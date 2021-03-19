@@ -19,6 +19,8 @@ class CarrotsTests: XCTestCase {
         coreDataStack = nil
     }
     
+    // MARK: - Tests
+    
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() {
         guard let coreDataStack = coreDataStack else {
             XCTFail()
@@ -27,5 +29,16 @@ class CarrotsTests: XCTestCase {
         let game = Game.initGame(coreDataStack: coreDataStack)
         XCTAssert(game.pointsForOneEuro == 1000)
     }
+    
+    func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addAthletic("Ben")
+        XCTAssert(game.athletics[0].name == "Ben")
+    }
+    
 
 }
