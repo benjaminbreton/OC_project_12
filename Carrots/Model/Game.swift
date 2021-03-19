@@ -9,8 +9,17 @@ import Foundation
 import CoreData
 
 public class Game: NSManagedObject {
+    
+    // MARK: - Properties
+    
+    /// Stack used to get and set datas in CoreData.
     var coreDataStack: CoreDataStack?
     
+    // MARK: - Init game
+    
+    /// Create a Game instance with saved datas.
+    /// - parameter coreDataStack: Stack used to get and set datas in CoreData.
+    /// - returns: A Game instance.
     static func initGame(coreDataStack: CoreDataStack) -> Game {
         let request: NSFetchRequest<Game> = Game.fetchRequest()
         guard let result = try? coreDataStack.viewContext.fetch(request) else {
@@ -22,6 +31,9 @@ public class Game: NSManagedObject {
             return result[0]
         }
     }
+    /// Create a Game instance if no datas have been saved in CoreData.
+    /// - parameter coreDataStack: Stack used to get and set datas in CoreData.
+    /// - returns: A Game instance.
     static private func getNewGame(coreDataStack: CoreDataStack) -> Game {
         let commonPot = Pot(context: coreDataStack.viewContext)
         let game = Game(context: coreDataStack.viewContext)
