@@ -15,7 +15,7 @@ class FakeCoreDataStack: CoreDataStack {
         let persistentStoreDescription = NSPersistentStoreDescription()
         persistentStoreDescription.type = NSInMemoryStoreType
         // create new container
-        let container = NSPersistentContainer(name: "Reciplease")
+        let container = NSPersistentContainer(name: "Carrots")
         // set new description to new container's persistentStoreDescriptions
         container.persistentStoreDescriptions = [persistentStoreDescription]
         // load persistent stores

@@ -37,7 +37,12 @@ class CarrotsTests: XCTestCase {
         }
         let game = Game.initGame(coreDataStack: coreDataStack)
         game.addAthletic("Ben")
-        XCTAssert(game.athletics[0].name == "Ben")
+        guard let athletics = game.athletics?.allObjects as? [Athletic] else {
+            XCTFail()
+            return
+        }
+        XCTAssert(athletics.count == 1)
+        XCTAssert(athletics[0].name == "Ben")
     }
     
 

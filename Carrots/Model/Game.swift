@@ -44,5 +44,22 @@ public class Game: NSManagedObject {
         coreDataStack.saveContext()
         return game
     }
+    
+    func addAthletic(_ name: String) {
+        guard let coreDataStack = coreDataStack, let athletics = athletics else { return }
+        guard let existingAthletics: [Athletic] = athletics.allObjects as? [Athletic] else { return }
+        for existingAthletic in existingAthletics {
+            if existingAthletic.name == name {
+                return
+            }
+        }
+        let athletic = Athletic(context: coreDataStack.viewContext)
+        athletic.name = name
+        let pot = Pot(context: coreDataStack.viewContext)
+        athletic.pot = pot
+        self.athletics = athletics.adding(athletic) as NSSet
+        coreDataStack.saveContext()
+    }
 }
+
 
