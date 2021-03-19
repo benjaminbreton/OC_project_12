@@ -14,18 +14,10 @@
 		034AB63126010E5F0034C1E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034AB63026010E5F0034C1E2 /* Preview Assets.xcassets */; };
 		034AB63426010E5F0034C1E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034AB63226010E5F0034C1E2 /* LaunchScreen.storyboard */; };
 		034AB63F26010E600034C1E2 /* CarrotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB63E26010E600034C1E2 /* CarrotsTests.swift */; };
-		034AB64A26010E600034C1E2 /* CarrotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB64926010E600034C1E2 /* CarrotsUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		034AB63B26010E600034C1E2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 034AB61926010E5B0034C1E2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 034AB62026010E5B0034C1E2;
-			remoteInfo = Carrots;
-		};
-		034AB64626010E600034C1E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 034AB61926010E5B0034C1E2 /* Project object */;
 			proxyType = 1;
@@ -46,9 +38,6 @@
 		034AB63A26010E600034C1E2 /* CarrotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarrotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		034AB63E26010E600034C1E2 /* CarrotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrotsTests.swift; sourceTree = "<group>"; };
 		034AB64026010E600034C1E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		034AB64526010E600034C1E2 /* CarrotsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarrotsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		034AB64926010E600034C1E2 /* CarrotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrotsUITests.swift; sourceTree = "<group>"; };
-		034AB64B26010E600034C1E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +55,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		034AB64226010E600034C1E2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,7 +63,6 @@
 			children = (
 				034AB62326010E5B0034C1E2 /* Carrots */,
 				034AB63D26010E600034C1E2 /* CarrotsTests */,
-				034AB64826010E600034C1E2 /* CarrotsUITests */,
 				034AB62226010E5B0034C1E2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +72,6 @@
 			children = (
 				034AB62126010E5B0034C1E2 /* Carrots.app */,
 				034AB63A26010E600034C1E2 /* CarrotsTests.xctest */,
-				034AB64526010E600034C1E2 /* CarrotsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,15 +103,6 @@
 				034AB64026010E600034C1E2 /* Info.plist */,
 			);
 			path = CarrotsTests;
-			sourceTree = "<group>";
-		};
-		034AB64826010E600034C1E2 /* CarrotsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				034AB64926010E600034C1E2 /* CarrotsUITests.swift */,
-				034AB64B26010E600034C1E2 /* Info.plist */,
-			);
-			path = CarrotsUITests;
 			sourceTree = "<group>";
 		};
 		034AB65D26010EA00034C1E2 /* Supporting files */ = {
@@ -206,24 +177,6 @@
 			productReference = 034AB63A26010E600034C1E2 /* CarrotsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		034AB64426010E600034C1E2 /* CarrotsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 034AB65426010E600034C1E2 /* Build configuration list for PBXNativeTarget "CarrotsUITests" */;
-			buildPhases = (
-				034AB64126010E600034C1E2 /* Sources */,
-				034AB64226010E600034C1E2 /* Frameworks */,
-				034AB64326010E600034C1E2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				034AB64726010E600034C1E2 /* PBXTargetDependency */,
-			);
-			name = CarrotsUITests;
-			productName = CarrotsUITests;
-			productReference = 034AB64526010E600034C1E2 /* CarrotsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -237,10 +190,6 @@
 						CreatedOnToolsVersion = 12.4;
 					};
 					034AB63926010E600034C1E2 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 034AB62026010E5B0034C1E2;
-					};
-					034AB64426010E600034C1E2 = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 034AB62026010E5B0034C1E2;
 					};
@@ -261,7 +210,6 @@
 			targets = (
 				034AB62026010E5B0034C1E2 /* Carrots */,
 				034AB63926010E600034C1E2 /* CarrotsTests */,
-				034AB64426010E600034C1E2 /* CarrotsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -278,13 +226,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		034AB63826010E600034C1E2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		034AB64326010E600034C1E2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -312,14 +253,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		034AB64126010E600034C1E2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				034AB64A26010E600034C1E2 /* CarrotsUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -327,11 +260,6 @@
 			isa = PBXTargetDependency;
 			target = 034AB62026010E5B0034C1E2 /* Carrots */;
 			targetProxy = 034AB63B26010E600034C1E2 /* PBXContainerItemProxy */;
-		};
-		034AB64726010E600034C1E2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 034AB62026010E5B0034C1E2 /* Carrots */;
-			targetProxy = 034AB64626010E600034C1E2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -549,46 +477,6 @@
 			};
 			name = Release;
 		};
-		034AB65526010E600034C1E2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XF9Z2VTWR3;
-				INFOPLIST_FILE = CarrotsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.benjamin-breton.CarrotsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Carrots;
-			};
-			name = Debug;
-		};
-		034AB65626010E600034C1E2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XF9Z2VTWR3;
-				INFOPLIST_FILE = CarrotsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.benjamin-breton.CarrotsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Carrots;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -615,15 +503,6 @@
 			buildConfigurations = (
 				034AB65226010E600034C1E2 /* Debug */,
 				034AB65326010E600034C1E2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		034AB65426010E600034C1E2 /* Build configuration list for PBXNativeTarget "CarrotsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				034AB65526010E600034C1E2 /* Debug */,
-				034AB65626010E600034C1E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
