@@ -82,6 +82,9 @@ public class Game: NSManagedObject {
         return athletic
     }
     
+    // MARK: - Introduction
+    
+    /// Toggle didSeeIntroduction property.
     func introductionHasBeenSeen() {
         guard let coreDataStack = coreDataStack else { return }
         didSeeIntroduction = true
