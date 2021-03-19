@@ -81,6 +81,12 @@ public class Game: NSManagedObject {
         athletic.pot = pot
         return athletic
     }
+    
+    func introductionHasBeenSeen() {
+        guard let coreDataStack = coreDataStack else { return }
+        didSeeIntroduction = true
+        coreDataStack.saveContext()
+    }
 }
 
 
