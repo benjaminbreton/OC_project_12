@@ -45,20 +45,41 @@ public class Game: NSManagedObject {
         return game
     }
     
+    // MARK: Add athletic
+    
+    /// Add athletic to the game.
+    /// - parameter name: Athletic's name to add.
     func addAthletic(_ name: String) {
         guard let coreDataStack = coreDataStack, let athletics = athletics else { return }
-        guard let existingAthletics: [Athletic] = athletics.allObjects as? [Athletic] else { return }
+        if athleticExists(name) { return }
+        let athletic = getNewAthletic(name, coreDataStack: coreDataStack)
+        self.athletics = athletics.adding(athletic) as NSSet
+        coreDataStack.saveContext()
+    }
+    /// Check if an athletic exists in athletics.
+    /// - parameter name: Athletic's name to check.
+    /// - returns: A boolean which indicates whether the athletic exists or not.
+    private func athleticExists(_ name: String) -> Bool {
+        guard let athletics = athletics, let existingAthletics: [Athletic] = athletics.allObjects as? [Athletic] else {
+            return false
+        }
         for existingAthletic in existingAthletics {
             if existingAthletic.name == name {
-                return
+                return true
             }
         }
+        return false
+    }
+    /// Create an athletic.
+    /// - parameter name: Athletic's name to create.
+    /// - parameter coreDataStack: Stack to use to create the athletic.
+    /// - returns: Created athletic.
+    private func getNewAthletic(_ name: String, coreDataStack: CoreDataStack) -> Athletic {
         let athletic = Athletic(context: coreDataStack.viewContext)
         athletic.name = name
         let pot = Pot(context: coreDataStack.viewContext)
         athletic.pot = pot
-        self.athletics = athletics.adding(athletic) as NSSet
-        coreDataStack.saveContext()
+        return athletic
     }
 }
 
