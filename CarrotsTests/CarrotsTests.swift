@@ -40,6 +40,17 @@ class CarrotsTests: XCTestCase {
         XCTAssert(game.didSeeIntroduction)
     }
     
+    func testGivenAGameExistsWhenAskForLoadingItThenGameIsLoaded() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.introductionHasBeenSeen()
+        let game2 = Game.initGame(coreDataStack: coreDataStack)
+        XCTAssert(game2.didSeeIntroduction)
+    }
+    
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
         guard let coreDataStack = coreDataStack else {
             XCTFail()
