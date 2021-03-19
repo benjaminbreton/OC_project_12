@@ -14,6 +14,10 @@
 		034AB63126010E5F0034C1E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034AB63026010E5F0034C1E2 /* Preview Assets.xcassets */; };
 		034AB63426010E5F0034C1E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034AB63226010E5F0034C1E2 /* LaunchScreen.storyboard */; };
 		034AB63F26010E600034C1E2 /* CarrotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB63E26010E600034C1E2 /* CarrotsTests.swift */; };
+		03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */; };
+		03DE95882604C51800FBAA4F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95872604C51800FBAA4F /* Game.swift */; };
+		03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */; };
+		03DE95952604E4C300FBAA4F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95942604E4C300FBAA4F /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		034AB63A26010E600034C1E2 /* CarrotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarrotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		034AB63E26010E600034C1E2 /* CarrotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrotsTests.swift; sourceTree = "<group>"; };
 		034AB64026010E600034C1E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		03DE95872604C51800FBAA4F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoreDataStack.swift; sourceTree = "<group>"; };
+		03DE95942604E4C300FBAA4F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,7 @@
 			children = (
 				034AB63E26010E600034C1E2 /* CarrotsTests.swift */,
 				034AB64026010E600034C1E2 /* Info.plist */,
+				03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */,
 			);
 			path = CarrotsTests;
 			sourceTree = "<group>";
@@ -112,6 +121,7 @@
 				034AB62626010E5B0034C1E2 /* SceneDelegate.swift */,
 				034AB62426010E5B0034C1E2 /* AppDelegate.swift */,
 				034AB63526010E5F0034C1E2 /* Info.plist */,
+				03DE95942604E4C300FBAA4F /* ContentView.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -127,6 +137,7 @@
 		034AB66926010EE50034C1E2 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */,
 				034AB62A26010E5B0034C1E2 /* Carrots.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -135,6 +146,7 @@
 		03DE95752604BF9A00FBAA4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				03DE95872604C51800FBAA4F /* Game.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,8 +252,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
+				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
+				03DE95952604E4C300FBAA4F /* ContentView.swift in Sources */,
 				034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */,
 				034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */,
+				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */,
 				034AB63F26010E600034C1E2 /* CarrotsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,7 +416,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Carrots/Preview Content\"";
 				DEVELOPMENT_TEAM = XF9Z2VTWR3;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Carrots/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Carrots/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,7 +437,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Carrots/Preview Content\"";
 				DEVELOPMENT_TEAM = XF9Z2VTWR3;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Carrots/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Carrots/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -10,7 +10,7 @@ import XCTest
 
 class CarrotsTests: XCTestCase {
 
-    let coreDataStack: CoreDataStack?
+    var coreDataStack: CoreDataStack?
     
     override func setUp() {
         coreDataStack = FakeCoreDataStack()
@@ -20,7 +20,11 @@ class CarrotsTests: XCTestCase {
     }
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() {
-        let game = Game.initGame()
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
         XCTAssert(game.pointsForOneEuro == 1000)
     }
 
