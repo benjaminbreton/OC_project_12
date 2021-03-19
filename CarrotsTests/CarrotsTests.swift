@@ -30,6 +30,16 @@ class CarrotsTests: XCTestCase {
         XCTAssert(game.pointsForOneEuro == 1000)
     }
     
+    func testGivenAGameExistsWhenIndicateThatIntroductionHasBeenSeenThenGamesPropertyHasBeenChanged() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.introductionHasBeenSeen()
+        XCTAssert(game.didSeeIntroduction)
+    }
+    
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
         guard let coreDataStack = coreDataStack else {
             XCTFail()
