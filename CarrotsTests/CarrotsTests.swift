@@ -19,7 +19,7 @@ class CarrotsTests: XCTestCase {
         coreDataStack = nil
     }
     
-    // MARK: - Tests
+    // MARK: - Game Tests
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() {
         guard let coreDataStack = coreDataStack else {
@@ -51,19 +51,46 @@ class CarrotsTests: XCTestCase {
         XCTAssert(game2.didSeeIntroduction)
     }
     
+    // MARK: - Athletics tests
+    
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
         guard let coreDataStack = coreDataStack else {
             XCTFail()
             return
         }
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addAthletic("Ben")
-        guard let athletics = game.athletics?.allObjects as? [Athletic] else {
+        game.addAthletic("Ben") { result in
+            switch result {
+            case .success(let athleticsArray):
+                XCTAssert(athleticsArray.count == 1)
+                XCTAssert(athleticsArray[0].name == "Ben)
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
+    
+    func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() {
+        guard let coreDataStack = coreDataStack else {
             XCTFail()
             return
         }
-        XCTAssert(athletics.count == 1)
-        XCTAssert(athletics[0].name == "Ben")
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addAthletic("Ben") { result in
+            switch result {
+            case .success(_):
+                game.addAthletic("Ben") { result in
+                    switch result {
+                    case .success(_):
+                        XCTFail()
+                    case .failure(let error):
+                        XCTAssert(error == .existingAthletic)
+                    }
+                }
+            case .failure(_):
+                XCTFail()
+            }
+        }
     }
     
 
