@@ -94,6 +94,28 @@ class CarrotsTests: XCTestCase {
             }
         }
     }
-    
+    func testGivenAGameWithAthleticExistsWhenAskToDeleteHimThenAthleticIsDeleted() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addAthletic("Ben") { result in
+            switch result {
+            case .success(let athleticsArray):
+                let athletic = athleticsArray[0]
+                game.deleteAthletic(athletic) { result in
+                    switch result {
+                    case .success(let athleticsArray):
+                        XCTAssert(athleticsArray.count == 0)
+                    case .failure(_):
+                        XCTFail()
+                    }
+                }
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
 
 }
