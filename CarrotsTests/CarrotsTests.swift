@@ -168,5 +168,36 @@ class CarrotsTests: XCTestCase {
             }
         }
     }
+    
+    func testGivenSportsExistWhenAskToDeleteOneOfThemThenSportIsDeleted() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addSport("Marche", unityType: .kilometers, valueForOnePoint: 1) { result in
+            switch result {
+            case .success(_):
+                game.addSport("Rameur", unityType: .count, valueForOnePoint: 1) { result in
+                    switch result {
+                    case .success(_):
+                        game.deleteSport(at: 0) { result in
+                            switch result {
+                            case .success(let sportsArray):
+                                XCTAssert(sportsArray.count == 1)
+                                XCTAssert(sportsArray[0].name == "Rameur")
+                            case .failure(_):
+                                XCTFail()
+                            }
+                        }
+                    case .failure(_):
+                        XCTFail()
+                    }
+                }
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
 
 }
