@@ -63,7 +63,7 @@ class CarrotsTests: XCTestCase {
             switch result {
             case .success(let athleticsArray):
                 XCTAssert(athleticsArray.count == 1)
-                XCTAssert(athleticsArray[0].name == "Ben)
+                XCTAssert(athleticsArray[0].name == "Ben")
             case .failure(_):
                 XCTFail()
             }

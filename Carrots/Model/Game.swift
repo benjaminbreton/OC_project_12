@@ -50,11 +50,15 @@ public class Game: NSManagedObject {
     
     /// Add athletic to the game.
     /// - parameter name: Athletic's name to add.
-    func addAthletic(_ name: String) {
+    func addAthletic(_ name: String, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack else { return }
-        if athleticExists(name) { return }
+        if athleticExists(name) {
+            completionHandler(.failure(.existingAthletic))
+            return
+        }
         addNewAthletic(name, coreDataStack: coreDataStack)
         coreDataStack.saveContext()
+        completionHandler(.success(athleticsArray))
     }
     /// Check if an athletic exists in athletics.
     /// - parameter name: Athletic's name to check.
@@ -87,6 +91,18 @@ public class Game: NSManagedObject {
         didSeeIntroduction = true
         coreDataStack.saveContext()
     }
+}
+
+enum ApplicationErrors: Error, CustomStringConvertible {
+    case existingAthletic
+    var description: String {
+        switch self {
+        case .existingAthletic:
+            return "Existing athletic's name [F-Game]"
+        }
+    }
+    
+    
 }
 
 
