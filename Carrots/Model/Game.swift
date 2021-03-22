@@ -257,12 +257,16 @@ extension Game {
     
     // MARK: - Delete
     
+    /// Delete performance.
+    /// - parameter performance: Performance to delete.
     func deletePerformance(_ performance: Performance) {
         guard let coreDataStack = coreDataStack else { return }
         cancelPotAddings(performance)
         coreDataStack.viewContext.delete(performance)
         coreDataStack.saveContext()
     }
+    /// Cancel points added in pots by a performance.
+    /// - parameter performance: Performance which added points.
     private func cancelPotAddings(_ performance: Performance) {
         if performance.addedToCommonPot {
             guard let pot = commonPot else { return }
