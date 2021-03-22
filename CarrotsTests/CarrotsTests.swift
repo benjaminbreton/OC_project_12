@@ -198,5 +198,36 @@ class CarrotsTests: XCTestCase {
             }
         }
     }
-
+    
+    // MARK: - Performances tests
+    
+    func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        addAthletic("Ben", to: game)
+        addSport("Marche", to: game)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics[0], performance: 10)
+        guard let pot = game.commonPot else {
+            XCTFail()
+            return
+        }
+        XCTAssert(pot.points == 10)
+        XCTAssert(game.performances.count == 1)
+    }
+    
+    // MARK: - Supporting methods
+    
+    func addAthletic(_ name: String, to game: Game) {
+        game.addAthletic(name) { _ in
+            return
+        }
+    }
+    func addSport(_ name: String, to game: Game) {
+        game.addSport(name, unityType: .count, valueForOnePoint: 1) { _ in
+            return
+        }
+    }
 }
