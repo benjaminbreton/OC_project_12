@@ -1,0 +1,17 @@
+//
+//  ApplicationErrors.swift
+//  Carrots
+//
+//  Created by Benjamin Breton on 22/03/2021.
+//
+
+import Foundation
+enum ApplicationErrors: Error, CustomStringConvertible {
+    case existingAthletic
+    var description: String {
+        switch self {
+        case .existingAthletic:
+            return "Existing athletic's name [F-Game]"
+        }
+    }
+}

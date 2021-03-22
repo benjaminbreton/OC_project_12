@@ -93,16 +93,6 @@ public class Game: NSManagedObject {
     }
 }
 
-enum ApplicationErrors: Error, CustomStringConvertible {
-    case existingAthletic
-    var description: String {
-        switch self {
-        case .existingAthletic:
-            return "Existing athletic's name [F-Game]"
-        }
-    }
-    
-    
-}
+
 
 

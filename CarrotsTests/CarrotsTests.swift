@@ -84,6 +84,8 @@ class CarrotsTests: XCTestCase {
                     case .success(_):
                         XCTFail()
                     case .failure(let error):
+                        print(error)
+                        print(error.userDescription)
                         XCTAssert(error == .existingAthletic)
                     }
                 }
