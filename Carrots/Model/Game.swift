@@ -111,9 +111,11 @@ public class Game: NSManagedObject {
     
     // MARK: - Add sport
     
-    /// Add athletic to the game.
-    /// - parameter name: Athletic's name to add.
-    /// - parameter completionHandler: Code to execute when athletic has been added.
+    /// Add sport to the game.
+    /// - parameter name: Sport's name to create.
+    /// - parameter unityType: Sport's unity type.
+    /// - parameter valueForOnePoint: Unity type's value to get one point.
+    /// - parameter completionHandler: Code to execute when sport has been added.
     func addSport(_ name: String, unityType: Sport.UnityType, valueForOnePoint: Double, completionHandler: (Result<[Sport], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack else { return }
         if sportExists(name) {
@@ -124,9 +126,9 @@ public class Game: NSManagedObject {
         coreDataStack.saveContext()
         completionHandler(.success(sportsArray))
     }
-    /// Check if an athletic exists in athletics.
-    /// - parameter name: Athletic's name to check.
-    /// - returns: A boolean which indicates whether the athletic exists or not.
+    /// Check if a sport exists in sports.
+    /// - parameter name: Sport's name to check.
+    /// - returns: A boolean which indicates whether the sport exists or not.
     private func sportExists(_ name: String) -> Bool {
         for existingSport in sportsArray {
             if existingSport.name == name {
@@ -149,31 +151,7 @@ public class Game: NSManagedObject {
     }
 }
 
-public class Sport: NSManagedObject {
-    var unityType: UnityType {
-        switch unityInt16 {
-        case 1:
-            return .kilometers
-        case 2:
-            return .time
-        default:
-            return .count
-        }
-    }
-    enum UnityType {
-        case kilometers, time, count
-        var int16: Int16 {
-            switch self {
-            case .kilometers:
-                return 1
-            case .time:
-                return 2
-            case .count:
-                return 0
-            }
-        }
-    }
-}
+
 
 
 
