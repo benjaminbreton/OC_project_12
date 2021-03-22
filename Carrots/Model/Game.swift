@@ -46,10 +46,11 @@ public class Game: NSManagedObject {
         return game
     }
     
-    // MARK: Add athletic
+    // MARK: - Add athletic
     
     /// Add athletic to the game.
     /// - parameter name: Athletic's name to add.
+    /// - parameter completionHandler: Code to execute when athletic has been added.
     func addAthletic(_ name: String, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack else { return }
         if athleticExists(name) {
@@ -74,7 +75,6 @@ public class Game: NSManagedObject {
     /// Create an athletic.
     /// - parameter name: Athletic's name to create.
     /// - parameter coreDataStack: Stack to use to create the athletic.
-    /// - returns: Created athletic.
     private func addNewAthletic(_ name: String, coreDataStack: CoreDataStack) {
         let athletic = Athletic(context: coreDataStack.viewContext)
         athletic.name = name
@@ -82,6 +82,12 @@ public class Game: NSManagedObject {
         athletic.pot = pot
         athletic.game = self
     }
+    
+    // MARK: - Delete athletic
+    
+    /// Delete an athletic
+    /// - parameter athletic: Athletic to delete.
+    /// - parameter completionHandler: Code to execute when athletic has been deleted.
     func deleteAthletic(_ athletic: Athletic, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack else { return }
         coreDataStack.viewContext.delete(athletic)
