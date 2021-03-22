@@ -125,5 +125,24 @@ class CarrotsTests: XCTestCase {
             }
         }
     }
+    
+    // MARK: - Sports tests
+    
+    func testGivenAGameExistsWhenAskToAddSportThenSportHasBeenAdded() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addSport("Marche", unity: .kilometers, valueForOnePoint: 1) { result in
+            switch result {
+            case .success(let sportsArray):
+                XCTAssert(sportsArray.count == 1)
+                XCTAssert(sportsArray[0].name == "Marche")
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
 
 }
