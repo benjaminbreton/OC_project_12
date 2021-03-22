@@ -22,29 +22,20 @@ class CarrotsTests: XCTestCase {
     // MARK: - Game Tests
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
         XCTAssert(game.pointsForOneEuro == 1000)
     }
     
     func testGivenAGameExistsWhenIndicateThatIntroductionHasBeenSeenThenGamesPropertyHasBeenChanged() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
         game.introductionHasBeenSeen()
         XCTAssert(game.didSeeIntroduction)
     }
     
     func testGivenAGameExistsWhenAskForLoadingItThenGameIsLoaded() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
         game.introductionHasBeenSeen()
         let game2 = Game.initGame(coreDataStack: coreDataStack)
@@ -54,72 +45,39 @@ class CarrotsTests: XCTestCase {
     // MARK: - Athletics tests
     
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addAthletic("Ben") { result in
-            switch result {
-            case .success(let athleticsArray):
-                XCTAssert(athleticsArray.count == 1)
-                XCTAssert(athleticsArray[0].name == "Ben")
-            case .failure(_):
-                XCTFail()
-            }
-        }
+        addAthletic("Ben", to: game)
+        XCTAssert(game.athletics.count == 1)
+        XCTAssert(game.athletics[0].name == "Ben")
     }
     
     func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
+        addAthletic("Ben", to: game)
         game.addAthletic("Ben") { result in
             switch result {
             case .success(_):
-                game.addAthletic("Ben") { result in
-                    switch result {
-                    case .success(_):
-                        XCTFail()
-                    case .failure(let error):
-                        print(error)
-                        print(error.userDescription)
-                        XCTAssert(error == .existingAthletic)
-                    }
-                }
-            case .failure(_):
                 XCTFail()
+            case .failure(let error):
+                print(error)
+                print(error.userDescription)
+                XCTAssert(error == .existingAthletic)
             }
         }
     }
     func testGivenAGameWithAthleticsExistsWhenAskToDeleteOneOfThemThenAthleticIsDeleted() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addAthletic("Ben") { result in
+        addAthletic("Ben", to: game)
+        addAthletic("Elo", to: game)
+        game.deleteAthletic(game.athletics[0]) { result in
             switch result {
-            case .success(_):
-                game.addAthletic("Elo") { result in
-                    switch result {
-                    case .success(_):
-                        game.deleteAthletic("Ben") { result in
-                            switch result {
-                            case .success(let athletics):
-                                XCTAssert(athletics.count == 1)
-                                XCTAssert(athletics[0].name == "Elo")
-                            case . failure(_):
-                                XCTFail()
-                            }
-                        }
-                    case .failure(_):
-                        XCTFail()
-                    }
-                }
-            case .failure(_):
+            case .success(let athletics):
+                XCTAssert(athletics.count == 1)
+                XCTAssert(athletics[0].name == "Elo")
+            case . failure(_):
                 XCTFail()
             }
         }
@@ -128,71 +86,38 @@ class CarrotsTests: XCTestCase {
     // MARK: - Sports tests
     
     func testGivenAGameExistsWhenAskToAddSportThenSportHasBeenAdded() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addSport("Marche", unityType: .kilometers, valueForOnePoint: 1) { result in
-            switch result {
-            case .success(let sportsArray):
-                XCTAssert(sportsArray.count == 1)
-                XCTAssert(sportsArray[0].name == "Marche")
-                XCTAssert(sportsArray[0].unityType == .kilometers)
-            case .failure(_):
-                XCTFail()
-            }
-        }
+        addSport("Marche", to: game)
+        XCTAssert(game.sports.count == 1)
+        XCTAssert(game.sports[0].name == "Marche")
+        XCTAssert(game.sports[0].unityType == .count)
     }
     
     func testGivenASportExistsWhenAskToAddASportWithTheSameNameThenErrorOccures() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addSport("Marche", unityType: .kilometers, valueForOnePoint: 1) { result in
+        addSport("Marche", to: game)
+        game.addSport("Marche", unityType: .count, valueForOnePoint: 25) { result in
             switch result {
             case .success(_):
-                game.addSport("Marche", unityType: .count, valueForOnePoint: 25) { result in
-                    switch result {
-                    case .success(_):
-                        XCTFail()
-                    case .failure(let error):
-                        XCTAssert(error == .existingSport)
-                    }
-                }
-            case .failure(_):
                 XCTFail()
+            case .failure(let error):
+                XCTAssert(error == .existingSport)
             }
         }
     }
     
     func testGivenSportsExistWhenAskToDeleteOneOfThemThenSportIsDeleted() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addSport("Marche", unityType: .kilometers, valueForOnePoint: 1) { result in
+        addSport("Marche", to: game)
+        addSport("Rameur", to: game)
+        game.deleteSport(game.sports[0]) { result in
             switch result {
-            case .success(_):
-                game.addSport("Rameur", unityType: .count, valueForOnePoint: 1) { result in
-                    switch result {
-                    case .success(_):
-                        game.deleteSport("Marche") { result in
-                            switch result {
-                            case .success(let sports):
-                                XCTAssert(sports.count == 1)
-                                XCTAssert(sports[0].name == "Rameur")
-                            case .failure(_):
-                                XCTFail()
-                            }
-                        }
-                    case .failure(_):
-                        XCTFail()
-                    }
-                }
+            case .success(let sports):
+                XCTAssert(sports.count == 1)
+                XCTAssert(sports[0].name == "Rameur")
             case .failure(_):
                 XCTFail()
             }
@@ -202,10 +127,7 @@ class CarrotsTests: XCTestCase {
     // MARK: - Performances tests
     
     func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() {
-        guard let coreDataStack = coreDataStack else {
-            XCTFail()
-            return
-        }
+        let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
@@ -229,5 +151,12 @@ class CarrotsTests: XCTestCase {
         game.addSport(name, unityType: .count, valueForOnePoint: 1) { _ in
             return
         }
+    }
+    func getCoreDataStack() -> CoreDataStack {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return FakeCoreDataStack()
+        }
+        return coreDataStack
     }
 }

@@ -113,11 +113,10 @@ extension Game {
     // MARK: - Delete
     
     /// Delete an athletic
-    /// - parameter name: Athletic's name to delete.
+    /// - parameter athletic: Athletic to delete.
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
-    func deleteAthletic(_ name: String, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
-        guard let coreDataStack = coreDataStack, let athletics: [Athletic] = getEntityWithItsName(name, coreDataStack: coreDataStack), athletics.count == 1 else { return }
-        let athletic = athletics[0]
+    func deleteAthletic(_ athletic: Athletic, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
+        guard let coreDataStack = coreDataStack else { return }
         coreDataStack.viewContext.delete(athletic)
         coreDataStack.saveContext()
         completionHandler(.success(self.athletics))
@@ -199,11 +198,10 @@ extension Game {
     // MARK: - Delete
     
     /// Delete a sport.
-    /// - parameter name: Sport's name to delete.
+    /// - parameter sport: Sport to delete.
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
-    func deleteSport(_ name: String, completionHandler: (Result<[Sport], ApplicationErrors>) -> Void) {
-        guard let coreDataStack = coreDataStack, let sports: [Sport] = getEntityWithItsName(name, coreDataStack: coreDataStack), sports.count == 1 else { return }
-        let sport = sports[0]
+    func deleteSport(_ sport: Sport, completionHandler: (Result<[Sport], ApplicationErrors>) -> Void) {
+        guard let coreDataStack = coreDataStack else { return }
         coreDataStack.viewContext.delete(sport)
         coreDataStack.saveContext()
         completionHandler(.success(self.sports))
@@ -213,14 +211,38 @@ extension Game {
 // MARK: - Performances
 
 extension Game {
+    
+    // MARK: - Add
+    
+    /// Add performance.
+    /// - parameter sport: Performance's sport.
+    /// - parameter athletics: Athletics who made the performance.
+    /// - parameter value: Performance's value, depending on sport's unit type.
     func addPerformance(sport: Sport, athletics: [Athletic], value: [Double]) {
         guard let coreDataStack = coreDataStack else { return }
+        let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, coreDataStack: coreDataStack)
+        addPointsToPot(with: performance)
+        coreDataStack.saveContext()
+    }
+    /// Get new performance with choosen parameters.
+    /// - parameter sport: Performance's sport.
+    /// - parameter athletics: Athletics who made the performance.
+    /// - parameter value: Performance's value, depending on sport's unit type.
+    /// - parameter coreDataStack: Coredatastack in which the performance has to be made.
+    /// - returns: The created performance.
+    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [Double], coreDataStack: CoreDataStack) -> Performance {
         let performance = Performance(context: coreDataStack.viewContext)
         performance.sport = sport
         performance.athletics = NSSet(array: athletics)
         performance.value = sport.unityType.value(for: value)
         performance.addedToCommonPot = addToCommonPot
         performance.date = Date()
+        return performance
+    }
+    /// Add points earned with a performance to pot depending on performance's parameters.
+    /// - parameter performance: Perforamnce with which points have been earned.
+    private func addPointsToPot(with performance: Performance) {
+        guard let athleticsSet = performance.athletics, let athletics = athleticsSet.allObjects as? [Athletic] else { return }
         if addToCommonPot {
             guard let pot = commonPot else { return }
             pot.points += performance.points
@@ -230,17 +252,10 @@ extension Game {
                 pot.points += performance.points
             }
         }
-        coreDataStack.saveContext()
     }
 }
 
-public class Performance: NSManagedObject {
-    var points: Double {
-        guard let sport = sport else { return 0 }
-        let points = round(value / sport.valueForOnePoint)
-        return points * sport.valueForOnePoint > value ? points - 1 : points
-    }
-}
+
 
 
 
