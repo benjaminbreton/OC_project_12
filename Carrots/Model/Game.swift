@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+// MARK: - Game properties
 public class Game: NSManagedObject {
     
     // MARK: - Properties
@@ -28,8 +29,12 @@ public class Game: NSManagedObject {
         guard let coreDataStack = coreDataStack, let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
         return result
     }
+}
 
-    
+// MARK: - Static methods
+
+extension Game {
+
     // MARK: - Init game
     
     /// Create a Game instance with saved datas.
@@ -55,8 +60,13 @@ public class Game: NSManagedObject {
         coreDataStack.saveContext()
         return game
     }
+}
+
+// MARK: - Athletics
+
+extension Game {
     
-    // MARK: - Add athletic
+    // MARK: - Add
     
     /// Add athletic to the game.
     /// - parameter name: Athletic's name to add.
@@ -92,10 +102,10 @@ public class Game: NSManagedObject {
         athletic.pot = pot
     }
     
-    // MARK: - Delete athletic
+    // MARK: - Delete
     
     /// Delete an athletic
-    /// - parameter athletic: Athletic to delete.
+    /// - parameter name: Athletic's name to delete.
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
     func deleteAthletic(_ name: String, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack, let athletics: [Athletic] = getEntityWithItsName(name, coreDataStack: coreDataStack), athletics.count == 1 else { return }
@@ -104,17 +114,27 @@ public class Game: NSManagedObject {
         coreDataStack.saveContext()
         completionHandler(.success(self.athletics))
     }
+}
+
+// MARK: - Supporting methods
     
-    // MARK: - Supporting methods
+extension Game {
     
+    /// Create a predicate to get a coredata's entity from its name.
+    /// - parameter name: Entity's name to search.
+    /// - parameter coreDataStack : Coredatastack to use to search entity.
+    /// - returns: An array with all existing entities founded.
     private func getEntityWithItsName<Type>(_ name: String, coreDataStack: CoreDataStack) -> [Type]? where Type: NSManagedObject {
         let request: NSFetchRequest<NSFetchRequestResult> = Type.fetchRequest()
         request.predicate = NSPredicate(format: "name == %@", name)
         let result = try? coreDataStack.viewContext.fetch(request) as? [Type]
         return result
     }
-    
-    // MARK: - Introduction
+}
+
+// MARK: - Introduction's methods
+
+extension Game {
     
     /// Toggle didSeeIntroduction property.
     func introductionHasBeenSeen() {
@@ -122,8 +142,13 @@ public class Game: NSManagedObject {
         didSeeIntroduction = true
         coreDataStack.saveContext()
     }
+}
+
+// MARK: - Sports
+
+extension Game {
     
-    // MARK: - Add sport
+    // MARK: - Add
     
     /// Add sport to the game.
     /// - parameter name: Sport's name to create.
@@ -163,10 +188,10 @@ public class Game: NSManagedObject {
         sport.valueForOnePoint = valueForOnePoint
     }
     
-    // MARK: - Delete sport
+    // MARK: - Delete
     
-    /// Delete an athletic
-    /// - parameter athletic: Athletic to delete.
+    /// Delete a sport.
+    /// - parameter name: Sport's name to delete.
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
     func deleteSport(_ name: String, completionHandler: (Result<[Sport], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack, let sports: [Sport] = getEntityWithItsName(name, coreDataStack: coreDataStack), sports.count == 1 else { return }
