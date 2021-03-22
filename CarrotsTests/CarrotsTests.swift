@@ -145,5 +145,28 @@ class CarrotsTests: XCTestCase {
             }
         }
     }
+    
+    func testGivenASportExistsWhenAskToAddASportWithTheSameNameThenErrorOccures() {
+        guard let coreDataStack = coreDataStack else {
+            XCTFail()
+            return
+        }
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addSport("Marche", unityType: .kilometers, valueForOnePoint: 1) { result in
+            switch result {
+            case .success(_):
+                game.addSport("Marche", unityType: .count, valueForOnePoint: 25) { result in
+                    switch result {
+                    case .success(_):
+                        XCTFail()
+                    case .failure(let error):
+                        XCTAssert(error == .existingSport)
+                    }
+                }
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
 
 }
