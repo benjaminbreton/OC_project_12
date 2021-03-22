@@ -33,5 +33,13 @@ public class Sport: NSManagedObject {
                 return 0
             }
         }
+        func value(for value: [Double]) -> Double {
+            switch self {
+            case .time:
+                return value[0] * 3600 + value[1] * 60 + value[2]
+            default:
+                return value[0]
+            }
+        }
     }
 }

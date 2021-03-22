@@ -2,12 +2,22 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Athletic" representedClassName=".Athletic" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="performances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="athletics" inverseEntity="Performance"/>
         <relationship name="pot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="athleticOwner" inverseEntity="Pot"/>
     </entity>
     <entity name="Game" representedClassName=".Game" syncable="YES" codeGenerationType="category">
+        <attribute name="addToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="didSeeIntroduction" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="pointsForOneEuro" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="commonPot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="game" inverseEntity="Pot"/>
+    </entity>
+    <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="category">
+        <attribute name="addedToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="potAddings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="athletics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="performances" inverseEntity="Athletic"/>
+        <relationship name="sport" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sport" inverseName="performances" inverseEntity="Sport"/>
     </entity>
     <entity name="Pot" representedClassName=".Pot" syncable="YES" codeGenerationType="class">
         <attribute name="addings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -20,11 +30,13 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unityInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="valueForOnePoint" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="performances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="sport" inverseEntity="Performance"/>
     </entity>
     <elements>
-        <element name="Athletic" positionX="82.47119140624994" positionY="-412.9474334716797" width="128" height="73"/>
-        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="88"/>
+        <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="88"/>
+        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="89"/>
+        <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="119"/>
         <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="118"/>
-        <element name="Sport" positionX="279" positionY="-306" width="128" height="74"/>
+        <element name="Sport" positionX="71.272705078125" positionY="-203.4456481933594" width="128" height="103"/>
     </elements>
 </model>

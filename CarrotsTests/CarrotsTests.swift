@@ -209,7 +209,7 @@ class CarrotsTests: XCTestCase {
         let game = Game.initGame(coreDataStack: coreDataStack)
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics[0], performance: 10)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10])
         guard let pot = game.commonPot else {
             XCTFail()
             return

@@ -29,6 +29,13 @@ public class Game: NSManagedObject {
         guard let coreDataStack = coreDataStack, let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
         return result
     }
+    
+    var performances: [Performance] {
+        let request: NSFetchRequest<Performance> = Performance.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        guard let coreDataStack = coreDataStack, let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
+        return result
+    }
 }
 
 // MARK: - Static methods
@@ -57,6 +64,7 @@ extension Game {
         game.commonPot = commonPot
         game.pointsForOneEuro = 1000
         game.coreDataStack = coreDataStack
+        game.addToCommonPot = true
         coreDataStack.saveContext()
         return game
     }
@@ -202,6 +210,37 @@ extension Game {
     }
 }
 
+// MARK: - Performances
+
+extension Game {
+    func addPerformance(sport: Sport, athletics: [Athletic], value: [Double]) {
+        guard let coreDataStack = coreDataStack else { return }
+        let performance = Performance(context: coreDataStack.viewContext)
+        performance.sport = sport
+        performance.athletics = NSSet(array: athletics)
+        performance.value = sport.unityType.value(for: value)
+        performance.addedToCommonPot = addToCommonPot
+        performance.date = Date()
+        if addToCommonPot {
+            guard let pot = commonPot else { return }
+            pot.points += performance.points
+        } else {
+            for athletic in athletics {
+                guard let pot = athletic.pot else { return }
+                pot.points += performance.points
+            }
+        }
+        coreDataStack.saveContext()
+    }
+}
+
+public class Performance: NSManagedObject {
+    var points: Double {
+        guard let sport = sport else { return 0 }
+        let points = round(value / sport.valueForOnePoint)
+        return points * sport.valueForOnePoint > value ? points - 1 : points
+    }
+}
 
 
 
