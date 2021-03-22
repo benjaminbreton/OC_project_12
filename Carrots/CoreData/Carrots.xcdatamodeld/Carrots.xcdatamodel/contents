@@ -10,6 +10,7 @@
         <attribute name="pointsForOneEuro" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="athletics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="game" inverseEntity="Athletic"/>
         <relationship name="commonPot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="game" inverseEntity="Pot"/>
+        <relationship name="sports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sport" inverseName="game" inverseEntity="Sport"/>
     </entity>
     <entity name="Pot" representedClassName=".Pot" syncable="YES" codeGenerationType="class">
         <attribute name="addings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -18,9 +19,16 @@
         <relationship name="athletics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="commonPot" inverseEntity="Game"/>
     </entity>
+    <entity name="Sport" representedClassName=".Sport" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="unityInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="valueForOnePoint" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="sports" inverseEntity="Game"/>
+    </entity>
     <elements>
-        <element name="Athletic" positionX="93.01831054687494" positionY="-387.1838684082031" width="128" height="88"/>
-        <element name="Game" positionX="-88.82012939453131" positionY="-207.8875122070312" width="128" height="103"/>
+        <element name="Athletic" positionX="82.47119140624994" positionY="-412.9474334716797" width="128" height="88"/>
+        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="118"/>
         <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="118"/>
+        <element name="Sport" positionX="248.9470825195312" positionY="-124.7176818847656" width="128" height="103"/>
     </elements>
 </model>

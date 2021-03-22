@@ -134,11 +134,12 @@ class CarrotsTests: XCTestCase {
             return
         }
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addSport("Marche", unity: .kilometers, valueForOnePoint: 1) { result in
+        game.addSport("Marche", unityType: .kilometers, valueForOnePoint: 1) { result in
             switch result {
             case .success(let sportsArray):
                 XCTAssert(sportsArray.count == 1)
                 XCTAssert(sportsArray[0].name == "Marche")
+                XCTAssert(sportsArray[0].unityType == .kilometers)
             case .failure(_):
                 XCTFail()
             }

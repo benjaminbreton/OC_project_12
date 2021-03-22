@@ -20,6 +20,11 @@ public class Game: NSManagedObject {
         return existingAthletics
     }
     
+    var sportsArray: [Sport] {
+        guard let sports = sports, let existingSports: [Sport] = sports.allObjects as? [Sport] else { return [] }
+        return existingSports
+    }
+    
     // MARK: - Init game
     
     /// Create a Game instance with saved datas.
@@ -102,6 +107,71 @@ public class Game: NSManagedObject {
         guard let coreDataStack = coreDataStack else { return }
         didSeeIntroduction = true
         coreDataStack.saveContext()
+    }
+    
+    // MARK: - Add sport
+    
+    /// Add athletic to the game.
+    /// - parameter name: Athletic's name to add.
+    /// - parameter completionHandler: Code to execute when athletic has been added.
+    func addSport(_ name: String, unityType: Sport.UnityType, valueForOnePoint: Double, completionHandler: (Result<[Sport], ApplicationErrors>) -> Void) {
+        guard let coreDataStack = coreDataStack else { return }
+        if sportExists(name) {
+            completionHandler(.failure(.existingSport))
+            return
+        }
+        addNewSport(name, unityType: unityType, valueForOnePoint: valueForOnePoint, coreDataStack: coreDataStack)
+        coreDataStack.saveContext()
+        completionHandler(.success(sportsArray))
+    }
+    /// Check if an athletic exists in athletics.
+    /// - parameter name: Athletic's name to check.
+    /// - returns: A boolean which indicates whether the athletic exists or not.
+    private func sportExists(_ name: String) -> Bool {
+        for existingSport in sportsArray {
+            if existingSport.name == name {
+                return true
+            }
+        }
+        return false
+    }
+    /// Create a sport.
+    /// - parameter name: Sport's name to create.
+    /// - parameter unityType: Sport's unity type.
+    /// - parameter valueForOnePoint: Unity type's value to get one point.
+    /// - parameter coreDataStack: Stack to use to create the athletic.
+    private func addNewSport(_ name: String, unityType: Sport.UnityType, valueForOnePoint: Double, coreDataStack: CoreDataStack) {
+        let sport = Sport(context: coreDataStack.viewContext)
+        sport.name = name
+        sport.unityInt16 = unityType.int16
+        sport.valueForOnePoint = valueForOnePoint
+        sport.game = self
+    }
+}
+
+public class Sport: NSManagedObject {
+    var unityType: UnityType {
+        switch unityInt16 {
+        case 1:
+            return .kilometers
+        case 2:
+            return .time
+        default:
+            return .count
+        }
+    }
+    enum UnityType {
+        case kilometers, time, count
+        var int16: Int16 {
+            switch self {
+            case .kilometers:
+                return 1
+            case .time:
+                return 2
+            case .count:
+                return 0
+            }
+        }
     }
 }
 

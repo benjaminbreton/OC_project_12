@@ -12,6 +12,8 @@ extension Error {
             switch error {
             case .existingAthletic:
                 return "This name has already been used for another athletic. Please choose another name."
+            case .existingSport:
+                return "This name has already been used for another sport. Please choose another name."
             }
         } else {
             return "An error occurres."
