@@ -2,33 +2,29 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Athletic" representedClassName=".Athletic" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="athletics" inverseEntity="Game"/>
-        <relationship name="pot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="athletics" inverseEntity="Pot"/>
+        <relationship name="pot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="athleticOwner" inverseEntity="Pot"/>
     </entity>
     <entity name="Game" representedClassName=".Game" syncable="YES" codeGenerationType="category">
         <attribute name="didSeeIntroduction" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="pointsForOneEuro" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="athletics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="game" inverseEntity="Athletic"/>
         <relationship name="commonPot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="game" inverseEntity="Pot"/>
-        <relationship name="sports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sport" inverseName="game" inverseEntity="Sport"/>
     </entity>
     <entity name="Pot" representedClassName=".Pot" syncable="YES" codeGenerationType="class">
         <attribute name="addings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="points" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="withdrawings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="athletics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
+        <relationship name="athleticOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="commonPot" inverseEntity="Game"/>
     </entity>
     <entity name="Sport" representedClassName=".Sport" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unityInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="valueForOnePoint" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="sports" inverseEntity="Game"/>
     </entity>
     <elements>
-        <element name="Athletic" positionX="82.47119140624994" positionY="-412.9474334716797" width="128" height="88"/>
-        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="118"/>
+        <element name="Athletic" positionX="82.47119140624994" positionY="-412.9474334716797" width="128" height="73"/>
+        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="88"/>
         <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="118"/>
-        <element name="Sport" positionX="248.9470825195312" positionY="-124.7176818847656" width="128" height="103"/>
+        <element name="Sport" positionX="279" positionY="-306" width="128" height="74"/>
     </elements>
 </model>

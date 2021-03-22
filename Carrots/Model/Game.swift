@@ -15,15 +15,20 @@ public class Game: NSManagedObject {
     /// Stack used to get and set datas in CoreData.
     var coreDataStack: CoreDataStack?
     
-    var athleticsArray: [Athletic] {
-        guard let athletics = athletics, let existingAthletics: [Athletic] = athletics.allObjects as? [Athletic] else { return [] }
-        return existingAthletics
+    var athletics: [Athletic] {
+        let request: NSFetchRequest<Athletic> = Athletic.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        guard let coreDataStack = coreDataStack, let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
+        return result
     }
     
-    var sportsArray: [Sport] {
-        guard let sports = sports, let existingSports: [Sport] = sports.allObjects as? [Sport] else { return [] }
-        return existingSports
+    var sports: [Sport] {
+        let request: NSFetchRequest<Sport> = Sport.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        guard let coreDataStack = coreDataStack, let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
+        return result
     }
+
     
     // MARK: - Init game
     
@@ -64,13 +69,13 @@ public class Game: NSManagedObject {
         }
         addNewAthletic(name, coreDataStack: coreDataStack)
         coreDataStack.saveContext()
-        completionHandler(.success(athleticsArray))
+        completionHandler(.success(athletics))
     }
     /// Check if an athletic exists in athletics.
     /// - parameter name: Athletic's name to check.
     /// - returns: A boolean which indicates whether the athletic exists or not.
     private func athleticExists(_ name: String) -> Bool {
-        for existingAthletic in athleticsArray {
+        for existingAthletic in athletics {
             if existingAthletic.name == name {
                 return true
             }
@@ -85,7 +90,6 @@ public class Game: NSManagedObject {
         athletic.name = name
         let pot = Pot(context: coreDataStack.viewContext)
         athletic.pot = pot
-        athletic.game = self
     }
     
     // MARK: - Delete athletic
@@ -93,11 +97,21 @@ public class Game: NSManagedObject {
     /// Delete an athletic
     /// - parameter athletic: Athletic to delete.
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
-    func deleteAthletic(_ athletic: Athletic, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
-        guard let coreDataStack = coreDataStack else { return }
+    func deleteAthletic(_ name: String, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
+        guard let coreDataStack = coreDataStack, let athletics: [Athletic] = getEntityWithItsName(name, coreDataStack: coreDataStack), athletics.count == 1 else { return }
+        let athletic = athletics[0]
         coreDataStack.viewContext.delete(athletic)
         coreDataStack.saveContext()
-        completionHandler(.success(athleticsArray))
+        completionHandler(.success(self.athletics))
+    }
+    
+    // MARK: - Supporting methods
+    
+    private func getEntityWithItsName<Type>(_ name: String, coreDataStack: CoreDataStack) -> [Type]? where Type: NSManagedObject {
+        let request: NSFetchRequest<NSFetchRequestResult> = Type.fetchRequest()
+        request.predicate = NSPredicate(format: "name == %@", name)
+        let result = try? coreDataStack.viewContext.fetch(request) as? [Type]
+        return result
     }
     
     // MARK: - Introduction
@@ -124,13 +138,13 @@ public class Game: NSManagedObject {
         }
         addNewSport(name, unityType: unityType, valueForOnePoint: valueForOnePoint, coreDataStack: coreDataStack)
         coreDataStack.saveContext()
-        completionHandler(.success(sportsArray))
+        completionHandler(.success(sports))
     }
     /// Check if a sport exists in sports.
     /// - parameter name: Sport's name to check.
     /// - returns: A boolean which indicates whether the sport exists or not.
     private func sportExists(_ name: String) -> Bool {
-        for existingSport in sportsArray {
+        for existingSport in sports {
             if existingSport.name == name {
                 return true
             }
@@ -147,7 +161,19 @@ public class Game: NSManagedObject {
         sport.name = name
         sport.unityInt16 = unityType.int16
         sport.valueForOnePoint = valueForOnePoint
-        sport.game = self
+    }
+    
+    // MARK: - Delete sport
+    
+    /// Delete an athletic
+    /// - parameter athletic: Athletic to delete.
+    /// - parameter completionHandler: Code to execute when athletic has been deleted.
+    func deleteSport(_ name: String, completionHandler: (Result<[Sport], ApplicationErrors>) -> Void) {
+        guard let coreDataStack = coreDataStack, let sports: [Sport] = getEntityWithItsName(name, coreDataStack: coreDataStack), sports.count == 1 else { return }
+        let sport = sports[0]
+        coreDataStack.viewContext.delete(sport)
+        coreDataStack.saveContext()
+        completionHandler(.success(self.sports))
     }
 }
 

@@ -105,14 +105,13 @@ class CarrotsTests: XCTestCase {
             case .success(_):
                 game.addAthletic("Elo") { result in
                     switch result {
-                    case .success(let athleticsArray):
-                        let athletic = athleticsArray[0]
-                        game.deleteAthletic(athletic) { result in
+                    case .success(_):
+                        game.deleteAthletic("Ben") { result in
                             switch result {
-                            case .success(let athleticsArray):
-                                XCTAssert(athleticsArray.count == 1)
-                                XCTAssert(athleticsArray[0].name == "Elo")
-                            case .failure(_):
+                            case .success(let athletics):
+                                XCTAssert(athletics.count == 1)
+                                XCTAssert(athletics[0].name == "Elo")
+                            case . failure(_):
                                 XCTFail()
                             }
                         }
@@ -181,11 +180,11 @@ class CarrotsTests: XCTestCase {
                 game.addSport("Rameur", unityType: .count, valueForOnePoint: 1) { result in
                     switch result {
                     case .success(_):
-                        game.deleteSport(at: 0) { result in
+                        game.deleteSport("Marche") { result in
                             switch result {
-                            case .success(let sportsArray):
-                                XCTAssert(sportsArray.count == 1)
-                                XCTAssert(sportsArray[0].name == "Rameur")
+                            case .success(let sports):
+                                XCTAssert(sports.count == 1)
+                                XCTAssert(sports[0].name == "Rameur")
                             case .failure(_):
                                 XCTFail()
                             }
