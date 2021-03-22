@@ -82,6 +82,12 @@ public class Game: NSManagedObject {
         athletic.pot = pot
         athletic.game = self
     }
+    func deleteAthletic(_ athletic: Athletic, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
+        guard let coreDataStack = coreDataStack else { return }
+        coreDataStack.viewContext.delete(athletic)
+        coreDataStack.saveContext()
+        completionHandler(.success(athleticsArray))
+    }
     
     // MARK: - Introduction
     
