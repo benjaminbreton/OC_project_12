@@ -237,6 +237,7 @@ extension Game {
         performance.value = sport.unityType.value(for: value)
         performance.addedToCommonPot = addToCommonPot
         performance.date = Date()
+        performance.potAddings = sport.pointsToAdd(value: performance.value)
         return performance
     }
     /// Add points earned with a performance to pot depending on performance's parameters.
@@ -245,11 +246,32 @@ extension Game {
         guard let athleticsSet = performance.athletics, let athletics = athleticsSet.allObjects as? [Athletic] else { return }
         if addToCommonPot {
             guard let pot = commonPot else { return }
-            pot.points += performance.points
+            pot.points += performance.potAddings
         } else {
             for athletic in athletics {
                 guard let pot = athletic.pot else { return }
-                pot.points += performance.points
+                pot.points += performance.potAddings
+            }
+        }
+    }
+    
+    // MARK: - Delete
+    
+    func deletePerformance(_ performance: Performance) {
+        guard let coreDataStack = coreDataStack else { return }
+        cancelPotAddings(performance)
+        coreDataStack.viewContext.delete(performance)
+        coreDataStack.saveContext()
+    }
+    private func cancelPotAddings(_ performance: Performance) {
+        if performance.addedToCommonPot {
+            guard let pot = commonPot else { return }
+            pot.points -= performance.potAddings
+        } else {
+            guard let athleticsSet = performance.athletics, let athletics = athleticsSet.allObjects as? [Athletic] else { return }
+            for athletic in athletics {
+                guard let pot = athletic.pot else { return }
+                pot.points -= performance.potAddings
             }
         }
     }

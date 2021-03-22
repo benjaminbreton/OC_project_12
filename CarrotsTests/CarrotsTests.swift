@@ -145,7 +145,7 @@ class CarrotsTests: XCTestCase {
         addSport("Rameur", to: game)
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10])
         game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100])
-        game.deletePerformance(performance: game.performances[0])
+        game.deletePerformance(game.performances[0])
         let pot = getPot(game: game)
         XCTAssert(pot.points == 10)
         XCTAssert(game.performances.count == 1)

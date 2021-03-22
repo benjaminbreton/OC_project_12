@@ -19,6 +19,10 @@ public class Sport: NSManagedObject {
             return .count
         }
     }
+    func pointsToAdd(value: Double) -> Double {
+        let points = round(value / valueForOnePoint)
+        return points * valueForOnePoint > value ? points - 1 : points
+    }
     /// Sport's unity type enumeration.
     enum UnityType {
         case kilometers, time, count
@@ -42,4 +46,6 @@ public class Sport: NSManagedObject {
             }
         }
     }
+    
+    
 }

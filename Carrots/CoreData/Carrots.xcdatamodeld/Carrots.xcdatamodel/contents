@@ -11,7 +11,7 @@
         <attribute name="pointsForOneEuro" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="commonPot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="game" inverseEntity="Pot"/>
     </entity>
-    <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="category">
+    <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="class">
         <attribute name="addedToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="potAddings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
