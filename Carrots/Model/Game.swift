@@ -52,6 +52,7 @@ extension Game {
         guard let result = try? coreDataStack.viewContext.fetch(request), result.count > 0 else {
             return getNewGame(coreDataStack: coreDataStack)
         }
+        result[0].coreDataStack = coreDataStack
         return result[0]
     }
     /// Create a Game instance if no datas have been saved in CoreData.
@@ -64,7 +65,6 @@ extension Game {
         game.commonPot = commonPot
         game.pointsForOneEuro = 1000
         game.coreDataStack = coreDataStack
-        game.addToCommonPot = true
         coreDataStack.saveContext()
         return game
     }
@@ -117,10 +117,23 @@ extension Game {
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
     func deleteAthletic(_ athletic: Athletic, completionHandler: (Result<[Athletic], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack else { return }
+        deleteAthleticPerformances(athletic)
         coreDataStack.viewContext.delete(athletic)
         coreDataStack.saveContext()
         completionHandler(.success(self.athletics))
     }
+    /// Delete performances in which the only athletic is an athletic to delete, without cancelling earned points.
+    /// - parameter athletic: The athletic to be deleted.
+    private func deleteAthleticPerformances(_ athletic: Athletic) {
+        let performances: [Performance] = getArrayFromSet(athletic.performances)
+        for performance in performances {
+            let athletics: [Athletic] = getArrayFromSet(performance.athletics)
+            if athletics.count == 1 && athletics[0] == athletic {
+                performPerformanceDeletion(performance, cancelPoints: false)
+            }
+        }
+    }
+    
 }
 
 // MARK: - Supporting methods
@@ -131,11 +144,18 @@ extension Game {
     /// - parameter name: Entity's name to search.
     /// - parameter coreDataStack : Coredatastack to use to search entity.
     /// - returns: An array with all existing entities founded.
-    private func getEntityWithItsName<Type>(_ name: String, coreDataStack: CoreDataStack) -> [Type]? where Type: NSManagedObject {
-        let request: NSFetchRequest<NSFetchRequestResult> = Type.fetchRequest()
-        request.predicate = NSPredicate(format: "name == %@", name)
-        let result = try? coreDataStack.viewContext.fetch(request) as? [Type]
-        return result
+//    private func getEntityWithItsName<Type>(_ name: String, coreDataStack: CoreDataStack) -> [Type]? where Type: NSManagedObject {
+//        let request: NSFetchRequest<NSFetchRequestResult> = Type.fetchRequest()
+//        request.predicate = NSPredicate(format: "name == %@", name)
+//        let result = try? coreDataStack.viewContext.fetch(request) as? [Type]
+//        return result
+//    }
+    /// Convert a set in an array.
+    /// - parameter set: The set to be converted.
+    /// - returns: The array based on the set.
+    private func getArrayFromSet<T: NSManagedObject>(_ set: NSSet?) -> [T] {
+        guard let arraySet = set, let array = arraySet.allObjects as? [T] else { return [] }
+        return array
     }
 }
 
@@ -218,9 +238,10 @@ extension Game {
     /// - parameter sport: Performance's sport.
     /// - parameter athletics: Athletics who made the performance.
     /// - parameter value: Performance's value, depending on sport's unit type.
-    func addPerformance(sport: Sport, athletics: [Athletic], value: [Double]) {
+    /// - parameter addToCommonPot: Boolean which indicates whether the points have to be added to the common pot or not.
+    func addPerformance(sport: Sport, athletics: [Athletic], value: [Double], addToCommonPot: Bool) {
         guard let coreDataStack = coreDataStack else { return }
-        let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, coreDataStack: coreDataStack)
+        let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, coreDataStack: coreDataStack, addToCommonPot: addToCommonPot)
         addPointsToPot(with: performance)
         coreDataStack.saveContext()
     }
@@ -230,7 +251,7 @@ extension Game {
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter coreDataStack: Coredatastack in which the performance has to be made.
     /// - returns: The created performance.
-    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [Double], coreDataStack: CoreDataStack) -> Performance {
+    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [Double], coreDataStack: CoreDataStack, addToCommonPot: Bool) -> Performance {
         let performance = Performance(context: coreDataStack.viewContext)
         performance.sport = sport
         performance.athletics = NSSet(array: athletics)
@@ -238,15 +259,16 @@ extension Game {
         performance.addedToCommonPot = addToCommonPot
         performance.date = Date()
         performance.potAddings = sport.pointsToAdd(value: performance.value)
+        performance.initialAthleticsCount = Double(athletics.count)
         return performance
     }
     /// Add points earned with a performance to pot depending on performance's parameters.
-    /// - parameter performance: Perforamnce with which points have been earned.
+    /// - parameter performance: Performance with which points have been earned.
     private func addPointsToPot(with performance: Performance) {
-        guard let athleticsSet = performance.athletics, let athletics = athleticsSet.allObjects as? [Athletic] else { return }
-        if addToCommonPot {
+        let athletics: [Athletic] = getArrayFromSet(performance.athletics)
+        if performance.addedToCommonPot {
             guard let pot = commonPot else { return }
-            pot.points += performance.potAddings
+            pot.points += performance.potAddings * performance.initialAthleticsCount
         } else {
             for athletic in athletics {
                 guard let pot = athletic.pot else { return }
@@ -260,19 +282,25 @@ extension Game {
     /// Delete performance.
     /// - parameter performance: Performance to delete.
     func deletePerformance(_ performance: Performance) {
+        performPerformanceDeletion(performance, cancelPoints: true)
+    }
+    /// Delete performance.
+    /// - parameter performance: Performance to delete.
+    /// - parameter cancelPoints: Boolean which indicates whether the points earned by the performance have to be cancelled or not.
+    private func performPerformanceDeletion(_ performance: Performance, cancelPoints: Bool) {
         guard let coreDataStack = coreDataStack else { return }
-        cancelPotAddings(performance)
+        if cancelPoints { cancelPotAddings(performance) }
         coreDataStack.viewContext.delete(performance)
         coreDataStack.saveContext()
     }
     /// Cancel points added in pots by a performance.
     /// - parameter performance: Performance which added points.
     private func cancelPotAddings(_ performance: Performance) {
+        let athletics: [Athletic] = getArrayFromSet(performance.athletics)
         if performance.addedToCommonPot {
             guard let pot = commonPot else { return }
-            pot.points -= performance.potAddings
+            pot.points -= performance.potAddings * performance.initialAthleticsCount
         } else {
-            guard let athleticsSet = performance.athletics, let athletics = athleticsSet.allObjects as? [Athletic] else { return }
             for athletic in athletics {
                 guard let pot = athletic.pot else { return }
                 pot.points -= performance.potAddings
