@@ -327,11 +327,22 @@ extension Game {
         }
     }
     
+    // MARK: - Withdraw money
+    
+    /// Withdraw money directly to a pot.
+    /// - parameter owner: The pot's owner.
+    /// - parameter amount: Amount to withdraw to the pot.
     func withdrawMoney<T: NSManagedObject>(to owner: T, amount: Double) {
         if amount > 0 {
             changeMoney(to: owner, amount: -amount)
         }
     }
+    
+    // MARK: - Supporting method
+    
+    /// Change amount of a pot.
+    /// - parameter owner: The pot's owner.
+    /// - parameter amount: Changement to do.
     private func changeMoney<T: NSManagedObject>(to owner: T, amount: Double) {
         if let owner = owner as? Game {
             guard let pot = owner.commonPot, let coreDataStack = coreDataStack else { return }
