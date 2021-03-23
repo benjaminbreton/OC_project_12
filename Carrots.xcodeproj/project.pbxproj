@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AE3E260A40CB007FBAA1 /* Pot.swift */; };
 		034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62426010E5B0034C1E2 /* AppDelegate.swift */; };
 		034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62626010E5B0034C1E2 /* SceneDelegate.swift */; };
 		034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62A26010E5B0034C1E2 /* Carrots.xcdatamodeld */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0307AE3E260A40CB007FBAA1 /* Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pot.swift; sourceTree = "<group>"; };
 		034AB62126010E5B0034C1E2 /* Carrots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carrots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		034AB62426010E5B0034C1E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		034AB62626010E5B0034C1E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				03DE95872604C51800FBAA4F /* Game.swift */,
+				0307AE3E260A40CB007FBAA1 /* Pot.swift */,
 				03832129260899F3003EE886 /* Sport.swift */,
 				0383212026088DEF003EE886 /* ApplicationErrors.swift */,
 			);
@@ -273,6 +276,7 @@
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
 				03DE95952604E4C300FBAA4F /* ContentView.swift in Sources */,
 				034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */,
+				0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */,
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */,
 				0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */,

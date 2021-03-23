@@ -318,6 +318,9 @@ extension Game {
     
     // MARK: - Add money
     
+    /// Add money directly to a pot.
+    /// - parameter owner: The pot's owner.
+    /// - parameter amount: Amount to add to the pot.
     func addMoney<T: NSManagedObject>(to owner: T, amount: Double) {
         if let owner = owner as? Game {
             guard let pot = owner.commonPot, let coreDataStack = coreDataStack else { return }
@@ -332,14 +335,7 @@ extension Game {
     }
 }
 
-public class Pot: NSManagedObject {
-    var amount: Double {
-        guard let game = game else { return 0 }
-        var amount = points / game.pointsForOneEuro + addings - withdrawings
-        amount = round(amount * 100) / 100
-        return amount
-    }
-}
+
 
 
 
