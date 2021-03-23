@@ -52,6 +52,15 @@ class CarrotsTests: XCTestCase {
         XCTAssert(pot.amount == 10)
     }
     
+    func testGivenPotContainsSomeMoneyWhenAskToWithdrawSomeOfItThenMoneyHasBeenWithdrawn() {
+        let coreDataStack = getCoreDataStack()
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        game.addMoney(to: game, amount: 100)
+        game.withdrawMoney(to: game, amount: 30)
+        let pot = getPot(game: game)
+        XCTAssert(pot.amount == 70)
+    }
+    
     // MARK: - Athletics tests
     
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
