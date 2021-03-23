@@ -61,6 +61,7 @@ extension Game {
     static private func getNewGame(coreDataStack: CoreDataStack) -> Game {
         let commonPot = Pot(context: coreDataStack.viewContext)
         let game = Game(context: coreDataStack.viewContext)
+        commonPot.game = game
         game.didSeeIntroduction = false
         game.commonPot = commonPot
         game.pointsForOneEuro = 1000
@@ -107,6 +108,7 @@ extension Game {
         let athletic = Athletic(context: coreDataStack.viewContext)
         athletic.name = name
         let pot = Pot(context: coreDataStack.viewContext)
+        pot.game = self
         athletic.pot = pot
     }
     
@@ -309,7 +311,35 @@ extension Game {
     }
 }
 
+// MARK: - Pot
 
+extension Game {
+    
+    
+    // MARK: - Add money
+    
+    func addMoney<T: NSManagedObject>(to owner: T, amount: Double) {
+        if let owner = owner as? Game {
+            guard let pot = owner.commonPot, let coreDataStack = coreDataStack else { return }
+            pot.addings += amount
+            coreDataStack.saveContext()
+        }
+        if let owner = owner as? Athletic {
+            guard let pot = owner.pot, let coreDataStack = coreDataStack else { return }
+            pot.addings += amount
+            coreDataStack.saveContext()
+        }
+    }
+}
+
+public class Pot: NSManagedObject {
+    var amount: Double {
+        guard let game = game else { return 0 }
+        var amount = points / game.pointsForOneEuro + addings - withdrawings
+        amount = round(amount * 100) / 100
+        return amount
+    }
+}
 
 
 
