@@ -159,10 +159,16 @@ class CarrotsTests: XCTestCase {
         let game = Game.initGame(coreDataStack: coreDataStack)
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true)
-        let pot = getPot(game: game)
-        XCTAssert(pot.points == 10)
-        XCTAssert(game.performances.count == 1)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { result in
+            switch result {
+            case .success(_):
+                let pot = getPot(game: game)
+                XCTAssert(pot.points == 10)
+                XCTAssert(game.performances.count == 1)
+            case .failure(_):
+                XCTFail()
+            }
+        }
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithoutAthleticThenErrorOccures() {
@@ -186,8 +192,8 @@ class CarrotsTests: XCTestCase {
         addAthletic("Ben", to: game)
         addAthletic("Elo", to: game)
         addSport("Marche", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: false)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: false) { _ in }
         let pot = getPot(game: game)
         let athletic1Pot = getPot(of: game.athletics[0], game: game)
         let athletic2Pot = getPot(of: game.athletics[1], game: game)
@@ -205,8 +211,8 @@ class CarrotsTests: XCTestCase {
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
         addSport("Rameur", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true)
-        game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: true)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
+        game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: true) { _ in }
         game.deletePerformance(game.performances[0])
         let pot = getPot(game: game)
         XCTAssert(pot.points == 10)
@@ -220,8 +226,8 @@ class CarrotsTests: XCTestCase {
         addAthletic("Elo", to: game)
         addSport("Marche", to: game)
         addSport("Rameur", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true)
-        game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: false)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
+        game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: false) { _ in }
         game.deletePerformance(game.performances[0])
         game.deletePerformance(game.performances[0])
         let pot = getPot(game: game)
@@ -245,14 +251,14 @@ class CarrotsTests: XCTestCase {
         addSport("Marche", to: game)
         let sport = game.sports[0]
         let pot = getPot(game: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [15], addToCommonPot: true)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [30], addToCommonPot: true)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [100], addToCommonPot: true)
-        game.addPerformance(sport: game.sports[0], athletics: [athletic1], value: [50], addToCommonPot: true)
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [15], addToCommonPot: true) { _ in }
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [30], addToCommonPot: true) { _ in }
+        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [100], addToCommonPot: true) { _ in }
+        game.addPerformance(sport: game.sports[0], athletics: [athletic1], value: [50], addToCommonPot: true) { _ in }
         game.deleteAthletic(athletic1) { result in
             switch result {
             case .success(_):
-                game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [70], addToCommonPot: true)
+                game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [70], addToCommonPot: true) { _ in }
                 game.deletePerformance(game.performances[2])
                 game.deleteSport(sport) { result in
                     switch result {

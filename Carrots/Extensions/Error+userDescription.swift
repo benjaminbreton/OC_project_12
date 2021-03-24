@@ -14,6 +14,8 @@ extension Error {
                 return "This name has already been used for another athletic. Please choose another name."
             case .existingSport:
                 return "This name has already been used for another sport. Please choose another name."
+            case .performanceWithoutAthletic:
+                return "Performance has to have at least one athletic."
             default:
                 return "An error occurres."
             }

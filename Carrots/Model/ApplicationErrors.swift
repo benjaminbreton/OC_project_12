@@ -7,7 +7,7 @@
 
 import Foundation
 enum ApplicationErrors: Error, CustomStringConvertible {
-    case existingAthletic, existingSport, unknownSportIndex
+    case existingAthletic, existingSport, unknownSportIndex, performanceWithoutAthletic
     var description: String {
         switch self {
         case .existingAthletic:
@@ -16,6 +16,8 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "Existing sport's name [F-Game]"
         case .unknownSportIndex:
             return "Sport index out of range [F-Game]"
+        case .performanceWithoutAthletic:
+            return "Performance without athletic [F-Game]"
         }
     }
 }
