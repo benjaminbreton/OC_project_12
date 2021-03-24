@@ -8,7 +8,7 @@
     <entity name="Game" representedClassName=".Game" syncable="YES" codeGenerationType="category">
         <attribute name="didSeeIntroduction" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="pointsForOneEuro" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="allPots" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="game" inverseEntity="Pot"/>
+        <relationship name="allPots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pot" inverseName="game" inverseEntity="Pot"/>
         <relationship name="commonPot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pot" inverseName="commonPotGame" inverseEntity="Pot"/>
     </entity>
     <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="class">
@@ -36,9 +36,9 @@
     </entity>
     <elements>
         <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="88"/>
-        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="89"/>
+        <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="103"/>
         <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="148"/>
-        <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="119"/>
+        <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="133"/>
         <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="103"/>
     </elements>
 </model>

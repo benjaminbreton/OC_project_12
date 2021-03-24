@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 // MARK: - Game properties
+
 public class Game: NSManagedObject {
     
     // MARK: - Properties

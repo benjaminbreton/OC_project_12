@@ -47,9 +47,13 @@ class CarrotsTests: XCTestCase {
     func testGivenPotContainsNothingWhenAskToAddMoneyThenMoneyHasBeenAdded() {
         let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addMoney(to: game, amount: 10)
+        addAthletic("Ben", to: game)
         let pot = getPot(game: game)
+        let athleticPot = getPot(of: game.athletics[0], game: game)
+        game.addMoney(to: game, amount: 10)
+        game.addMoney(to: game.athletics[0], amount: 50)
         XCTAssert(pot.amount == 10)
+        XCTAssert(athleticPot.amount == 50)
     }
     
     func testGivenPotContainsSomeMoneyWhenAskToWithdrawSomeOfItThenMoneyHasBeenWithdrawn() {
@@ -57,8 +61,13 @@ class CarrotsTests: XCTestCase {
         let game = Game.initGame(coreDataStack: coreDataStack)
         game.addMoney(to: game, amount: 100)
         game.withdrawMoney(to: game, amount: 30)
+        addAthletic("Ben", to: game)
+        game.addMoney(to: game.athletics[0], amount: 200)
+        game.withdrawMoney(to: game.athletics[0], amount: 195)
         let pot = getPot(game: game)
+        let athleticPot = getPot(of: game.athletics[0], game: game)
         XCTAssert(pot.amount == 70)
+        XCTAssert(athleticPot.amount == 5)
     }
     
     // MARK: - Athletics tests
