@@ -70,6 +70,15 @@ class CarrotsTests: XCTestCase {
         XCTAssert(athleticPot.amount == 5)
     }
     
+    func testGivenAthleticExistsWhenAskToSeePotStatisticsThenStatisticsAreShown() {
+        let coreDataStack = getCoreDataStack()
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        let stats = game.athletics[0].getPotInformations
+        XCTAssert(stats.amount == "0.00")
+        XCTAssert(stats.evolution == .same)
+        XCTAssert(stats.predictedAmount == "0.00")
+    }
+    
     // MARK: - Athletics tests
     
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
