@@ -278,11 +278,11 @@ extension Game {
         let athletics: [Athletic] = getArrayFromSet(performance.athletics)
         if performance.addedToCommonPot {
             guard let pot = commonPot else { return }
-            pot.points += performance.potAddings * performance.initialAthleticsCount
+            pot.addPoints(performance.potAddings * performance.initialAthleticsCount)
         } else {
             for athletic in athletics {
                 guard let pot = athletic.pot else { return }
-                pot.points += performance.potAddings
+                pot.addPoints(performance.potAddings)
             }
         }
     }
@@ -309,11 +309,11 @@ extension Game {
         let athletics: [Athletic] = getArrayFromSet(performance.athletics)
         if performance.addedToCommonPot {
             guard let pot = commonPot else { return }
-            pot.points -= performance.potAddings * performance.initialAthleticsCount
+            pot.addPoints(-performance.potAddings * performance.initialAthleticsCount)
         } else {
             for athletic in athletics {
                 guard let pot = athletic.pot else { return }
-                pot.points -= performance.potAddings
+                pot.addPoints(-performance.potAddings)
             }
         }
     }
@@ -354,12 +354,12 @@ extension Game {
     private func changeMoney<T: NSManagedObject>(to owner: T, amount: Double) {
         if let owner = owner as? Game {
             guard let pot = owner.commonPot, let coreDataStack = coreDataStack else { return }
-            pot.addings += amount
+            pot.amount += amount
             coreDataStack.saveContext()
         }
         if let owner = owner as? Athletic {
             guard let pot = owner.pot, let coreDataStack = coreDataStack else { return }
-            pot.addings += amount
+            pot.amount += amount
             coreDataStack.saveContext()
         }
     }

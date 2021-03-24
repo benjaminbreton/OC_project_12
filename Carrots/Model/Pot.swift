@@ -8,10 +8,16 @@
 import Foundation
 import CoreData
 public class Pot: NSManagedObject {
-    var amount: Double {
-        guard let game = game else { return 0 }
-        var amount = points / game.pointsForOneEuro + addings - withdrawings
-        amount = round(amount * 100) / 100
-        return amount
+    func addPoints(_ count: Double) {
+        let countCheck = convertPoints(count)
+        amount += countCheck.amount
+        points += countCheck.leftPoints
+        let pointsCheck = convertPoints(points)
+        amount += pointsCheck.amount
+    }
+    private func convertPoints(_ count: Double) -> (amount: Double, leftPoints: Double) {
+        let amount: Int = Int(count / 1000)
+        let leftPoints = Int(count) % 1000
+        return (amount: Double(amount), leftPoints: Double(leftPoints))
     }
 }

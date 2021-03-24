@@ -21,9 +21,8 @@
         <relationship name="sport" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sport" inverseName="performances" inverseEntity="Sport"/>
     </entity>
     <entity name="Pot" representedClassName=".Pot" syncable="YES" codeGenerationType="category">
-        <attribute name="addings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="points" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="withdrawings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="athleticOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
         <relationship name="commonPotGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="commonPot" inverseEntity="Game"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="allPots" inverseEntity="Game"/>
@@ -38,7 +37,7 @@
         <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="88"/>
         <element name="Game" positionX="251.3038330078124" positionY="-291.1086120605468" width="128" height="103"/>
         <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="148"/>
-        <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="133"/>
+        <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="118"/>
         <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="103"/>
     </elements>
 </model>
