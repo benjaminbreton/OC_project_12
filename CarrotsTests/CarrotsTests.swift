@@ -165,6 +165,21 @@ class CarrotsTests: XCTestCase {
         XCTAssert(game.performances.count == 1)
     }
     
+    func testGivenAGameExistsWhenAskToAddPerformanceWithoutAthleticThenErrorOccures() {
+        let coreDataStack = getCoreDataStack()
+        let game = Game.initGame(coreDataStack: coreDataStack)
+        addAthletic("Ben", to: game)
+        addSport("Marche", to: game)
+        game.addPerformance(sport: game.sports[0], athletics: [], value: [10], addToCommonPot: true) { result in
+            switch result {
+            case .success(_):
+                XCTFail()
+            case .failure(let error):
+                XCTAssert(error == .performanceWithoutAthletic)
+            }
+        }
+    }
+    
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() {
         let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
