@@ -242,6 +242,7 @@ extension Game {
     /// - parameter athletics: Athletics who made the performance.
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter addToCommonPot: Boolean which indicates whether the points have to be added to the common pot or not.
+    /// - parameter completionHandler: Actions to do once performance has been added.
     func addPerformance(sport: Sport, athletics: [Athletic], value: [Double], addToCommonPot: Bool, completionHandler: (Result<[Performance], ApplicationErrors>) -> Void) {
         guard let coreDataStack = coreDataStack else { return }
         guard athletics.count > 0 else {
