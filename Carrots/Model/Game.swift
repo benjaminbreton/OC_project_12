@@ -37,6 +37,14 @@ public class Game: NSManagedObject {
         guard let coreDataStack = coreDataStack, let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
         return result
     }
+    
+    var allCommonPoints: Double {
+        if performances.count > 0 {
+            return performances.map({ $0.addedToCommonPot ? $0.potAddings : 0 }).reduce(0, +)
+        } else {
+            return 0
+        }
+    }
 }
 
 // MARK: - Static methods
@@ -71,6 +79,7 @@ extension Game {
         game.commonPot = commonPot
         game.pointsForOneEuro = 1000
         game.coreDataStack = coreDataStack
+        game.predictedAmountDate = Date() + 30*24*3600
         coreDataStack.saveContext()
         return game
     }
@@ -371,6 +380,98 @@ extension Game {
             coreDataStack.saveContext()
         }
     }
+}
+
+// MARK: - Get statistics
+
+extension Game {
+    
+    // MARK: - Stats typealias
+    
+    typealias PotInformations = (pot: Pot, creationDate: Date, lastEvolutionDate: Date)
+    typealias EvolutionInformations = (evolution: Double, evolutionType: Pot.EvolutionType, evolutionDate: Date)
+    typealias Statistics = (amount: String, predictedAmount: String, evolution: Pot.EvolutionType)
+    
+    // MARK: - Get stats
+    
+    /// Get athletic's or commonpot's statistics.
+    /// - parameter athletic: Athletic for whom statistics have to be getted, default value : nil to get commonpot's statistics.
+    /// - parameter completionHandler: Actions to do with the returned stats.
+    func getStatistics(for athletic: Athletic? = nil, completionHandler: (Statistics) -> Void) {
+        // get pot informations
+        guard let potInformations = getPotInformations(for: athletic) else { return }
+        let pot = potInformations.pot
+        let creationDate = potInformations.creationDate
+        // get evolution
+        let evolutionInformations = getEvolutionInformations(athletic: athletic, potInformations: potInformations)
+        let evolution: Double = evolutionInformations.evolution
+        let evolutionType: Pot.EvolutionType = evolutionInformations.evolutionType
+        let evolutionDate: Date = evolutionInformations.evolutionDate
+        // format amounts
+        let formatter = getAmountFormatter()
+        guard let nextAmount = getPredictedAmount(from: evolutionDate, with: evolution, pot: pot),
+              let amount: String = formatter.string(from: NSNumber(value: pot.amount)),
+              let predictedAmount: String = formatter.string(from: NSNumber(value: nextAmount)) else { return }
+        // return stats
+        if creationDate + 24 * 3600 > Date() {
+            completionHandler((amount: amount, predictedAmount: "No prediction can't be done for the first 24 hours.", evolution: .same))
+            return
+        }
+        completionHandler((amount: amount, predictedAmount: predictedAmount, evolution: evolutionType))
+    }
+    private func getPotInformations(for athletic: Athletic?) -> PotInformations? {
+        if let athletic = athletic {
+            guard let pot = athletic.pot, let creationDate = pot.creationDate, let lastEvolutionDate = pot.lastEvolutionDate else { return nil }
+            return (pot: pot, creationDate: creationDate, lastEvolutionDate: lastEvolutionDate)
+        } else {
+            guard let pot = commonPot, let creationDate = pot.creationDate, let lastEvolutionDate = pot.lastEvolutionDate else { return nil }
+            return (pot: pot, creationDate: creationDate, lastEvolutionDate: lastEvolutionDate)
+        }
+    }
+    private func getEvolutionInformations(athletic: Athletic?, potInformations: PotInformations) -> EvolutionInformations {
+        let pot = potInformations.pot
+        let creationDate = potInformations.creationDate
+        let lastEvolutionDate = potInformations.lastEvolutionDate
+        if lastEvolutionDate + 24 * 3600 > Date() {
+            // evolution doesn't have to be updated
+            return (evolution: pot.lastEvolution, evolutionType: pot.evolutionType.potEvolutionType, evolutionDate: lastEvolutionDate)
+        } else {
+            // update evolution
+            let evolutionDate = Date()
+            let allPoints: Double
+            if let athletic = athletic {
+                allPoints = athletic.allPoints
+            } else {
+                allPoints = allCommonPoints
+            }
+            let duration = DateInterval(start: creationDate, end: evolutionDate).duration
+            let evolution = duration/allPoints
+            let evolutionType = Pot.EvolutionType.determinate(from: pot.lastEvolution, to: evolution)
+            pot.lastEvolution = evolution
+            pot.lastEvolutionDate = evolutionDate
+            pot.evolutionType = evolutionType.int16
+            return (evolution: evolution, evolutionType: evolutionType, evolutionDate: evolutionDate)
+        }
+    }
+    private func getPredictedAmount(from evolutionDate: Date, with evolution: Double, pot: Pot) -> Double? {
+        guard var nextDate = predictedAmountDate else { return nil }
+        if nextDate <= Date() {
+            nextDate = Date() + 30*24*3600
+            predictedAmountDate = nextDate
+        }
+        let nextStep = DateInterval(start: evolutionDate, end: nextDate).duration
+        let amountToAdd = nextStep * evolution
+        let nextAmount = pot.amount + amountToAdd
+        return nextAmount
+    }
+    private func getAmountFormatter() -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        formatter.locale = Locale.current
+        return formatter
+    }
+    
 }
 
 

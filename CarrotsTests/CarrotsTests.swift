@@ -74,10 +74,11 @@ class CarrotsTests: XCTestCase {
         let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
         addAthletic("Ben", to: game)
-        let stats = game.athletics[0].getPotInformations(for: Date() + 24 * 3600)
-        XCTAssert(stats.amount == "0.00")
-        XCTAssert(stats.evolution == .same)
-        XCTAssert(stats.predictedAmount == "No prediction can't be done for the first 24 hours.")
+        game.getStatistics(for: game.athletics[0]) { stats in
+            XCTAssert(stats.amount == "0.00")
+            XCTAssert(stats.evolution == .same)
+            XCTAssert(stats.predictedAmount == "No prediction can't be done for the first 24 hours.")
+        }
     }
     
     // MARK: - Athletics tests

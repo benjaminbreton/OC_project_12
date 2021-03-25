@@ -18,6 +18,8 @@
 		0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383212026088DEF003EE886 /* ApplicationErrors.swift */; };
 		0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383212526088E0C003EE886 /* Error+userDescription.swift */; };
 		0383212A260899F3003EE886 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03832129260899F3003EE886 /* Sport.swift */; };
+		03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7B9260C7B1400DDA29F /* Athletic.swift */; };
+		03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */; };
 		03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */; };
 		03DE95882604C51800FBAA4F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95872604C51800FBAA4F /* Game.swift */; };
 		03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */; };
@@ -50,6 +52,8 @@
 		0383212026088DEF003EE886 /* ApplicationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationErrors.swift; sourceTree = "<group>"; };
 		0383212526088E0C003EE886 /* Error+userDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+userDescription.swift"; sourceTree = "<group>"; };
 		03832129260899F3003EE886 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		03D3C7B9260C7B1400DDA29F /* Athletic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athletic.swift; sourceTree = "<group>"; };
+		03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Int16+enumConversion.swift"; path = "Carrots/Model/Int16+enumConversion.swift"; sourceTree = SOURCE_ROOT; };
 		03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		03DE95872604C51800FBAA4F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoreDataStack.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				0383212526088E0C003EE886 /* Error+userDescription.swift */,
+				03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				0307AE3E260A40CB007FBAA1 /* Pot.swift */,
 				03832129260899F3003EE886 /* Sport.swift */,
 				0383212026088DEF003EE886 /* ApplicationErrors.swift */,
+				03D3C7B9260C7B1400DDA29F /* Athletic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
+				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
 				0383212A260899F3003EE886 /* Sport.swift in Sources */,
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
 				03DE95952604E4C300FBAA4F /* ContentView.swift in Sources */,
@@ -280,6 +287,7 @@
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */,
 				0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */,
+				03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */,
 				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
