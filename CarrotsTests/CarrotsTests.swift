@@ -73,10 +73,11 @@ class CarrotsTests: XCTestCase {
     func testGivenAthleticExistsWhenAskToSeePotStatisticsThenStatisticsAreShown() {
         let coreDataStack = getCoreDataStack()
         let game = Game.initGame(coreDataStack: coreDataStack)
-        let stats = game.athletics[0].getPotInformations
+        addAthletic("Ben", to: game)
+        let stats = game.athletics[0].getPotInformations(for: Date() + 24 * 3600)
         XCTAssert(stats.amount == "0.00")
         XCTAssert(stats.evolution == .same)
-        XCTAssert(stats.predictedAmount == "0.00")
+        XCTAssert(stats.predictedAmount == "No prediction can't be done for the first 24 hours.")
     }
     
     // MARK: - Athletics tests

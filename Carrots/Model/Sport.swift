@@ -9,16 +9,7 @@ import Foundation
 import CoreData
 public class Sport: NSManagedObject {
     /// Sport's unity type.
-    var unityType: UnityType {
-        switch unityInt16 {
-        case 1:
-            return .kilometers
-        case 2:
-            return .time
-        default:
-            return .count
-        }
-    }
+    var unityType: UnityType { unityInt16.sportUnityType }
     func pointsToAdd(value: Double) -> Double {
         let points = round(value / valueForOnePoint)
         return points * valueForOnePoint > value ? points - 1 : points
@@ -48,4 +39,26 @@ public class Sport: NSManagedObject {
     }
     
     
+}
+extension Int16 {
+    var sportUnityType: Sport.UnityType {
+        switch self {
+        case 1:
+            return .kilometers
+        case 2:
+            return .time
+        default:
+            return .count
+        }
+    }
+    var potEvolutionType: Pot.EvolutionType {
+        switch self {
+        case 1:
+            return .up
+        case 2:
+            return .down
+        default:
+            return .same
+        }
+    }
 }

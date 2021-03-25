@@ -63,6 +63,10 @@ extension Game {
         let commonPot = Pot(context: coreDataStack.viewContext)
         let game = Game(context: coreDataStack.viewContext)
         commonPot.game = game
+        commonPot.creationDate = Date()
+        commonPot.lastEvolution = 0
+        commonPot.lastEvolutionDate = Date()
+        commonPot.evolutionType = 0
         game.didSeeIntroduction = false
         game.commonPot = commonPot
         game.pointsForOneEuro = 1000
@@ -110,6 +114,10 @@ extension Game {
         athletic.name = name
         let pot = Pot(context: coreDataStack.viewContext)
         pot.game = self
+        pot.creationDate = Date()
+        pot.lastEvolution = 0
+        pot.lastEvolutionDate = Date()
+        pot.evolutionType = 0
         athletic.pot = pot
     }
     
