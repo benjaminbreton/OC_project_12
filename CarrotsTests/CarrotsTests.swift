@@ -9,70 +9,59 @@ import XCTest
 @testable import Carrots
 
 class CarrotsTests: XCTestCase {
-
-    var coreDataStack: CoreDataStack?
+    
+    var game: Game?
     
     override func setUp() {
-        coreDataStack = FakeCoreDataStack()
+        let coreDataStack = FakeCoreDataStack()
+        game = Game(coreDataStack: coreDataStack)
     }
     override func tearDown() {
-        coreDataStack = nil
+        game = nil
     }
     
     // MARK: - Game Tests
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         XCTAssert(game.pointsForOneEuro == 1000)
     }
     
-    func testGivenAGameExistsWhenIndicateThatIntroductionHasBeenSeenThenGamesPropertyHasBeenChanged() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
-        game.introductionHasBeenSeen()
-        XCTAssert(game.didSeeIntroduction)
-    }
-    
     func testGivenAGameExistsWhenAskForLoadingItThenGameIsLoaded() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         game.introductionHasBeenSeen()
-        let game2 = Game.initGame(coreDataStack: coreDataStack)
+        let game2 = getUnwrappedGame()
         XCTAssert(game2.didSeeIntroduction)
     }
     
     // MARK: - Pot tests
     
     func testGivenPotContainsNothingWhenAskToAddMoneyThenMoneyHasBeenAdded() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
-        let pot = getPot(game: game)
-        let athleticPot = getPot(of: game.athletics[0], game: game)
-        game.addMoney(to: game, amount: 10)
-        game.addMoney(to: game.athletics[0], amount: 50)
+        let pot = game.commonPot
+        let athleticPot = game.getPot(of: game.athletics[0])
+        pot.addMoney(amount: 10)
+        athleticPot.addMoney(amount: 50)
         XCTAssert(pot.amount == 10)
         XCTAssert(athleticPot.amount == 50)
     }
     
     func testGivenPotContainsSomeMoneyWhenAskToWithdrawSomeOfItThenMoneyHasBeenWithdrawn() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
-        game.addMoney(to: game, amount: 100)
-        game.withdrawMoney(to: game, amount: 30)
+        let game = getUnwrappedGame()
+        let commonPot = game.commonPot
+        commonPot.addMoney(amount: 100)
+        commonPot.withdrawMoney(amount: 30)
         addAthletic("Ben", to: game)
-        game.addMoney(to: game.athletics[0], amount: 200)
-        game.withdrawMoney(to: game.athletics[0], amount: 195)
-        let pot = getPot(game: game)
-        let athleticPot = getPot(of: game.athletics[0], game: game)
-        XCTAssert(pot.amount == 70)
+        let athleticPot = game.getPot(of: game.athletics[0])
+        athleticPot.addMoney(amount: 200)
+        athleticPot.withdrawMoney(amount: 195)
+        XCTAssert(commonPot.amount == 70)
         XCTAssert(athleticPot.amount == 5)
     }
     
     func testGivenAthleticExistsWhenAskToSeePotStatisticsThenStatisticsAreShown() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         game.getStatistics(for: game.athletics[0]) { stats in
             XCTAssert(stats.amount == "0.00")
@@ -84,16 +73,14 @@ class CarrotsTests: XCTestCase {
     // MARK: - Athletics tests
     
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         XCTAssert(game.athletics.count == 1)
         XCTAssert(game.athletics[0].name == "Ben")
     }
     
     func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         game.addAthletic("Ben") { result in
             switch result {
@@ -107,8 +94,7 @@ class CarrotsTests: XCTestCase {
         }
     }
     func testGivenAGameWithAthleticsExistsWhenAskToDeleteOneOfThemThenAthleticIsDeleted() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addAthletic("Elo", to: game)
         game.deleteAthletic(game.athletics[0]) { result in
@@ -125,8 +111,7 @@ class CarrotsTests: XCTestCase {
     // MARK: - Sports tests
     
     func testGivenAGameExistsWhenAskToAddSportThenSportHasBeenAdded() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addSport("Marche", to: game)
         XCTAssert(game.sports.count == 1)
         XCTAssert(game.sports[0].name == "Marche")
@@ -134,8 +119,7 @@ class CarrotsTests: XCTestCase {
     }
     
     func testGivenASportExistsWhenAskToAddASportWithTheSameNameThenErrorOccures() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addSport("Marche", to: game)
         game.addSport("Marche", unityType: .count, valueForOnePoint: 25) { result in
             switch result {
@@ -148,8 +132,7 @@ class CarrotsTests: XCTestCase {
     }
     
     func testGivenSportsExistWhenAskToDeleteOneOfThemThenSportIsDeleted() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addSport("Marche", to: game)
         addSport("Rameur", to: game)
         game.deleteSport(game.sports[0]) { result in
@@ -166,14 +149,13 @@ class CarrotsTests: XCTestCase {
     // MARK: - Performances tests
     
     func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { result in
             switch result {
             case .success(_):
-                let pot = getPot(game: game)
+                let pot = game.commonPot
                 XCTAssert(pot.points == 10)
                 XCTAssert(game.performances.count == 1)
             case .failure(_):
@@ -183,8 +165,7 @@ class CarrotsTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithoutAthleticThenErrorOccures() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
         game.addPerformance(sport: game.sports[0], athletics: [], value: [10], addToCommonPot: true) { result in
@@ -198,17 +179,16 @@ class CarrotsTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addAthletic("Elo", to: game)
         addSport("Marche", to: game)
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: false) { _ in }
-        let pot = getPot(game: game)
-        let athletic1Pot = getPot(of: game.athletics[0], game: game)
-        let athletic2Pot = getPot(of: game.athletics[1], game: game)
-        XCTAssert(pot.points == 20)
+        let commonPot = game.commonPot
+        let athletic1Pot = game.getPot(of: game.athletics[0])
+        let athletic2Pot = game.getPot(of: game.athletics[1])
+        XCTAssert(commonPot.points == 20)
         XCTAssert(athletic1Pot.points == 10)
         XCTAssert(athletic2Pot.points == 10)
         XCTAssert(game.performances.count == 2)
@@ -217,22 +197,20 @@ class CarrotsTests: XCTestCase {
     
     
     func testGivenPerformancesExistWhenAskToDeleteOneOfThemThenPerformanceIsDeleted() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addSport("Marche", to: game)
         addSport("Rameur", to: game)
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
         game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: true) { _ in }
         game.deletePerformance(game.performances[0])
-        let pot = getPot(game: game)
+        let pot = game.commonPot
         XCTAssert(pot.points == 10)
         XCTAssert(game.performances.count == 1)
     }
     
     func testGivenPerformancesExistWhenAskToDeleteAllOfThemThenPerformancesAreDeleted() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addAthletic("Elo", to: game)
         addSport("Marche", to: game)
@@ -241,10 +219,10 @@ class CarrotsTests: XCTestCase {
         game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: false) { _ in }
         game.deletePerformance(game.performances[0])
         game.deletePerformance(game.performances[0])
-        let pot = getPot(game: game)
-        let athletic1Pot = getPot(of: game.athletics[0], game: game)
-        let athletic2Pot = getPot(of: game.athletics[1], game: game)
-        XCTAssert(pot.points == 0)
+        let commonPot = game.commonPot
+        let athletic1Pot = game.getPot(of: game.athletics[0])
+        let athletic2Pot = game.getPot(of: game.athletics[1])
+        XCTAssert(commonPot.points == 0)
         XCTAssert(athletic1Pot.points == 0)
         XCTAssert(athletic2Pot.points == 0)
         XCTAssert(game.performances.count == 0)
@@ -253,15 +231,14 @@ class CarrotsTests: XCTestCase {
     // MARK: - Several tests
     
     func testGivenPerformancesExistsWhenAthleticSportAndPerformancesHasBeenDeletedThenTheyAreSuccessfullyDeletedAndPointsTotalIsCorrect() {
-        let coreDataStack = getCoreDataStack()
-        let game = Game.initGame(coreDataStack: coreDataStack)
+        let game = getUnwrappedGame()
         addAthletic("Ben", to: game)
         addAthletic("Elo", to: game)
         let athletic1 = game.athletics[0]
         let athletic2 = game.athletics[1]
         addSport("Marche", to: game)
         let sport = game.sports[0]
-        let pot = getPot(game: game)
+        let commonPot = game.commonPot
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [15], addToCommonPot: true) { _ in }
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [30], addToCommonPot: true) { _ in }
         game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [100], addToCommonPot: true) { _ in }
@@ -297,7 +274,7 @@ class CarrotsTests: XCTestCase {
                          - sport deletion : all sport's performances are deleted ; but the deletion doesn't change points total
                          > total : 350
                          */
-                        XCTAssert(pot.points == 350)
+                        XCTAssert(commonPot.points == 350)
                     case .failure(_):
                         XCTFail()
                     }
@@ -321,25 +298,11 @@ class CarrotsTests: XCTestCase {
             return
         }
     }
-    func getCoreDataStack() -> CoreDataStack {
-        guard let coreDataStack = coreDataStack else {
+    func getUnwrappedGame() -> Game {
+        guard let game = game else {
             XCTFail()
-            return FakeCoreDataStack()
+            return Game()
         }
-        return coreDataStack
-    }
-    func getPot(of owner: Athletic? = nil, game: Game) -> Pot {
-        if let owner = owner {
-            guard let pot = owner.pot else {
-                XCTFail()
-                return Pot()
-            }
-            return pot
-        }
-        guard let pot = game.commonPot else {
-            XCTFail()
-            return Pot()
-        }
-        return pot
+        return game
     }
 }

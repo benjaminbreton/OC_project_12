@@ -8,11 +8,18 @@
 import Foundation
 import CoreData
 
+/*
 // MARK: - Game properties
 
-public class Game: NSManagedObject {
+public class NAncGame {
     
     // MARK: - Properties
+    
+    /*
+    pointsForOneEuro Double
+     didSeeIntroduction Bool
+     predictedAmount Double
+    */
     
     /// Stack used to get and set datas in CoreData.
     var coreDataStack: CoreDataStack?
@@ -474,7 +481,7 @@ extension Game {
     
 }
 
-
+*/
 
 
 
