@@ -3,7 +3,7 @@
     <entity name="Athletic" representedClassName=".Athletic" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="performances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="athletics" inverseEntity="Performance"/>
-        <relationship name="pot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pot" inverseName="athleticOwner" inverseEntity="Pot"/>
+        <relationship name="pot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pot" inverseName="owner" inverseEntity="Pot"/>
     </entity>
     <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="class">
         <attribute name="addedToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -21,7 +21,7 @@
         <attribute name="lastEvolution" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lastEvolutionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="points" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="athleticOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
     </entity>
     <entity name="Sport" representedClassName=".Sport" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>

@@ -11,15 +11,19 @@ enum ApplicationErrors: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .existingAthletic:
-            return "Existing athletic's name [F-Game]"
+            return "Existing athletic's name"
         case .existingSport:
-            return "Existing sport's name [F-Game]"
+            return "Existing sport's name"
         case .unknownSportIndex:
-            return "Sport index out of range [F-Game]"
+            return "Sport index out of range"
         case .performanceWithoutAthletic:
-            return "Performance without athletic [F-Game]"
+            return "Performance without athletic"
         case .cantReturnStats:
-            return "Can't return stats [F-Game]"
+            return "Can't return stats"
         }
+    }
+    static func getErrorWithLog(_ error: ApplicationErrors, file: String = #file, line: Int = #line, function: String = #function) -> ApplicationErrors {
+        print("###> ERROR <### Error \(error) took place on file \(file), line \(line), function \(function). ###")
+        return error
     }
 }
