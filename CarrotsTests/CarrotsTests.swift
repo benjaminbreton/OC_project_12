@@ -63,7 +63,12 @@ class CarrotsTests: XCTestCase {
         addAthletic("Ben", to: game)
         game.getStatistics(for: game.athletics[0])
         let statistics = try XCTUnwrap(game.askedStatistics)
-        XCTAssert(statistics.amount == "0.00")
+        print(statistics.amount)
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        let expectingResult = try XCTUnwrap(formatter.string(from: 0))
+        XCTAssert(statistics.amount == expectingResult)
         XCTAssert(statistics.evolution == .same)
         XCTAssert(statistics.predictedAmount == "No prediction can't be done for the first 24 hours.")
     }

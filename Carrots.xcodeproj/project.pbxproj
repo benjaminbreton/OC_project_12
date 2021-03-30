@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AE3E260A40CB007FBAA1 /* Pot.swift */; };
+		030DB54C261352320054D140 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54B261352320054D140 /* Settings.swift */; };
 		034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62426010E5B0034C1E2 /* AppDelegate.swift */; };
 		034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62626010E5B0034C1E2 /* SceneDelegate.swift */; };
 		034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62A26010E5B0034C1E2 /* Carrots.xcdatamodeld */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		0307AE3E260A40CB007FBAA1 /* Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pot.swift; sourceTree = "<group>"; };
+		030DB54B261352320054D140 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		034AB62126010E5B0034C1E2 /* Carrots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carrots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		034AB62426010E5B0034C1E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		034AB62626010E5B0034C1E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				03DE95872604C51800FBAA4F /* Game.swift */,
+				030DB54B261352320054D140 /* Settings.swift */,
 				0307AE3E260A40CB007FBAA1 /* Pot.swift */,
 				03832129260899F3003EE886 /* Sport.swift */,
 				0383212026088DEF003EE886 /* ApplicationErrors.swift */,
@@ -279,6 +282,7 @@
 			files = (
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
 				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
+				030DB54C261352320054D140 /* Settings.swift in Sources */,
 				0383212A260899F3003EE886 /* Sport.swift in Sources */,
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
 				03DE95952604E4C300FBAA4F /* ContentView.swift in Sources */,

@@ -44,11 +44,6 @@ public class Pot: NSManagedObject {
     }
 }
 
-
-
-
-
-
 // MARK: - Get statistics
 
 extension Pot {
@@ -56,57 +51,57 @@ extension Pot {
     // MARK: - Stats typealias
     
     typealias EvolutionInformations = (evolution: Double, evolutionType: Pot.EvolutionType, evolutionDate: Date)
-    typealias Statistics = (amount: String, predictedAmount: String, evolution: Pot.EvolutionType, predictedAmountDate: String)
+    typealias Statistics = (amount: String, predictedAmount: String, evolution: Pot.EvolutionType, predictedAmountDate: Date)
     
     // MARK: - Get stats
     
-    /// Get athletic's or commonpot's statistics.
+    /// Get athletic's or common pot's statistics.
     /// - parameter athletic: Athletic for whom statistics have to be getted, default value : nil to get commonpot's statistics.
     /// - parameter completionHandler: Actions to do with the returned stats.
     func getStatistics(allCommonPoints: Double = 0, predictedAmountDate: Date, completionHandler: (Statistics) -> Void) {
         // get pot informations
-        guard let creationDate = creationDate else { return }
+        guard let creationDate = creationDate, creationDate + 24 * 3600 < Date() else {
+            let formattedAmount = getFormattedAmount(amount)
+            completionHandler((amount: formattedAmount, predictedAmount: "No prediction can't be done for the first 24 hours.", evolution: .same, predictedAmountDate: Date()))
+            return
+        }
         // get evolution
-        let athletic = owner
-        let evolutionInformations = getEvolutionInformations(athletic: athletic, allCommonPoints: allCommonPoints)
+        let evolutionInformations = getEvolutionInformations(allCommonPoints: allCommonPoints)
         let evolution: Double = evolutionInformations.evolution
         let evolutionType: Pot.EvolutionType = evolutionInformations.evolutionType
         let evolutionDate: Date = evolutionInformations.evolutionDate
         // get predicted amount
         let predictedAmountDate = predictedAmountDate > Date() ? predictedAmountDate : predictedAmountDate + 30 * 24 * 3600
-        let nextAmount = getPredictedAmount(from: evolutionDate, with: evolution, predictedAmountDate: predictedAmountDate)
+        let predictedAmount = getPredictedAmount(from: evolutionDate, with: evolution, predictedAmountDate: predictedAmountDate)
         // format amounts
-        let amountFormatter = getAmountFormatter()
-        guard let amount: String = amountFormatter.string(from: NSNumber(value: amount)),
-              let predictedAmount: String = amountFormatter.string(from: NSNumber(value: nextAmount)) else { return }
-        // format date
-        let dateFormatter = getDateFormatter()
-        let formattedPredictedAmountDate = dateFormatter.string(from: predictedAmountDate)
+        let formattedAmount = getFormattedAmount(amount)
+        let formattedPredictedAmount = getFormattedAmount(predictedAmount)
         // return stats
-        if creationDate + 24 * 3600 > Date() {
-            completionHandler((amount: amount, predictedAmount: "No prediction can't be done for the first 24 hours.", evolution: .same, predictedAmountDate: "---"))
-            return
-        }
-        completionHandler((amount: amount, predictedAmount: predictedAmount, evolution: evolutionType, predictedAmountDate: formattedPredictedAmountDate))
+        completionHandler((amount: formattedAmount, predictedAmount: formattedPredictedAmount, evolution: evolutionType, predictedAmountDate: predictedAmountDate))
     }
-    
-    
-    private func getEvolutionInformations(athletic: Athletic?, allCommonPoints: Double) -> EvolutionInformations {
+    /// Get evolution informations.
+    /// - parameter allCommonPoints: All points added to the common pot.
+    /// - returns: Evolution informations : evolution, evolution's type (up, down or same), and evolution date (when evolution has been calculated).
+    private func getEvolutionInformations(allCommonPoints: Double) -> EvolutionInformations {
         guard let creationDate = creationDate, let lastEvolutionDate = lastEvolutionDate else { return (evolution: 0, evolutionType: .same, evolutionDate: Date()) }
         if lastEvolutionDate + 24 * 3600 > Date() {
-            // evolution doesn't have to be updated
+            // evolution doesn't have to be updated, returns old values
             return (evolution: lastEvolution, evolutionType: evolutionType.potEvolutionType, evolutionDate: lastEvolutionDate)
         } else {
             // update evolution
-            let evolutionDate = Date()
+            // get new evolution date : beginning of current day
+            let evolutionDate = getTodayBeginning()
+            // get all earned points by the owner
             let allPoints: Double
-            if let athletic = athletic {
+            if let athletic = owner {
                 allPoints = athletic.allPoints
             } else {
                 allPoints = allCommonPoints
             }
+            // get duration during which points have been earned
             let duration = DateInterval(start: creationDate, end: evolutionDate).duration
-            let evolution = duration/allPoints
+            // compute evolution
+            let evolution = allPoints / duration
             let evolutionType = Pot.EvolutionType.determinate(from: lastEvolution, to: evolution)
             self.lastEvolution = evolution
             self.lastEvolutionDate = evolutionDate
@@ -114,24 +109,32 @@ extension Pot {
             return (evolution: evolution, evolutionType: evolutionType, evolutionDate: evolutionDate)
         }
     }
+    /// Get predicted amount of the pot regarding evolution.
+    /// - parameter evolutionDate: When evolution has been calculated.
+    /// - parameter evolution: Calculated evolution based on earned points.
+    /// - parameter predictAmountDate: Prediction's date.
+    /// - returns: The computed amount on the prediction's date.
     private func getPredictedAmount(from evolutionDate: Date, with evolution: Double, predictedAmountDate: Date) -> Double {
         let nextStep = DateInterval(start: evolutionDate, end: predictedAmountDate).duration
         let amountToAdd = nextStep * evolution
         let nextAmount = amount + amountToAdd
         return nextAmount
     }
-    private func getAmountFormatter() -> NumberFormatter {
+    /// Get formatted amount.
+    /// - parameter amount: Amount to format.
+    /// - returns: Formatted amount.
+    private func getFormattedAmount(_ amount: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
         formatter.locale = Locale.current
-        return formatter
+        formatter.numberStyle = .currency
+        guard let result = formatter.string(from: NSNumber(value: amount)) else { return "" }
+        return result
     }
-    private func getDateFormatter() -> DateFormatter {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
+    /// Get start of day for today.
+    /// - returns: Start of today.
+    private func getTodayBeginning() -> Date {
+        let calendar = Calendar.current
+        let date = calendar.startOfDay(for: Date())
+        return date
     }
 }
