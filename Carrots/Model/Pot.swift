@@ -8,6 +8,15 @@
 import Foundation
 import CoreData
 public class Pot: NSManagedObject {
+    var formattedAmount: String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        return formatter.string(from: NSNumber(value: amount)) ?? ""
+    }
+    var formattedEvolutionType: EvolutionType {
+        evolutionType.potEvolutionType
+    }
     func addPoints(_ count: Double) {
         let countCheck = convertPoints(count)
         amount += countCheck.amount
@@ -31,6 +40,18 @@ public class Pot: NSManagedObject {
             default:
                 return 0
             }
+        }
+        var image: (name: String, colorInt16: Int16) {
+            let name: String
+            switch self {
+            case .up:
+                name = "arrow.up.right.square"
+            case .same:
+                name = "arrow.right.square"
+            case .down:
+                name = "arrow.down.right.square"
+            }
+            return (name: name, colorInt16: int16)
         }
         static func determinate(from lastEvolution: Double, to newEvolution: Double) -> EvolutionType {
             if newEvolution > lastEvolution {

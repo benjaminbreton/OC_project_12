@@ -5,7 +5,7 @@
 //  Created by Benjamin Breton on 25/03/2021.
 //
 
-import Foundation
+import SwiftUI
 extension Int16 {
     var sportUnityType: Sport.UnityType {
         switch self {
@@ -25,6 +25,16 @@ extension Int16 {
             return .down
         default:
             return .same
+        }
+    }
+    var potEvolutionColor: Color {
+        switch self {
+        case 1:
+            return .green
+        case 2:
+            return .red
+        default:
+            return .yellow
         }
     }
 }

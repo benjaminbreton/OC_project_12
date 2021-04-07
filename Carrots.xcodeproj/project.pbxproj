@@ -10,6 +10,11 @@
 		0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AE3E260A40CB007FBAA1 /* Pot.swift */; };
 		030DB54C261352320054D140 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54B261352320054D140 /* Settings.swift */; };
 		030DB55026135EFE0054D140 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54F26135EFE0054D140 /* ViewModel.swift */; };
+		030F3571261A3ECE006ABF68 /* PotChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030F3570261A3ECD006ABF68 /* PotChanges.swift */; };
+		032AFA0F261756ED00D61E28 /* PotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA0E261756ED00D61E28 /* PotsView.swift */; };
+		032AFA2426175D0600D61E28 /* akaPosse.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2326175D0600D61E28 /* akaPosse.ttf */; };
+		032AFA2E26175DA900D61E28 /* kirsty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2D26175DA900D61E28 /* kirsty.otf */; };
+		032AFA342617648800D61E28 /* ListBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA332617648800D61E28 /* ListBase.swift */; };
 		034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62426010E5B0034C1E2 /* AppDelegate.swift */; };
 		034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62626010E5B0034C1E2 /* SceneDelegate.swift */; };
 		034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 034AB62A26010E5B0034C1E2 /* Carrots.xcdatamodeld */; };
@@ -20,6 +25,7 @@
 		0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383212026088DEF003EE886 /* ApplicationErrors.swift */; };
 		0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383212526088E0C003EE886 /* Error+userDescription.swift */; };
 		0383212A260899F3003EE886 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03832129260899F3003EE886 /* Sport.swift */; };
+		03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */; };
 		03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7B9260C7B1400DDA29F /* Athletic.swift */; };
 		03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */; };
 		03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */; };
@@ -42,6 +48,11 @@
 		0307AE3E260A40CB007FBAA1 /* Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pot.swift; sourceTree = "<group>"; };
 		030DB54B261352320054D140 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		030DB54F26135EFE0054D140 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		030F3570261A3ECD006ABF68 /* PotChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotChanges.swift; sourceTree = "<group>"; };
+		032AFA0E261756ED00D61E28 /* PotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsView.swift; sourceTree = "<group>"; };
+		032AFA2326175D0600D61E28 /* akaPosse.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = akaPosse.ttf; sourceTree = "<group>"; };
+		032AFA2D26175DA900D61E28 /* kirsty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kirsty.otf; sourceTree = "<group>"; };
+		032AFA332617648800D61E28 /* ListBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBase.swift; sourceTree = "<group>"; };
 		034AB62126010E5B0034C1E2 /* Carrots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carrots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		034AB62426010E5B0034C1E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		034AB62626010E5B0034C1E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +67,7 @@
 		0383212026088DEF003EE886 /* ApplicationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationErrors.swift; sourceTree = "<group>"; };
 		0383212526088E0C003EE886 /* Error+userDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+userDescription.swift"; sourceTree = "<group>"; };
 		03832129260899F3003EE886 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeViewModelToBuildViews.swift; sourceTree = "<group>"; };
 		03D3C7B9260C7B1400DDA29F /* Athletic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athletic.swift; sourceTree = "<group>"; };
 		03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Int16+enumConversion.swift"; path = "Carrots/Model/Int16+enumConversion.swift"; sourceTree = SOURCE_ROOT; };
 		03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -135,6 +147,8 @@
 		034AB65D26010EA00034C1E2 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				032AFA2326175D0600D61E28 /* akaPosse.ttf */,
+				032AFA2D26175DA900D61E28 /* kirsty.otf */,
 				034AB62D26010E5F0034C1E2 /* Assets.xcassets */,
 				034AB62626010E5B0034C1E2 /* SceneDelegate.swift */,
 				034AB62426010E5B0034C1E2 /* AppDelegate.swift */,
@@ -187,6 +201,10 @@
 			isa = PBXGroup;
 			children = (
 				03F472092615FB8A002CE23D /* HomeView.swift */,
+				030F3570261A3ECD006ABF68 /* PotChanges.swift */,
+				032AFA332617648800D61E28 /* ListBase.swift */,
+				032AFA0E261756ED00D61E28 /* PotsView.swift */,
+				03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,8 +289,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				032AFA2E26175DA900D61E28 /* kirsty.otf in Resources */,
 				034AB63426010E5F0034C1E2 /* LaunchScreen.storyboard in Resources */,
 				034AB63126010E5F0034C1E2 /* Preview Assets.xcassets in Resources */,
+				032AFA2426175D0600D61E28 /* akaPosse.ttf in Resources */,
 				034AB62E26010E5F0034C1E2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +311,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */,
+				032AFA342617648800D61E28 /* ListBase.swift in Sources */,
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
+				030F3571261A3ECE006ABF68 /* PotChanges.swift in Sources */,
 				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
 				030DB54C261352320054D140 /* Settings.swift in Sources */,
 				03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */,
@@ -303,6 +326,7 @@
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */,
 				0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */,
+				032AFA0F261756ED00D61E28 /* PotsView.swift in Sources */,
 				03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */,
 				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
 			);
@@ -472,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.benjamin-breton.Carrots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -493,7 +517,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.benjamin-breton.Carrots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
