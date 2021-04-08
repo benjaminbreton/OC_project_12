@@ -16,8 +16,8 @@ struct HomeView: View {
     
     var body: some View {
         UITabBar.appearance().backgroundImage = UIImage()
-        UINavigationBar.appearance().titleTextAttributes = [.font : CommonSettings().regularNavigationTitleFont]
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font : CommonSettings().largeNavigationTitleFont]
+        UINavigationBar.appearance().titleTextAttributes = [.font : ViewCommonSettings().regularNavigationTitleFont]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font : ViewCommonSettings().largeNavigationTitleFont]
         return NavigationView {
             TabView(selection: $selection) {
                 ForEach(types.indices) { index in
@@ -87,7 +87,7 @@ struct HomeView: View {
                     Image(systemName: navigationButtonImage)
                         .resizable()
                         .foregroundColor(.black)
-                        .frame(width: CommonSettings().navigationButtonSize, height: CommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 })
         }
         func view(_ tag: Int, viewModel: FakeViewModel) -> some View {
@@ -126,78 +126,15 @@ struct HomeView: View {
     }
 }
 
-struct BigTitleFont: ViewModifier {
-    func body(content: Content) -> some View {
-        content.font(.custom("akaPosse", size: CommonSettings().bigTitleFontSize))
-    }
-}
-struct TitleFont: ViewModifier {
-    func body(content: Content) -> some View {
-        content.font(.custom("kirsty", size: CommonSettings().titleFontSize))
-    }
-}
-struct SimpleFont: ViewModifier {
-    func body(content: Content) -> some View {
-        content.font(.custom("kirsty", size: CommonSettings().regularFontSize))
-    }
-}
 
-struct NoListRectangle: ViewModifier {
-    func body(content: Content) -> some View {
-        ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
-                .opacity(0.2)
-            content
-                .padding()
-        }
-        .padding()
-    }
-}
 
-struct CellRectangle: ViewModifier {
-    func body(content: Content) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
-                .opacity(0.2)
-            content
-        }
-        .padding()
-    }
-}
 
-struct BackgroundView: ViewModifier {
-    func body(content: Content) -> some View {
-        ZStack {
-            Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [.gray, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                .edgesIgnoringSafeArea(.all)
-            content
-        }
-    }
-}
 
-extension View {
-    func withAppBackground() -> some View {
-        modifier(BackgroundView())
-    }
-    func inCellRectangle() -> some View {
-        modifier(CellRectangle())
-    }
-    func inNoListRectangle() -> some View {
-        modifier(NoListRectangle())
-    }
-    func withTitleFont() -> some View {
-        modifier(TitleFont())
-    }
-    func withSimpleFont() -> some View {
-        modifier(SimpleFont())
-    }
-    func withBigTitleFont() -> some View {
-        modifier(BigTitleFont())
-    }
-}
+
+
+
+
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
@@ -208,31 +145,3 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
-class CommonSettings {
-    var commonPotLineHeight: CGFloat {
-        UIScreen.main.bounds.height / 10
-    }
-    var regularFontSize: CGFloat {
-        return 20 * UIScreen.main.bounds.height / 844
-    }
-    var titleFontSize: CGFloat {
-        return regularFontSize * 1.5
-    }
-    var bigTitleFontSize: CGFloat {
-        return regularFontSize * 1.5
-    }
-    var navigationTitleFontSize: CGFloat {
-        return regularFontSize * 2.5
-    }
-    var navigationButtonSize: CGFloat {
-        return 30 * UIScreen.main.bounds.height / 844
-    }
-    var regularNavigationTitleFont: UIFont {
-        guard let regularTitleFont = UIFont(name: "akaPosse", size: CommonSettings().regularFontSize) else { return UIFont() }
-        return regularTitleFont
-    }
-    var largeNavigationTitleFont: UIFont {
-        guard let largeTitleFont = UIFont(name: "akaPosse", size: CommonSettings().navigationTitleFontSize) else { return UIFont() }
-        return largeTitleFont
-    }
-}

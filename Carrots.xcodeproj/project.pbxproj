@@ -28,6 +28,19 @@
 		03D038FC261D9488004B8C30 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D038FB261D9488004B8C30 /* LogoView.swift */; };
 		03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7B9260C7B1400DDA29F /* Athletic.swift */; };
 		03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */; };
+		03DD81EE261EFD700028A0A5 /* View + modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81ED261EFD700028A0A5 /* View + modifiers.swift */; };
+		03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */; };
+		03DD81F7261F000B0028A0A5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F6261F000B0028A0A5 /* BackgroundView.swift */; };
+		03DD81FB261F00390028A0A5 /* CellRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FA261F00390028A0A5 /* CellRectangle.swift */; };
+		03DD81FF261F00520028A0A5 /* NoListRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FE261F00520028A0A5 /* NoListRectangle.swift */; };
+		03DD8203261F00620028A0A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8202261F00620028A0A5 /* Fonts.swift */; };
+		03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD820B261F01190028A0A5 /* NavigationPageView.swift */; };
+		03DD8212261F013C0028A0A5 /* PotsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */; };
+		03DD8216261F01620028A0A5 /* PotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8215261F01620028A0A5 /* PotCell.swift */; };
+		03DD821A261F01870028A0A5 /* NavigationLinkOnModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8219261F01870028A0A5 /* NavigationLinkOnModifier.swift */; };
+		03DD821E261F01AA0028A0A5 /* NavigationPotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD821D261F01AA0028A0A5 /* NavigationPotCell.swift */; };
+		03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8221261F01D60028A0A5 /* PotAddings.swift */; };
+		03DD8226261F0A540028A0A5 /* InButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8225261F0A540028A0A5 /* InButton.swift */; };
 		03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */; };
 		03DE95882604C51800FBAA4F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95872604C51800FBAA4F /* Game.swift */; };
 		03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */; };
@@ -70,6 +83,19 @@
 		03D038FB261D9488004B8C30 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		03D3C7B9260C7B1400DDA29F /* Athletic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athletic.swift; sourceTree = "<group>"; };
 		03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Int16+enumConversion.swift"; path = "Carrots/Model/Int16+enumConversion.swift"; sourceTree = SOURCE_ROOT; };
+		03DD81ED261EFD700028A0A5 /* View + modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + modifiers.swift"; sourceTree = "<group>"; };
+		03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCommonSettings.swift; sourceTree = "<group>"; };
+		03DD81F6261F000B0028A0A5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		03DD81FA261F00390028A0A5 /* CellRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRectangle.swift; sourceTree = "<group>"; };
+		03DD81FE261F00520028A0A5 /* NoListRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoListRectangle.swift; sourceTree = "<group>"; };
+		03DD8202261F00620028A0A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		03DD820B261F01190028A0A5 /* NavigationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPageView.swift; sourceTree = "<group>"; };
+		03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsSettingsView.swift; sourceTree = "<group>"; };
+		03DD8215261F01620028A0A5 /* PotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotCell.swift; sourceTree = "<group>"; };
+		03DD8219261F01870028A0A5 /* NavigationLinkOnModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkOnModifier.swift; sourceTree = "<group>"; };
+		03DD821D261F01AA0028A0A5 /* NavigationPotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPotCell.swift; sourceTree = "<group>"; };
+		03DD8221261F01D60028A0A5 /* PotAddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotAddings.swift; sourceTree = "<group>"; };
+		03DD8225261F0A540028A0A5 /* InButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InButton.swift; sourceTree = "<group>"; };
 		03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		03DE95872604C51800FBAA4F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoreDataStack.swift; sourceTree = "<group>"; };
@@ -178,10 +204,63 @@
 		0383212426088DFE003EE886 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				03DD81ED261EFD700028A0A5 /* View + modifiers.swift */,
 				0383212526088E0C003EE886 /* Error+userDescription.swift */,
 				03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		03DD81F5261EFFF70028A0A5 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				03DD81F6261F000B0028A0A5 /* BackgroundView.swift */,
+				03DD81FA261F00390028A0A5 /* CellRectangle.swift */,
+				03DD81FE261F00520028A0A5 /* NoListRectangle.swift */,
+				03DD8202261F00620028A0A5 /* Fonts.swift */,
+				03DD820B261F01190028A0A5 /* NavigationPageView.swift */,
+				03DD8225261F0A540028A0A5 /* InButton.swift */,
+				03DD8219261F01870028A0A5 /* NavigationLinkOnModifier.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		03DD8206261F00AB0028A0A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				03F472092615FB8A002CE23D /* HomeView.swift */,
+				03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		03DD8208261F00B40028A0A5 /* Pots */ = {
+			isa = PBXGroup;
+			children = (
+				032AFA0E261756ED00D61E28 /* PotsView.swift */,
+				03DD8221261F01D60028A0A5 /* PotAddings.swift */,
+				03DD821D261F01AA0028A0A5 /* NavigationPotCell.swift */,
+				03DD8215261F01620028A0A5 /* PotCell.swift */,
+				03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */,
+			);
+			path = Pots;
+			sourceTree = "<group>";
+		};
+		03DD8209261F00C60028A0A5 /* Supporting views */ = {
+			isa = PBXGroup;
+			children = (
+				032AFA332617648800D61E28 /* ListBase.swift */,
+				03D038FB261D9488004B8C30 /* LogoView.swift */,
+			);
+			path = "Supporting views";
+			sourceTree = "<group>";
+		};
+		03DD820A261F00E10028A0A5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		03DE95752604BF9A00FBAA4F /* Model */ = {
@@ -200,11 +279,11 @@
 		03F472082615FB66002CE23D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03F472092615FB8A002CE23D /* HomeView.swift */,
-				03D038FB261D9488004B8C30 /* LogoView.swift */,
-				032AFA332617648800D61E28 /* ListBase.swift */,
-				032AFA0E261756ED00D61E28 /* PotsView.swift */,
-				03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */,
+				03DD820A261F00E10028A0A5 /* Settings */,
+				03DD8209261F00C60028A0A5 /* Supporting views */,
+				03DD8208261F00B40028A0A5 /* Pots */,
+				03DD8206261F00AB0028A0A5 /* Home */,
+				03DD81F5261EFFF70028A0A5 /* ViewModifiers */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,24 +390,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */,
 				03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */,
 				032AFA342617648800D61E28 /* ListBase.swift in Sources */,
+				03DD81F7261F000B0028A0A5 /* BackgroundView.swift in Sources */,
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
 				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
+				03DD81EE261EFD700028A0A5 /* View + modifiers.swift in Sources */,
 				030DB54C261352320054D140 /* Settings.swift in Sources */,
 				03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */,
 				03D038FC261D9488004B8C30 /* LogoView.swift in Sources */,
+				03DD81FF261F00520028A0A5 /* NoListRectangle.swift in Sources */,
 				0383212A260899F3003EE886 /* Sport.swift in Sources */,
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
 				030DB55026135EFE0054D140 /* ViewModel.swift in Sources */,
 				034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */,
 				0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */,
+				03DD8203261F00620028A0A5 /* Fonts.swift in Sources */,
+				03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */,
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */,
 				0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */,
+				03DD8226261F0A540028A0A5 /* InButton.swift in Sources */,
+				03DD8212261F013C0028A0A5 /* PotsSettingsView.swift in Sources */,
 				032AFA0F261756ED00D61E28 /* PotsView.swift in Sources */,
+				03DD81FB261F00390028A0A5 /* CellRectangle.swift in Sources */,
 				03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */,
 				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
+				03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */,
+				03DD8216261F01620028A0A5 /* PotCell.swift in Sources */,
+				03DD821E261F01AA0028A0A5 /* NavigationPotCell.swift in Sources */,
+				03DD821A261F01870028A0A5 /* NavigationLinkOnModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
