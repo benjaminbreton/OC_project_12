@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     //@ObservedObject var viewModel: ViewModel = ViewModel()
-    let viewModel = FakeViewModel.create()
+    var viewModel = FakeViewModel.create()
     @State private var selection = 0
     
     let types: [PageType] = [.pots, .athletics, .sports, .performances]
@@ -87,7 +87,7 @@ struct HomeView: View {
                     Image(systemName: navigationButtonImage)
                         .resizable()
                         .foregroundColor(.black)
-                        //.frame(width: CommonSettings().navigationButtonSize, height: CommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: CommonSettings().navigationButtonSize, height: CommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 })
         }
         func view(_ tag: Int, viewModel: FakeViewModel) -> some View {

@@ -24,8 +24,8 @@ class FakeViewModel {
     static func create() -> FakeViewModel {
         let commonPot = FakePot(amount: 30, evolutionType: 1)
         var athletics: [FakeAthletic] = []
-        let names = ["Lena", "Elo", "Ben", "Dom", "Mar", "Par", "Mic", "Cle", "Ben2"]
-        for index in 0..<9 {
+        let names = ["Lena"]//, "Elo", "Ben", "Dom", "Mar", "Par", "Mic", "Cle", "Ben2"]
+        for index in 0..<names.count {
             let pot = FakePot(amount: Double.random(in: 10000...99999), evolutionType: Int16.random(in: 0...2))
             let at = FakeAthletic(name: names[index], pot: pot, performances: nil)
             athletics.append(at)

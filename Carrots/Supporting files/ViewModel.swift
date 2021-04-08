@@ -5,7 +5,7 @@
 //  Created by Benjamin Breton on 30/03/2021.
 //
 
-import SwiftUI
+import Foundation
 class ViewModel: ObservableObject {
     @Published var game = Game()
     func addAthletic(_ name: String) {
