@@ -40,4 +40,7 @@ class ViewCommonSettings {
         let characters = "ABEHKMOTWXZabfntw8$*/='#@&_;!|{}]"
         return characters.map({ "\($0)" })
     }
+    var lineWidth: CGFloat {
+        5 * UIScreen.main.bounds.height / 844
+    }
 }

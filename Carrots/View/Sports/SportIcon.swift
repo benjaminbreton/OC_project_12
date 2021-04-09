@@ -20,7 +20,7 @@ struct SportIcon: View {
             Text(icon)
                 .withSportIconFont(usedHeightMultiplier: multiplier)
             Circle()
-                .stroke(lineWidth: 5)
+                .stroke(lineWidth: ViewCommonSettings().lineWidth)
                 .foregroundColor(.image)
                 .opacity(selectedIndex?.wrappedValue == index ? 1 : 0)
         }
