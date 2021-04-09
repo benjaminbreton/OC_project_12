@@ -123,26 +123,26 @@ struct TabNavigationItem: View {
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
-                .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .font(.largeTitle)
                 .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
             
         case .athletics:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
-                .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .font(.largeTitle)
                 .withNavigationLink(destination: AthleticSettings(athletic: nil, name: "", image: nil))
         case .performances:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
-                .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .font(.largeTitle)
                 .withNavigationLink(destination: SportSettings(sport: nil, name: "Name", unity: Int16(0).sportUnityType))
         case .sports:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
-                .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .font(.largeTitle)
                 .withNavigationLink(destination: SportSettings(sport: nil, name: "", unity: Int16(0).sportUnityType))
         }
     }

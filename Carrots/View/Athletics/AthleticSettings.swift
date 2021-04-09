@@ -16,11 +16,13 @@ struct AthleticSettings: View {
         GeometryReader { geometry in
             VStack() {
                 Divider()
-                Text("Name : ")
-                    .withSimpleFont()
+                Text("Name")
+                    .withTitleFont()
                 TextField("Name", text: $name)
                     .withBigSimpleFont()
                 Divider()
+                Text("Image")
+                    .withTitleFont()
                 AthleticImageWithButtons(imageData: image, radius: geometry.size.width * 0.35)
                 ConfirmButton {
                     mode.wrappedValue.dismiss()

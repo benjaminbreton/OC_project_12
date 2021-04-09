@@ -31,7 +31,9 @@ struct SportSettings: View {
             Picker("Please choose an unity", selection: $unity) {
                 ForEach(unities, id: \.self) {
                     Text($0.description)
+                        .withSimpleFont()
                 }
+                
             }
             ConfirmButton {
                 mode.wrappedValue.dismiss()
