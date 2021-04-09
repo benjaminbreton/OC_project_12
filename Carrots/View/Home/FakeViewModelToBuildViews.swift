@@ -52,6 +52,7 @@ class FakeViewModel {
 class FakeAthletic {
     let name: String?
     let image: Data?
+    let imageRotation: Double = 0
     let pot: FakePot?
     let performances: [FakePerformance]?
     init(name: String, pot: FakePot, performances: [FakePerformance]?) {

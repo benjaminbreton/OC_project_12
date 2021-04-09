@@ -23,7 +23,7 @@ struct AthleticSettings: View {
                 Divider()
                 Text("Image")
                     .withTitleFont()
-                AthleticImageWithButtons(imageData: image, radius: geometry.size.width * 0.35)
+                AthleticImageWithButtons(imageData: image, radius: geometry.size.width * 0.35, rotation: athletic?.imageRotation ?? 0)
                 ConfirmButton {
                     mode.wrappedValue.dismiss()
                 }

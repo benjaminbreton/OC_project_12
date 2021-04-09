@@ -9,6 +9,7 @@ import SwiftUI
 struct AthleticImage: View {
     let imageData: Data?
     let radius: CGFloat
+    @Binding var rotation: Double
     var body: some View {
         ZStack(alignment: .center) {
             Circle()
@@ -16,6 +17,9 @@ struct AthleticImage: View {
             if let data = imageData, let image = UIImage(data: data) {
                 Image(uiImage: image)
                     .resizable()
+                    .scaledToFill()
+                    .rotationEffect(.init(degrees: rotation))
+                    
             } else {
                 Image(systemName: "person")
                     .resizable()
@@ -32,12 +36,26 @@ struct AthleticImageWithButtons: View {
     let radius: CGFloat
     @State private var isShowPicker = false
     @State private var isShowCamera = false
+    @State var rotation: Double
     var body: some View {
         ZStack(alignment: .center) {
-            AthleticImage(imageData: imageData, radius: radius)
+            AthleticImage(imageData: imageData, radius: radius, rotation: $rotation)
             VStack {
+                // arrowshape.turn.up.left
+                HStack {
+                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.left")
+                        .inButton {
+                            rotation -= 90
+                        }
+                    Spacer()
+                        .frame(width: radius * 1.2, height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.right")
+                        .inButton {
+                            rotation += 90
+                        }
+                }
                 Spacer()
-                    .frame(width: radius * 2, height: radius * 1.7, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: radius * 2, height: radius * 1.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 HStack {
                     SystemImageBlackAndWhite(name: "photo")
                         .inButton {
