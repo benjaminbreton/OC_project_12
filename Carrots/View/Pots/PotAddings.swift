@@ -10,6 +10,9 @@ struct PotAddings: View {
     let pot: FakePot?
     @State var changeType: Int = 0
     @State var amount: String = ""
+    var amountTitle: String {
+        changeType == 0 ? "Amount to add" : "Amount to withdraw"
+    }
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
@@ -27,7 +30,7 @@ struct PotAddings: View {
             })
             .pickerStyle(SegmentedPickerStyle())
             Divider().padding()
-            TextField("Amount", text: $amount)
+            TextField(amountTitle, text: $amount)
                 .withSimpleFont()
                 .keyboardType(.decimalPad)
             Divider().padding()

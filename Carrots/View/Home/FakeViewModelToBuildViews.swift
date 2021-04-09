@@ -42,12 +42,14 @@ class FakeViewModel {
 }
 class FakeAthletic {
     let name: String?
+    let image: Data?
     let pot: FakePot?
     let performances: [FakePerformance]?
     init(name: String, pot: FakePot, performances: [FakePerformance]?) {
         self.name = name
         self.pot = pot
         self.performances = performances
+        image = nil
         pot.owner = self
     }
 }
