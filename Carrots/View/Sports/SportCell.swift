@@ -15,7 +15,7 @@ struct SportCell: View {
     var body: some View {
         print(ViewCommonSettings().sportsIconsCharacters[Int(sport.icon)])
         return HStack(alignment: .center) {
-            SportIcon(icon: ViewCommonSettings().sportsIconsCharacters[Int(sport.icon)], multiplier: multiplier)
+            SportIcon(index: Int(sport.icon), selectedIndex: nil, multiplier: multiplier)
                 .frame(width: rowHeight, height: rowHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             Spacer()
                 .frame(width: ViewCommonSettings().commonHeight)

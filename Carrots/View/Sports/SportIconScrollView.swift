@@ -13,14 +13,14 @@ struct SportIconScrollView: View {
         ScrollView(.horizontal) {
             HStack {
                 ForEach(characters.indices) { index in
-                    SportIcon(icon: characters[index], multiplier: 6)
+                    SportIcon(index: index, selectedIndex: $selection, multiplier: 6)
                         .frame(width: ViewCommonSettings().commonHeight * 6, height: ViewCommonSettings().commonHeight * 6)
                         .inButton {
                             selection = index
                         }
-                        .foregroundColor(selection == index ? .image : .text)
                 }
             }
+            .frame(height: ViewCommonSettings().commonHeight * 8)
         }
     }
 }

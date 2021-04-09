@@ -37,7 +37,7 @@ struct BigSimpleFont: ViewModifier {
 struct LinkFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("kirsty", size: ViewCommonSettings().regularFontSize))
+            .font(.custom("kirsty", size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.link)
     }
 }

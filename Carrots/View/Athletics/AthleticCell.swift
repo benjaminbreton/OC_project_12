@@ -12,15 +12,13 @@ struct AthleticCell: View {
     var body: some View {
         ZStack(alignment: .leading) {
             HStack(alignment: .center) {
-                GeometryReader { geometry in
-                    AthleticImage(imageData: athletic.image, radius: geometry.size.height / 2, rotation: $rotation)
-                    //.frame(width: geometry.size.height, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                }
+                AthleticImage(imageData: athletic.image, radius: ViewCommonSettings().commonHeight * 2, rotation: $rotation)
                 Text(athletic.name ?? "No name")
                     .padding()
                     .withBigSimpleFont()
             }
         }
+        .frame(height: ViewCommonSettings().commonHeight * 4)
         .withNavigationLink(destination: AthleticSettings(athletic: athletic, name: athletic.name ?? "Name"))
     }
 }
