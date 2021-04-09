@@ -14,6 +14,7 @@
 		03264BD626203E3D003F6429 /* AthleticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD526203E3D003F6429 /* AthleticCell.swift */; };
 		03264BDA26203E78003F6429 /* AthleticImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD926203E78003F6429 /* AthleticImage.swift */; };
 		03264BDE26203EB5003F6429 /* AthleticSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BDD26203EB5003F6429 /* AthleticSettings.swift */; };
+		03264BE426205333003F6429 /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BE326205333003F6429 /* ConfirmButton.swift */; };
 		032AFA0F261756ED00D61E28 /* PotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA0E261756ED00D61E28 /* PotsView.swift */; };
 		032AFA2426175D0600D61E28 /* akaPosse.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2326175D0600D61E28 /* akaPosse.ttf */; };
 		032AFA2E26175DA900D61E28 /* kirsty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2D26175DA900D61E28 /* kirsty.otf */; };
@@ -32,7 +33,7 @@
 		03D038FC261D9488004B8C30 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D038FB261D9488004B8C30 /* LogoView.swift */; };
 		03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7B9260C7B1400DDA29F /* Athletic.swift */; };
 		03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */; };
-		03DD81EE261EFD700028A0A5 /* View + modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81ED261EFD700028A0A5 /* View + modifiers.swift */; };
+		03DD81EE261EFD700028A0A5 /* View+modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81ED261EFD700028A0A5 /* View+modifiers.swift */; };
 		03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */; };
 		03DD81F7261F000B0028A0A5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F6261F000B0028A0A5 /* BackgroundView.swift */; };
 		03DD81FB261F00390028A0A5 /* CellRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FA261F00390028A0A5 /* CellRectangle.swift */; };
@@ -71,6 +72,7 @@
 		03264BD526203E3D003F6429 /* AthleticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticCell.swift; sourceTree = "<group>"; };
 		03264BD926203E78003F6429 /* AthleticImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticImage.swift; sourceTree = "<group>"; };
 		03264BDD26203EB5003F6429 /* AthleticSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticSettings.swift; sourceTree = "<group>"; };
+		03264BE326205333003F6429 /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		032AFA0E261756ED00D61E28 /* PotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsView.swift; sourceTree = "<group>"; };
 		032AFA2326175D0600D61E28 /* akaPosse.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = akaPosse.ttf; sourceTree = "<group>"; };
 		032AFA2D26175DA900D61E28 /* kirsty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kirsty.otf; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		03D038FB261D9488004B8C30 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		03D3C7B9260C7B1400DDA29F /* Athletic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athletic.swift; sourceTree = "<group>"; };
 		03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Int16+enumConversion.swift"; path = "Carrots/Model/Int16+enumConversion.swift"; sourceTree = SOURCE_ROOT; };
-		03DD81ED261EFD700028A0A5 /* View + modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + modifiers.swift"; sourceTree = "<group>"; };
+		03DD81ED261EFD700028A0A5 /* View+modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modifiers.swift"; sourceTree = "<group>"; };
 		03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCommonSettings.swift; sourceTree = "<group>"; };
 		03DD81F6261F000B0028A0A5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		03DD81FA261F00390028A0A5 /* CellRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRectangle.swift; sourceTree = "<group>"; };
@@ -216,7 +218,7 @@
 		0383212426088DFE003EE886 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				03DD81ED261EFD700028A0A5 /* View + modifiers.swift */,
+				03DD81ED261EFD700028A0A5 /* View+modifiers.swift */,
 				0383212526088E0C003EE886 /* Error+userDescription.swift */,
 				03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */,
 				03264BD126203D58003F6429 /* Color+appColors.swift */,
@@ -264,6 +266,7 @@
 			children = (
 				032AFA332617648800D61E28 /* ListBase.swift */,
 				03D038FB261D9488004B8C30 /* LogoView.swift */,
+				03264BE326205333003F6429 /* ConfirmButton.swift */,
 			);
 			path = "Supporting views";
 			sourceTree = "<group>";
@@ -431,11 +434,12 @@
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
 				03264BD626203E3D003F6429 /* AthleticCell.swift in Sources */,
 				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
-				03DD81EE261EFD700028A0A5 /* View + modifiers.swift in Sources */,
+				03DD81EE261EFD700028A0A5 /* View+modifiers.swift in Sources */,
 				030DB54C261352320054D140 /* Settings.swift in Sources */,
 				03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */,
 				03D038FC261D9488004B8C30 /* LogoView.swift in Sources */,
 				03DD822B261F23960028A0A5 /* AthleticsView.swift in Sources */,
+				03264BE426205333003F6429 /* ConfirmButton.swift in Sources */,
 				03DD81FF261F00520028A0A5 /* NoListRectangle.swift in Sources */,
 				0383212A260899F3003EE886 /* Sport.swift in Sources */,
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,

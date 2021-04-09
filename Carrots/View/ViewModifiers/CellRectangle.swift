@@ -10,7 +10,7 @@ struct CellRectangle: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
+                .foregroundColor(.backCell)
                 .opacity(0.2)
             content
         }

@@ -20,9 +20,9 @@ struct PotCell: View {
         VStack() {
             HStack {
                 Text(name)
-                    .withTitleFont()
+                    .withBigSimpleFont()
                 Text("\(pot?.formattedAmount ?? "")")
-                    .withTitleFont()
+                    .withBigSimpleFont()
                     .layoutPriority(1)
             }
             

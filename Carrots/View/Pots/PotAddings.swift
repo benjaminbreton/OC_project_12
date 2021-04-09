@@ -33,11 +33,9 @@ struct PotAddings: View {
             TextField(amountTitle, text: $amount)
                 .withSimpleFont()
                 .keyboardType(.decimalPad)
-            Divider().padding()
-            Text("Confirm")
-                .inButton {
-                    mode.wrappedValue.dismiss()
-                }
+            ConfirmButton {
+                mode.wrappedValue.dismiss()
+            }
         }
         .inNavigationPageView(title: "Pot modification")
     }

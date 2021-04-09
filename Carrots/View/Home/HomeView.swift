@@ -25,8 +25,8 @@ struct HomeView: View {
             }
             .navigationBarTitle(Text(types[selection].name))
             .navigationBarItems(trailing: TabNavigationItem(type: types[selection], viewModel: viewModel))
-            .accentColor(.black)
-        }.accentColor(.black)
+            .accentColor(.tab)
+        }.accentColor(.title)
         
     }
     private func setTabAppearance() {
@@ -122,26 +122,26 @@ struct TabNavigationItem: View {
         case .pots:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
-                .foregroundColor(.black)
+                .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
             
         case .athletics:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
-                .foregroundColor(.black)
+                .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .withNavigationLink(destination: AthleticSettings(athletic: nil, name: "Name", image: nil))
         case .performances:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
-                .foregroundColor(.black)
+                .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
         case .sports:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
-                .foregroundColor(.black)
+                .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
         }

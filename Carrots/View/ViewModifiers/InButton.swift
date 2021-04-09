@@ -11,7 +11,7 @@ struct InButton: ViewModifier {
     func body(content: Content) -> some View {
         Button(action: action, label: {
             content
-                .withSimpleFont()
+                .withLinkFont()
         })
     }
 }

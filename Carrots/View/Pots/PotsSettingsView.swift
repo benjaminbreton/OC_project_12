@@ -26,17 +26,12 @@ struct PotsSettingsView: View {
             DatePicker(selection: $newDate, in: Date()..., displayedComponents: .date) {
                 Text("Select a date").withSimpleFont()
             }
-            Divider()
-            Button(action: {
+            ConfirmButton {
                 print(newDate)
                 viewModel.changePredictedAmountDate(with: newDate)
                 print(viewModel.predictedAmountDate)
                 self.mode.wrappedValue.dismiss()
-            }, label: {
-                Text("Confirm")
-                    .withSimpleFont()
-            })
-            Divider()
+            }
         }
         .inNavigationPageView(title: "Date settings")
         

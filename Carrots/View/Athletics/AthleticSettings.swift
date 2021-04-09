@@ -19,16 +19,12 @@ struct AthleticSettings: View {
                 Text("Name : ")
                     .withSimpleFont()
                 TextField("Name : ", text: $name)
-                    .withTitleFont()
+                    .withBigSimpleFont()
                 Divider()
                 AthleticImageWithButtons(imageData: image, radius: geometry.size.width * 0.35)
-                //AthleticImage(imageData: image, radius: geometry.size.width / 2)
-                Divider()
-                Text(athletic != nil ? "Confirm" : "Add")
-                    .inButton {
-                        mode.wrappedValue.dismiss()
-                    }
-                Divider()
+                ConfirmButton {
+                    mode.wrappedValue.dismiss()
+                }
             }
         }
         .inNavigationPageView(title: "Settings")

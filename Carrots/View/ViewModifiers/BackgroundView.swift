@@ -10,7 +10,7 @@ struct BackgroundView: ViewModifier {
     func body(content: Content) -> some View {
         ZStack(alignment: .topLeading) {
             Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [.gray, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .fill(LinearGradient(gradient: Gradient(colors: [.backgroundFirst, .backgroundSecond]), startPoint: .topLeading, endPoint: .bottomTrailing))
                 .edgesIgnoringSafeArea(.all)
             content
         }

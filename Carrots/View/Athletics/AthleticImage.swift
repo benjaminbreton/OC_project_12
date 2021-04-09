@@ -12,15 +12,14 @@ struct AthleticImage: View {
     var body: some View {
         ZStack(alignment: .center) {
             Circle()
-                .foregroundColor(.white)
-                .opacity(0.2)
+                .foregroundColor(.backCell)
             if let data = imageData, let image = UIImage(data: data) {
                 Image(uiImage: image)
                     .resizable()
             } else {
                 Image(systemName: "person")
                     .resizable()
-                    .foregroundColor(.orange)
+                    .foregroundColor(.image)
             }
         }
         .frame(width: radius * 2, height: radius * 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -69,11 +68,11 @@ struct SystemImageBlackAndWhite: View {
             ZStack(alignment: .center) {
                 Image(systemName: name)
                     .resizable()
-                    .foregroundColor(.white)
+                    .foregroundColor(.linkInverse)
                 Image(systemName: name)
                     .resizable()
                     .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.95, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.black)
+                    .foregroundColor(.link)
             }
         }
         

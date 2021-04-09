@@ -33,4 +33,7 @@ class ViewCommonSettings {
         guard let largeTitleFont = UIFont(name: "akaPosse", size: ViewCommonSettings().navigationTitleFontSize) else { return UIFont() }
         return largeTitleFont
     }
+    var spacerCommonHeight: CGFloat {
+        UIScreen.main.bounds.height / 100 * 2
+    }
 }

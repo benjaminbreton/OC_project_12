@@ -23,6 +23,12 @@ extension View {
     func withSimpleFont() -> some View {
         modifier(SimpleFont())
     }
+    func withBigSimpleFont() -> some View {
+        modifier(BigSimpleFont())
+    }
+    func withLinkFont() -> some View {
+        modifier(LinkFont())
+    }
     func withBigTitleFont() -> some View {
         modifier(BigTitleFont())
     }
