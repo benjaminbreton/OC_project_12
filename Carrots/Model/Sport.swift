@@ -28,6 +28,16 @@ public class Sport: NSManagedObject {
                 return 0
             }
         }
+        var description: String {
+            switch self {
+            case .kilometers:
+                return "kilometers"
+            case .time:
+                return "time"
+            case .count:
+                return "count"
+            }
+        }
         func value(for value: [Double]) -> Double {
             switch self {
             case .time:

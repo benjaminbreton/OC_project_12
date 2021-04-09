@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     //@ObservedObject var viewModel: ViewModel = ViewModel()
     var viewModel = FakeViewModel.create()
-    @State private var selection = 1
+    @State private var selection = 2
     
     let types: [PageType] = [.pots, .athletics, .sports, .performances]
     
@@ -105,7 +105,7 @@ struct TabPageView: View {
                 }
                 .tag(tag)
         case .sports:
-            PotsView(viewModel: viewModel)
+            SportsView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: type.image)
                     Text(type.name)
@@ -131,19 +131,19 @@ struct TabNavigationItem: View {
                 .resizable()
                 .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .withNavigationLink(destination: AthleticSettings(athletic: nil, name: "Name", image: nil))
+                .withNavigationLink(destination: AthleticSettings(athletic: nil, name: "", image: nil))
         case .performances:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
+                .withNavigationLink(destination: SportSettings(sport: nil, name: "Name", unity: Int16(0).sportUnityType))
         case .sports:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
                 .frame(width: ViewCommonSettings().navigationButtonSize, height: ViewCommonSettings().navigationButtonSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
+                .withNavigationLink(destination: SportSettings(sport: nil, name: "", unity: Int16(0).sportUnityType))
         }
     }
 }

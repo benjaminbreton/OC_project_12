@@ -21,6 +21,8 @@ struct AthleticsView: View {
 
                     To add an athletic, press the + button on the top of the screen, and set athletic's informations.
                     """)
+                    .withSimpleFont()
+                    .inNoListRectangle()
             }
             Divider()
         }

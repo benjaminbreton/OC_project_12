@@ -18,7 +18,7 @@ struct AthleticSettings: View {
                 Divider()
                 Text("Name : ")
                     .withSimpleFont()
-                TextField("Name : ", text: $name)
+                TextField("Name", text: $name)
                     .withBigSimpleFont()
                 Divider()
                 AthleticImageWithButtons(imageData: image, radius: geometry.size.width * 0.35)
@@ -27,6 +27,6 @@ struct AthleticSettings: View {
                 }
             }
         }
-        .inNavigationPageView(title: "Settings")
+        .inNavigationPageView(title: athletic == nil ? "Create athletic" : "Athletic settings")
     }
 }

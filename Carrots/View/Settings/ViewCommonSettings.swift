@@ -33,7 +33,11 @@ class ViewCommonSettings {
         guard let largeTitleFont = UIFont(name: "akaPosse", size: ViewCommonSettings().navigationTitleFontSize) else { return UIFont() }
         return largeTitleFont
     }
-    var spacerCommonHeight: CGFloat {
+    var commonHeight: CGFloat {
         UIScreen.main.bounds.height / 100 * 2
+    }
+    var sportsIconsCharacters: [String] {
+        let characters = "ABEHKMOTWXZabfntw8$*/='#@&_;!|{}]"
+        return characters.map({ "\($0)" })
     }
 }

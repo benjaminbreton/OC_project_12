@@ -15,6 +15,12 @@
 		03264BDA26203E78003F6429 /* AthleticImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD926203E78003F6429 /* AthleticImage.swift */; };
 		03264BDE26203EB5003F6429 /* AthleticSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BDD26203EB5003F6429 /* AthleticSettings.swift */; };
 		03264BE426205333003F6429 /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BE326205333003F6429 /* ConfirmButton.swift */; };
+		03264BE926205638003F6429 /* sportstfb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03264BE826205638003F6429 /* sportstfb.ttf */; };
+		03264BEF262056E4003F6429 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BEE262056E4003F6429 /* SportsView.swift */; };
+		03264BF326208E23003F6429 /* SportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BF226208E22003F6429 /* SportCell.swift */; };
+		03264BF726208E36003F6429 /* SportIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BF626208E36003F6429 /* SportIcon.swift */; };
+		03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BFA26208E4C003F6429 /* SportSettings.swift */; };
+		03264BFF26208E63003F6429 /* SportIconScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BFE26208E63003F6429 /* SportIconScrollView.swift */; };
 		032AFA0F261756ED00D61E28 /* PotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA0E261756ED00D61E28 /* PotsView.swift */; };
 		032AFA2426175D0600D61E28 /* akaPosse.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2326175D0600D61E28 /* akaPosse.ttf */; };
 		032AFA2E26175DA900D61E28 /* kirsty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2D26175DA900D61E28 /* kirsty.otf */; };
@@ -73,6 +79,12 @@
 		03264BD926203E78003F6429 /* AthleticImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticImage.swift; sourceTree = "<group>"; };
 		03264BDD26203EB5003F6429 /* AthleticSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticSettings.swift; sourceTree = "<group>"; };
 		03264BE326205333003F6429 /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
+		03264BE826205638003F6429 /* sportstfb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sportstfb.ttf; sourceTree = "<group>"; };
+		03264BEE262056E4003F6429 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
+		03264BF226208E22003F6429 /* SportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportCell.swift; sourceTree = "<group>"; };
+		03264BF626208E36003F6429 /* SportIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportIcon.swift; sourceTree = "<group>"; };
+		03264BFA26208E4C003F6429 /* SportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportSettings.swift; sourceTree = "<group>"; };
+		03264BFE26208E63003F6429 /* SportIconScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportIconScrollView.swift; sourceTree = "<group>"; };
 		032AFA0E261756ED00D61E28 /* PotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsView.swift; sourceTree = "<group>"; };
 		032AFA2326175D0600D61E28 /* akaPosse.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = akaPosse.ttf; sourceTree = "<group>"; };
 		032AFA2D26175DA900D61E28 /* kirsty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kirsty.otf; sourceTree = "<group>"; };
@@ -134,6 +146,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03264BE7262055E2003F6429 /* Sports */ = {
+			isa = PBXGroup;
+			children = (
+				03264BEE262056E4003F6429 /* SportsView.swift */,
+				03264BFE26208E63003F6429 /* SportIconScrollView.swift */,
+				03264BFA26208E4C003F6429 /* SportSettings.swift */,
+				03264BF626208E36003F6429 /* SportIcon.swift */,
+				03264BF226208E22003F6429 /* SportCell.swift */,
+			);
+			path = Sports;
+			sourceTree = "<group>";
+		};
+		03264BEC2620563C003F6429 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				032AFA2D26175DA900D61E28 /* kirsty.otf */,
+				032AFA2326175D0600D61E28 /* akaPosse.ttf */,
+				03264BE826205638003F6429 /* sportstfb.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		034AB61826010E5B0034C1E2 = {
 			isa = PBXGroup;
 			children = (
@@ -187,8 +221,7 @@
 		034AB65D26010EA00034C1E2 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				032AFA2326175D0600D61E28 /* akaPosse.ttf */,
-				032AFA2D26175DA900D61E28 /* kirsty.otf */,
+				03264BEC2620563C003F6429 /* Fonts */,
 				034AB62D26010E5F0034C1E2 /* Assets.xcassets */,
 				034AB62626010E5B0034C1E2 /* SceneDelegate.swift */,
 				034AB62426010E5B0034C1E2 /* AppDelegate.swift */,
@@ -317,6 +350,7 @@
 				03DD8230261F43850028A0A5 /* ImagePicker */,
 				03DD8206261F00AB0028A0A5 /* Home */,
 				03DD8208261F00B40028A0A5 /* Pots */,
+				03264BE7262055E2003F6429 /* Sports */,
 				03DD8229261F23860028A0A5 /* Athletics */,
 				03DD820A261F00E10028A0A5 /* Settings */,
 				03DD8209261F00C60028A0A5 /* Supporting views */,
@@ -410,6 +444,7 @@
 				034AB63126010E5F0034C1E2 /* Preview Assets.xcassets in Resources */,
 				032AFA2426175D0600D61E28 /* akaPosse.ttf in Resources */,
 				034AB62E26010E5F0034C1E2 /* Assets.xcassets in Resources */,
+				03264BE926205638003F6429 /* sportstfb.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +464,7 @@
 			files = (
 				03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */,
 				03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */,
+				03264BF326208E23003F6429 /* SportCell.swift in Sources */,
 				032AFA342617648800D61E28 /* ListBase.swift in Sources */,
 				03DD81F7261F000B0028A0A5 /* BackgroundView.swift in Sources */,
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,
@@ -440,6 +476,7 @@
 				03D038FC261D9488004B8C30 /* LogoView.swift in Sources */,
 				03DD822B261F23960028A0A5 /* AthleticsView.swift in Sources */,
 				03264BE426205333003F6429 /* ConfirmButton.swift in Sources */,
+				03264BFF26208E63003F6429 /* SportIconScrollView.swift in Sources */,
 				03DD81FF261F00520028A0A5 /* NoListRectangle.swift in Sources */,
 				0383212A260899F3003EE886 /* Sport.swift in Sources */,
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
@@ -449,6 +486,7 @@
 				03DD8203261F00620028A0A5 /* Fonts.swift in Sources */,
 				03264BDA26203E78003F6429 /* AthleticImage.swift in Sources */,
 				03DD8232261F43920028A0A5 /* ImagePicker.swift in Sources */,
+				03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */,
 				03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */,
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				03264BDE26203EB5003F6429 /* AthleticSettings.swift in Sources */,
@@ -461,7 +499,9 @@
 				03DD81FB261F00390028A0A5 /* CellRectangle.swift in Sources */,
 				03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */,
 				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
+				03264BEF262056E4003F6429 /* SportsView.swift in Sources */,
 				03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */,
+				03264BF726208E36003F6429 /* SportIcon.swift in Sources */,
 				03DD8216261F01620028A0A5 /* PotCell.swift in Sources */,
 				03DD821E261F01AA0028A0A5 /* NavigationPotCell.swift in Sources */,
 				03DD821A261F01870028A0A5 /* NavigationLinkOnModifier.swift in Sources */,

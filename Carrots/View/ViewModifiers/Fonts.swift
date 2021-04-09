@@ -41,3 +41,11 @@ struct LinkFont: ViewModifier {
             .foregroundColor(.link)
     }
 }
+struct SportIconFont: ViewModifier {
+    let multiplier: CGFloat
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("sportstfb", size: ViewCommonSettings().regularFontSize * multiplier))
+            .foregroundColor(.image)
+    }
+}

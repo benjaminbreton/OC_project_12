@@ -34,6 +34,7 @@ struct PotsView: View {
                     - select the + button on the top of the screen ;
                     - add new athletic's informations and confirm.
                     """)
+                    .withSimpleFont()
                     .inNoListRectangle()
             }
             

@@ -17,7 +17,7 @@ struct AthleticCell: View {
                 }
                 Text(athletic.name ?? "No name")
                     .padding()
-                    .withSimpleFont()
+                    .withBigSimpleFont()
             }
         }
         .withNavigationLink(destination: AthleticSettings(athletic: athletic, name: athletic.name ?? "Name"))
