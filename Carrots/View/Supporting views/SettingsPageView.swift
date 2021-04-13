@@ -41,18 +41,20 @@ struct SettingsScroll<T: View>: View {
 struct SettingsPageCell: View {
     let element: Element
     enum Element {
-        case textField(text: String, value: Binding<String>)
+        case textField(text: String, value: Binding<String>, keyboardType: UIKeyboardType)
         case sportIconPicker(selected: Binding<Int>)
         case sportUnityPicker(allChoices: [Sport.UnityType], selected: Binding<Sport.UnityType>)
         case athleticImagePicker(image: Binding<UIImage?>, rotation: Double)
+        case sportUnityValue(selected: Sport.UnityType, valueForOnePoint: Binding<[String]>)
     }
     var body: some View {
         return VStack(alignment: .center) {
             switch element {
-            case .textField(text: let text, value: let value):
-                Text(text)
+            case .textField(text: let title, value: let value, keyboardType: let keyboard):
+                Text(title)
                     .withTitleFont()
-                TextField(text, text: value)
+                TextField(title, text: value)
+                    .keyboardType(keyboard)
                     .withBigSimpleFont()
             case .sportIconPicker(selected: let selected):
                 Text("Icon")
@@ -67,7 +69,45 @@ struct SettingsPageCell: View {
                 Text("Image")
                     .withTitleFont()
                 AthleticImageWithButtons(image: image, radius: ViewCommonSettings().commonHeight * 8, rotation: rotation)
+            case .sportUnityValue(selected: let selected, valueForOnePoint: let value):
+                Text("Value for 1 point")
+                    .withTitleFont()
+                switch selected {
+                case .time:
+                    HStack {
+                        TextField("Value", text: value[0])
+                            .keyboardType(.numberPad)
+                            .withBigSimpleFont()
+                        Text(" h ")
+                        TextField("Value", text: value[1])
+                            .keyboardType(.numberPad)
+                            .withBigSimpleFont()
+                        Text(" m ")
+                        TextField("Value", text: value[2])
+                            .keyboardType(.numberPad)
+                            .withBigSimpleFont()
+                        Text(" s ")
+                        
+                    }
+                default:
+                    TextField("Value", text: value[0])
+                        .withBigSimpleFont()
+                }
             }
+        }
+    }
+}
+struct GenericTextfield: View {
+    let title: String
+    var value: Binding<String>
+    let keyboard: UIKeyboardType
+    var body: some View {
+        VStack {
+            Text(title)
+                .withTitleFont()
+            TextField(title, text: value)
+                .keyboardType(keyboard)
+                .withBigSimpleFont()
         }
     }
 }

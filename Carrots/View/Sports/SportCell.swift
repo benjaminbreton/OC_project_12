@@ -12,6 +12,18 @@ struct SportCell: View {
     var rowHeight: CGFloat {
         ViewCommonSettings().commonHeight * multiplier
     }
+    var valueArray: [String] {
+        switch sport.unityInt16.sportUnityType {
+        case .time:
+            let date = DateComponents(second: Int(sport.valueForOnePoint))
+            guard let hours = date.hour, let minutes = date.minute, let seconds = date.second else {
+                return ["0", "0", "0"]
+            }
+            return ["\(hours)", "\(minutes)", "\(seconds)"]
+        default:
+            return ["\(Int(sport.valueForOnePoint))"]
+        }
+    }
     var body: some View {
         print(ViewCommonSettings().sportsIconsCharacters[Int(sport.icon)])
         return HStack(alignment: .center) {
@@ -27,6 +39,6 @@ struct SportCell: View {
             }
             .frame(height: rowHeight)
         }
-        .withNavigationLink(destination: SportSettings(sport: sport, name: sport.name ?? "Name", icon: Int(sport.icon), unity: sport.unityInt16.sportUnityType))
+        .withNavigationLink(destination: SportSettings(sport: sport, name: sport.name ?? "Name", icon: Int(sport.icon), unity: sport.unityInt16.sportUnityType, valueForOnePoint: valueArray))
     }
 }

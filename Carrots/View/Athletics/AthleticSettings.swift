@@ -13,7 +13,7 @@ struct AthleticSettings: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         SettingsPageView(elements: [
-                            .textField(text: "Name", value: $name),
+                            .textField(text: "Name", value: $name, keyboardType: .default),
                             .athleticImagePicker(image: $image, rotation: athletic?.imageRotation ?? 0)],
                          title: name == "" ? "Athletic's creation" : "Athletic's settings") {
 
