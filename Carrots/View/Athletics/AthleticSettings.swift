@@ -9,9 +9,8 @@ import SwiftUI
 struct AthleticSettings: View {
     let athletic: FakeAthletic?
     @State var name: String
-    @State var image: Data?
+    @State var image: UIImage?
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
     var body: some View {
         GeometryReader { geometry in
             VStack() {
@@ -23,7 +22,7 @@ struct AthleticSettings: View {
                 Divider()
                 Text("Image")
                     .withTitleFont()
-                AthleticImageWithButtons(imageData: image, radius: geometry.size.width * 0.35, rotation: athletic?.imageRotation ?? 0)
+                AthleticImageWithButtons(image: image, radius: geometry.size.width * 0.35, rotation: athletic?.imageRotation ?? 0)
                 ConfirmButton {
                     mode.wrappedValue.dismiss()
                 }

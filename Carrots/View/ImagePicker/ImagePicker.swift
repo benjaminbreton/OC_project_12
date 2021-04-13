@@ -7,35 +7,13 @@
 
 import UIKit
 import SwiftUI
-struct CustomActionSheetAlert: UIViewControllerRepresentable {
-    typealias UIViewControllerType = UIAlertController
-    let message: String
-    let buttons: [(title: String, action: () -> Void)]
-    func makeUIViewController(context: Context) -> UIAlertController {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-        for buttonData in buttons {
-            let button = UIAlertAction(title: buttonData.title, style: .default, handler: { _ in
-                buttonData.action()
-            })
-            alert.addAction(button)
-        }
-        return alert
-    }
-    
-    func updateUIViewController(_ uiViewController: UIAlertController, context: Context) {
-        
-    }
-    
-    
-    
-    
-}
+
 struct ImagePicker: UIViewControllerRepresentable {
     
     
  
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var selectedImageData: Data?
+    var sourceType: UIImagePickerController.SourceType
+    @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) private var presentationMode
  
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
@@ -67,7 +45,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
      
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                parent.selectedImageData = image.pngData()
+                parent.selectedImage = image
             }
      
             parent.presentationMode.wrappedValue.dismiss()

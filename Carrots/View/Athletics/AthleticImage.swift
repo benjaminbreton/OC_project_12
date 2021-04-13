@@ -7,14 +7,14 @@
 
 import SwiftUI
 struct AthleticImage: View {
-    let imageData: Data?
+    let image: UIImage?
     let radius: CGFloat
     @Binding var rotation: Double
     var body: some View {
         ZStack(alignment: .center) {
             Circle()
                 .foregroundColor(.backCell)
-            if let data = imageData, let image = UIImage(data: data) {
+            if let image = image {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
@@ -32,14 +32,14 @@ struct AthleticImage: View {
 
 }
 struct AthleticImageWithButtons: View {
-    @State var imageData: Data?
+    @State var image: UIImage?
     let radius: CGFloat
     @State private var isShowPicker = false
     @State private var isShowCamera = false
     @State var rotation: Double
     var body: some View {
         ZStack(alignment: .center) {
-            AthleticImage(imageData: imageData, radius: radius, rotation: $rotation)
+            AthleticImage(image: image, radius: radius, rotation: $rotation)
             VStack {
                 // arrowshape.turn.up.left
                 HStack {
@@ -74,7 +74,7 @@ struct AthleticImageWithButtons: View {
             .frame(width: radius * 2, height: radius * 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         }
         .sheet(isPresented: $isShowPicker, content: {
-            ImagePicker(sourceType: isShowCamera ? .camera : .photoLibrary, selectedImageData: $imageData)
+            ImagePicker(sourceType: isShowCamera ? .camera : .photoLibrary, selectedImage: $image)
         })
     }
 
