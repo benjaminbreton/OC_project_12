@@ -19,7 +19,7 @@ struct SportSettings: View {
         SettingsPageView(elements: [
                                 .textField(text: "Name", value: $name),
                                 .sportIconPicker(selected: $icon),
-                                .genericPicker(allChoices: unities, selected: $unity, title: "Unity")],
+                                .sportUnityPicker(allChoices: unities, selected: $unity)],
                             title: name == "" ? "Sport creation" : "Sport settings")
     }
 }
