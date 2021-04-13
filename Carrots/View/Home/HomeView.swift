@@ -137,13 +137,13 @@ struct TabNavigationItem: View {
                 .resizable()
                 .foregroundColor(.link)
                 .font(.largeTitle)
-                .withNavigationLink(destination: SportSettings(sport: nil, name: "Name", unity: Int16(0).sportUnityType))
+                .withNavigationLink(destination: SportSettings(sport: nil, name: "Name", icon: 0, unity: Int16(0).sportUnityType))
         case .sports:
             Image(systemName: type.navigationButtonImage)
                 .resizable()
                 .foregroundColor(.link)
                 .font(.largeTitle)
-                .withNavigationLink(destination: SportSettings(sport: nil, name: "", unity: Int16(0).sportUnityType))
+                .withNavigationLink(destination: SportSettings(sport: nil, name: "", icon: 0, unity: Int16(0).sportUnityType))
         }
     }
 }

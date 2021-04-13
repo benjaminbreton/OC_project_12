@@ -27,6 +27,6 @@ struct SportCell: View {
             }
             .frame(height: rowHeight)
         }
-        .withNavigationLink(destination: SportSettings(sport: sport, name: sport.name ?? "Name", unity: sport.unityInt16.sportUnityType))
+        .withNavigationLink(destination: SportSettings(sport: sport, name: sport.name ?? "Name", icon: Int(sport.icon), unity: sport.unityInt16.sportUnityType))
     }
 }

@@ -15,7 +15,8 @@ public class Sport: NSManagedObject {
         return points * valueForOnePoint > value ? points - 1 : points
     }
     /// Sport's unity type enumeration.
-    enum UnityType {
+    enum UnityType: HashableCustomString {
+        
         case kilometers, time, count
         /// Sport's unity type int16 to save in coredata.
         var int16: Int16 {

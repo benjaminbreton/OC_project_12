@@ -38,3 +38,10 @@ struct PotsSettingsView: View {
         
     }
 }
+struct PotSettingsCell: View {
+    var body: some View {
+        VStack {
+            
+        }
+    }
+}
