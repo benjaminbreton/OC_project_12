@@ -12,7 +12,13 @@ struct AthleticSettings: View {
     @State var image: UIImage?
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
-        GeometryReader { geometry in
+        SettingsPageView(elements: [
+                            .textField(text: "Name", value: $name),
+                            .athleticImagePicker(image: $image, rotation: athletic?.imageRotation ?? 0)],
+                         title: name == "" ? "Athletic's creation" : "Athletic's settings") {
+
+        }
+/*
             VStack() {
                 Divider()
                 Text("Name")
@@ -22,12 +28,13 @@ struct AthleticSettings: View {
                 Divider()
                 Text("Image")
                     .withTitleFont()
-                AthleticImageWithButtons(image: image, radius: geometry.size.width * 0.35, rotation: athletic?.imageRotation ?? 0)
+                AthleticImageWithButtons(image: image, radius: ViewCommonSettings().commonHeight * 8, rotation: athletic?.imageRotation ?? 0)
                 ConfirmButton {
                     mode.wrappedValue.dismiss()
                 }
             }
-        }
+        
         .inNavigationPageView(title: athletic == nil ? "Create athletic" : "Athletic settings")
+ */
     }
 }

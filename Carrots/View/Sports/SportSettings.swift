@@ -20,6 +20,8 @@ struct SportSettings: View {
                                 .textField(text: "Name", value: $name),
                                 .sportIconPicker(selected: $icon),
                                 .sportUnityPicker(allChoices: unities, selected: $unity)],
-                            title: name == "" ? "Sport creation" : "Sport settings")
+                         title: name == "" ? "Sport creation" : "Sport settings") {
+            
+        }
     }
 }

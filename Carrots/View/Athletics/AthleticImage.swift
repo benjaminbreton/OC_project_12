@@ -32,24 +32,24 @@ struct AthleticImage: View {
 
 }
 struct AthleticImageWithButtons: View {
-    @State var image: UIImage?
+    @Binding var image: UIImage?
     let radius: CGFloat
     @State private var isShowPicker = false
     @State private var isShowCamera = false
     @State var rotation: Double
     var body: some View {
-        ZStack(alignment: .center) {
+        let sizeMultiplier: CGFloat = 0.4
+        return ZStack(alignment: .center) {
             AthleticImage(image: image, radius: radius, rotation: $rotation)
-            VStack {
-                // arrowshape.turn.up.left
+            VStack(alignment: .center) {
                 HStack {
-                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.left")
+                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.left", size: radius * sizeMultiplier)
                         .inButton {
                             rotation -= 90
                         }
                     Spacer()
-                        .frame(width: radius * 1.2, height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.right")
+                        .frame(width: radius * (2 - sizeMultiplier * 2), height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.right", size: radius * sizeMultiplier)
                         .inButton {
                             rotation += 90
                         }
@@ -57,14 +57,14 @@ struct AthleticImageWithButtons: View {
                 Spacer()
                     .frame(width: radius * 2, height: radius * 1.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 HStack {
-                    SystemImageBlackAndWhite(name: "photo")
+                    SystemImageBlackAndWhite(name: "photo", size: radius * sizeMultiplier)
                         .inButton {
                             isShowCamera = false
                             isShowPicker = true
                         }
                     Spacer()
-                        .frame(width: radius * 1.2, height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    SystemImageBlackAndWhite(name: "camera")
+                        .frame(width: radius * (2 - sizeMultiplier * 2), height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    SystemImageBlackAndWhite(name: "camera", size: radius * sizeMultiplier)
                         .inButton {
                             isShowCamera = true
                             isShowPicker = true
@@ -81,19 +81,17 @@ struct AthleticImageWithButtons: View {
 }
 struct SystemImageBlackAndWhite: View {
     let name: String
+    let size: CGFloat
     var body: some View {
-        GeometryReader { geometry in
             ZStack(alignment: .center) {
                 Image(systemName: name)
                     .resizable()
                     .foregroundColor(.linkInverse)
                 Image(systemName: name)
                     .resizable()
-                    .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.95, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: size * 0.95, height: size * 0.8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.link)
             }
-        }
-        
     }
 }
 
