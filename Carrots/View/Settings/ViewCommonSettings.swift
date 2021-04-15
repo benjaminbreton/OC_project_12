@@ -11,20 +11,26 @@ class ViewCommonSettings {
         UIScreen.main.bounds.height / 10
     }
     var regularFontSize: CGFloat {
-        return 20 * UIScreen.main.bounds.height / 844
+        20 * UIScreen.main.bounds.height / 844
+    }
+    var lightFontSize: CGFloat {
+        regularFontSize * 0.75
     }
     var titleFontSize: CGFloat {
-        return regularFontSize * 1.5
+        regularFontSize * 1.5
     }
     var bigTitleFontSize: CGFloat {
-        return regularFontSize * 1.5
+        regularFontSize * 1.5
     }
     var navigationTitleFontSize: CGFloat {
-        return regularFontSize * 2.5
+        regularFontSize * 2.5
     }
     var navigationButtonSize: CGFloat {
-        return 30 * UIScreen.main.bounds.height / 844
+        30 * UIScreen.main.bounds.height / 844
     }
+    let regularFontName: String = "kirsty"
+    let titleFontName: String = "akaPosse"
+    let iconsFontName: String = "sportstfb"
     var regularNavigationTitleFont: UIFont {
         guard let regularTitleFont = UIFont(name: "akaPosse", size: ViewCommonSettings().regularFontSize) else { return UIFont() }
         return regularTitleFont

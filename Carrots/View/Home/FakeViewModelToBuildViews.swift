@@ -10,6 +10,7 @@ class FakeViewModel {
     let athletics: [FakeAthletic]
     let sports: [FakeSport]
     let commonPot: FakePot?
+    let performances: [FakePerformance]
     var predictedAmountDate: Date
     var formattedPredictedAmountDate: String {
         let formatter = DateFormatter()
@@ -17,11 +18,12 @@ class FakeViewModel {
         formatter.timeStyle = .none
         return formatter.string(from: predictedAmountDate)
     }
-    init(athletics: [FakeAthletic], commonPot: FakePot, predictedAmountDate: Date, sports: [FakeSport]) {
+    init(athletics: [FakeAthletic], commonPot: FakePot, predictedAmountDate: Date, sports: [FakeSport], performances: [FakePerformance]) {
         self.athletics = athletics
         self.commonPot = commonPot
         self.predictedAmountDate = predictedAmountDate
         self.sports = sports
+        self.performances = performances
     }
     static func create() -> FakeViewModel {
         let commonPot = FakePot(amount: 30, evolutionType: 1)
@@ -39,18 +41,25 @@ class FakeViewModel {
         sports.append(sport1)
         sports.append(sport2)
         sports.append(sport3)
-        return FakeViewModel(athletics: athletics, commonPot: commonPot, predictedAmountDate: Date() + 30 * 24 * 3600, sports: sports)
+        let performance1 = FakePerformance(sport: sport1, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: true)
+        let performance2 = FakePerformance(sport: sport2, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false)
+        let performance3 = FakePerformance(sport: sport3, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false)
+        let performances = [performance3, performance2, performance1]
+        return FakeViewModel(athletics: athletics, commonPot: commonPot, predictedAmountDate: Date() + 30 * 24 * 3600, sports: sports, performances: performances)
     }
     static func createEmpty() -> FakeViewModel {
         let commonPot = FakePot(amount: 0, evolutionType: 0)
-        return FakeViewModel(athletics: [], commonPot: commonPot, predictedAmountDate: Date() + 30 * 24 * 3600, sports: [])
+        return FakeViewModel(athletics: [], commonPot: commonPot, predictedAmountDate: Date() + 30 * 24 * 3600, sports: [], performances: [])
     }
     func changePredictedAmountDate(with date: Date) {
         predictedAmountDate = date
     }
 }
-class FakeAthletic {
+class FakeAthletic: CustomStringConvertible {
     let name: String?
+    var description: String {
+        name ?? ""
+    }
     var image: Data?
     let imageRotation: Double = 0
     let pot: FakePot?
@@ -94,5 +103,25 @@ class FakeSport {
     }
 }
 class FakePerformance {
-    
+    let sport: FakeSport?
+    let value: Int64
+    let potAddings: Int
+    let addedToCommonPot: Bool
+    let athletics: [FakeAthletic]?
+    let date: Date? = Date()
+    var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateStyle = .long
+        formatter.timeStyle = .medium
+        guard let date = date else { return "" }
+        return formatter.string(from: date)
+    }
+    init(sport: FakeSport, athletics: [FakeAthletic], value: Int64, addedToCommonPot: Bool) {
+        self.sport = sport
+        self.athletics = athletics
+        self.value = value
+        self.addedToCommonPot = addedToCommonPot
+        potAddings = Int(value) / Int(sport.valueForOnePoint)
+    }
 }

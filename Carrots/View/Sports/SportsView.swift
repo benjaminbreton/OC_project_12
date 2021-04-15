@@ -9,6 +9,13 @@ import SwiftUI
 struct SportsView: View {
     let viewModel: FakeViewModel
     var body: some View {
+        
+        FirstPageView(array: viewModel.sports, noArrayText: """
+                    No sports have been added.
+
+                    To add a sport, press the + button on the top of the screen, and set sport's informations.
+                    """)
+        /*
         VStack {
             Divider()
             if viewModel.sports.count > 0 {
@@ -27,6 +34,7 @@ struct SportsView: View {
             Divider()
         }
         .withAppBackground()
+ */
     }
 }
 

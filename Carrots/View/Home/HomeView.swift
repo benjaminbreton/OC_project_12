@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     //@ObservedObject var viewModel: ViewModel = ViewModel()
     var viewModel = FakeViewModel.create()
-    @State private var selection = 2
+    @State private var selection = 3
     
     let types: [PageType] = [.pots, .athletics, .sports, .performances]
     
@@ -98,7 +98,7 @@ struct TabPageView: View {
                 }
                 .tag(tag)
         case .performances:
-            PotsView(viewModel: viewModel)
+            PerformancesView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: type.image)
                     Text(type.name)
@@ -137,7 +137,7 @@ struct TabNavigationItem: View {
                 .resizable()
                 .foregroundColor(.link)
                 .font(.largeTitle)
-                .withNavigationLink(destination: SportSettings(sport: nil, name: "Name", icon: 0, unity: Int16(0).sportUnityType, valueForOnePoint: [""]))
+                .withNavigationLink(destination: PerformanceSettings(athleticsArray: viewModel.athletics))
         case .sports:
             Image(systemName: type.navigationButtonImage)
                 .resizable()

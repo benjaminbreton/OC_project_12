@@ -17,4 +17,5 @@ extension Color {
     static var backCell: Color { Color("backCell") }
     static var linkInverse: Color { Color("linkInverse") }
     static var title: Color { Color("title") }
+    static var textLight: Color { Color("textLight") }
 }

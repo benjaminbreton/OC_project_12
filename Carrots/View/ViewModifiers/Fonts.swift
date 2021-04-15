@@ -9,35 +9,42 @@ import SwiftUI
 struct BigTitleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("akaPosse", size: ViewCommonSettings().bigTitleFontSize))
+            .font(.custom(ViewCommonSettings().titleFontName, size: ViewCommonSettings().bigTitleFontSize))
             .foregroundColor(.title)
     }
 }
 struct TitleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("kirsty", size: ViewCommonSettings().titleFontSize))
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.title)
     }
 }
 struct SimpleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("kirsty", size: ViewCommonSettings().regularFontSize))
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize))
             .foregroundColor(.text)
     }
 }
 struct BigSimpleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("kirsty", size: ViewCommonSettings().titleFontSize))
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.text)
+    }
+}
+struct LightSimpleFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().lightFontSize))
+            .foregroundColor(.textLight)
     }
 }
 struct LinkFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("kirsty", size: ViewCommonSettings().titleFontSize))
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.link)
     }
 }
@@ -45,7 +52,7 @@ struct SportIconFont: ViewModifier {
     let multiplier: CGFloat
     func body(content: Content) -> some View {
         content
-            .font(.custom("sportstfb", size: ViewCommonSettings().regularFontSize * multiplier))
+            .font(.custom(ViewCommonSettings().iconsFontName, size: ViewCommonSettings().regularFontSize * multiplier))
             .foregroundColor(.image)
     }
 }

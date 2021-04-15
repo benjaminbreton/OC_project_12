@@ -47,7 +47,37 @@ public class Sport: NSManagedObject {
                 return value[0]
             }
         }
+        func stringArray(for value: Int64) -> [String] {
+            switch self {
+            case .time:
+                let interval = TimeInterval(value)
+                let components = DateComponents(calendar: Calendar.current, year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0)
+                guard let firstDate = components.date else { return ["0", "0", "0"]}
+                let date = Date(timeInterval: interval, since: firstDate)
+                let neededComponents: Set<Calendar.Component> = [.hour, .minute, .second]
+                
+                let resultComponents = Calendar.current.dateComponents(neededComponents, from: date)
+                guard let hours = resultComponents.hour, let minutes = resultComponents.minute, let seconds = resultComponents.second else { return ["0", "0", "0"]}
+                return ["\(hours)", "\(minutes)", "\(seconds)"]
+            default:
+                return ["\(Int(value))"]
+            }
+        }
+        func singleString(for value: Int64) -> String {
+            let realisation = stringArray(for: value)
+            switch self {
+            case .time:
+                return "\(realisation[0]) h \(realisation[1]) m \(realisation[2]) s"
+            case .kilometers:
+                return "\(realisation[0]) km"
+            default:
+                return realisation[0]
+            }
+        }
+        
     }
+    
+    
     
     
 }

@@ -46,6 +46,8 @@ struct SettingsPageCell: View {
         case sportUnityPicker(allChoices: [Sport.UnityType], selected: Binding<Sport.UnityType>)
         case athleticImagePicker(image: Binding<UIImage?>, rotation: Double)
         case sportUnityValue(selected: Sport.UnityType, valueForOnePoint: Binding<[String]>)
+        case pickerAthleticTextField(data: [FakeAthletic], selectionIndex: Binding<Int>, selectedAthletics: Binding<[FakeAthletic]>)
+        case stringList(list: [String])
     }
     var body: some View {
         return VStack(alignment: .center) {
@@ -93,6 +95,28 @@ struct SettingsPageCell: View {
                     TextField("Value", text: value[0])
                         .withBigSimpleFont()
                 }
+            case .pickerAthleticTextField(data: let data, selectionIndex: let index, selectedAthletics: let selectedAthletics):
+                Text("Athletic")
+                    .withTitleFont()
+                HStack {
+                    PickerField("Choose athletics", data: data, selectionIndex: index)
+                    Image(systemName: "plus")
+                        .withSimpleFont()
+                        .inButton(action: {
+                            selectedAthletics.wrappedValue.append(data[index.wrappedValue])
+                        })
+                }
+                
+                ListBase(items: selectedAthletics.wrappedValue.map({
+                    Text($0.description)
+                        .withSimpleFont()
+                }))
+            case .stringList(list: let list):
+                ListBase(items: list.map({
+                                            Text($0)
+                                                .withSimpleFont()
+                }))
+                
             }
         }
     }
@@ -117,7 +141,7 @@ struct GenericPicker<ElementType: HashableCustomString>: View {
     let allChoices: [ElementType]
     let selected: Binding<ElementType>
     var body: some View {
-        Picker("Please choose an unity", selection: selected) {
+        Picker(instructions, selection: selected) {
             ForEach(allChoices, id: \.self) {
                 Text($0.description)
                     .withSimpleFont()
@@ -126,3 +150,90 @@ struct GenericPicker<ElementType: HashableCustomString>: View {
     }
 }
 
+
+// MARK: - Pickerfield
+
+struct PickerField<T: CustomStringConvertible>: UIViewRepresentable {
+    // MARK: - Public properties
+    @Binding var selectionIndex: Int
+    
+    // MARK: - Private properties
+    private var placeholder: String
+    private var data: [T]
+    private let textField: PickerTextField<T>
+    
+    // MARK: - Initializers
+    init(_ title: String, data: [T], selectionIndex: Binding<Int>) {
+        self.placeholder = title
+        self.data = data
+        self._selectionIndex = selectionIndex
+
+        textField = PickerTextField(data: data, selectionIndex: selectionIndex)
+        textField.font = UIFont(name: ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize)
+    }
+
+    // MARK: - Public methods
+    func makeUIView(context: UIViewRepresentableContext<PickerField>) -> UITextField {
+        textField.placeholder = placeholder
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<PickerField>) {
+        uiView.text = data[selectionIndex].description
+    }
+
+    
+}
+
+
+class PickerTextField<T: CustomStringConvertible>: UITextField, UIPickerViewDataSource, UIPickerViewDelegate {
+    // MARK: - Public properties
+    var data: [T]
+    @Binding var selectionIndex: Int
+
+    // MARK: - Initializers
+    init(data: [T], selectionIndex: Binding<Int>) {
+        self.data = data
+        self._selectionIndex = selectionIndex
+        super.init(frame: .zero)
+
+        self.inputView = pickerView
+        self.tintColor = .clear
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Private properties
+    private lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+
+    // MARK: - Private methods
+    @objc
+    private func donePressed() {
+        self.selectionIndex = self.pickerView.selectedRow(inComponent: 0)
+        self.endEditing(true)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return data.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return data[row].description
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectionIndex = row
+    }
+}
