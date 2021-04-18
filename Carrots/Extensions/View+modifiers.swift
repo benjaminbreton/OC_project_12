@@ -47,4 +47,10 @@ extension View {
     func inButton(action: @escaping () -> Void) -> some View {
         modifier(InButton(action: action))
     }
+    func inSettingsPage(_ title: String, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, confirmAction: confirmAction))
+    }
+    func closeKeyboardOnTap() -> some View {
+        modifier(CloseKeyboardOnTap())
+    }
 }

@@ -6,10 +6,35 @@
 //
 
 import SwiftUI
+
+/// Common properties used to get a responsive application.
 class ViewCommonSettings {
+    
+    // MARK: - Common opacity
+    
+    let commonOpacity: Double = 0.2
+    
+    // MARK: - Common cornerRadius
+    
+    let commonCornerRadius: CGFloat = UIScreen.main.bounds.height * 10 / 844
+    
+    // MARK: - Height - width
+    
     var commonPotLineHeight: CGFloat {
         UIScreen.main.bounds.height / 10
     }
+    var commonHeight: CGFloat {
+        UIScreen.main.bounds.height / 100 * 2
+    }
+    var lineWidth: CGFloat {
+        5 * UIScreen.main.bounds.height / 844
+    }
+    var lineHeight: CGFloat {
+        2 * commonHeight
+    }
+    
+    // MARK: - Font size
+    
     var regularFontSize: CGFloat {
         20 * UIScreen.main.bounds.height / 844
     }
@@ -28,9 +53,15 @@ class ViewCommonSettings {
     var navigationButtonSize: CGFloat {
         30 * UIScreen.main.bounds.height / 844
     }
+    
+    // MARK: - Font name
+    
     let regularFontName: String = "kirsty"
     let titleFontName: String = "akaPosse"
     let iconsFontName: String = "sportstfb"
+    
+    // MARK: - UIFonts
+    
     var regularNavigationTitleFont: UIFont {
         guard let regularTitleFont = UIFont(name: "akaPosse", size: ViewCommonSettings().regularFontSize) else { return UIFont() }
         return regularTitleFont
@@ -39,14 +70,13 @@ class ViewCommonSettings {
         guard let largeTitleFont = UIFont(name: "akaPosse", size: ViewCommonSettings().navigationTitleFontSize) else { return UIFont() }
         return largeTitleFont
     }
-    var commonHeight: CGFloat {
-        UIScreen.main.bounds.height / 100 * 2
-    }
+    
+    // MARK: - Specials
+    
     var sportsIconsCharacters: [String] {
         let characters = "ABEHKMOTWXZabfntw8$*/='#@&_;!|{}]"
         return characters.map({ "\($0)" })
     }
-    var lineWidth: CGFloat {
-        5 * UIScreen.main.bounds.height / 844
-    }
+    
 }
+

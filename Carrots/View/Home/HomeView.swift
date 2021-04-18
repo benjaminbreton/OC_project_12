@@ -26,7 +26,8 @@ struct HomeView: View {
             .navigationBarTitle(Text(types[selection].name))
             .navigationBarItems(trailing: TabNavigationItem(type: types[selection], viewModel: viewModel))
             .accentColor(.tab)
-        }.accentColor(.title)
+        }
+        .accentColor(.title)
         
     }
     private func setTabAppearance() {
@@ -137,7 +138,7 @@ struct TabNavigationItem: View {
                 .resizable()
                 .foregroundColor(.link)
                 .font(.largeTitle)
-                .withNavigationLink(destination: PerformanceSettings(athleticsArray: viewModel.athletics))
+                .withNavigationLink(destination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
         case .sports:
             Image(systemName: type.navigationButtonImage)
                 .resizable()

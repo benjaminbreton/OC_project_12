@@ -57,5 +57,6 @@ struct FirstPageView<T>: View {
             Divider()
         }
         .withAppBackground()
+        .closeKeyboardOnTap()
     }
 }

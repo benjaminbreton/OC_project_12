@@ -17,6 +17,7 @@ struct NavigationPageView: ViewModifier {
         .navigationBarTitle(Text(title))
         .padding()
         .withAppBackground()
+        .closeKeyboardOnTap()
     }
 }
 

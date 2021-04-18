@@ -18,4 +18,6 @@ extension Color {
     static var linkInverse: Color { Color("linkInverse") }
     static var title: Color { Color("title") }
     static var textLight: Color { Color("textLight") }
+    static var pickerText: Color { Color("pickerText") }
+    static var pickerBackground: Color { Color("pickerBackground") }
 }

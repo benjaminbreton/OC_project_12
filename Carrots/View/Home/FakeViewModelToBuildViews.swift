@@ -90,7 +90,12 @@ class FakePot {
         self.evolutionType = evolutionType
     }
 }
-class FakeSport {
+class FakeSport: CustomStringConvertible {
+    var description: String {
+        guard let name = name else { return "" }
+        return name
+    }
+    
     var name: String?
     var icon: Int16
     var unityInt16: Int16

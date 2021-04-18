@@ -42,28 +42,3 @@ struct PerformanceCell: View {
         //.withNavigationLink(destination: SportSettings(sport: sport, name: sport.name ?? "Name", icon: Int(sport.icon), unity: sport.unityInt16.sportUnityType, valueForOnePoint: valueArray))
     }
 }
-struct CommonHeightSpacer: View {
-    var body: some View {
-        Spacer()
-            .frame(height: ViewCommonSettings().commonHeight)
-    }
-}
-struct CommonWidthSpacer: View {
-    var body: some View {
-        Spacer()
-            .frame(width: ViewCommonSettings().commonHeight)
-    }
-}
-struct PerformanceSettings: View {
-    let athleticsArray: [FakeAthletic]
-    @State var selectedAthletics: [FakeAthletic] = []
-    @State var selection: Int = 0
-    var body: some View {
-        SettingsPageView(elements: [
-            .pickerAthleticTextField(data: athleticsArray, selectionIndex: $selection, selectedAthletics: $selectedAthletics)
-        ], title: "Settings", confirmAction: { })
-    }
-    mutating func addAthletic() {
-        selectedAthletics.append(athleticsArray[selection])
-    }
-}

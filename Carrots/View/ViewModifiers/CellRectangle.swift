@@ -9,9 +9,9 @@ import SwiftUI
 struct CellRectangle: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: ViewCommonSettings().commonCornerRadius)
                 .foregroundColor(.backCell)
-                .opacity(0.2)
+                .opacity(ViewCommonSettings().commonOpacity)
             content
         }
         .padding()
