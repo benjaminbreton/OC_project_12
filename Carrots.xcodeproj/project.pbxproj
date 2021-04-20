@@ -283,6 +283,17 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		034FC12F262EC62A0081ADB2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				03DD81F5261EFFF70028A0A5 /* ViewModifiers */,
+				03DD8209261F00C60028A0A5 /* Supporting views */,
+				03DD820A261F00E10028A0A5 /* Settings properties */,
+				03B1DF97262C8D2800B590AC /* Settings Page */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		0383212426088DFE003EE886 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,20 +379,13 @@
 		03DD8229261F23860028A0A5 /* Athletics */ = {
 			isa = PBXGroup;
 			children = (
+				03DD8231261F43920028A0A5 /* ImagePicker.swift */,
 				03DD822A261F23960028A0A5 /* AthleticsView.swift */,
 				03264BDD26203EB5003F6429 /* AthleticSettings.swift */,
 				03264BD926203E78003F6429 /* AthleticImage.swift */,
 				03264BD526203E3D003F6429 /* AthleticCell.swift */,
 			);
 			path = Athletics;
-			sourceTree = "<group>";
-		};
-		03DD8230261F43850028A0A5 /* ImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				03DD8231261F43920028A0A5 /* ImagePicker.swift */,
-			);
-			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 		03DE95752604BF9A00FBAA4F /* Model */ = {
@@ -400,16 +404,12 @@
 		03F472082615FB66002CE23D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03B1DF97262C8D2800B590AC /* Settings Page */,
-				03DD8230261F43850028A0A5 /* ImagePicker */,
+				034FC12F262EC62A0081ADB2 /* Common */,
 				03DD8206261F00AB0028A0A5 /* Home */,
 				03DD8208261F00B40028A0A5 /* Pots */,
 				03264BE7262055E2003F6429 /* Sports */,
 				03DD8229261F23860028A0A5 /* Athletics */,
 				033E942F262098C20051B6A7 /* Performances */,
-				03DD820A261F00E10028A0A5 /* Settings properties */,
-				03DD8209261F00C60028A0A5 /* Supporting views */,
-				03DD81F5261EFFF70028A0A5 /* ViewModifiers */,
 			);
 			path = View;
 			sourceTree = "<group>";
