@@ -121,30 +121,23 @@ struct TabNavigationItem: View {
     var body: some View {
         switch type {
         case .pots:
-            Image(systemName: type.navigationButtonImage)
-                .resizable()
-                .foregroundColor(.link)
-                .font(.largeTitle)
-                .withNavigationLink(destination: AppSettings(date: Date() + 30 * 24 * 3600, points: "1000"))
+            NavigationBarButton(
+                image: type.navigationButtonImage,
+                destination: AppSettings(date: Date() + 30 * 24 * 3600, points: "1000"))
             
         case .athletics:
-            Image(systemName: type.navigationButtonImage)
-                .resizable()
-                .foregroundColor(.link)
-                .font(.largeTitle)
-                .withNavigationLink(destination: AthleticSettings(athletic: nil, name: "", image: nil))
+            NavigationBarButton(
+                image: type.navigationButtonImage,
+                destination: AthleticSettings(athletic: nil, name: "", image: nil))
         case .performances:
-            Image(systemName: type.navigationButtonImage)
-                .resizable()
-                .foregroundColor(.link)
-                .font(.largeTitle)
-                .withNavigationLink(destination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
+            NavigationBarButton(
+                image: type.navigationButtonImage,
+                destination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
+            
         case .sports:
-            Image(systemName: type.navigationButtonImage)
-                .resizable()
-                .foregroundColor(.link)
-                .font(.largeTitle)
-                .withNavigationLink(destination: SportSettings( name: "", icon: ""))
+            NavigationBarButton(
+                image: type.navigationButtonImage,
+                destination: SportSettings( name: "", icon: ""))
         }
     }
 }
