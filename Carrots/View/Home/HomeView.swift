@@ -125,7 +125,7 @@ struct TabNavigationItem: View {
                 .resizable()
                 .foregroundColor(.link)
                 .font(.largeTitle)
-                .withNavigationLink(destination: PotsSettingsView(viewModel: viewModel, newDate: viewModel.predictedAmountDate))
+                .withNavigationLink(destination: AppSettings(date: Date() + 30 * 24 * 3600, points: "1000"))
             
         case .athletics:
             Image(systemName: type.navigationButtonImage)
@@ -144,7 +144,7 @@ struct TabNavigationItem: View {
                 .resizable()
                 .foregroundColor(.link)
                 .font(.largeTitle)
-                .withNavigationLink(destination: SportSettings(sport: nil, name: "", icon: 0, unity: Int16(0).sportUnityType, valueForOnePoint: [""]))
+                .withNavigationLink(destination: SportSettings( name: "", icon: ""))
         }
     }
 }

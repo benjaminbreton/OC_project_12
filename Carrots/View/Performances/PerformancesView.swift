@@ -52,7 +52,7 @@ struct FirstPageView<T>: View {
             } else {
                 Text(noArrayText)
                     .withSimpleFont()
-                    .inNoListRectangle()
+                    .inRectangle(.topLeading)
             }
             Divider()
         }

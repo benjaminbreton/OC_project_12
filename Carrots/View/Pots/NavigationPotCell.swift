@@ -16,6 +16,7 @@ struct NavigationPotCell: View {
         }
     }
     var body: some View {
-        PotCell(pot: pot).withNavigationLink(destination: PotAddings(pot: pot))
+        PotCell(pot: pot)
+            .withNavigationLink(destination: PotAddings(pot: pot))
     }
 }

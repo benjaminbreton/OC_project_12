@@ -7,41 +7,38 @@
 
 import SwiftUI
 struct SportValue: View {
-    @Binding var sport: [FakeSport]
+    let placeholder: String
+    let unity: Sport.UnityType?
     @Binding var value: [String]
     var body: some View {
-        VStack {
+        return VStack {
             Text("Value")
                 .withTitleFont()
-            ZStack(alignment: .center) {
-                RoundedRectangle(cornerRadius: ViewCommonSettings().commonCornerRadius)
-                    .foregroundColor(.backCell)
-                    .opacity(ViewCommonSettings().commonOpacity)
-                if sport.count == 1 {
+            ZStack {
+                if let sportUnity = unity {
                     HStack {
-                        switch sport[0].unityInt16.sportUnityType {
+                        switch sportUnity {
                         case .time:
-                            TextField("hours", text: $value[0])
-                            Text(" h ")
-                            TextField("min.", text: $value[1])
-                            Text(" m ")
-                            TextField("sec.", text: $value[2])
-                            Text(" s ")
-                        case .kilometers:
-                            TextField("distance", text: $value[0])
-                            Text(" km")
-                        case .count:
-                            TextField("count", text: $value[0])
+                            TextField(sportUnity.placeholders[0], text: $value[0])
+                            Text(sportUnity.symbols[0])
+                            TextField(sportUnity.placeholders[1], text: $value[1])
+                            Text(sportUnity.symbols[1])
+                            TextField(sportUnity.placeholders[2], text: $value[2])
+                            Text(sportUnity.symbols[2])
+                        default:
+                            TextField(sportUnity.placeholders[0], text: $value[0])
+                            Text(sportUnity.symbols[0])
                         }
                     }
-                    .withSimpleFont()
-                    .keyboardType(.numberPad)
                 } else {
-                    Text("Choose a sport")
-                        .withSimpleFont()
+                    Text(placeholder)
                 }
             }
             .frame(height: ViewCommonSettings().lineHeight)
+            .withSimpleFont()
+            .keyboardType(.numberPad)
+            .inRectangle(.center)
         }
     }
 }
+

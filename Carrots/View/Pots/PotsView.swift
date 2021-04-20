@@ -20,11 +20,11 @@ struct PotsView: View {
             Text("Athletics pots")
                 .withBigTitleFont()
             if athleticsPots.count > 0 {
-                ListBase(items: athleticsPots.map({
-                    NavigationPotCell(pot: $0)
-                    
-                    
-                }))
+                ScrollView(.vertical) {
+                    ForEach(athleticsPots.indices) { index in
+                        NavigationPotCell(pot: athleticsPots[index] )
+                    }
+                }
             } else {
                 Text("""
                     No athletics have been added.
@@ -35,7 +35,7 @@ struct PotsView: View {
                     - add new athletic's informations and confirm.
                     """)
                     .withSimpleFont()
-                    .inNoListRectangle()
+                    .inRectangle(.topLeading)
             }
             
             Divider()

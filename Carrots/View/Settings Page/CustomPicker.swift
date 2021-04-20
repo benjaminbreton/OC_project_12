@@ -45,16 +45,13 @@ struct CustomPicker<T: CustomStringConvertible>: View {
         VStack {
             Text(title)
                 .withTitleFont()
-            ZStack {
-                RoundedRectangle(cornerRadius: ViewCommonSettings().commonCornerRadius)
-                    .foregroundColor(.backCell)
-                    .opacity(ViewCommonSettings().commonOpacity)
-                PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
-            }
-            .frame(height: ViewCommonSettings().lineHeight * lineCount)
+            PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
+                .frame(height: ViewCommonSettings().lineHeight * lineCount)
+                .inRectangle(.topLeading)    
         }
     }
 }
+
 // MARK: - UIViewRepresentable
 
 fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
@@ -245,7 +242,7 @@ fileprivate class PickerTextView<T: CustomStringConvertible>: UITextView, UIPick
         }
     }
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: data[row].description, attributes: [NSAttributedString.Key.foregroundColor: UIColor.pickerText])
+        return NSAttributedString(string: data[row].description, attributes: [NSAttributedString.Key.foregroundColor: UIColor.pickerText, NSAttributedString.Key.font: UIFont.pickerFont])
     }
 }
 

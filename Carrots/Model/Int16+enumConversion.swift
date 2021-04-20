@@ -10,7 +10,7 @@ extension Int16 {
     var sportUnityType: Sport.UnityType {
         switch self {
         case 1:
-            return .kilometers
+            return .distance
         case 2:
             return .time
         default:

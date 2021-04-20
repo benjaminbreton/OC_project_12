@@ -7,11 +7,7 @@
 
 import SwiftUI
 struct SportIcon: View {
-    let index: Int
-    var selectedIndex: Binding<Int>?
-    var icon: String {
-        ViewCommonSettings().sportsIconsCharacters[index]
-    }
+    var icon: String
     let multiplier: CGFloat
     var body: some View {
         ZStack(alignment: .center) {
@@ -19,10 +15,12 @@ struct SportIcon: View {
                 .foregroundColor(.backCell)
             Text(icon)
                 .withSportIconFont(usedHeightMultiplier: multiplier)
+            /*
             Circle()
                 .stroke(lineWidth: ViewCommonSettings().lineWidth)
                 .foregroundColor(.image)
                 .opacity(selectedIndex?.wrappedValue == index ? 1 : 0)
+ */
         }
     }
 }

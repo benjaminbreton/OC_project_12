@@ -15,13 +15,15 @@ public class Sport: NSManagedObject {
         return points * valueForOnePoint > value ? points - 1 : points
     }
     /// Sport's unity type enumeration.
-    enum UnityType: HashableCustomString {
+    enum UnityType: CustomStringConvertible {
         
-        case kilometers, time, count
+        case distance, time, count
+        
+        static let unities: [UnityType] = [.count, .distance, .time]
         /// Sport's unity type int16 to save in coredata.
         var int16: Int16 {
             switch self {
-            case .kilometers:
+            case .distance:
                 return 1
             case .time:
                 return 2
@@ -31,12 +33,32 @@ public class Sport: NSManagedObject {
         }
         var description: String {
             switch self {
-            case .kilometers:
+            case .distance:
                 return "kilometers"
             case .time:
                 return "time"
             case .count:
                 return "count"
+            }
+        }
+        var symbols: [String] {
+            switch self {
+            case .distance:
+                return [" km"]
+            case .time:
+                return [" h ", " m ", " s"]
+            case .count:
+                return [""]
+            }
+        }
+        var placeholders: [String] {
+            switch self {
+            case .distance:
+                return ["distance"]
+            case .time:
+                return ["hours", "min.", "sec."]
+            case .count:
+                return ["count"]
             }
         }
         func value(for value: [Double]) -> Double {
@@ -60,20 +82,21 @@ public class Sport: NSManagedObject {
                 guard let hours = resultComponents.hour, let minutes = resultComponents.minute, let seconds = resultComponents.second else { return ["0", "0", "0"]}
                 return ["\(hours)", "\(minutes)", "\(seconds)"]
             default:
-                return ["\(Int(value))"]
+                return ["\(Int(value))", "0", "0"]
             }
         }
         func singleString(for value: Int64) -> String {
             let realisation = stringArray(for: value)
             switch self {
             case .time:
-                return "\(realisation[0]) h \(realisation[1]) m \(realisation[2]) s"
-            case .kilometers:
-                return "\(realisation[0]) km"
+                return "\(realisation[0])\(symbols[0])\(realisation[1])\(symbols[1])\(realisation[2])\(symbols[2])"
+            case .distance:
+                return "\(realisation[0])\(symbols[0])"
             default:
                 return realisation[0]
             }
         }
+        
         
     }
     

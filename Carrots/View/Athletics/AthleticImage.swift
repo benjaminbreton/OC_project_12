@@ -36,7 +36,7 @@ struct AthleticImageWithButtons: View {
     let radius: CGFloat
     @State private var isShowPicker = false
     @State private var isShowCamera = false
-    @State var rotation: Double
+    @State var rotation: Double = 0
     var body: some View {
         let sizeMultiplier: CGFloat = 0.4
         return ZStack(alignment: .center) {

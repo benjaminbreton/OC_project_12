@@ -35,9 +35,9 @@ class FakeViewModel {
             athletics.append(at)
         }
         var sports: [FakeSport] = []
-        let sport1 = FakeSport(name: "Marche", icon: 15, unity: .kilometers, valueForOnePoint: 1000)
-        let sport2 = FakeSport(name: "Rameur", icon: 22, unity: .count, valueForOnePoint: 10)
-        let sport3 = FakeSport(name: "Vélo", icon: 25, unity: .time, valueForOnePoint: 360)
+        let sport1 = FakeSport(name: "Marche", icon: "t", unity: .distance, valueForOnePoint: 1000)
+        let sport2 = FakeSport(name: "Rameur", icon: "*", unity: .count, valueForOnePoint: 10)
+        let sport3 = FakeSport(name: "Vélo", icon: "&", unity: .time, valueForOnePoint: 360)
         sports.append(sport1)
         sports.append(sport2)
         sports.append(sport3)
@@ -97,10 +97,10 @@ class FakeSport: CustomStringConvertible {
     }
     
     var name: String?
-    var icon: Int16
+    var icon: String?
     var unityInt16: Int16
     var valueForOnePoint: Double
-    init(name: String, icon: Int16, unity: Sport.UnityType, valueForOnePoint: Double) {
+    init(name: String, icon: String, unity: Sport.UnityType, valueForOnePoint: Double) {
         self.name = name
         self.icon = icon
         self.unityInt16 = unity.int16

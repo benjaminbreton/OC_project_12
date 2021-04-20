@@ -24,7 +24,8 @@ struct PerformanceCell: View {
     }
     var body: some View {
         HStack(alignment: .center) {
-            SportIcon(index: Int(performance.sport?.icon ?? 0), selectedIndex: nil, multiplier: multiplier)
+            SportIcon(icon: performance.sport?.icon ?? "", multiplier: multiplier)
+           // SportIcon(index: Int(performance.sport?.icon ?? 0), selectedIndex: nil, multiplier: multiplier)
                 .frame(width: rowHeight / 2, height: rowHeight / 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             CommonWidthSpacer()
             VStack(alignment: .leading) {

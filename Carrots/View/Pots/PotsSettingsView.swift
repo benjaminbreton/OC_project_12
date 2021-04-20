@@ -45,3 +45,39 @@ struct PotSettingsCell: View {
         }
     }
 }
+
+struct AppSettings: View {
+    @State var date: Date
+    @State var points: String
+    var body: some View {
+        VStack {
+            CustomDatePicker(date: $date)
+            CustomTextfield(title: "Points for one euro", placeHolder: "Points", value: $points, keyboard: .numberPad)
+        }
+        .inSettingsPage("app settings") {
+            
+        }
+    }
+}
+struct CustomDatePicker: View {
+    @Binding var date: Date
+    var body: some View {
+        VStack {
+            Text("Date settings")
+                .withTitleFont()
+            VStack {
+                Text("""
+                                    The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
+                                    
+                                    You can set this date here.
+                                    """)
+                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                DatePicker(selection: _date, in: Date()..., displayedComponents: .date) {
+                    Text("Select a date")
+                }
+            }
+            .withSimpleFont()
+            .inRectangle(.center)
+        }
+    }
+}

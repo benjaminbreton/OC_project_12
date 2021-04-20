@@ -14,8 +14,8 @@ extension View {
     func inCellRectangle() -> some View {
         modifier(CellRectangle())
     }
-    func inNoListRectangle() -> some View {
-        modifier(NoListRectangle())
+    func inRectangle(_ alignment: Alignment) -> some View {
+        modifier(InRectangle(alignment: alignment))
     }
     func withTitleFont() -> some View {
         modifier(TitleFont())
