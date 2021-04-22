@@ -8,9 +8,9 @@
 import SwiftUI
 struct SportCell: View {
     let sport: FakeSport
-    let multiplier: CGFloat = 4
+    let lineCount: CGFloat = 2
     var rowHeight: CGFloat {
-        ViewCommonSettings().commonHeight * multiplier
+        ViewCommonSettings().textLineHeight * lineCount
     }
     var valueArray: [String] {
         switch sport.unityInt16.sportUnityType {
@@ -26,7 +26,7 @@ struct SportCell: View {
     }
     var body: some View {
         HStack(alignment: .center) {
-            SportIcon(icon: sport.icon ?? "", multiplier: multiplier)
+            SportIcon(icon: sport.icon ?? "", lineCount: lineCount)
                 .frame(width: rowHeight, height: rowHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             Spacer()
               .frame(width: ViewCommonSettings().commonHeight)

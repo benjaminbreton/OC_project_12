@@ -20,4 +20,6 @@ extension Color {
     static var textLight: Color { Color("textLight") }
     static var pickerText: Color { Color("pickerText") }
     static var pickerBackground: Color { Color("pickerBackground") }
+    static var graphFirst: Color { Color("graphFirst") }
+    static var graphSecond: Color { Color("graphSecond") }
 }

@@ -11,10 +11,11 @@ struct SportSettings: View {
     @State var icon: String
     @State var unity: [Sport.UnityType] = []
     @State var valueForOnePoint: [String] = ["0", "0", "0"]
+    let unities: [Sport.UnityType] = [.count, .distance, .time]
     var body: some View {
         VStack {
             CustomTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
-            CustomPicker(title: "Unity", data: Sport.UnityType.unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
+            CustomPicker(title: "Unity", data: unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
             SportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, value: $valueForOnePoint)
             SportIconPicker(icon: $icon)
         }

@@ -7,9 +7,19 @@
 
 import SwiftUI
 struct CommonHeightSpacer: View {
+    let quantity: Int
+    init(_ quantity: Int = 1) {
+        self.quantity = quantity
+    }
     var body: some View {
-        Spacer()
-            .frame(height: ViewCommonSettings().commonHeight)
+        let array = Array.init(repeating: Spacer()
+                                .frame(height: ViewCommonSettings().commonHeight), count: quantity)
+        return VStack {
+            ForEach(array.indices) { index in
+                array[index]
+            }
+        }
+        
     }
 }
 struct CommonWidthSpacer: View {

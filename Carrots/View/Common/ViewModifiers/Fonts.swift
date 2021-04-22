@@ -49,10 +49,10 @@ struct LinkFont: ViewModifier {
     }
 }
 struct SportIconFont: ViewModifier {
-    let multiplier: CGFloat
+    let lineCount: CGFloat
     func body(content: Content) -> some View {
         content
-            .font(.custom(ViewCommonSettings().iconsFontName, size: ViewCommonSettings().regularFontSize * multiplier))
+            .font(.custom(ViewCommonSettings().iconsFontName, size: ViewCommonSettings().regularFontSize * lineCount))
             .foregroundColor(.image)
     }
 }

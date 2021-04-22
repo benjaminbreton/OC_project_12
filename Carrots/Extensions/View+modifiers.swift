@@ -35,11 +35,11 @@ extension View {
     func withBigTitleFont() -> some View {
         modifier(BigTitleFont())
     }
-    func withSportIconFont(usedHeightMultiplier multiplier: CGFloat) -> some View {
-        modifier(SportIconFont(multiplier: 1.8 / 4 * multiplier))
+    func withSportIconFont(lineCount: CGFloat) -> some View {
+        modifier(SportIconFont(lineCount: lineCount))
     }
     func withNavigationLink<T: View>(destination: T) -> some View {
-        modifier(NavigationLinkOnModifier(destination: destination))
+        modifier(WithNavigationLink(destination: destination))
     }
     func inNavigationPageView(title: String) -> some View {
         modifier(NavigationPageView(title: title))

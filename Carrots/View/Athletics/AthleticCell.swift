@@ -23,6 +23,6 @@ struct AthleticCell: View {
             }
         }
         .frame(height: ViewCommonSettings().commonHeight * 4)
-        .withNavigationLink(destination: AthleticSettings(athletic: athletic, name: athletic.name ?? "Name"))
+        .withNavigationLink(destination: AthleticDetails(athletic: athletic))
     }
 }

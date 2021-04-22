@@ -17,7 +17,7 @@ struct CustomTextfield: View {
                 .withTitleFont()
             TextField(placeHolder, text: _value)
                 .withSimpleFont()
-                .frame(height: ViewCommonSettings().lineHeight)
+                .frame(height: ViewCommonSettings().textLineHeight)
                 .keyboardType(keyboard)
                 .inRectangle(.center)
         }

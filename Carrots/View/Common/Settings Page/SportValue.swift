@@ -34,7 +34,7 @@ struct SportValue: View {
                     Text(placeholder)
                 }
             }
-            .frame(height: ViewCommonSettings().lineHeight)
+            .frame(height: ViewCommonSettings().textLineHeight)
             .withSimpleFont()
             .keyboardType(.numberPad)
             .inRectangle(.center)

@@ -34,7 +34,7 @@ struct CustomToggleWithExplications: View {
             VStack {
                 Toggle(question, isOn: _isOn)
                 Text(isOn ? explicationsIsOn : explicationsIsOff)
-                    .frame(height: ViewCommonSettings().lineHeight * textLines)
+                    .frame(height: ViewCommonSettings().textLineHeight * textLines)
                     .foregroundColor(.textLight)
             }
             .withSimpleFont()

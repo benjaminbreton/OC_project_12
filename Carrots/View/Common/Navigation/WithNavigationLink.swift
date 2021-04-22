@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct NavigationLinkOnModifier<T: View>: ViewModifier {
+struct WithNavigationLink<T: View>: ViewModifier {
     let destination: T
     func body(content: Content) -> some View {
         NavigationLink(

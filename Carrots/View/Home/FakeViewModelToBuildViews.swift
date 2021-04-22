@@ -31,7 +31,7 @@ class FakeViewModel {
         let names = ["Len", "Elo", "Ben", "Dom", "Mar", "Par", "Mic", "Cle", "Ben2"]
         for index in 0..<names.count {
             let pot = FakePot(amount: Double.random(in: 10000...99999), evolutionType: Int16.random(in: 0...2))
-            let at = FakeAthletic(name: names[index], pot: pot, performances: nil)
+            let at = FakeAthletic(name: names[index], pot: pot, performances: [])
             athletics.append(at)
         }
         var sports: [FakeSport] = []
@@ -45,6 +45,9 @@ class FakeViewModel {
         let performance2 = FakePerformance(sport: sport2, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false)
         let performance3 = FakePerformance(sport: sport3, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false)
         let performances = [performance3, performance2, performance1]
+        for athletic in athletics {
+            athletic.performances = performances
+        }
         return FakeViewModel(athletics: athletics, commonPot: commonPot, predictedAmountDate: Date() + 30 * 24 * 3600, sports: sports, performances: performances)
     }
     static func createEmpty() -> FakeViewModel {
@@ -63,13 +66,35 @@ class FakeAthletic: CustomStringConvertible {
     var image: Data?
     let imageRotation: Double = 0
     let pot: FakePot?
-    let performances: [FakePerformance]?
-    init(name: String, pot: FakePot, performances: [FakePerformance]?) {
+    var performances: [FakePerformance]
+    let creationDate: Date?
+    let evolutionDatas: [EvolutionData]
+    init(name: String, pot: FakePot, performances: [FakePerformance]) {
         self.name = name
         self.pot = pot
         self.performances = performances
+        self.creationDate = Date() - 60 * 24 * 3600
+        var datas: [EvolutionData] = []
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        datas.append(EvolutionData(date: today - 31 * 24 * 3600, value: 1))
+        for index in 1...10 {
+            let value = Double.random(in: 0...2)
+            let date: Date = today - Double(11 - index) * 3 * 24 * 3600
+            datas.append(EvolutionData(date: date, value: value))
+        }
+        datas.append(EvolutionData(date: today, value: 1))
+        self.evolutionDatas = datas
         image = nil
         pot.owner = self
+    }
+}
+class EvolutionData {
+    let date: Date?
+    let value: Double
+    init(date: Date?, value: Double) {
+        self.date = date
+        self.value = value
     }
 }
 class FakePot {

@@ -32,19 +32,19 @@ struct SportIconScrollView: View {
             HStack {
                 ForEach(characters.indices) { index in
                     ZStack {
-                        SportIcon(icon: characters[index], multiplier: 6)
-                            .frame(width: ViewCommonSettings().commonHeight * 6, height: ViewCommonSettings().commonHeight * 6)
+                        SportIcon(icon: characters[index], lineCount: 3)
+                            .frame(width: ViewCommonSettings().textLineHeight * 3, height: ViewCommonSettings().textLineHeight * 3)
                             .inButton {
                                 icon = characters[index]
                         }
                         Circle()
-                            .stroke(lineWidth: ViewCommonSettings().lineWidth)
+                            .stroke(lineWidth: ViewCommonSettings().strokeLineWidth)
                             .foregroundColor(.image)
                             .opacity(selection == index ? 1 : 0)
                     }
                 }
             }
-            .frame(height: ViewCommonSettings().commonHeight * 8)
+            .frame(height: ViewCommonSettings().textLineHeight * 4)
         }
     }
 }

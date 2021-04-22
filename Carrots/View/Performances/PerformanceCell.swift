@@ -8,38 +8,38 @@
 import SwiftUI
 struct PerformanceCell: View {
     let performance: FakePerformance
-    let multiplier: CGFloat = 4
-    var rowHeight: CGFloat {
-        ViewCommonSettings().commonHeight * multiplier * 2
+    private var lineCount: CGFloat {
+        2
     }
-    var athleticsNames: String {
+    private var rowHeight: CGFloat {
+        ViewCommonSettings().textLineHeight * lineCount
+    }
+    private var athleticsNames: String {
         guard let athletics = performance.athletics else { return "" }
         let athleticsNames = athletics.map({ "\($0.name ?? "No name")" }).joined(separator: ", ")
         return "Athletics: \(athleticsNames)"
     }
-    var formattedValue: String {
+    private var formattedValue: String {
         guard let sport = performance.sport else { return "" }
         let unity = sport.unityInt16.sportUnityType
         return "Realised: \(unity.singleString(for: performance.value))"
     }
     var body: some View {
         HStack(alignment: .center) {
-            SportIcon(icon: performance.sport?.icon ?? "", multiplier: multiplier)
-           // SportIcon(index: Int(performance.sport?.icon ?? 0), selectedIndex: nil, multiplier: multiplier)
-                .frame(width: rowHeight / 2, height: rowHeight / 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            SportIcon(icon: performance.sport?.icon ?? "", lineCount: lineCount)
+                .frame(width: rowHeight, height: rowHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             CommonWidthSpacer()
             VStack(alignment: .leading) {
                 Text(performance.formattedDate)
                     .withLightSimpleFont()
                 CommonHeightSpacer()
-                Text(athleticsNames)
-                    .withSimpleFont()
-                CommonHeightSpacer()
+//                Text(athleticsNames)
+//                    .withSimpleFont()
+//                CommonHeightSpacer()
                 Text(formattedValue)
                     .withSimpleFont()
             }
             .frame(height: rowHeight)
         }
-        //.withNavigationLink(destination: SportSettings(sport: sport, name: sport.name ?? "Name", icon: Int(sport.icon), unity: sport.unityInt16.sportUnityType, valueForOnePoint: valueArray))
     }
 }

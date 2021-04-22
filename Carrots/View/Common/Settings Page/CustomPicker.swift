@@ -46,7 +46,7 @@ struct CustomPicker<T: CustomStringConvertible>: View {
             Text(title)
                 .withTitleFont()
             PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
-                .frame(height: ViewCommonSettings().lineHeight * lineCount)
+                .frame(height: ViewCommonSettings().textLineHeight * lineCount)
                 .inRectangle(.topLeading)    
         }
     }

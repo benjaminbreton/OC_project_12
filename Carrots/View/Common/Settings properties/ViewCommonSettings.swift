@@ -26,11 +26,20 @@ class ViewCommonSettings {
     var commonHeight: CGFloat {
         UIScreen.main.bounds.height / 100 * 2
     }
-    var lineWidth: CGFloat {
+    var strokeLineWidth: CGFloat {
         5 * UIScreen.main.bounds.height / 844
     }
-    var lineHeight: CGFloat {
+    var textLineHeight: CGFloat {
         2 * commonHeight
+    }
+    var shapeLine: CGFloat {
+        3
+    }
+    var performanceCellMultiplier: CGFloat {
+        4
+    }
+    var performanceCellRowHeight: CGFloat {
+        ViewCommonSettings().commonHeight * performanceCellMultiplier * 2
     }
     
     // MARK: - Font size

@@ -8,13 +8,13 @@
 import SwiftUI
 struct SportIcon: View {
     var icon: String
-    let multiplier: CGFloat
+    let lineCount: CGFloat
     var body: some View {
         ZStack(alignment: .center) {
             Circle()
                 .foregroundColor(.backCell)
             Text(icon)
-                .withSportIconFont(usedHeightMultiplier: multiplier)
+                .withSportIconFont(lineCount: lineCount)
             /*
             Circle()
                 .stroke(lineWidth: ViewCommonSettings().lineWidth)
