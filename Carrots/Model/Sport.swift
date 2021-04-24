@@ -19,7 +19,6 @@ public class Sport: NSManagedObject {
         
         case distance, time, count
         
-        static let unities: [UnityType] = [.count, .distance, .time]
         /// Sport's unity type int16 to save in coredata.
         var int16: Int16 {
             switch self {
@@ -34,7 +33,7 @@ public class Sport: NSManagedObject {
         var description: String {
             switch self {
             case .distance:
-                return "kilometers"
+                return "distance"
             case .time:
                 return "time"
             case .count:
