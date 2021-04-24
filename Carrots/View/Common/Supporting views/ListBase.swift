@@ -11,7 +11,6 @@ struct ListBase<T: View>: View {
     var body: some View {
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
-        UITableViewCell.appearance().selectedBackgroundView = UIView()
         return List {
             ForEach(items.indices) { index in
                 items[index]

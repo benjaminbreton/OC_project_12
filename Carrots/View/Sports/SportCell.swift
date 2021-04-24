@@ -38,6 +38,6 @@ struct SportCell: View {
             }
             .frame(height: rowHeight)
         }
-        .withNavigationLink(destination: SportSettings(name: sport.name ?? "", icon: sport.icon ?? ""))
+        .withNavigationLink(destination: SportDetails(sport: sport))
     }
 }
