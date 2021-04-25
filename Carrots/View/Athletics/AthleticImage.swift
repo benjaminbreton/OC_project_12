@@ -19,7 +19,7 @@ struct AthleticImage: View {
                     .resizable()
                     .scaledToFill()
                     .rotationEffect(.init(degrees: rotation))
-                    
+                
             } else {
                 Image(systemName: "person")
                     .resizable()
@@ -29,69 +29,62 @@ struct AthleticImage: View {
         .frame(width: radius * 2, height: radius * 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         .cornerRadius(radius)
     }
-
+    
 }
 struct AthleticImageWithButtons: View {
     @Binding var image: UIImage?
     let radius: CGFloat
-    @State private var isShowPicker = false
-    @State private var isShowCamera = false
+    @State private var isShowPicker: Bool = false
+    @State private var isShowCamera: Bool = false {
+        didSet {
+            isShowPicker = true
+        }
+    }
     @State var rotation: Double = 0
+    @State private var source: UIImagePickerController.SourceType? {
+        didSet {
+            isShowPicker = true
+        }
+    }
     var body: some View {
         let sizeMultiplier: CGFloat = 0.4
         return ZStack(alignment: .center) {
             AthleticImage(image: image, radius: radius, rotation: $rotation)
             VStack(alignment: .center) {
-                HStack {
-                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.left", size: radius * sizeMultiplier)
-                        .inButton {
-                            rotation -= 90
-                        }
-                    Spacer()
-                        .frame(width: radius * (2 - sizeMultiplier * 2), height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    SystemImageBlackAndWhite(name: "arrowshape.turn.up.right", size: radius * sizeMultiplier)
-                        .inButton {
-                            rotation += 90
-                        }
-                }
                 Spacer()
-                    .frame(width: radius * 2, height: radius * 1.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: radius * 2, height: radius * 1.7, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 HStack {
-                    SystemImageBlackAndWhite(name: "photo", size: radius * sizeMultiplier)
-                        .inButton {
-                            isShowCamera = false
-                            isShowPicker = true
-                        }
+                    AthleticImageButton("photo") {
+                        self.source = .photoLibrary
+                    }
                     Spacer()
                         .frame(width: radius * (2 - sizeMultiplier * 2), height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    SystemImageBlackAndWhite(name: "camera", size: radius * sizeMultiplier)
-                        .inButton {
-                            isShowCamera = true
-                            isShowPicker = true
-                        }
+                    AthleticImageButton("camera") {
+                        self.source = .camera
+                    }
                 }
             }
             .frame(width: radius * 2, height: radius * 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         }
         .sheet(isPresented: $isShowPicker, content: {
-            ImagePicker(sourceType: isShowCamera ? .camera : .photoLibrary, selectedImage: $image)
+            ImagePicker(sourceType: $source, selectedImage: $image)
         })
     }
-
 }
-struct SystemImageBlackAndWhite: View {
+
+struct AthleticImageButton: View {
     let name: String
-    let size: CGFloat
+    let action: () -> Void
+    init(_ name: String, action: @escaping () -> Void) {
+        self.name = name
+        self.action = action
+    }
     var body: some View {
-            ZStack(alignment: .center) {
-                Image(systemName: name)
-                    .resizable()
-                    .foregroundColor(.linkInverse)
-                Image(systemName: name)
-                    .resizable()
-                    .frame(width: size * 0.95, height: size * 0.8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.link)
-            }
+        Image(systemName: name)
+            .resizable()
+            .font(.largeTitle)
+            .foregroundColor(.link)
+            .inButton(action: action)
     }
 }
 

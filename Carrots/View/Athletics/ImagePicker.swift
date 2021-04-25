@@ -12,7 +12,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     
  
-    var sourceType: UIImagePickerController.SourceType
+    @Binding var sourceType: UIImagePickerController.SourceType?
     @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) private var presentationMode
  
@@ -20,7 +20,7 @@ struct ImagePicker: UIViewControllerRepresentable {
  
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
-        imagePicker.sourceType = sourceType
+        imagePicker.sourceType = sourceType ?? .camera
         imagePicker.delegate = context.coordinator
  
         return imagePicker
