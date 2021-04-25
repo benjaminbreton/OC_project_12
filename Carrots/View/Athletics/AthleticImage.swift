@@ -35,11 +35,6 @@ struct AthleticImageWithButtons: View {
     @Binding var image: UIImage?
     let radius: CGFloat
     @State private var isShowPicker: Bool = false
-    @State private var isShowCamera: Bool = false {
-        didSet {
-            isShowPicker = true
-        }
-    }
     @State var rotation: Double = 0
     @State private var source: UIImagePickerController.SourceType? {
         didSet {
