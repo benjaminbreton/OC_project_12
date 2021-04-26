@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct PotsView: View {
+struct PotsHome: View {
     //let viewModel: ViewModel
     let viewModel: FakeViewModel
     
@@ -44,6 +44,6 @@ struct PotsView: View {
             }
             Divider()
         }
-        .withAppBackground()
+        .inNavigationHome(title: "pots", buttonImage: "gear", buttonDestination: PotsSettingsView(viewModel: viewModel, newDate: Date()))
     }
 }

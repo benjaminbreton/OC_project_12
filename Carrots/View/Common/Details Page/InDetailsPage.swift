@@ -15,6 +15,7 @@ struct InDetailsPage<T: View>: ViewModifier {
             ScrollView(.vertical) {
                 content
             }
+            Divider()
         }
         .inNavigationPageViewWithButton(title: title, buttonImage: "square.and.pencil", buttonDestination: destinationToModify)
     }

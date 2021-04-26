@@ -6,16 +6,25 @@
 //
 
 import SwiftUI
+struct InNavigationHome<T: View>: ViewModifier {
+    let title: String
+    let buttonImage: String
+    let buttonDestination: T
+    func body(content: Content) -> some View {
+        NavigationView {
+            content
+                .inNavigationPageViewWithButton(title: title, buttonImage: buttonImage, buttonDestination: buttonDestination)
+        }
+        .accentColor(.title)
+    }
+}
+
 struct NavigationPageView: ViewModifier {
     let title: String
     func body(content: Content) -> some View {
-        ZStack(alignment: .topLeading) {
-            Group {
-                content
-            }
-        }
+        content
         .navigationBarTitle(Text(title))
-        .padding()
+        //.padding()
         .withAppBackground()
         .closeKeyboardOnTap()
     }
@@ -25,21 +34,19 @@ struct NavigationPageViewWithButton<T: View>: ViewModifier {
     let buttonImage: String
     let buttonDestination: T
     func body(content: Content) -> some View {
-        ZStack(alignment: .topLeading) {
-            Group {
-                content
-            }
-        }
-        .navigationBarTitle(Text(title))
-        .navigationBarItems(trailing: NavigationBarButton(image: buttonImage, destination: buttonDestination))
-        .padding()
-        .withAppBackground()
-        .closeKeyboardOnTap()
+        content
+            .closeKeyboardOnTap()
+            .withAppBackground()
+            .navigationBarTitle(Text(title))
+            .navigationBarItems(trailing: NavigationBarButton(image: buttonImage, destination: buttonDestination))
     }
 }
 extension View {
     func inNavigationPageViewWithButton<T: View>(title: String, buttonImage: String, buttonDestination: T) -> some View {
         modifier(NavigationPageViewWithButton(title: title, buttonImage: buttonImage, buttonDestination: buttonDestination))
+    }
+    func inNavigationHome<T: View>(title: String, buttonImage: String, buttonDestination: T) -> some View {
+        modifier((InNavigationHome(title: title, buttonImage: buttonImage, buttonDestination: buttonDestination)))
     }
 }
 

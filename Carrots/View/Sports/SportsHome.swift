@@ -1,21 +1,16 @@
 //
-//  SportsView.swift
+//  SportsHome.swift
 //  Carrots
 //
 //  Created by Benjamin Breton on 09/04/2021.
 //
 
 import SwiftUI
-struct SportsView: View {
+struct SportsHome: View {
     let viewModel: FakeViewModel
     var body: some View {
         
-        FirstPageView(array: viewModel.sports, noArrayText: """
-                    No sports have been added.
 
-                    To add a sport, press the + button on the top of the screen, and set sport's informations.
-                    """)
-        /*
         VStack {
             Divider()
             if viewModel.sports.count > 0 {
@@ -29,12 +24,11 @@ struct SportsView: View {
                     To add a sport, press the + button on the top of the screen, and set sport's informations.
                     """)
                     .withSimpleFont()
-                    .inNoListRectangle()
+                    .inRectangle(.leading)
             }
             Divider()
         }
-        .withAppBackground()
- */
+        .inNavigationHome(title: "sports", buttonImage: "plus.circle", buttonDestination: SportSettings(name: "", icon: ""))
     }
 }
 

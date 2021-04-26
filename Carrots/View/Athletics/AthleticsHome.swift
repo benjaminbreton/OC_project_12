@@ -1,12 +1,12 @@
 //
-//  AthleticsView.swift
+//  AthleticsHome.swift
 //  Carrots
 //
 //  Created by Benjamin Breton on 08/04/2021.
 //
 
 import SwiftUI
-struct AthleticsView: View {
+struct AthleticsHome: View {
     let viewModel: FakeViewModel
     var body: some View {
         VStack {
@@ -26,6 +26,6 @@ struct AthleticsView: View {
             }
             Divider()
         }
-        .withAppBackground()
+        .inNavigationHome(title: "athletics", buttonImage: "person.crop.circle.badge.plus", buttonDestination: AthleticSettings(athletic: nil, name: "", image: nil))
     }
 }

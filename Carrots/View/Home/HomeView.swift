@@ -10,16 +10,13 @@ import SwiftUI
 struct HomeView: View {
     //@ObservedObject var viewModel: ViewModel = ViewModel()
     var viewModel = FakeViewModel.create()
-    @State private var selection = 3
+    @State private var selection = 0
     
     var body: some View {
         setTabAppearance()
         setNavigationAppearance()
-        return NavigationView {
-            HomeTab(viewModel: viewModel, selection: $selection)
-        }
-        .accentColor(.title)
-        
+        setUITableViewAppearance()
+        return HomeTab(viewModel: viewModel, selection: $selection)
     }
     private func setTabAppearance() {
         UITabBar.appearance().backgroundImage = UIImage()
@@ -28,34 +25,12 @@ struct HomeView: View {
         UINavigationBar.appearance().titleTextAttributes = [.font : ViewCommonSettings().regularNavigationTitleFont]
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : ViewCommonSettings().largeNavigationTitleFont]
     }
-}
-struct TabNavigationItem: View {
-    @Binding var selection: Int
-    let viewModel: FakeViewModel
-    var body: some View {
-        switch selection {
-        case 0:
-            NavigationBarButton(
-                image: selection.navigationButtonImage,
-                destination: AppSettings(date: Date() + 30 * 24 * 3600, points: "1000"))
-            
-        case 1:
-            NavigationBarButton(
-                image: selection.navigationButtonImage,
-                destination: AthleticSettings(athletic: nil, name: "", image: nil))
-        case 3:
-            NavigationBarButton(
-                image: selection.navigationButtonImage,
-                destination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
-        case 2:
-            NavigationBarButton(
-                image: selection.navigationButtonImage,
-                destination: SportSettings( name: "", icon: ""))
-        default:
-            NavigationBarButton(image: "", destination: Text(""))
-        }
+    private func setUITableViewAppearance() {
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
     }
 }
+
 
 struct HomeTab: View {
     let viewModel: FakeViewModel
@@ -63,34 +38,32 @@ struct HomeTab: View {
     
     var body: some View {
         TabView {
-            PotsView(viewModel: viewModel)
+            PotsHome(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "creditcard.circle.fill")
                     Text("pots")
                 }
                 .tag(0)
-            AthleticsView(viewModel: viewModel)
+            AthleticsHome(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "figure.walk.circle.fill")
                     Text("athletics")
                 }
                 .tag(1)
             
-            SportsView(viewModel: viewModel)
+            SportsHome(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "bicycle.circle.fill")
                     Text("sports")
                 }
                 .tag(2)
-            PerformancesView(viewModel: viewModel)
+            PerformancesHome(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "arrow.up.right.circle.fill")
                     Text("performances")
                 }
                 .tag(3)
         }
-        .navigationBarTitle(Text(selection.tabTitle))
-        .navigationBarItems(trailing: TabNavigationItem(selection: _selection, viewModel: viewModel))
         .accentColor(.tab)
     }
 }

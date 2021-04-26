@@ -1,12 +1,12 @@
 //
-//  PerformancesView.swift
+//  PerformancesHome.swift
 //  Carrots
 //
 //  Created by Benjamin Breton on 13/04/2021.
 //
 
 import SwiftUI
-struct PerformancesView: View {
+struct PerformancesHome: View {
     let viewModel: FakeViewModel
     var instructions: String {
         if viewModel.athletics.count > 0 {
@@ -23,40 +23,23 @@ struct PerformancesView: View {
         }
     }
     var body: some View {
-        FirstPageView(array: viewModel.performances,
-                      noArrayText: """
+        VStack {
+            Divider()
+            if viewModel.performances.count > 0 {
+                    ListBase(items: viewModel.performances.map({
+                        PerformanceCell(performance: $0)
+                    }))
+            } else {
+                Text("""
             No performances have been added.
 
             To add a performance \(instructions)
             """)
-    }
-}
-
-struct FirstPageView<T>: View {
-    let array: [T]
-    let noArrayText: String
-    var body: some View {
-        VStack {
-            Divider()
-            if array.count > 0 {
-                if let sports = array as? [FakeSport] {
-                    ListBase(items: sports.map({
-                        SportCell(sport: $0)
-                    }))
-                }
-                if let performances = array as? [FakePerformance] {
-                    ListBase(items: performances.map({
-                        PerformanceCell(performance: $0)
-                    }))
-                }
-            } else {
-                Text(noArrayText)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
             }
             Divider()
         }
-        .withAppBackground()
-        //.closeKeyboardOnTap()
+        .inNavigationHome(title: "performances", buttonImage: "gauge.badge.plus", buttonDestination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
     }
 }
