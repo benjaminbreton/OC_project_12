@@ -12,7 +12,7 @@ struct InSettingsPage: ViewModifier {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     func body(content: Content) -> some View {
         VStack(alignment: .center) {
-            //Divider().padding()
+            Divider()
             ScrollView(.vertical) {
                 content
             }
@@ -22,5 +22,6 @@ struct InSettingsPage: ViewModifier {
             }
         }
         .inNavigationPageView(title: title)
+        .closeKeyboardOnTap()
     }
 }

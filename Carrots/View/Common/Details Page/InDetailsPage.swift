@@ -7,22 +7,31 @@
 
 import SwiftUI
 struct InDetailsPage<T: View>: ViewModifier {
-    let title: String
+    let genericTitle: String
+    let specificTitle: String
     let destinationToModify: T
     func body(content: Content) -> some View {
         VStack {
+            Divider()
+            HStack {
+                Text(specificTitle)
+                    .withBigTitleFont()
+                Image(systemName: "square.and.pencil")
+                    .withNavigationLink(destination: destinationToModify)
+                    .withLinkFont()
+            }
             Divider()
             ScrollView(.vertical) {
                 content
             }
             Divider()
         }
-        .inNavigationPageViewWithButton(title: title, buttonImage: "square.and.pencil", buttonDestination: destinationToModify)
+        .inNavigationPageView(title: genericTitle)
     }
 }
 extension View {
-    func inDetailsPage<T: View>(title: String, destinationToModify: T) -> some View {
-        modifier(InDetailsPage(title: title, destinationToModify: destinationToModify))
+    func inDetailsPage<T: View>(genericTitle: String, specificTitle: String, destinationToModify: T) -> some View {
+        modifier(InDetailsPage(genericTitle: genericTitle, specificTitle: specificTitle, destinationToModify: destinationToModify))
     }
 }
 
@@ -41,6 +50,7 @@ struct DetailsPerformancesDisplayer: View {
                     .inRectangle(.leading)
             }
             .withSimpleFont()
+            .padding()
             if performances.count > 0 {
                 Divider()
                 ListBase(items: performances.map({ PerformanceCell(performance: $0)}))

@@ -21,6 +21,7 @@ struct AthleticDetails: View {
             DetailsPerformancesDisplayer(performances: athletic.performances)
             
         }
-        .inDetailsPage(title: athletic.name ?? "athletic", destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data())))
+        .inDetailsPage(genericTitle: "profile", specificTitle: athletic.name ?? "No name", destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data())))
+        //.inDetailsPage(title: athletic.name ?? "athletic", destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data())))
     }
 }

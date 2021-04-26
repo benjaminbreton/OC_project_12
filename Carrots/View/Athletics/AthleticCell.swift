@@ -22,7 +22,7 @@ struct AthleticCell: View {
                     .withBigSimpleFont()
             }
         }
-        .frame(height: ViewCommonSettings().commonHeight * 4)
         .withNavigationLink(destination: AthleticDetails(athletic: athletic))
+        .frame(height: ViewCommonSettings().commonHeight * 4)
     }
 }

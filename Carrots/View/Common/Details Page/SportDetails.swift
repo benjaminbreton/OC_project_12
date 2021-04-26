@@ -15,7 +15,8 @@ struct SportDetails: View {
             CommonHeightSpacer(5)
             DetailsTextDisplayer(title: "Unity", texts: ["name: ": sport.unityInt16.sportUnityType.description, "value for one point :": ""])
         }
-        .inDetailsPage(title: sport.name ?? "No name", destinationToModify: SportSettings(name: sport.name ?? "No name", icon: sport.icon ?? ""))
+        .inDetailsPage(genericTitle: "sport details", specificTitle: sport.name ?? "No name", destinationToModify: SportSettings(name: sport.name ?? "No name", icon: sport.icon ?? ""))
+        //.inDetailsPage(title: sport.name ?? "No name", destinationToModify: SportSettings(name: sport.name ?? "No name", icon: sport.icon ?? ""))
     }
 }
 struct DetailsTextDisplayer: View {
