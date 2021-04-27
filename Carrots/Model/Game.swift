@@ -113,12 +113,18 @@ extension Game {
     }
     /// Create an athletic.
     /// - parameter name: Athletic's name to create.
-    private mutating func addNewAthletic(_ name: String, image data: Data?) {
+    private mutating func addNewAthletic(_ name: String, image: Data?) {
         let athletic = Athletic(context: coreDataStack.viewContext)
-        athletic.name = name
         athletic.creationDate = Date()
-        athletic.image = data
         getNewPot(for: athletic)
+        updateAthletic(athletic, name: name, image: image)
+        updateProperties()
+    }
+    
+    // MARK: - Update
+    
+    mutating func updateAthletic(_ athletic: Athletic, name: String?, image: Data?) {
+        athletic.update(name: name, image: image)
         updateProperties()
     }
     

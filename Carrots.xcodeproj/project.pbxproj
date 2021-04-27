@@ -209,6 +209,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		0335033B2638461000E2BD99 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		033E942F262098C20051B6A7 /* Performances */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +248,7 @@
 		034AB62326010E5B0034C1E2 /* Carrots */ = {
 			isa = PBXGroup;
 			children = (
+				0335033B2638461000E2BD99 /* ViewModel */,
 				03F472082615FB66002CE23D /* View */,
 				0383212426088DFE003EE886 /* Extensions */,
 				03DE95752604BF9A00FBAA4F /* Model */,
@@ -379,7 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				03F472092615FB8A002CE23D /* HomeView.swift */,
-				03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

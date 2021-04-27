@@ -56,5 +56,8 @@ public class Athletic: NSManagedObject {
         evolutionDatas.remove(at: evolutionDatas.count - 1)
         return evolutionDatas
     }
-    
+    func update(name: String?, image: Data?) {
+        self.name = name
+        self.image = image
+    }
 }
