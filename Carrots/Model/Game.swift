@@ -49,6 +49,7 @@ extension Game {
             sports = getEntitiesWithDescriptor(with: "name", ascending: true)
             performances = getEntitiesWithDescriptor(with: "date", ascending: false)
             allCommonPoints = getAllCommonPoints()
+            getAthleticsEvolution()
         }
         self.coreDataStack.saveContext()
     }
@@ -59,17 +60,31 @@ extension Game {
 
 extension Game {
     
+    // MARK: - Evolution
+    mutating func getAthleticsEvolution() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        for athletic in athletics {
+            if let value = athletic.getEvolution(for: today) {
+                let evolutionData = EvolutionData(context: coreDataStack.viewContext)
+                evolutionData.athletic = athletic
+                evolutionData.date = today
+                evolutionData.value = value
+            }
+        }
+    }
+    
     // MARK: - Add
     
     /// Add athletic to the game.
     /// - parameter name: Athletic's name to add.
     /// - parameter completionHandler: Code to execute when athletic has been added.
-    mutating func addAthletic(_ name: String) {
+    mutating func addAthletic(_ name: String, image data: Data?) {
         if athleticExists(name) {
             error = .existingAthletic
             return
         }
-        addNewAthletic(name)
+        addNewAthletic(name, image: data)
         coreDataStack.saveContext()
     }
     /// Check if an athletic exists in athletics.
@@ -85,9 +100,11 @@ extension Game {
     }
     /// Create an athletic.
     /// - parameter name: Athletic's name to create.
-    private mutating func addNewAthletic(_ name: String) {
+    private mutating func addNewAthletic(_ name: String, image data: Data?) {
         let athletic = Athletic(context: coreDataStack.viewContext)
         athletic.name = name
+        athletic.creationDate = Date()
+        athletic.image = data
         getNewPot(for: athletic)
         updateAthletics()
     }
@@ -106,7 +123,7 @@ extension Game {
     /// Delete performances in which the only athletic is an athletic to delete, without cancelling earned points.
     /// - parameter athletic: The athletic to be deleted.
     private mutating func deleteAthleticPerformances(_ athletic: Athletic) {
-        let performances: [Performance] = getArrayFromSet(athletic.performances)
+        let performances: [Performance] = athletic.performances
         for performance in performances {
             let athletics: [Athletic] = getArrayFromSet(performance.athletics)
             if athletics.count == 1 && athletics[0] == athletic {

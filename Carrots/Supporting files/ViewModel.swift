@@ -8,7 +8,5 @@
 import Foundation
 class ViewModel: ObservableObject {
     @Published var game = Game()
-    func addAthletic(_ name: String) {
-        game.addAthletic(name)
-    }
+
 }

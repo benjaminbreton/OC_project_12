@@ -68,33 +68,14 @@ class FakeAthletic: CustomStringConvertible {
     let pot: FakePot?
     var performances: [FakePerformance]
     let creationDate: Date?
-    let evolutionDatas: [EvolutionData]
+    let evolutionDatas: [EvolutionData] = []
     init(name: String, pot: FakePot, performances: [FakePerformance]) {
         self.name = name
         self.pot = pot
         self.performances = performances
         self.creationDate = Date() - 60 * 24 * 3600
-        var datas: [EvolutionData] = []
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        datas.append(EvolutionData(date: today - 31 * 24 * 3600, value: 1))
-        for index in 1...10 {
-            let value = Double.random(in: 0...2)
-            let date: Date = today - Double(11 - index) * 3 * 24 * 3600
-            datas.append(EvolutionData(date: date, value: value))
-        }
-        datas.append(EvolutionData(date: today, value: 1))
-        self.evolutionDatas = datas
         image = nil
         pot.owner = self
-    }
-}
-class EvolutionData {
-    let date: Date?
-    let value: Double
-    init(date: Date?, value: Double) {
-        self.date = date
-        self.value = value
     }
 }
 class FakePot {

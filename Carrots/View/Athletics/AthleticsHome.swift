@@ -29,16 +29,6 @@ struct AthleticsHome: View {
         .inNavigationHome(title: "athletics", buttonImage: "person.crop.circle.badge.plus", buttonDestination: AthleticSettings(athletic: nil, name: "", image: nil))
     }
 }
-
-struct AppList<T: View>: View {
-    let items: [T]
-    var body: some View {
-        ScrollView(.vertical) {
-            ForEach(items.indices) { index in
-                items[index]
-                    .inRectangle(.leading)
-            }
-        }
-        .lineSpacing(5)
-    }
+class AthleticGame: ObservableObject {
+    
 }
