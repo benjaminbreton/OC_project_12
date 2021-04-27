@@ -10,10 +10,18 @@ import CoreData
 public class Sport: NSManagedObject {
     /// Sport's unity type.
     var unityType: UnityType { unityInt16.sportUnityType }
+    override public var description: String { name ?? "No name" }
     func pointsToAdd(for value: Int64) -> Int64 {
         guard valueForOnePoint > 0 else { return 0 }
         let points = value / valueForOnePoint
         return points * valueForOnePoint > value ? points - 1 : points
+    }
+    func update(name: String?, icon: String?, unityType: Int?, valueForOnePoint: [String?]) {
+        guard let name = name, let icon = icon, let unityType = unityType else { return }
+        self.name = name
+        self.icon = icon
+        self.unityInt16 = Int16(unityType)
+        self.valueForOnePoint = self.unityType.value(for: valueForOnePoint)
     }
     /// Sport's unity type enumeration.
     enum UnityType: CustomStringConvertible {

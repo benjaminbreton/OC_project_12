@@ -235,13 +235,15 @@ extension Game {
     /// - parameter unityType: Sport's unity type.
     /// - parameter valueForOnePoint: Unity type's value to get one point.
     /// - parameter completionHandler: Code to execute when sport has been added.
-    mutating func addSport(_ name: String?, unityType: Sport.UnityType, valueForOnePoint: String?) {
-        guard let name = name, let valueForOnePoint = valueForOnePoint else { return }
+    mutating func addSport(_ name: String?, icon: String?, unityType: Int?, valueForOnePoint: [String?]) {
+        guard let name = name, let icon = icon, let unityType = unityType else { return }
         if sportExists(name) {
             error = .existingSport
             return
         }
-        addNewSport(name, unityType: unityType, valueForOnePoint: valueForOnePoint)
+        let sport = Sport(context: coreDataStack.viewContext)
+        sport.update(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
+        updateSport(for: sport, name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
         coreDataStack.saveContext()
     }
     /// Check if a sport exists in sports.
@@ -255,17 +257,12 @@ extension Game {
         }
         return false
     }
-    /// Create a sport.
-    /// - parameter name: Sport's name to create.
-    /// - parameter unityType: Sport's unity type.
-    /// - parameter valueForOnePoint: Unity type's value to get one point.
-    /// - parameter coreDataStack: Stack to use to create the athletic.
-    private mutating func addNewSport(_ name: String?, unityType: Sport.UnityType, valueForOnePoint: String?) {
-        guard let value = valueForOnePoint, let valueForOnePoint = Int64(value) else { return }
-        let sport = Sport(context: coreDataStack.viewContext)
-        sport.name = name
-        sport.unityInt16 = unityType.int16
-        sport.valueForOnePoint = valueForOnePoint
+
+    
+    // MARK: - Update sport
+    
+    mutating func updateSport(for sport: Sport, name: String?, icon: String?, unityType: Int?,  valueForOnePoint: [String?]) {
+        sport.update(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
         updateProperties()
     }
     

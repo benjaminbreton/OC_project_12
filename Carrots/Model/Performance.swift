@@ -7,31 +7,6 @@
 
 import Foundation
 import CoreData
-/*
- class FakePerformance {
-     let sport: FakeSport?
-     let value: Int64
-     let potAddings: Int
-     let addedToCommonPot: Bool
-     let athletics: [FakeAthletic]?
-     let date: Date? = Date()
-     var formattedDate: String {
-         let formatter = DateFormatter()
-         formatter.locale = Locale.current
-         formatter.dateStyle = .long
-         formatter.timeStyle = .medium
-         guard let date = date else { return "" }
-         return formatter.string(from: date)
-     }
-     init(sport: FakeSport, athletics: [FakeAthletic], value: Int64, addedToCommonPot: Bool) {
-         self.sport = sport
-         self.athletics = athletics
-         self.value = value
-         self.addedToCommonPot = addedToCommonPot
-         potAddings = Int(value) / Int(sport.valueForOnePoint)
-     }
- }
- */
 public class Performance: NSManagedObject {
     var athletics: [Athletic] {
         guard let athleticsSet = athleticsSet, let athletics = athleticsSet.allObjects as? [Athletic] else {

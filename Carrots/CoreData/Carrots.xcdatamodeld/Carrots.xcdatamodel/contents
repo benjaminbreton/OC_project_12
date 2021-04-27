@@ -32,6 +32,7 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
     </entity>
     <entity name="Sport" representedClassName=".Sport" syncable="YES" codeGenerationType="category">
+        <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unityInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="valueForOnePoint" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -42,6 +43,6 @@
         <element name="EvolutionData" positionX="-130.3831787109375" positionY="-507.9654235839844" width="128" height="88"/>
         <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="148"/>
         <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="134"/>
-        <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="103"/>
+        <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="118"/>
     </elements>
 </model>
