@@ -10,7 +10,7 @@ import CoreData
 public class Athletic: NSManagedObject {
     var allPoints: Double {
         if performances.count > 0 {
-            return performances.map({ $0.addedToCommonPot ? 0 : $0.potAddings }).reduce(0, +)
+            return Double(performances.map({ $0.addedToCommonPot ? 0 : $0.potAddings }).reduce(0, +))
         } else {
             return 0
         }
@@ -42,6 +42,19 @@ public class Athletic: NSManagedObject {
     private func getEvolutionValue(from start: Date, to end: Date) -> Double {
         let interval = DateInterval(start: start, end: end)
         return allPoints / interval.duration
+    }
+    func evolutionDatasToClean(for date: Date) -> [EvolutionData] {
+        let date = date - 30 * 24 * 3600
+        var evolutionDatas: [EvolutionData] = []
+        for evolutionData in evolutionDatas {
+            guard let evolutionDate = evolutionData.date else { return [] }
+            if evolutionDate <= date {
+                evolutionDatas.append(evolutionData)
+            }
+        }
+        guard evolutionDatas.count > 0 else { return evolutionDatas }
+        evolutionDatas.remove(at: evolutionDatas.count - 1)
+        return evolutionDatas
     }
     
 }

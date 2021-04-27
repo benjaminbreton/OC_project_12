@@ -61,6 +61,10 @@ extension Game {
 extension Game {
     
     // MARK: - Evolution
+    
+    /**
+     Every day, athletics can get evolution of their performances during the last 30 days. This method updates athletics evolution if necessary.
+     */
     mutating func getAthleticsEvolution() {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -70,6 +74,15 @@ extension Game {
                 evolutionData.athletic = athletic
                 evolutionData.date = today
                 evolutionData.value = value
+                deleteEvolutionDatas(athletic.evolutionDatasToClean(for: today))
+            }
+        }
+    }
+    
+    private func deleteEvolutionDatas(_ evolutionDatas: [EvolutionData]) {
+        if evolutionDatas.count > 0 {
+            for evolutionData in evolutionDatas {
+                coreDataStack.viewContext.delete(evolutionData)
             }
         }
     }
@@ -106,7 +119,7 @@ extension Game {
         athletic.creationDate = Date()
         athletic.image = data
         getNewPot(for: athletic)
-        updateAthletics()
+        updateProperties()
     }
     
     // MARK: - Delete
@@ -116,28 +129,24 @@ extension Game {
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
     mutating func deleteAthletic(_ athletic: Athletic) {
         deleteAthleticPerformances(athletic)
+        deleteEvolutionDatas(athletic.evolutionDatas)
         coreDataStack.viewContext.delete(athletic)
         coreDataStack.saveContext()
-        updateAthletics()
+        updateProperties()
     }
     /// Delete performances in which the only athletic is an athletic to delete, without cancelling earned points.
     /// - parameter athletic: The athletic to be deleted.
     private mutating func deleteAthleticPerformances(_ athletic: Athletic) {
         let performances: [Performance] = athletic.performances
         for performance in performances {
-            let athletics: [Athletic] = getArrayFromSet(performance.athletics)
+            let athletics: [Athletic] = performance.athletics
             if athletics.count == 1 && athletics[0] == athletic {
                 performPerformanceDeletion(performance, cancelPoints: false)
             }
         }
     }
     
-    // MARK: - Update
     
-    /// Update athletics array.
-    mutating private func updateAthletics() {
-        athletics = getEntitiesWithDescriptor(with: "name", ascending: true)
-    }
     
 }
 
@@ -193,10 +202,16 @@ extension Game {
     }
     private func getAllCommonPoints() -> Double {
         if performances.count > 0 {
-            return performances.map({ $0.addedToCommonPot ? $0.potAddings : 0 }).reduce(0, +)
+            return Double(performances.map({ $0.addedToCommonPot ? $0.potAddings : 0 }).reduce(0, +))
         } else {
             return 0
         }
+    }
+    /// Update athletics array.
+    mutating private func updateProperties() {
+        athletics = getEntitiesWithDescriptor(with: "name", ascending: true)
+        performances = getEntitiesWithDescriptor(with: "date", ascending: false)
+        sports = getEntitiesWithDescriptor(with: "name", ascending: true)
     }
 }
 
@@ -220,7 +235,8 @@ extension Game {
     /// - parameter unityType: Sport's unity type.
     /// - parameter valueForOnePoint: Unity type's value to get one point.
     /// - parameter completionHandler: Code to execute when sport has been added.
-    mutating func addSport(_ name: String, unityType: Sport.UnityType, valueForOnePoint: Double) {
+    mutating func addSport(_ name: String?, unityType: Sport.UnityType, valueForOnePoint: String?) {
+        guard let name = name, let valueForOnePoint = valueForOnePoint else { return }
         if sportExists(name) {
             error = .existingSport
             return
@@ -244,12 +260,13 @@ extension Game {
     /// - parameter unityType: Sport's unity type.
     /// - parameter valueForOnePoint: Unity type's value to get one point.
     /// - parameter coreDataStack: Stack to use to create the athletic.
-    private mutating func addNewSport(_ name: String, unityType: Sport.UnityType, valueForOnePoint: Double) {
+    private mutating func addNewSport(_ name: String?, unityType: Sport.UnityType, valueForOnePoint: String?) {
+        guard let value = valueForOnePoint, let valueForOnePoint = Int64(value) else { return }
         let sport = Sport(context: coreDataStack.viewContext)
         sport.name = name
         sport.unityInt16 = unityType.int16
         sport.valueForOnePoint = valueForOnePoint
-        updateSports()
+        updateProperties()
     }
     
     // MARK: - Delete
@@ -260,14 +277,7 @@ extension Game {
     mutating func deleteSport(_ sport: Sport) {
         coreDataStack.viewContext.delete(sport)
         coreDataStack.saveContext()
-        updateSports()
-    }
-    
-    // MARK: - Update
-    
-    /// Update sports array.
-    private mutating func updateSports() {
-        sports = getEntitiesWithDescriptor(with: "name", ascending: true)
+        updateProperties()
     }
 }
 
@@ -283,15 +293,15 @@ extension Game {
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter addToCommonPot: Boolean which indicates whether the points have to be added to the common pot or not.
     /// - parameter completionHandler: Actions to do once performance has been added.
-    mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [Double], addToCommonPot: Bool) {
+    mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
         guard athletics.count > 0 else {
             error = .performanceWithoutAthletic
             return
         }
         let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
-        addPointsToPot(with: performance)
+        performance.addPoints(to: addToCommonPot ? Array.init(repeating: commonPot, count: athletics.count) : athletics.map({ $0.pot }))
         coreDataStack.saveContext()
-        updatePerformances()
+        updateProperties()
     }
     /// Get new performance with choosen parameters.
     /// - parameter sport: Performance's sport.
@@ -299,30 +309,16 @@ extension Game {
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter coreDataStack: Coredatastack in which the performance has to be made.
     /// - returns: The created performance.
-    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [Double], addToCommonPot: Bool) -> Performance {
+    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) -> Performance {
         let performance = Performance(context: coreDataStack.viewContext)
         performance.sport = sport
-        performance.athletics = NSSet(array: athletics)
+        performance.athleticsSet = NSSet(array: athletics)
         performance.value = sport.unityType.value(for: value)
         performance.addedToCommonPot = addToCommonPot
         performance.date = Date()
-        performance.potAddings = sport.pointsToAdd(value: performance.value)
-        performance.initialAthleticsCount = Double(athletics.count)
+        performance.potAddings = sport.pointsToAdd(for: performance.value)
+        performance.initialAthleticsCount = Int16(athletics.count)
         return performance
-    }
-    /// Add points earned with a performance to pot depending on performance's parameters.
-    /// - parameter performance: Performance with which points have been earned.
-    private func addPointsToPot(with performance: Performance) {
-        let athletics: [Athletic] = getArrayFromSet(performance.athletics)
-        if performance.addedToCommonPot {
-            guard let commonPot = commonPot else { return }
-            commonPot.addPoints(performance.potAddings * performance.initialAthleticsCount)
-        } else {
-            for athletic in athletics {
-                guard let pot = athletic.pot else { return }
-                pot.addPoints(performance.potAddings)
-            }
-        }
     }
     
     // MARK: - Delete
@@ -336,31 +332,15 @@ extension Game {
     /// - parameter performance: Performance to delete.
     /// - parameter cancelPoints: Boolean which indicates whether the points earned by the performance have to be cancelled or not.
     private mutating func performPerformanceDeletion(_ performance: Performance, cancelPoints: Bool) {
-        if cancelPoints { cancelPotAddings(performance) }
+        if cancelPoints {
+            performance.cancelPoints(to:
+                                        performance.addedToCommonPot ?
+                                        Array(repeating: commonPot, count: Int(performance.initialAthleticsCount)) :
+                                        performance.athletics.map({ $0.pot }))
+        }
         coreDataStack.viewContext.delete(performance)
         coreDataStack.saveContext()
-        updatePerformances()
-    }
-    /// Cancel points added in pots by a performance.
-    /// - parameter performance: Performance which added points.
-    private func cancelPotAddings(_ performance: Performance) {
-        let athletics: [Athletic] = getArrayFromSet(performance.athletics)
-        if performance.addedToCommonPot {
-            guard let commonPot = commonPot else { return }
-            commonPot.addPoints(-performance.potAddings * performance.initialAthleticsCount)
-        } else {
-            for athletic in athletics {
-                guard let pot = athletic.pot else { return }
-                pot.addPoints(-performance.potAddings)
-            }
-        }
-    }
-    
-    // MARK: - Update
-    
-    /// Update performances array.
-    private mutating func updatePerformances() {
-        performances = getEntitiesWithDescriptor(with: "date", ascending: false)
+        updateProperties()
     }
 }
 

@@ -10,8 +10,9 @@ import CoreData
 public class Sport: NSManagedObject {
     /// Sport's unity type.
     var unityType: UnityType { unityInt16.sportUnityType }
-    func pointsToAdd(value: Double) -> Double {
-        let points = round(value / valueForOnePoint)
+    func pointsToAdd(for value: Int64) -> Int64 {
+        guard valueForOnePoint > 0 else { return 0 }
+        let points = value / valueForOnePoint
         return points * valueForOnePoint > value ? points - 1 : points
     }
     /// Sport's unity type enumeration.
@@ -60,12 +61,14 @@ public class Sport: NSManagedObject {
                 return ["count"]
             }
         }
-        func value(for value: [Double]) -> Double {
+        func value(for inputs: [String?]) -> Int64 {
+            guard inputs.count == 3 else { return 0 }
+            let values: [Int] = inputs.map({ Int($0 ?? "0") ?? 0 })
             switch self {
             case .time:
-                return value[0] * 3600 + value[1] * 60 + value[2]
+                return Int64(values[0] * 3600 + values[1] * 60 + values[2])
             default:
-                return value[0]
+                return Int64(values[0])
             }
         }
         func stringArray(for value: Int64) -> [String] {

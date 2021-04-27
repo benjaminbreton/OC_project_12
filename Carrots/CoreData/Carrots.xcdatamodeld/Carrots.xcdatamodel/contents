@@ -5,7 +5,7 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="evolutionDatasSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvolutionData" inverseName="athletic" inverseEntity="EvolutionData"/>
-        <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="athletics" inverseEntity="Performance"/>
+        <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="athleticsSet" inverseEntity="Performance"/>
         <relationship name="pot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pot" inverseName="owner" inverseEntity="Pot"/>
     </entity>
     <entity name="EvolutionData" representedClassName=".EvolutionData" syncable="YES" codeGenerationType="class">
@@ -13,13 +13,13 @@
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="athletic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="evolutionDatasSet" inverseEntity="Athletic"/>
     </entity>
-    <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="class">
+    <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="category">
         <attribute name="addedToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="initialAthleticsCount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="potAddings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="athletics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="performancesSet" inverseEntity="Athletic"/>
+        <attribute name="initialAthleticsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="potAddings" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="athleticsSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athletic" inverseName="performancesSet" inverseEntity="Athletic"/>
         <relationship name="sport" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sport" inverseName="performances" inverseEntity="Sport"/>
     </entity>
     <entity name="Pot" representedClassName=".Pot" syncable="YES" codeGenerationType="category">
@@ -34,7 +34,7 @@
     <entity name="Sport" representedClassName=".Sport" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unityInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="valueForOnePoint" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="valueForOnePoint" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="performances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Performance" inverseName="sport" inverseEntity="Performance"/>
     </entity>
     <elements>
