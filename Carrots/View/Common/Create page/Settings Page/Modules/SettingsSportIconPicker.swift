@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
-struct SportIconPicker: View {
+struct SettingsSportIconPicker: View {
     @Binding var icon: String
     var body: some View {
         VStack {
             Text("Icon")
                 .withTitleFont()
-            SportIconScrollView(icon: _icon)
+            SettingsSportIconScrollView(icon: _icon)
         }
     }
 }
-struct SportIconScrollView: View {
+fileprivate struct SettingsSportIconScrollView: View {
     @Binding var icon: String
     private var selection: Int {
         for index in characters.indices {

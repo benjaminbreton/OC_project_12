@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct SportValue: View {
+struct SettingsSportValue: View {
     let placeholder: String
     let unity: Sport.UnityType?
     @Binding var value: [String]

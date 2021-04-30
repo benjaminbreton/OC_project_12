@@ -12,8 +12,8 @@ struct AthleticSettings: View {
     @State var image: UIImage?
     var body: some View {
         VStack {
-            CustomTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
-            AthleticImagePicker(image: $image)
+            SettingsCustomTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
+            SettingsAthleticImagePicker(image: $image)
         }
         .inSettingsPage(name == "" ? "New athletic":"\(name) settings", confirmAction: {
             

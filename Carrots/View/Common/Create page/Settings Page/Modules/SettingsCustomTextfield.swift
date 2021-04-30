@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct CustomTextfield: View {
+struct SettingsCustomTextfield: View {
     let title: String
     let placeHolder: String
     @Binding var value: String

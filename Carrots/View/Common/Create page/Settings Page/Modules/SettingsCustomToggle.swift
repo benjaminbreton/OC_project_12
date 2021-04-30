@@ -1,12 +1,12 @@
 //
-//  CustomToggle.swift
+//  SettingsCustomToggle.swift
 //  Carrots
 //
 //  Created by Benjamin Breton on 19/04/2021.
 //
 
 import SwiftUI
-struct CustomToggle: View {
+struct SettingsCustomToggle: View {
     let title: String
     let question: String
     @Binding var isOn: Bool
@@ -20,7 +20,7 @@ struct CustomToggle: View {
         }
     }
 }
-struct CustomToggleWithExplications: View {
+struct SettingsCustomToggleWithExplications: View {
     let title: String
     let question: String
     @Binding var isOn: Bool

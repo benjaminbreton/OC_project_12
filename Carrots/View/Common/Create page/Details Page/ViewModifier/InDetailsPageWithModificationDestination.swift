@@ -6,7 +6,20 @@
 //
 
 import SwiftUI
-struct InDetailsPage<T: View>: ViewModifier {
+fileprivate struct InDetailsPageWithoutModificationDestination: ViewModifier {
+    let title: String
+    func body(content: Content) -> some View {
+        VStack {
+            Divider()
+            ScrollView(.vertical) {
+                content
+            }
+            Divider()
+        }
+        .inNavigationPageView(title: title)
+    }
+}
+fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifier {
     let genericTitle: String
     let specificTitle: String
     let destinationToModify: T
@@ -31,7 +44,10 @@ struct InDetailsPage<T: View>: ViewModifier {
 }
 extension View {
     func inDetailsPage<T: View>(genericTitle: String, specificTitle: String, destinationToModify: T) -> some View {
-        modifier(InDetailsPage(genericTitle: genericTitle, specificTitle: specificTitle, destinationToModify: destinationToModify))
+        modifier(InDetailsPageWithModificationDestination(genericTitle: genericTitle, specificTitle: specificTitle, destinationToModify: destinationToModify))
+    }
+    func inDetailsPage(genericTitle: String) -> some View {
+        modifier(InDetailsPageWithoutModificationDestination(title: genericTitle))
     }
 }
 

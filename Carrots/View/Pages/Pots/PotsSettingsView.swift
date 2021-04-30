@@ -52,7 +52,7 @@ struct AppSettings: View {
     var body: some View {
         VStack {
             CustomDatePicker(date: $date)
-            CustomTextfield(title: "Points for one euro", placeHolder: "Points", value: $points, keyboard: .numberPad)
+            SettingsCustomTextfield(title: "Points for one euro", placeHolder: "Points", value: $points, keyboard: .numberPad)
         }
         .inSettingsPage("app settings") {
             

@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 extension View {
     func withAppBackground() -> some View {
-        modifier(BackgroundView())
+        modifier(WithBackground())
     }
     func inCellRectangle() -> some View {
-        modifier(CellRectangle())
+        modifier(InCellRectangle())
     }
     func inRectangle(_ alignment: Alignment) -> some View {
         modifier(InRectangle(alignment: alignment))

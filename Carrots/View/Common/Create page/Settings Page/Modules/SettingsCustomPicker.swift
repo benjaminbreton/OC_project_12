@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-// MARK: - CustomPicker
+// MARK: - SettingsCustomPicker
 
 
-struct CustomPicker<T: CustomStringConvertible>: View {
+struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     
     // MARK: - Properties
     

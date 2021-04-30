@@ -14,10 +14,10 @@ struct SportSettings: View {
     let unities: [Sport.UnityType] = [.count, .distance, .time]
     var body: some View {
         VStack {
-            CustomTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
-            CustomPicker(title: "Unity", data: unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
-            SportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, value: $valueForOnePoint)
-            SportIconPicker(icon: $icon)
+            SettingsCustomTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
+            SettingsCustomPicker(title: "Unity", data: unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
+            SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, value: $valueForOnePoint)
+            SettingsSportIconPicker(icon: $icon)
         }
         .inSettingsPage(name == "" ? "new sport":"\(name) settings") {
             
