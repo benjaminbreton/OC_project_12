@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct InRectangle: ViewModifier {
+fileprivate struct InRectangle: ViewModifier {
     let alignment: Alignment
     func body(content: Content) -> some View {
         ZStack(alignment: alignment) {
@@ -17,5 +17,10 @@ struct InRectangle: ViewModifier {
                 .padding()
         }
         .padding()
+    }
+}
+extension View {
+    func inRectangle(_ alignment: Alignment) -> some View {
+        modifier(InRectangle(alignment: alignment))
     }
 }

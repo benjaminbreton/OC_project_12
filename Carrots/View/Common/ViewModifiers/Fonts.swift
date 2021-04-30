@@ -6,53 +6,82 @@
 //
 
 import SwiftUI
-struct BigTitleFont: ViewModifier {
+
+// MARK: - ViewModifiers
+
+fileprivate struct BigTitleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().titleFontName, size: ViewCommonSettings().bigTitleFontSize))
             .foregroundColor(.title)
     }
 }
-struct TitleFont: ViewModifier {
+fileprivate struct TitleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.title)
     }
 }
-struct SimpleFont: ViewModifier {
+fileprivate struct SimpleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize))
             .foregroundColor(.text)
     }
 }
-struct BigSimpleFont: ViewModifier {
+fileprivate struct BigSimpleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.text)
     }
 }
-struct LightSimpleFont: ViewModifier {
+fileprivate struct LightSimpleFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().lightFontSize))
             .foregroundColor(.textLight)
     }
 }
-struct LinkFont: ViewModifier {
+fileprivate struct LinkFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
             .foregroundColor(.link)
     }
 }
-struct SportIconFont: ViewModifier {
+fileprivate struct SportIconFont: ViewModifier {
     let lineCount: CGFloat
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().iconsFontName, size: ViewCommonSettings().regularFontSize * lineCount))
             .foregroundColor(.image)
+    }
+}
+
+// MARK: - View's extensions
+
+extension View {
+    func withTitleFont() -> some View {
+        modifier(TitleFont())
+    }
+    func withSimpleFont() -> some View {
+        modifier(SimpleFont())
+    }
+    func withLightSimpleFont() -> some View {
+        modifier(LightSimpleFont())
+    }
+    func withBigSimpleFont() -> some View {
+        modifier(BigSimpleFont())
+    }
+    func withLinkFont() -> some View {
+        modifier(LinkFont())
+    }
+    func withBigTitleFont() -> some View {
+        modifier(BigTitleFont())
+    }
+    func withSportIconFont(lineCount: CGFloat) -> some View {
+        modifier(SportIconFont(lineCount: lineCount))
     }
 }

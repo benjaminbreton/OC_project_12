@@ -43,6 +43,7 @@
 		034FC152262F13D20081ADB2 /* DetailsEvolutionGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FC151262F13D20081ADB2 /* DetailsEvolutionGraph.swift */; };
 		03648EA4263BE6D5004EE0AA /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03648EA3263BE6D5004EE0AA /* HomeTab.swift */; };
 		03648EA8263BE715004EE0AA /* Int+pagesProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03648EA7263BE715004EE0AA /* Int+pagesProperties.swift */; };
+		03648EB4263C01E8004EE0AA /* InNavigationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03648EB3263C01E8004EE0AA /* InNavigationHome.swift */; };
 		0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383212026088DEF003EE886 /* ApplicationErrors.swift */; };
 		0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383212526088E0C003EE886 /* Error+userDescription.swift */; };
 		0383212A260899F3003EE886 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03832129260899F3003EE886 /* Sport.swift */; };
@@ -63,7 +64,6 @@
 		03D038FC261D9488004B8C30 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D038FB261D9488004B8C30 /* LogoView.swift */; };
 		03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7B9260C7B1400DDA29F /* Athletic.swift */; };
 		03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */; };
-		03DD81EE261EFD700028A0A5 /* View+modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81ED261EFD700028A0A5 /* View+modifiers.swift */; };
 		03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */; };
 		03DD81F7261F000B0028A0A5 /* WithBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F6261F000B0028A0A5 /* WithBackground.swift */; };
 		03DD81FB261F00390028A0A5 /* InCellRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FA261F00390028A0A5 /* InCellRectangle.swift */; };
@@ -135,6 +135,7 @@
 		034FC151262F13D20081ADB2 /* DetailsEvolutionGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsEvolutionGraph.swift; sourceTree = "<group>"; };
 		03648EA3263BE6D5004EE0AA /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
 		03648EA7263BE715004EE0AA /* Int+pagesProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+pagesProperties.swift"; sourceTree = "<group>"; };
+		03648EB3263C01E8004EE0AA /* InNavigationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InNavigationHome.swift; sourceTree = "<group>"; };
 		0383212026088DEF003EE886 /* ApplicationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationErrors.swift; sourceTree = "<group>"; };
 		0383212526088E0C003EE886 /* Error+userDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+userDescription.swift"; sourceTree = "<group>"; };
 		03832129260899F3003EE886 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 		03D038FB261D9488004B8C30 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		03D3C7B9260C7B1400DDA29F /* Athletic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athletic.swift; sourceTree = "<group>"; };
 		03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Int16+enumConversion.swift"; path = "Carrots/Model/Int16+enumConversion.swift"; sourceTree = SOURCE_ROOT; };
-		03DD81ED261EFD700028A0A5 /* View+modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modifiers.swift"; sourceTree = "<group>"; };
 		03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCommonSettings.swift; sourceTree = "<group>"; };
 		03DD81F6261F000B0028A0A5 /* WithBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithBackground.swift; sourceTree = "<group>"; };
 		03DD81FA261F00390028A0A5 /* InCellRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InCellRectangle.swift; sourceTree = "<group>"; };
@@ -393,6 +393,7 @@
 			children = (
 				03DD8219261F01870028A0A5 /* WithNavigationLink.swift */,
 				03DD820B261F01190028A0A5 /* NavigationPageView.swift */,
+				03648EB3263C01E8004EE0AA /* InNavigationHome.swift */,
 				034FC13B262EC71A0081ADB2 /* NavigationBarButton.swift */,
 			);
 			path = Navigation;
@@ -410,7 +411,6 @@
 		0383212426088DFE003EE886 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				03DD81ED261EFD700028A0A5 /* View+modifiers.swift */,
 				0383212526088E0C003EE886 /* Error+userDescription.swift */,
 				03D3C7BD260C7B2B00DDA29F /* Int16+enumConversion.swift */,
 				03264BD126203D58003F6429 /* Color+appColors.swift */,
@@ -634,7 +634,6 @@
 				03B1DFA6262C8DDB00B590AC /* PerformanceSettings.swift in Sources */,
 				03264BD626203E3D003F6429 /* AthleticCell.swift in Sources */,
 				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
-				03DD81EE261EFD700028A0A5 /* View+modifiers.swift in Sources */,
 				03CE0749262D75260054BDC0 /* SettingsCustomToggle.swift in Sources */,
 				030DB54C261352320054D140 /* Settings.swift in Sources */,
 				03B1DF9C262C8D5D00B590AC /* InSettingsPage.swift in Sources */,
@@ -655,6 +654,7 @@
 				03DD8203261F00620028A0A5 /* Fonts.swift in Sources */,
 				033503382638227600E2BD99 /* Performance.swift in Sources */,
 				03264BDA26203E78003F6429 /* AthleticImage.swift in Sources */,
+				03648EB4263C01E8004EE0AA /* InNavigationHome.swift in Sources */,
 				03342BC8262B1088002FE0BE /* SettingsCustomPicker.swift in Sources */,
 				03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */,
 				03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */,

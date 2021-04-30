@@ -6,11 +6,22 @@
 //
 
 import SwiftUI
-struct CloseKeyboardOnTap: ViewModifier {
+
+// MARK: - ViewModifier
+
+fileprivate struct CloseKeyboardOnTap: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
+    }
+}
+
+// MARK: - View's extension
+
+extension View {
+    func closeKeyboardOnTap() -> some View {
+        modifier(CloseKeyboardOnTap())
     }
 }

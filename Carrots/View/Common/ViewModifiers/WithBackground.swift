@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct WithBackground: ViewModifier {
+fileprivate struct WithBackground: ViewModifier {
     func body(content: Content) -> some View {
         ZStack(alignment: .topLeading) {
             Rectangle()
@@ -14,5 +14,10 @@ struct WithBackground: ViewModifier {
                 .edgesIgnoringSafeArea(.all)
             content
         }
+    }
+}
+extension View {
+    func withAppBackground() -> some View {
+        modifier(WithBackground())
     }
 }

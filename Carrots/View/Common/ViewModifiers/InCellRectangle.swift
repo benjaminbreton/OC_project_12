@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct InCellRectangle: ViewModifier {
+fileprivate struct InCellRectangle: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: ViewCommonSettings().commonCornerRadius)
@@ -15,5 +15,10 @@ struct InCellRectangle: ViewModifier {
             content
         }
         .padding()
+    }
+}
+extension View {
+    func inCellRectangle() -> some View {
+        modifier(InCellRectangle())
     }
 }

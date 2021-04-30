@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
-struct WithNavigationLink<T: View>: ViewModifier {
+
+// MARK: - ViewModifier
+
+fileprivate struct WithNavigationLink<T: View>: ViewModifier {
     let destination: T
     func body(content: Content) -> some View {
         NavigationLink(
@@ -14,5 +17,13 @@ struct WithNavigationLink<T: View>: ViewModifier {
             label: {
                 content
             })
+    }
+}
+
+// MARK: - View's extension
+
+extension View {
+    func withNavigationLink<T: View>(destination: T) -> some View {
+        modifier(WithNavigationLink(destination: destination))
     }
 }
