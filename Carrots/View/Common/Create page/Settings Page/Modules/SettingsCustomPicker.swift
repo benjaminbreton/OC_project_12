@@ -42,13 +42,9 @@ struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     // MARK: - View
     
     var body: some View {
-        VStack {
-            Text(title)
-                .withTitleFont()
-            PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
-                .frame(height: ViewCommonSettings().textLineHeight * lineCount)
-                .inRectangle(.topLeading)    
-        }
+        PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
+            .frame(height: ViewCommonSettings().textLineHeight * lineCount)
+            .inSettingsModule(title)
     }
 }
 

@@ -9,11 +9,8 @@ import SwiftUI
 struct SettingsSportIconPicker: View {
     @Binding var icon: String
     var body: some View {
-        VStack {
-            Text("Icon")
-                .withTitleFont()
-            SettingsSportIconScrollView(icon: _icon)
-        }
+        SettingsSportIconScrollView(icon: _icon)
+            .inSettingsModule("Icon")
     }
 }
 fileprivate struct SettingsSportIconScrollView: View {

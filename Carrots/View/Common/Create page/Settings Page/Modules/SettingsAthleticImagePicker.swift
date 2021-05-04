@@ -11,11 +11,8 @@ import UIKit
 struct SettingsAthleticImagePicker: View {
     @Binding var image: UIImage?
     var body: some View {
-        VStack {
-            Text("Image")
-                .withTitleFont()
-            AthleticImageWithButtons(image: _image, radius: ViewCommonSettings().commonHeight * 8)
-        }
+        AthleticImageWithButtons(image: _image, radius: ViewCommonSettings().commonHeight * 8)
+            .inCenteredSettingsModule("Image")
     }
 }
 fileprivate struct AthleticImageWithButtons: View {

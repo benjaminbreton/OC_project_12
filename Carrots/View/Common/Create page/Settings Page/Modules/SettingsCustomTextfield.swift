@@ -12,15 +12,10 @@ struct SettingsCustomTextfield: View {
     @Binding var value: String
     let keyboard: UIKeyboardType
     var body: some View {
-        VStack {
-            Text(title)
-                .withTitleFont()
-            TextField(placeHolder, text: _value)
-                .withSimpleFont()
-                .frame(height: ViewCommonSettings().textLineHeight)
-                .keyboardType(keyboard)
-                .inRectangle(.center)
-        }
+        TextField(placeHolder, text: _value)
+            .frame(height: ViewCommonSettings().textLineHeight)
+            .keyboardType(keyboard)
+            .inSettingsModule(title)
     }
 }
 

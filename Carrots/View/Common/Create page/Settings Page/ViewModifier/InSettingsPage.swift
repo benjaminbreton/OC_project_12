@@ -29,6 +29,7 @@ fileprivate struct InSettingsPage: ViewModifier {
     func body(content: Content) -> some View {
         VStack(alignment: .center) {
             Divider()
+            CommonHeightSpacer()
             ScrollView(.vertical) {
                 content
             }

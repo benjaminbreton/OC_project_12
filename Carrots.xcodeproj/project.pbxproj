@@ -59,6 +59,7 @@
 		03C564A326302FFC0056756A /* DetailsAthleticPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C564A226302FFC0056756A /* DetailsAthleticPicture.swift */; };
 		03C564A72630301C0056756A /* DetailsDateDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C564A62630301C0056756A /* DetailsDateDisplayer.swift */; };
 		03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */; };
+		03CAE4672641259400C9309D /* InSettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE4662641259400C9309D /* InSettingsModule.swift */; };
 		03CE0749262D75260054BDC0 /* SettingsCustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */; };
 		03CE074D262D75C10054BDC0 /* UIFont+appFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE074C262D75C10054BDC0 /* UIFont+appFonts.swift */; };
 		03D038FC261D9488004B8C30 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D038FB261D9488004B8C30 /* LogoView.swift */; };
@@ -151,6 +152,7 @@
 		03C564A226302FFC0056756A /* DetailsAthleticPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAthleticPicture.swift; sourceTree = "<group>"; };
 		03C564A62630301C0056756A /* DetailsDateDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDateDisplayer.swift; sourceTree = "<group>"; };
 		03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeViewModelToBuildViews.swift; sourceTree = "<group>"; };
+		03CAE4662641259400C9309D /* InSettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSettingsModule.swift; sourceTree = "<group>"; };
 		03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCustomToggle.swift; sourceTree = "<group>"; };
 		03CE074C262D75C10054BDC0 /* UIFont+appFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appFonts.swift"; sourceTree = "<group>"; };
 		03D038FB261D9488004B8C30 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				03B1DF9B262C8D5D00B590AC /* InSettingsPage.swift */,
+				03CAE4662641259400C9309D /* InSettingsModule.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				03648EB4263C01E8004EE0AA /* InNavigationHome.swift in Sources */,
 				03342BC8262B1088002FE0BE /* SettingsCustomPicker.swift in Sources */,
 				03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */,
+				03CAE4672641259400C9309D /* InSettingsModule.swift in Sources */,
 				03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */,
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				03C5649F26302FD20056756A /* AthleticDetails.swift in Sources */,

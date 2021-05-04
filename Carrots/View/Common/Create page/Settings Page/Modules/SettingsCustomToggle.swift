@@ -11,13 +11,8 @@ struct SettingsCustomToggle: View {
     let question: String
     @Binding var isOn: Bool
     var body: some View {
-        VStack {
-            Text(title)
-                .withTitleFont()
-            Toggle(question, isOn: _isOn)
-                .withSimpleFont()
-                .inRectangle(.center)
-        }
+        Toggle(question, isOn: _isOn)
+            .inSettingsModule(title)
     }
 }
 struct SettingsCustomToggleWithExplications: View {
@@ -29,16 +24,11 @@ struct SettingsCustomToggleWithExplications: View {
     let textLines: CGFloat
     var body: some View {
         VStack {
-            Text(title)
-                .withTitleFont()
-            VStack {
-                Toggle(question, isOn: _isOn)
-                Text(isOn ? explicationsIsOn : explicationsIsOff)
-                    .frame(height: ViewCommonSettings().textLineHeight * textLines)
-                    .foregroundColor(.textLight)
-            }
-            .withSimpleFont()
-            .inRectangle(.center)
+            Toggle(question, isOn: _isOn)
+            Text(isOn ? explicationsIsOn : explicationsIsOff)
+                .frame(height: ViewCommonSettings().textLineHeight * textLines)
+                .withLightSimpleFont()
         }
+        .inSettingsModule(title)
     }
 }
