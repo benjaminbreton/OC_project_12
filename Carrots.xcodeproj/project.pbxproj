@@ -52,7 +52,7 @@
 		03B1DFA6262C8DDB00B590AC /* PerformanceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1DFA5262C8DDB00B590AC /* PerformanceSettings.swift */; };
 		03B1DFAA262C8DF700B590AC /* CommonSpacers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1DFA9262C8DF700B590AC /* CommonSpacers.swift */; };
 		03B1DFB0262C8EE500B590AC /* CloseKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1DFAF262C8EE500B590AC /* CloseKeyboardOnTap.swift */; };
-		03B1DFB4262C933300B590AC /* SettingsCustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1DFB3262C933300B590AC /* SettingsCustomTextfield.swift */; };
+		03B1DFB4262C933300B590AC /* SettingsTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1DFB3262C933300B590AC /* SettingsTextfield.swift */; };
 		03BBF2622625CE3600D41B8B /* PerformancesHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BBF2612625CE3600D41B8B /* PerformancesHome.swift */; };
 		03BBF2662625CFDC00D41B8B /* PerformanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BBF2652625CFDC00D41B8B /* PerformanceCell.swift */; };
 		03C5649F26302FD20056756A /* AthleticDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C5649E26302FD20056756A /* AthleticDetails.swift */; };
@@ -60,6 +60,8 @@
 		03C564A72630301C0056756A /* DetailsDateDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C564A62630301C0056756A /* DetailsDateDisplayer.swift */; };
 		03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */; };
 		03CAE4672641259400C9309D /* InModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE4662641259400C9309D /* InModule.swift */; };
+		03CAE4702641303600C9309D /* SettingsSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE46F2641303600C9309D /* SettingsSegmentedPicker.swift */; };
+		03CAE474264133F400C9309D /* SettingsDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE473264133F400C9309D /* SettingsDatePicker.swift */; };
 		03CE0749262D75260054BDC0 /* SettingsCustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */; };
 		03CE074D262D75C10054BDC0 /* UIFont+appFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE074C262D75C10054BDC0 /* UIFont+appFonts.swift */; };
 		03D038FC261D9488004B8C30 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D038FB261D9488004B8C30 /* LogoView.swift */; };
@@ -145,7 +147,7 @@
 		03B1DFA5262C8DDB00B590AC /* PerformanceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSettings.swift; sourceTree = "<group>"; };
 		03B1DFA9262C8DF700B590AC /* CommonSpacers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSpacers.swift; sourceTree = "<group>"; };
 		03B1DFAF262C8EE500B590AC /* CloseKeyboardOnTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseKeyboardOnTap.swift; sourceTree = "<group>"; };
-		03B1DFB3262C933300B590AC /* SettingsCustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCustomTextfield.swift; sourceTree = "<group>"; };
+		03B1DFB3262C933300B590AC /* SettingsTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextfield.swift; sourceTree = "<group>"; };
 		03BBF2612625CE3600D41B8B /* PerformancesHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesHome.swift; sourceTree = "<group>"; };
 		03BBF2652625CFDC00D41B8B /* PerformanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceCell.swift; sourceTree = "<group>"; };
 		03C5649E26302FD20056756A /* AthleticDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticDetails.swift; sourceTree = "<group>"; };
@@ -153,6 +155,8 @@
 		03C564A62630301C0056756A /* DetailsDateDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDateDisplayer.swift; sourceTree = "<group>"; };
 		03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeViewModelToBuildViews.swift; sourceTree = "<group>"; };
 		03CAE4662641259400C9309D /* InModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InModule.swift; sourceTree = "<group>"; };
+		03CAE46F2641303600C9309D /* SettingsSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSegmentedPicker.swift; sourceTree = "<group>"; };
+		03CAE473264133F400C9309D /* SettingsDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDatePicker.swift; sourceTree = "<group>"; };
 		03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCustomToggle.swift; sourceTree = "<group>"; };
 		03CE074C262D75C10054BDC0 /* UIFont+appFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appFonts.swift"; sourceTree = "<group>"; };
 		03D038FB261D9488004B8C30 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
@@ -219,10 +223,12 @@
 			children = (
 				03342BC7262B1088002FE0BE /* SettingsCustomPicker.swift */,
 				03B1DFA0262C8DA000B590AC /* SettingsSportValue.swift */,
-				03B1DFB3262C933300B590AC /* SettingsCustomTextfield.swift */,
+				03B1DFB3262C933300B590AC /* SettingsTextfield.swift */,
 				03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */,
 				034C01C6262DBCD5000663AA /* SettingsAthleticImagePicker.swift */,
 				034C01CA262DBD93000663AA /* SettingsSportIconPicker.swift */,
+				03CAE46F2641303600C9309D /* SettingsSegmentedPicker.swift */,
+				03CAE473264133F400C9309D /* SettingsDatePicker.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -660,7 +666,7 @@
 				034C01C7262DBCD5000663AA /* SettingsAthleticImagePicker.swift in Sources */,
 				030DB55026135EFE0054D140 /* ViewModel.swift in Sources */,
 				034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */,
-				03B1DFB4262C933300B590AC /* SettingsCustomTextfield.swift in Sources */,
+				03B1DFB4262C933300B590AC /* SettingsTextfield.swift in Sources */,
 				0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */,
 				03DD8203261F00620028A0A5 /* Fonts.swift in Sources */,
 				033503382638227600E2BD99 /* Performance.swift in Sources */,
@@ -673,7 +679,9 @@
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				03C5649F26302FD20056756A /* AthleticDetails.swift in Sources */,
 				03264BDE26203EB5003F6429 /* AthleticSettings.swift in Sources */,
+				03CAE474264133F400C9309D /* SettingsDatePicker.swift in Sources */,
 				03C564A326302FFC0056756A /* DetailsAthleticPicture.swift in Sources */,
+				03CAE4702641303600C9309D /* SettingsSegmentedPicker.swift in Sources */,
 				03264BD226203D58003F6429 /* Color+appColors.swift in Sources */,
 				03BBF2662625CFDC00D41B8B /* PerformanceCell.swift in Sources */,
 				03648EA4263BE6D5004EE0AA /* HomeTab.swift in Sources */,

@@ -78,7 +78,13 @@ class FakeAthletic: CustomStringConvertible {
         pot.owner = self
     }
 }
-class FakePot {
+class FakePot: CustomStringConvertible {
+    var description: String {
+        guard let name = owner?.name else {
+            return "Common pot"
+        }
+        return "\(name)'s pot"
+    }
     let amount: Double
     var formattedAmount: String {
         let formatter = NumberFormatter()

@@ -44,6 +44,6 @@ struct PotsHome: View {
             }
             Divider()
         }
-        .inNavigationHome(title: "pots", buttonImage: "gear", buttonDestination: PotsSettingsView(viewModel: viewModel, newDate: Date()))
+        .inNavigationHome(title: "pots", buttonImage: "gear", buttonDestination: PotsSettingsView(viewModel: viewModel, date: Date(), pointsForOneEuro: ""))
     }
 }

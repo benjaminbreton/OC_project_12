@@ -8,76 +8,44 @@
 import SwiftUI
 struct PotsSettingsView: View {
     let viewModel: FakeViewModel
-    @State var newDate: Date
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State var date: Date
+    @State var pointsForOneEuro: String
     
     var body: some View {
         VStack() {
-            Divider()
-            Text("""
+            SettingsDatePicker(title: "Prevision date", date: $date, range: .afterToday, explanations: """
                                 The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
                                 
                                 You can set this date here.
                                 """)
-                .withSimpleFont()
-                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                .layoutPriority(1)
-            Divider()
-            DatePicker(selection: $newDate, in: Date()..., displayedComponents: .date) {
-                Text("Select a date").withSimpleFont()
-            }
-            ConfirmButton {
-                print(newDate)
-                viewModel.changePredictedAmountDate(with: newDate)
-                print(viewModel.predictedAmountDate)
-                self.mode.wrappedValue.dismiss()
-            }
+            SettingsTextfield(title: "Points for one euro", placeHolder: "Points", value: $pointsForOneEuro, keyboard: .numberPad, explanations: """
+In this application, athletics can earn points by doing some sports performances.
+Points can be converted in euros in each pot.
+Set here the necessary number of points to earn one euro.
+""")
+            /*
+             Divider()
+             Text("""
+             The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
+             
+             You can set this date here.
+             """)
+             .withSimpleFont()
+             .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+             .layoutPriority(1)
+             Divider()
+             DatePicker(selection: $date, in: Date()..., displayedComponents: .date) {
+             Text("Select a date").withSimpleFont()
+             }
+             ConfirmButton {
+             
+             }
+             */
         }
-        .inNavigationPageView(title: "Date settings")
-        
-        
-    }
-}
-struct PotSettingsCell: View {
-    var body: some View {
-        VStack {
+        .inSettingsPage("general settings") {
             
         }
-    }
-}
-
-struct AppSettings: View {
-    @State var date: Date
-    @State var points: String
-    var body: some View {
-        VStack {
-            CustomDatePicker(date: $date)
-            SettingsCustomTextfield(title: "Points for one euro", placeHolder: "Points", value: $points, keyboard: .numberPad)
-        }
-        .inSettingsPage("app settings") {
-            
-        }
-    }
-}
-struct CustomDatePicker: View {
-    @Binding var date: Date
-    var body: some View {
-        VStack {
-            Text("Date settings")
-                .withTitleFont()
-            VStack {
-                Text("""
-                                    The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
-                                    
-                                    You can set this date here.
-                                    """)
-                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                DatePicker(selection: _date, in: Date()..., displayedComponents: .date) {
-                    Text("Select a date")
-                }
-            }
-            .withSimpleFont()
-            .inRectangle(.center)
-        }
+        
+        
     }
 }

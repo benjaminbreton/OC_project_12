@@ -14,7 +14,7 @@ struct SportSettings: View {
     let unities: [Sport.UnityType] = [.count, .distance, .time]
     var body: some View {
         VStack {
-            SettingsCustomTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
+            SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
             SettingsCustomPicker(title: "Unity", data: unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
             SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, value: $valueForOnePoint)
             SettingsSportIconPicker(icon: $icon)

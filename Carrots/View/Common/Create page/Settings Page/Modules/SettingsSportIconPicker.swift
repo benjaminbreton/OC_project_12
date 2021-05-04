@@ -6,14 +6,29 @@
 //
 
 import SwiftUI
+
+// MARK: - Displayed module
+
 struct SettingsSportIconPicker: View {
+    
+    // MARK: - Selected icon
+    
     @Binding var icon: String
+    
+    // MARK: - Body
+    
     var body: some View {
         SettingsSportIconScrollView(icon: _icon)
             .inModule("Icon")
     }
 }
+
+// MARK: - Icon scroll view
+
 fileprivate struct SettingsSportIconScrollView: View {
+    
+    // MARK: - Properties
+    
     @Binding var icon: String
     private var selection: Int {
         for index in characters.indices {
@@ -24,6 +39,9 @@ fileprivate struct SettingsSportIconScrollView: View {
         return 0
     }
     let characters: [String] = ViewCommonSettings().sportsIconsCharacters
+    
+    // MARK: - Body
+    
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
