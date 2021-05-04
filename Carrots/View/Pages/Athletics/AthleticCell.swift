@@ -24,5 +24,6 @@ struct AthleticCell: View {
         }
         .withNavigationLink(destination: AthleticDetails(athletic: athletic))
         .frame(height: ViewCommonSettings().commonHeight * 4)
+        .inRectangle(.leading)
     }
 }

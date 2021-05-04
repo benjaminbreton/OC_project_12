@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 public class Pot: NSManagedObject {
+    public override var description: String {
+        guard let name = owner?.name else { return "Common pot" }
+        return name
+    }
     var formattedAmount: String {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current

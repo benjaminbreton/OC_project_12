@@ -23,23 +23,28 @@ struct PerformancesHome: View {
         }
     }
     var body: some View {
-        VStack {
-            Divider()
-            if viewModel.performances.count > 0 {
-                    ListBase(items: viewModel.performances.map({
-                        PerformanceCell(performance: $0)
-                    }))
-            } else {
-                Text("""
+        AppList(viewModel.performances, placeHolder: """
             No performances have been added.
 
             To add a performance \(instructions)
             """)
-                    .withSimpleFont()
-                    .inRectangle(.topLeading)
-            }
-            Divider()
-        }
+//        VStack {
+//            Divider()
+//            if viewModel.performances.count > 0 {
+//                    ListBase(items: viewModel.performances.map({
+//                        PerformanceCell(performance: $0)
+//                    }))
+//            } else {
+//                Text("""
+//            No performances have been added.
+//
+//            To add a performance \(instructions)
+//            """)
+//                    .withSimpleFont()
+//                    .inRectangle(.topLeading)
+//            }
+//            Divider()
+//        }
         .inNavigationHome(title: "performances", buttonImage: "gauge.badge.plus", buttonDestination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
     }
 }

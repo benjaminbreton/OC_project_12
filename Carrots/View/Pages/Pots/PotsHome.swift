@@ -11,39 +11,18 @@ struct PotsHome: View {
     let viewModel: FakeViewModel
     
     var body: some View {
-        let athleticsPots = viewModel.athletics.map({$0.pot})
-        return VStack {
-            Divider()
-            ScrollView(.vertical) {
-                VStack {
-                    CommonHeightSpacer()
-                    NavigationPotCell(pot: viewModel.commonPot)
-                        .frame(width: .none, height: ViewCommonSettings().commonPotLineHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    Divider().padding()
-                    Text("Athletics pots")
-                        .withBigTitleFont()
-                    if athleticsPots.count > 0 {
-                        ScrollView(.vertical) {
-                            ForEach(athleticsPots.indices) { index in
-                                NavigationPotCell(pot: athleticsPots[index] )
-                            }
-                        }
-                    } else {
-                        Text("""
+        let athleticsPots = viewModel.athletics.map({ $0.pot ?? FakePot(amount: 0, evolutionType: 0) })
+        return AppList(athleticsPots,
+                       placeHolder: """
                             No athletics have been added.
 
                             To add an athletic :
                             - select Athletics tab below ;
                             - select the + button on the top of the screen ;
                             - add new athletic's informations and confirm.
-                            """)
-                            .withSimpleFont()
-                            .inRectangle(.topLeading)
-                    }
-                }
-            }
-            Divider()
-        }
+                            """,
+                       commonPot: viewModel.commonPot,
+                       title: "Athletics pots")
         .inNavigationHome(title: "pots", buttonImage: "gear", buttonDestination: PotsSettingsView(viewModel: viewModel, date: Date(), pointsForOneEuro: ""))
     }
 }

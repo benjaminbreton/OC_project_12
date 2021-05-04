@@ -41,5 +41,6 @@ struct PerformanceCell: View {
             }
             .frame(height: rowHeight)
         }
+        .inRectangle(.leading)
     }
 }

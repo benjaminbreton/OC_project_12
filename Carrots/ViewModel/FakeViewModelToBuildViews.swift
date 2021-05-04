@@ -41,9 +41,9 @@ class FakeViewModel {
         sports.append(sport1)
         sports.append(sport2)
         sports.append(sport3)
-        let performance1 = FakePerformance(sport: sport1, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: true)
-        let performance2 = FakePerformance(sport: sport2, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false)
-        let performance3 = FakePerformance(sport: sport3, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false)
+        let performance1 = FakePerformance(sport: sport1, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: true, number: 1)
+        let performance2 = FakePerformance(sport: sport2, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false, number: 2)
+        let performance3 = FakePerformance(sport: sport3, athletics: athletics, value: Int64.random(in: 1000...10000), addedToCommonPot: false, number: 3)
         let performances = [performance3, performance2, performance1]
         for athletic in athletics {
             athletic.performances = performances
@@ -119,13 +119,14 @@ class FakeSport: CustomStringConvertible {
         self.valueForOnePoint = valueForOnePoint
     }
 }
-class FakePerformance {
+class FakePerformance: CustomStringConvertible {
+    var description: String { formattedDate }
     let sport: FakeSport?
     let value: Int64
     let potAddings: Int
     let addedToCommonPot: Bool
     let athletics: [FakeAthletic]?
-    let date: Date? = Date()
+    let date: Date?
     var formattedDate: String {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
@@ -134,11 +135,12 @@ class FakePerformance {
         guard let date = date else { return "" }
         return formatter.string(from: date)
     }
-    init(sport: FakeSport, athletics: [FakeAthletic], value: Int64, addedToCommonPot: Bool) {
+    init(sport: FakeSport, athletics: [FakeAthletic], value: Int64, addedToCommonPot: Bool, number: Double) {
         self.sport = sport
         self.athletics = athletics
         self.value = value
         self.addedToCommonPot = addedToCommonPot
+        self.date = Date() + number
         potAddings = Int(value) / Int(sport.valueForOnePoint)
     }
 }

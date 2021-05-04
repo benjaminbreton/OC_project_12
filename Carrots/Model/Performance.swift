@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 public class Performance: NSManagedObject {
+    public override var description: String { "\(formattedDate) performance" }
     var athletics: [Athletic] {
         guard let athleticsSet = athleticsSet, let athletics = athleticsSet.allObjects as? [Athletic] else {
             return []

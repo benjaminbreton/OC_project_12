@@ -25,7 +25,7 @@
 		032AFA0F261756ED00D61E28 /* PotsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA0E261756ED00D61E28 /* PotsHome.swift */; };
 		032AFA2426175D0600D61E28 /* akaPosse.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2326175D0600D61E28 /* akaPosse.ttf */; };
 		032AFA2E26175DA900D61E28 /* kirsty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 032AFA2D26175DA900D61E28 /* kirsty.otf */; };
-		032AFA342617648800D61E28 /* ListBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA332617648800D61E28 /* ListBase.swift */; };
+		032AFA342617648800D61E28 /* AppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032AFA332617648800D61E28 /* AppList.swift */; };
 		03342BC8262B1088002FE0BE /* SettingsCustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03342BC7262B1088002FE0BE /* SettingsCustomPicker.swift */; };
 		033503382638227600E2BD99 /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033503372638227600E2BD99 /* Performance.swift */; };
 		0335034726384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335034626384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift */; };
@@ -116,7 +116,7 @@
 		032AFA0E261756ED00D61E28 /* PotsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsHome.swift; sourceTree = "<group>"; };
 		032AFA2326175D0600D61E28 /* akaPosse.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = akaPosse.ttf; sourceTree = "<group>"; };
 		032AFA2D26175DA900D61E28 /* kirsty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kirsty.otf; sourceTree = "<group>"; };
-		032AFA332617648800D61E28 /* ListBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBase.swift; sourceTree = "<group>"; };
+		032AFA332617648800D61E28 /* AppList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppList.swift; sourceTree = "<group>"; };
 		03342BC7262B1088002FE0BE /* SettingsCustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCustomPicker.swift; sourceTree = "<group>"; };
 		033503372638227600E2BD99 /* Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performance.swift; sourceTree = "<group>"; };
 		0335034626384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPerformancesDisplayer.swift; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 		03DD8209261F00C60028A0A5 /* Supporting views */ = {
 			isa = PBXGroup;
 			children = (
-				032AFA332617648800D61E28 /* ListBase.swift */,
+				032AFA332617648800D61E28 /* AppList.swift */,
 				03D038FB261D9488004B8C30 /* LogoView.swift */,
 				03264BE326205333003F6429 /* ConfirmButton.swift */,
 				03B1DFA9262C8DF700B590AC /* CommonSpacers.swift */,
@@ -644,7 +644,7 @@
 				03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */,
 				03C72ACB2619BF2300E5A318 /* FakeViewModelToBuildViews.swift in Sources */,
 				03264BF326208E23003F6429 /* SportCell.swift in Sources */,
-				032AFA342617648800D61E28 /* ListBase.swift in Sources */,
+				032AFA342617648800D61E28 /* AppList.swift in Sources */,
 				03DD81F7261F000B0028A0A5 /* WithBackground.swift in Sources */,
 				030585E326395A03002015A7 /* DetailsText.swift in Sources */,
 				034AB62526010E5B0034C1E2 /* AppDelegate.swift in Sources */,

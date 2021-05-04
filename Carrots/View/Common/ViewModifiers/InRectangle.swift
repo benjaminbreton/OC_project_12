@@ -16,7 +16,7 @@ fileprivate struct InRectangle: ViewModifier {
             content
                 .padding()
         }
-        .padding()
+        .padding(ViewCommonSettings().commonHeight / 2)
     }
 }
 extension View {

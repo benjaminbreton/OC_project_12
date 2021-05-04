@@ -19,9 +19,12 @@ struct DetailsPerformancesDisplayer: View {
             }
             .inModule("Performances")
             if performances.count > 0 {
-                ListBase(items: performances.map({ PerformanceCell(performance: $0)}))
-                    .frame(height: ViewCommonSettings().textLineHeight * 2 * (CGFloat(performances.count + 1)))
-                    .inModule()
+                AppList(performances, placeHolder: "No performances.")
+                    .frame(height: ViewCommonSettings().textLineHeight * 3 * (CGFloat(performances.count + 1)))
+
+//                ListBase(items: performances.map({ PerformanceCell(performance: $0)}))
+//                    .frame(height: ViewCommonSettings().textLineHeight * 2 * (CGFloat(performances.count + 1)))
+//                    .inModule()
             }
         }
     }
