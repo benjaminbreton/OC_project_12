@@ -118,7 +118,6 @@ extension Game {
         athletic.creationDate = Date()
         getNewPot(for: athletic)
         updateAthletic(athletic, name: name, image: image)
-        updateProperties()
     }
     
     // MARK: - Update
@@ -218,6 +217,7 @@ extension Game {
         athletics = getEntitiesWithDescriptor(with: "name", ascending: true)
         performances = getEntitiesWithDescriptor(with: "date", ascending: false)
         sports = getEntitiesWithDescriptor(with: "name", ascending: true)
+        coreDataStack.saveContext()
     }
 }
 
