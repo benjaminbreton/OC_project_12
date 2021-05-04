@@ -31,39 +31,33 @@ struct DetailsEvolutionGraph: View {
     // MARK: - Body
     
     var body: some View {
-        VStack {
-            // title
-            Text(title)
-                .withTitleFont()
-            // graphic's frame
-            ZStack {
-                if datas.count < 2 {
-                    // no graphic can be displayed
-                    VStack {
-                        Text("No evolution can be displayed the first day.")
-                            .withLightSimpleFont()
-                    }
-                } else {
-                    // graphic
-                    VStack {
-                        // description
-                        Text("\(description)\nmin.: \(values.min) - max.: \(values.max)")
-                            .withLightSimpleFont()
-                        // graphic itself
-                        EvolutionGraph(datas: datas)
-                            .stroke(lineWidth: ViewCommonSettings().shapeLine)
-                            .fill(LinearGradient(gradient: Gradient(colors: [.graphFirst, .graphSecond]), startPoint: .leading, endPoint: .trailing))
-                    }
+        ZStack {
+            if datas.count < 2 {
+                // no graphic can be displayed
+                VStack {
+                    Text("No evolution can be displayed the first day.")
+                        .withLightSimpleFont()
                 }
-                // frame's rectangle
-                Rectangle()
-                    .stroke(lineWidth: ViewCommonSettings().shapeLine)
-                    .foregroundColor(.graphFirst)
-                
+            } else {
+                // graphic
+                VStack {
+                    // description
+                    Text("\(description)\nmin.: \(values.min) - max.: \(values.max)")
+                        .withLightSimpleFont()
+                    // graphic itself
+                    EvolutionGraph(datas: datas)
+                        .stroke(lineWidth: ViewCommonSettings().shapeLine)
+                        .fill(LinearGradient(gradient: Gradient(colors: [.graphFirst, .graphSecond]), startPoint: .leading, endPoint: .trailing))
+                }
             }
-            .frame(height: height)
-            .padding()
+            // frame's rectangle
+            Rectangle()
+                .stroke(lineWidth: ViewCommonSettings().shapeLine)
+                .foregroundColor(.graphFirst)
+            
         }
+        .frame(height: height)
+        .inModule(title)
     }
 }
 

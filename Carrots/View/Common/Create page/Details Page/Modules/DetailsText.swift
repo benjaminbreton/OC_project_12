@@ -14,15 +14,12 @@ struct DetailsText: View {
     }
     var body: some View {
         VStack {
-            Text(title)
-                .withTitleFont()
             ForEach(keys.indices) { index in
                 HStack {
                     Text(keys[index])
                     Text(texts[keys[index]] ?? "")
                 }
-                .withSimpleFont()
-                .inRectangle(.leading)
+                .inModule(index == 0 ? title : nil)
             }
         }
     }

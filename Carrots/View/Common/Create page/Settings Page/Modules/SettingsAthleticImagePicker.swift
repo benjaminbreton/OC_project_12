@@ -12,7 +12,7 @@ struct SettingsAthleticImagePicker: View {
     @Binding var image: UIImage?
     var body: some View {
         AthleticImageWithButtons(image: _image, radius: ViewCommonSettings().commonHeight * 8)
-            .inCenteredSettingsModule("Image")
+            .inCenteredModule("Image")
     }
 }
 fileprivate struct AthleticImageWithButtons: View {

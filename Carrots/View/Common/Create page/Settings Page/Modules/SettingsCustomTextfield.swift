@@ -15,7 +15,7 @@ struct SettingsCustomTextfield: View {
         TextField(placeHolder, text: _value)
             .frame(height: ViewCommonSettings().textLineHeight)
             .keyboardType(keyboard)
-            .inSettingsModule(title)
+            .inModule(title)
     }
 }
 

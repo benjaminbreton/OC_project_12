@@ -10,7 +10,7 @@ struct SettingsSportIconPicker: View {
     @Binding var icon: String
     var body: some View {
         SettingsSportIconScrollView(icon: _icon)
-            .inSettingsModule("Icon")
+            .inModule("Icon")
     }
 }
 fileprivate struct SettingsSportIconScrollView: View {

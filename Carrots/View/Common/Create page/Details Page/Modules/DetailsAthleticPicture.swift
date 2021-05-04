@@ -14,6 +14,7 @@ struct DetailsAthleticPicture: View {
         VStack {
             CommonHeightSpacer()
             AthleticImage(image: image, radius: radius, rotation: $rotation)
+                .inCenteredModule()
             CommonHeightSpacer(5)
         }
     }

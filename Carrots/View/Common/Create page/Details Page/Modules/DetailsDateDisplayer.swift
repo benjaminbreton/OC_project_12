@@ -18,12 +18,7 @@ struct DetailsDateDisplayer: View {
         return formatter.string(from: date)
     }
     var body: some View {
-        VStack {
-            Text(title)
-                .withTitleFont()
-            Text(formattedCreationDate)
-                .withSimpleFont()
-                .inRectangle(.center)
-        }
+        Text(formattedCreationDate)
+            .inModule(title)
     }
 }

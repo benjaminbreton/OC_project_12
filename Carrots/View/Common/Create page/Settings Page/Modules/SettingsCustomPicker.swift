@@ -44,7 +44,7 @@ struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     var body: some View {
         PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
             .frame(height: ViewCommonSettings().textLineHeight * lineCount)
-            .inSettingsModule(title)
+            .inModule(title)
     }
 }
 

@@ -33,7 +33,7 @@ struct SettingsSportValue: View {
         }
         .frame(height: ViewCommonSettings().textLineHeight)
         .keyboardType(.numberPad)
-        .inSettingsModule("Value")
+        .inModule("Value")
     }
 }
 
