@@ -6,20 +6,24 @@
 //
 
 import SwiftUI
-struct AppList<T: CustomStringConvertible>: View {
+import CoreData
+struct FutureAppList<T: NSManagedObject>: View {
     let items: [T]
     let placeHolder: String
     let title: String?
-    let commonPot: FakePot?
-    init(_ items: [T], placeHolder: String, commonPot: FakePot? = nil, title: String? = nil) {
+    let commonPot: Pot?
+    let withDivider: Bool
+    @EnvironmentObject var gameDoor: GameDoor
+    init(_ items: [T], placeHolder: String, commonPot: Pot? = nil, title: String? = nil, withDivider: Bool = true) {
         self.items = items
         self.placeHolder = placeHolder
         self.commonPot = commonPot
         self.title = title
+        self.withDivider = withDivider
     }
     var body: some View {
         VStack {
-            Divider()
+            if withDivider { Divider() }
             ScrollView {
                 if let commonPot = commonPot {
                     PotCell(pot: commonPot)
@@ -29,30 +33,33 @@ struct AppList<T: CustomStringConvertible>: View {
                     Text(title)
                         .withTitleFont()
                 }
-                SimpleList(items: items, placeHolder: placeHolder)
+                FutureSimpleList(items: items, placeHolder: placeHolder)
+                    .environmentObject(gameDoor)
             }
-            Divider()
+            if withDivider { Divider() }
         }
     }
 }
-fileprivate struct SimpleList<T: CustomStringConvertible>: View {
+fileprivate struct FutureSimpleList<T: NSManagedObject>: View {
     let items: [T]
     let placeHolder: String
+    @EnvironmentObject var gameDoor: GameDoor
     var body: some View {
         Group {
             if items.count > 0 {
                 ForEach(items, id: \.description) { item in
-                    if let pot = item as? FakePot {
-                        PotCell(pot: pot)
-                            .withNavigationLink(destination: PotAddings(pot: pot))
-                    } else if let athletic = item as? FakeAthletic {
+                    if let athletic = item as? Athletic {
                         AthleticCell(athletic: athletic)
-                            .withNavigationLink(destination: AthleticDetails(athletic: athletic))
-                    } else if let sport = item as? FakeSport {
+                            .environmentObject(gameDoor)
+                    } else if let pot = item as? Pot {
+                        PotCell(pot: pot)
+                            .environmentObject(gameDoor)
+                    } else if let sport = item as? Sport {
                         SportCell(sport: sport)
-                            .withNavigationLink(destination: SportDetails(sport: sport))
-                    } else if let performance = item as? FakePerformance {
+                            .environmentObject(gameDoor)
+                    } else if let performance = item as? Performance {
                         PerformanceCell(performance: performance)
+                            .environmentObject(gameDoor)
                     }
                 }
             } else {

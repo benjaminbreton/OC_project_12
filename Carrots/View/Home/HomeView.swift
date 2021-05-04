@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
-    //@ObservedObject var viewModel: ViewModel = ViewModel()
-    var viewModel = FakeViewModel.create()
     @State private var selection = 0
+    @ObservedObject var gameDoor: GameDoor
     
+    init(_ coreDataStack: CoreDataStack) {
+        gameDoor = GameDoor(coreDataStack)
+    }
     var body: some View {
         setTabAppearance()
         setNavigationAppearance()
         setUITableViewAppearance()
-        return HomeTab(viewModel: viewModel, selection: $selection)
+        return HomeTab(selection: $selection)
+            .environmentObject(gameDoor)
     }
     private func setTabAppearance() {
         UITabBar.appearance().backgroundImage = UIImage()
@@ -33,9 +36,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(CoreDataStack())
             .previewDevice("iPhone 12")
-        HomeView()
+        HomeView(CoreDataStack())
             .previewDevice("iPhone SE (1st generation)")
     }
 }

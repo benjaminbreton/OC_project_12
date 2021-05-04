@@ -7,7 +7,8 @@
 
 import SwiftUI
 struct SportCell: View {
-    let sport: FakeSport
+    @EnvironmentObject var gameDoor: GameDoor
+    let sport: Sport
     let lineCount: CGFloat = 2
     var rowHeight: CGFloat {
         ViewCommonSettings().textLineHeight * lineCount
@@ -38,7 +39,10 @@ struct SportCell: View {
             }
             .frame(height: rowHeight)
         }
-        .withNavigationLink(destination: SportDetails(sport: sport))
+        .withNavigationLink(destination:
+                                SportDetails(sport: sport)
+                                .environmentObject(gameDoor)
+        )
         .inRectangle(.leading)
     }
 }

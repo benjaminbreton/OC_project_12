@@ -7,12 +7,12 @@
 
 import SwiftUI
 struct PerformanceSettings: View {
-    let sportsArray: [FakeSport]
-    let athleticsArray: [FakeAthletic]
-    @State var selectedAthletics: [FakeAthletic] = []
-    @State var selectedSport: [FakeSport] = []
+    @EnvironmentObject var gameDoor: GameDoor
+    var sportsArray: [Sport] { gameDoor.sports }
+    var athleticsArray: [Athletic] { gameDoor.athletics }
+    @State var selectedAthletics: [Athletic] = []
+    @State var selectedSport: [Sport] = []
     @State var value: [String] = ["0", "0", "0"]
-    @State var valueEssai: String = ""
     @State var addToCommonPot: Bool = true
     var body: some View {
         VStack {
@@ -22,7 +22,8 @@ struct PerformanceSettings: View {
             SettingsCustomToggleWithExplications(title: "Pot", question: "Add to common pot ? ", isOn: $addToCommonPot, explicationsIsOn: "Points will be added to common pot", explicationsIsOff: "Points will be added to athletics pots", textLines: 2)
         }
         .inSettingsPage("new performance", confirmAction: {
-            
+            guard selectedAthletics.count > 0, selectedSport.count == 1 else { return }
+            gameDoor.addPerformance(sport: selectedSport[0], athletics: selectedAthletics, value: value, addToCommonPot: addToCommonPot)
         })
     }
 

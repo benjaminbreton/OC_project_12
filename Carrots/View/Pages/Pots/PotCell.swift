@@ -7,8 +7,8 @@
 
 import SwiftUI
 struct PotCell: View {
-    //let pot: Pot?
-    let pot: FakePot?
+    @EnvironmentObject var gameDoor: GameDoor
+    let pot: Pot?
     var name: String {
         if let athletic = pot?.owner {
             return athletic.name ?? ""
@@ -28,16 +28,9 @@ struct PotCell: View {
             
             Divider()
             HStack {
-                GeometryReader { geometry in
-                    Image(systemName: pot?.formattedEvolutionType.image.name ?? "arrow.forward.square")
-                        .resizable()
-                        //                    .scaledToFit()
-                        .layoutPriority(0.5)
-                        .frame(width: geometry.size.height, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(pot?.formattedEvolutionType.image.colorInt16.potEvolutionColor)
-                }
-                
-                
+                Image(systemName: pot?.formattedEvolutionType.image.name ?? "arrow.forward.square")
+                    .foregroundColor(pot?.formattedEvolutionType.image.colorInt16.potEvolutionColor)
+                    .withTitleFont()
                 Text("expected: \(pot?.formattedAmount ?? "")")
                     .withSimpleFont()
                     .scaledToFill()
@@ -47,5 +40,9 @@ struct PotCell: View {
         }
         .padding()
         .inCellRectangle()
+        .withNavigationLink(
+            destination: PotAddings(pot: pot)
+                .environmentObject(gameDoor)
+        )
     }
 }

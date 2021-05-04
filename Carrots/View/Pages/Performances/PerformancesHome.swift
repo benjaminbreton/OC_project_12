@@ -7,11 +7,11 @@
 
 import SwiftUI
 struct PerformancesHome: View {
-    let viewModel: FakeViewModel
+    @EnvironmentObject var gameDoor: GameDoor
     var instructions: String {
-        if viewModel.athletics.count > 0 {
+        if gameDoor.athletics.count > 0 {
             return " you have to add at least one athletic. Select Athletics on the tab bar below and follow instructions to add athletics"
-        } else if viewModel.sports.count > 0 {
+        } else if gameDoor.sports.count > 0 {
             return " you have to add at least one sport. Select Sports on the tab bar below and follow instructions to add sports."
         } else {
             return """
@@ -23,7 +23,7 @@ struct PerformancesHome: View {
         }
     }
     var body: some View {
-        AppList(viewModel.performances, placeHolder: """
+        FutureAppList(gameDoor.performances, placeHolder: """
             No performances have been added.
 
             To add a performance \(instructions)
@@ -45,6 +45,11 @@ struct PerformancesHome: View {
 //            }
 //            Divider()
 //        }
-        .inNavigationHome(title: "performances", buttonImage: "gauge.badge.plus", buttonDestination: PerformanceSettings(sportsArray: viewModel.sports, athleticsArray: viewModel.athletics))
+        .inNavigationHome(
+            title: "performances",
+            buttonImage: "gauge.badge.plus",
+            buttonDestination: PerformanceSettings()
+                .environmentObject(gameDoor)
+        )
     }
 }

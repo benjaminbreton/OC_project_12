@@ -7,7 +7,8 @@
 
 import SwiftUI
 struct PotAddings: View {
-    let pot: FakePot?
+    @EnvironmentObject var gameDoor: GameDoor
+    let pot: Pot?
     @State var selection: Int = 0
     @State var amount: String = ""
     var placeHolder: String {

@@ -7,6 +7,8 @@
 
 import SwiftUI
 struct SportSettings: View {
+    @EnvironmentObject var gameDoor: GameDoor
+    let sport: Sport?
     @State var name: String
     @State var icon: String
     @State var unity: [Sport.UnityType] = []
@@ -20,7 +22,12 @@ struct SportSettings: View {
             SettingsSportIconPicker(icon: $icon)
         }
         .inSettingsPage(name == "" ? "new sport":"\(name) settings") {
-            
+            guard unity.count == 1 else { return }
+            if let sport = sport {
+                gameDoor.update(sport, name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)
+            } else {
+                gameDoor.addSport(name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)
+            }
         }
     }
 }

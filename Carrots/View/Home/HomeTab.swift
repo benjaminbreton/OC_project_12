@@ -7,36 +7,39 @@
 
 import SwiftUI
 struct HomeTab: View {
-    let viewModel: FakeViewModel
     @Binding var selection: Int
-    
+    @EnvironmentObject var gameDoor: GameDoor
     var body: some View {
         TabView {
-            PotsHome(viewModel: viewModel)
+            PotsHome()
                 .tabItem {
                     Image(systemName: "creditcard.circle.fill")
                     Text("pots")
                 }
                 .tag(0)
-            AthleticsHome(viewModel: viewModel)
+                .environmentObject(gameDoor)
+            AthleticsHome()
                 .tabItem {
                     Image(systemName: "figure.walk.circle.fill")
                     Text("athletics")
                 }
                 .tag(1)
+                .environmentObject(gameDoor)
             
-            SportsHome(viewModel: viewModel)
+            SportsHome()
                 .tabItem {
                     Image(systemName: "bicycle.circle.fill")
                     Text("sports")
                 }
                 .tag(2)
-            PerformancesHome(viewModel: viewModel)
+                .environmentObject(gameDoor)
+            PerformancesHome()
                 .tabItem {
                     Image(systemName: "arrow.up.right.circle.fill")
                     Text("performances")
                 }
                 .tag(3)
+                .environmentObject(gameDoor)
         }
         .accentColor(.tab)
     }

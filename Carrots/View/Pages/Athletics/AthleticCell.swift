@@ -7,12 +7,22 @@
 
 import SwiftUI
 struct AthleticCell: View {
-    let athletic: FakeAthletic
+    
+    // MARK: - Properties
+    
+    /// Viewmodel.
+    @EnvironmentObject var gameDoor: GameDoor
+    /// Choosen athletic.
+    let athletic: Athletic
+    /// Choosen athletic's image.
     private var image: UIImage? {
         guard let data = athletic.image else { return nil }
         return UIImage(data: data)
     }
     @State var rotation: Double = 0
+    
+    // MARK: - Body
+    
     var body: some View {
         ZStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -22,7 +32,10 @@ struct AthleticCell: View {
                     .withBigSimpleFont()
             }
         }
-        .withNavigationLink(destination: AthleticDetails(athletic: athletic))
+        .withNavigationLink(
+            destination: AthleticDetails(athletic: athletic)
+                .environmentObject(gameDoor)
+        )
         .frame(height: ViewCommonSettings().commonHeight * 4)
         .inRectangle(.leading)
     }

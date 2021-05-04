@@ -7,7 +7,8 @@
 
 import SwiftUI
 struct PerformanceCell: View {
-    let performance: FakePerformance
+    @EnvironmentObject var gameDoor: GameDoor
+    let performance: Performance
     private var lineCount: CGFloat {
         2
     }
@@ -15,8 +16,7 @@ struct PerformanceCell: View {
         ViewCommonSettings().textLineHeight * lineCount
     }
     private var athleticsNames: String {
-        guard let athletics = performance.athletics else { return "" }
-        let athleticsNames = athletics.map({ "\($0.name ?? "No name")" }).joined(separator: ", ")
+        let athleticsNames = performance.athletics.map({ "\($0.name ?? "No name")" }).joined(separator: ", ")
         return "Athletics: \(athleticsNames)"
     }
     private var formattedValue: String {

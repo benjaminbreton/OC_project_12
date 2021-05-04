@@ -16,11 +16,11 @@ public class Sport: NSManagedObject {
         let points = value / valueForOnePoint
         return points * valueForOnePoint > value ? points - 1 : points
     }
-    func update(name: String?, icon: String?, unityType: Int?, valueForOnePoint: [String?]) {
+    func update(name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
         guard let name = name, let icon = icon, let unityType = unityType else { return }
         self.name = name
         self.icon = icon
-        self.unityInt16 = Int16(unityType)
+        self.unityInt16 = unityType
         self.valueForOnePoint = self.unityType.value(for: valueForOnePoint)
     }
     /// Sport's unity type enumeration.

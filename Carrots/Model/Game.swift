@@ -122,7 +122,9 @@ extension Game {
     
     // MARK: - Update
     
-    mutating func updateAthletic(_ athletic: Athletic, name: String?, image: Data?) {
+    mutating func updateAthletic(_ athletic: Athletic, name: String, image: Data?) {
+        let existingName = athletic.name == name ? false : athleticExists(name)
+        guard !existingName else { return }
         athletic.update(name: name, image: image)
         updateProperties()
     }
@@ -194,7 +196,7 @@ extension Game {
     }
     private func getEntitiesWithDescriptor<Entity: NSManagedObject>(with descriptor: String, ascending: Bool) -> [Entity] {
         guard let request = Entity.fetchRequest() as? NSFetchRequest<Entity> else { return [] }
-        request.sortDescriptors = [NSSortDescriptor(key: descriptor, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: descriptor, ascending: ascending)]
         guard let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
         return result
     }
@@ -241,7 +243,7 @@ extension Game {
     /// - parameter unityType: Sport's unity type.
     /// - parameter valueForOnePoint: Unity type's value to get one point.
     /// - parameter completionHandler: Code to execute when sport has been added.
-    mutating func addSport(_ name: String?, icon: String?, unityType: Int?, valueForOnePoint: [String?]) {
+    mutating func addSport(_ name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
         guard let name = name, let icon = icon, let unityType = unityType else { return }
         if sportExists(name) {
             error = .existingSport
@@ -249,8 +251,7 @@ extension Game {
         }
         let sport = Sport(context: coreDataStack.viewContext)
         sport.update(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
-        updateSport(for: sport, name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
-        coreDataStack.saveContext()
+        updateProperties()
     }
     /// Check if a sport exists in sports.
     /// - parameter name: Sport's name to check.
@@ -267,7 +268,9 @@ extension Game {
     
     // MARK: - Update sport
     
-    mutating func updateSport(for sport: Sport, name: String?, icon: String?, unityType: Int?,  valueForOnePoint: [String?]) {
+    mutating func updateSport(for sport: Sport, name: String, icon: String?, unityType: Int16?,  valueForOnePoint: [String?]) {
+        let existingName = sport.name == name ? false : sportExists(name)
+        guard !existingName else { return }
         sport.update(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
         updateProperties()
     }

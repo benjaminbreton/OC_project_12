@@ -62,6 +62,7 @@
 		03CAE4672641259400C9309D /* InModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE4662641259400C9309D /* InModule.swift */; };
 		03CAE4702641303600C9309D /* SettingsSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE46F2641303600C9309D /* SettingsSegmentedPicker.swift */; };
 		03CAE474264133F400C9309D /* SettingsDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE473264133F400C9309D /* SettingsDatePicker.swift */; };
+		03CAE49126417F4F00C9309D /* GameDoor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CAE49026417F4F00C9309D /* GameDoor.swift */; };
 		03CE0749262D75260054BDC0 /* SettingsCustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */; };
 		03CE074D262D75C10054BDC0 /* UIFont+appFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE074C262D75C10054BDC0 /* UIFont+appFonts.swift */; };
 		03D038FC261D9488004B8C30 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D038FB261D9488004B8C30 /* LogoView.swift */; };
@@ -76,7 +77,6 @@
 		03DD8212261F013C0028A0A5 /* PotsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */; };
 		03DD8216261F01620028A0A5 /* PotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8215261F01620028A0A5 /* PotCell.swift */; };
 		03DD821A261F01870028A0A5 /* WithNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8219261F01870028A0A5 /* WithNavigationLink.swift */; };
-		03DD821E261F01AA0028A0A5 /* NavigationPotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD821D261F01AA0028A0A5 /* NavigationPotCell.swift */; };
 		03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8221261F01D60028A0A5 /* PotAddings.swift */; };
 		03DD8226261F0A540028A0A5 /* InButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8225261F0A540028A0A5 /* InButton.swift */; };
 		03DD822B261F23960028A0A5 /* AthleticsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD822A261F23960028A0A5 /* AthleticsHome.swift */; };
@@ -157,6 +157,7 @@
 		03CAE4662641259400C9309D /* InModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InModule.swift; sourceTree = "<group>"; };
 		03CAE46F2641303600C9309D /* SettingsSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSegmentedPicker.swift; sourceTree = "<group>"; };
 		03CAE473264133F400C9309D /* SettingsDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDatePicker.swift; sourceTree = "<group>"; };
+		03CAE49026417F4F00C9309D /* GameDoor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDoor.swift; sourceTree = "<group>"; };
 		03CE0748262D75260054BDC0 /* SettingsCustomToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCustomToggle.swift; sourceTree = "<group>"; };
 		03CE074C262D75C10054BDC0 /* UIFont+appFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appFonts.swift"; sourceTree = "<group>"; };
 		03D038FB261D9488004B8C30 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
@@ -171,7 +172,6 @@
 		03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsSettingsView.swift; sourceTree = "<group>"; };
 		03DD8215261F01620028A0A5 /* PotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotCell.swift; sourceTree = "<group>"; };
 		03DD8219261F01870028A0A5 /* WithNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithNavigationLink.swift; sourceTree = "<group>"; };
-		03DD821D261F01AA0028A0A5 /* NavigationPotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPotCell.swift; sourceTree = "<group>"; };
 		03DD8221261F01D60028A0A5 /* PotAddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotAddings.swift; sourceTree = "<group>"; };
 		03DD8225261F0A540028A0A5 /* InButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InButton.swift; sourceTree = "<group>"; };
 		03DD822A261F23960028A0A5 /* AthleticsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsHome.swift; sourceTree = "<group>"; };
@@ -290,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				03C72ACA2619BF2300E5A318 /* FakeViewModelToBuildViews.swift */,
+				03CAE49026417F4F00C9309D /* GameDoor.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -474,7 +475,6 @@
 			children = (
 				032AFA0E261756ED00D61E28 /* PotsHome.swift */,
 				03DD8221261F01D60028A0A5 /* PotAddings.swift */,
-				03DD821D261F01AA0028A0A5 /* NavigationPotCell.swift */,
 				03DD8215261F01620028A0A5 /* PotCell.swift */,
 				03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */,
 			);
@@ -667,6 +667,7 @@
 				030DB55026135EFE0054D140 /* ViewModel.swift in Sources */,
 				034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */,
 				03B1DFB4262C933300B590AC /* SettingsTextfield.swift in Sources */,
+				03CAE49126417F4F00C9309D /* GameDoor.swift in Sources */,
 				0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */,
 				03DD8203261F00620028A0A5 /* Fonts.swift in Sources */,
 				033503382638227600E2BD99 /* Performance.swift in Sources */,
@@ -707,7 +708,6 @@
 				0335034726384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift in Sources */,
 				03DD8216261F01620028A0A5 /* PotCell.swift in Sources */,
 				034FC152262F13D20081ADB2 /* DetailsEvolutionGraph.swift in Sources */,
-				03DD821E261F01AA0028A0A5 /* NavigationPotCell.swift in Sources */,
 				03DD821A261F01870028A0A5 /* WithNavigationLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

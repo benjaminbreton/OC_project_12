@@ -7,33 +7,26 @@
 
 import SwiftUI
 struct AthleticsHome: View {
-    let viewModel: FakeViewModel
+    
+    // MARK: - Properties
+    
+    /// View model.
+    @EnvironmentObject var gameDoor: GameDoor
+    
+    // MARK: - Body
+    
     var body: some View {
-        AppList(viewModel.athletics, placeHolder: """
+        FutureAppList(gameDoor.athletics, placeHolder: """
                     No athletics have been added.
 
                     To add an athletic, press the + button on the top of the screen, and set athletic's informations.
                     """)
-//        VStack {
-//            Divider()
-//            if viewModel.athletics.count > 0 {
-//                ListBase(items: viewModel.athletics.map({
-//                    AthleticCell(athletic: $0)
-//                }))
-//            } else {
-//                Text("""
-//                    No athletics have been added.
-//
-//                    To add an athletic, press the + button on the top of the screen, and set athletic's informations.
-//                    """)
-//                    .withSimpleFont()
-//                    .inRectangle(.topLeading)
-//            }
-//            Divider()
-//        }
-        .inNavigationHome(title: "athletics", buttonImage: "person.crop.circle.badge.plus", buttonDestination: AthleticSettings(athletic: nil, name: "", image: nil))
+            .environmentObject(gameDoor)
+            .inNavigationHome(
+                title: "athletics",
+                buttonImage: "person.crop.circle.badge.plus",
+                buttonDestination: AthleticSettings(athletic: nil, name: "", image: nil)
+                    .environmentObject(gameDoor)
+            )
     }
-}
-class AthleticGame: ObservableObject {
-    
 }

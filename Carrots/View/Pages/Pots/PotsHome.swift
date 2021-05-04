@@ -7,12 +7,10 @@
 
 import SwiftUI
 struct PotsHome: View {
-    //let viewModel: ViewModel
-    let viewModel: FakeViewModel
-    
+    @EnvironmentObject var gameDoor: GameDoor
     var body: some View {
-        let athleticsPots = viewModel.athletics.map({ $0.pot ?? FakePot(amount: 0, evolutionType: 0) })
-        return AppList(athleticsPots,
+        let athleticsPots = gameDoor.athletics.map({ $0.pot ?? Pot() })
+        return FutureAppList(athleticsPots,
                        placeHolder: """
                             No athletics have been added.
 
@@ -21,8 +19,14 @@ struct PotsHome: View {
                             - select the + button on the top of the screen ;
                             - add new athletic's informations and confirm.
                             """,
-                       commonPot: viewModel.commonPot,
+                       commonPot: gameDoor.commonPot,
                        title: "Athletics pots")
-        .inNavigationHome(title: "pots", buttonImage: "gear", buttonDestination: PotsSettingsView(viewModel: viewModel, date: Date(), pointsForOneEuro: ""))
+            .environmentObject(gameDoor)
+        .inNavigationHome(
+            title: "pots",
+            buttonImage: "gear",
+            buttonDestination: PotsSettingsView(date: Date(), pointsForOneEuro: "")
+                .environmentObject(gameDoor)
+        )
     }
 }

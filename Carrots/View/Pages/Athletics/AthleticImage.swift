@@ -7,9 +7,15 @@
 
 import SwiftUI
 struct AthleticImage: View {
+    
+    // MARK: - Properties
+    
     let image: UIImage?
     let radius: CGFloat
     @Binding var rotation: Double
+    
+    // MARK: - Body
+    
     var body: some View {
         ZStack(alignment: .center) {
             Circle()

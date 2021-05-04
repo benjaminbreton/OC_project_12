@@ -7,7 +7,8 @@
 
 import SwiftUI
 struct SportDetails: View {
-    let sport: FakeSport
+    @EnvironmentObject var gameDoor: GameDoor
+    let sport: Sport
     var body: some View {
         VStack {
             CommonHeightSpacer()
@@ -15,8 +16,12 @@ struct SportDetails: View {
             CommonHeightSpacer(5)
             DetailsText(title: "Unity", texts: ["name: ": sport.unityInt16.sportUnityType.description, "value for one point :": ""])
         }
-        .inDetailsPage(genericTitle: "sport details", specificTitle: sport.name ?? "No name", destinationToModify: SportSettings(name: sport.name ?? "No name", icon: sport.icon ?? ""))
-        //.inDetailsPage(title: sport.name ?? "No name", destinationToModify: SportSettings(name: sport.name ?? "No name", icon: sport.icon ?? ""))
+        .inDetailsPage(
+            genericTitle: "sport details",
+            specificTitle: sport.name ?? "No name",
+            destinationToModify: SportSettings(sport: sport, name: sport.name ?? "No name", icon: sport.icon ?? "")
+                .environmentObject(gameDoor)
+        )
     }
 }
 

@@ -8,18 +8,17 @@
 import Foundation
 import SwiftUI
 struct DetailsPerformancesDisplayer: View {
-    let performances: [FakePerformance]
+    let performances: [Performance]
     var count: Int { performances.count }
     var body: some View {
         VStack {
             HStack {
                 Text("Count : ")
                 Text("\(count)")
-                    .inRectangle(.leading)
             }
             .inModule("Performances")
             if performances.count > 0 {
-                AppList(performances, placeHolder: "No performances.")
+                FutureAppList(performances, placeHolder: "No performances.", withDivider: false)
                     .frame(height: ViewCommonSettings().textLineHeight * 3 * (CGFloat(performances.count + 1)))
 
 //                ListBase(items: performances.map({ PerformanceCell(performance: $0)}))

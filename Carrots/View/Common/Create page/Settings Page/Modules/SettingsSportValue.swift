@@ -8,7 +8,11 @@
 import SwiftUI
 struct SettingsSportValue: View {
     let placeholder: String
-    let unity: Sport.UnityType?
+    var unity: Sport.UnityType? {
+        didSet {
+            value = ["", "", ""]
+        }
+    }
     @Binding var value: [String]
     var body: some View {
         ZStack {
