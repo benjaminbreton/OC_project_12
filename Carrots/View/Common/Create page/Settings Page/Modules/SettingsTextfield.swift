@@ -12,20 +12,16 @@ struct SettingsTextfield: View {
     @Binding var value: String
     let keyboard: UIKeyboardType
     let explanations: String?
-    let wrongCount: Int?
-    let wrongExplanations: String?
     var isWrong: Binding<Bool>?
     @ObservedObject var textFieldValue: TextFieldValue
-    
-    init(title: String, placeHolder: String, value: Binding<String>, keyboard: UIKeyboardType, explanations: String? = nil, isWrong: Binding<Bool>? = nil, wrongCount: Int? = nil, wrongExplanations: String? = nil) {
+    @State var wrongExplanations: String?
+    init(title: String, placeHolder: String, value: Binding<String>, keyboard: UIKeyboardType, explanations: String? = nil, isWrong: Binding<Bool>? = nil, limits: TextFieldValue.Limits = nil, limitsExplanations: TextFieldValue.LimitsExplanations = nil) {
         self.title = title
         self.placeHolder = placeHolder
         self._value = value
         self.keyboard = keyboard
         self.explanations = explanations
-        self.wrongExplanations = wrongExplanations
-        self.wrongCount = wrongCount
-        self.textFieldValue = TextFieldValue(value.wrappedValue)
+        self.textFieldValue = TextFieldValue(value.wrappedValue, limits: limits, limitsExplanations: limitsExplanations)
         self.isWrong = isWrong
         
     }
@@ -36,12 +32,9 @@ struct SettingsTextfield: View {
                 .keyboardType(keyboard)
                 .onReceive(textFieldValue.$text) { newValue in
                     value = newValue
-                    if let count = wrongCount {
-                        if newValue.count >= count {
-                            isWrong?.wrappedValue = true
-                        } else {
-                            isWrong?.wrappedValue = false
-                        }
+                    if let explanations = textFieldValue.control() {
+                        wrongExplanations = explanations
+                        isWrong?.wrappedValue = true
                     } else {
                         isWrong?.wrappedValue = false
                     }
@@ -51,8 +44,28 @@ struct SettingsTextfield: View {
     }
 }
 
- class TextFieldValue: ObservableObject {
+class TextFieldValue: ObservableObject {
+    typealias Limits = (minCount: Int?, maxCount:Int?)?
+    typealias LimitsExplanations = (minCount: String?, maxCount: String?)?
+    
     @Published var text: String
-    init(_ text: String) { self.text = text }
+    
+    let limits: (minCount: Int?, maxCount:Int?)?
+    let explanations: (minCount: String?, maxCount: String?)?
+    init(_ text: String, limits: Limits, limitsExplanations: LimitsExplanations) {
+        self.text = text
+        self.limits = limits
+        self.explanations = limitsExplanations
+    }
+    func control() -> String? {
+        guard let limits = limits, let explanations = explanations else { return nil }
+        if let count = limits.minCount, text.count < count {
+            return explanations.minCount
+        }
+        if let count = limits.maxCount, text.count > count {
+            return explanations.maxCount
+        }
+        return nil
+    }
 }
 

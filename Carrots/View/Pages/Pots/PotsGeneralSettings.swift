@@ -29,8 +29,8 @@ struct PotsGeneralSettings: View {
         Set here the necessary number of points to earn one euro.
         """,
                 isWrong: $confirmationButtonIsDisabled,
-                wrongCount: 5,
-                wrongExplanations: "This number has to be inferior than 10000.")
+                limits: (minCount: 1, maxCount: 3),
+                limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
         }
         .inSettingsPage("general settings", confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
             gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro)

@@ -8,7 +8,7 @@
 import Foundation
 struct Settings {
     /// Needed points to get one euro.
-    @UserDefault(key: "pointsForOneEuro", defaultValue: 1000)
+    @UserDefault(key: "pointsForOneEuro", defaultValue: 100)
     var pointsForOneEuro: Int
     /// Indicates whether introduction has been seen or not.
     @UserDefault(key: "didSeeIntroduction", defaultValue: false)
