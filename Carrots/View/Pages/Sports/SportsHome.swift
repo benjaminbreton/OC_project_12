@@ -9,7 +9,7 @@ import SwiftUI
 struct SportsHome: View {
     @EnvironmentObject var gameDoor: GameDoor
     var body: some View {
-        FutureAppList(gameDoor.sports, placeHolder: """
+        AppList(gameDoor.sports, placeHolder: """
                     No sports have been added.
 
                     To add a sport, press the + button on the top of the screen, and set sport's informations.

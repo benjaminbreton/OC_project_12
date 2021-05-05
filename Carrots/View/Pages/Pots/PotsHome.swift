@@ -10,7 +10,7 @@ struct PotsHome: View {
     @EnvironmentObject var gameDoor: GameDoor
     var body: some View {
         let athleticsPots = gameDoor.athletics.map({ $0.pot ?? Pot() })
-        return FutureAppList(athleticsPots,
+        return AppList(athleticsPots,
                        placeHolder: """
                             No athletics have been added.
 

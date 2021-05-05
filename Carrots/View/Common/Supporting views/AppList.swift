@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreData
-struct FutureAppList<T: NSManagedObject>: View {
+struct AppList<T: NSManagedObject>: View {
     let items: [T]
     let placeHolder: String
     let title: String?
@@ -25,22 +25,24 @@ struct FutureAppList<T: NSManagedObject>: View {
         VStack {
             if withDivider { Divider() }
             ScrollView {
-                if let commonPot = commonPot {
-                    PotCell(pot: commonPot)
-                        .withNavigationLink(destination: PotAddings(pot: commonPot))
+                if items.count > 0 {
+                    if let commonPot = commonPot {
+                        PotCell(pot: commonPot)
+                            .withNavigationLink(destination: PotAddings(pot: commonPot))
+                    }
+                    if let title = title {
+                        Text(title)
+                            .withTitleFont()
+                    }
                 }
-                if let title = title {
-                    Text(title)
-                        .withTitleFont()
-                }
-                FutureSimpleList(items: items, placeHolder: placeHolder)
+                SimpleList(items: items, placeHolder: placeHolder)
                     .environmentObject(gameDoor)
             }
             if withDivider { Divider() }
         }
     }
 }
-fileprivate struct FutureSimpleList<T: NSManagedObject>: View {
+fileprivate struct SimpleList<T: NSManagedObject>: View {
     let items: [T]
     let placeHolder: String
     @EnvironmentObject var gameDoor: GameDoor

@@ -16,7 +16,7 @@ struct AthleticsHome: View {
     // MARK: - Body
     
     var body: some View {
-        FutureAppList(gameDoor.athletics, placeHolder: """
+        AppList(gameDoor.athletics, placeHolder: """
                     No athletics have been added.
 
                     To add an athletic, press the + button on the top of the screen, and set athletic's informations.

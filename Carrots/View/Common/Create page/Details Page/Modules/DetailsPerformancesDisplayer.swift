@@ -18,7 +18,7 @@ struct DetailsPerformancesDisplayer: View {
             }
             .inModule("Performances")
             if performances.count > 0 {
-                FutureAppList(performances, placeHolder: "No performances.", withDivider: false)
+                AppList(performances, placeHolder: "No performances.", withDivider: false)
                     .frame(height: ViewCommonSettings().textLineHeight * 3 * (CGFloat(performances.count + 1)))
 
 //                ListBase(items: performances.map({ PerformanceCell(performance: $0)}))

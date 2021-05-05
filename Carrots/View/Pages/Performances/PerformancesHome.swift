@@ -23,7 +23,7 @@ struct PerformancesHome: View {
         }
     }
     var body: some View {
-        FutureAppList(gameDoor.performances, placeHolder: """
+        AppList(gameDoor.performances, placeHolder: """
             No performances have been added.
 
             To add a performance \(instructions)
