@@ -32,11 +32,12 @@ struct AthleticCell: View {
                     .withBigSimpleFont()
             }
         }
+        .frame(height: ViewCommonSettings().commonHeight * 4)
+        .inRectangle(.leading)
         .withNavigationLink(
             destination: AthleticDetails(athletic: athletic)
                 .environmentObject(gameDoor)
         )
-        .frame(height: ViewCommonSettings().commonHeight * 4)
-        .inRectangle(.leading)
+        
     }
 }
