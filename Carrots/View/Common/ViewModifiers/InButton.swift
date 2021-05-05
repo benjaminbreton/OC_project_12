@@ -18,11 +18,23 @@ fileprivate struct InButton: ViewModifier {
         })
     }
 }
+fileprivate struct InDeleteButton: ViewModifier {
+    let action: () -> Void
+    func body(content: Content) -> some View {
+        Button(action: action) {
+            content
+                .withDeleteFont()
+        }
+    }
+}
 
 // MARK: - View's extension
 
 extension View {
     func inButton(action: @escaping () -> Void) -> some View {
         modifier(InButton(action: action))
+    }
+    func inDeleteButton(action: @escaping () -> Void) -> some View {
+        modifier(InDeleteButton(action: action))
     }
 }

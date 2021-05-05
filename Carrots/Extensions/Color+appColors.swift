@@ -22,4 +22,5 @@ extension Color {
     static var pickerBackground: Color { Color("pickerBackground") }
     static var graphFirst: Color { Color("graphFirst") }
     static var graphSecond: Color { Color("graphSecond") }
+    static var delete: Color { Color("delete") }
 }

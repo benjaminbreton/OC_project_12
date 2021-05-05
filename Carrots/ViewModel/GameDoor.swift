@@ -35,5 +35,7 @@ class GameDoor: ObservableObject {
     func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
         game.addPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
     }
-    
+    func delete(_ athletic: Athletic) {
+        game.deleteAthletic(athletic)
+    }
 }

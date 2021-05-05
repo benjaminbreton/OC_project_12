@@ -46,28 +46,35 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
     let items: [T]
     let placeHolder: String
     @EnvironmentObject var gameDoor: GameDoor
+    private var isPlaceHolderVisible: Bool { items.count == 0 }
     var body: some View {
         Group {
-            if items.count > 0 {
-                ForEach(items, id: \.description) { item in
-                    if let athletic = item as? Athletic {
-                        AthleticCell(athletic: athletic)
-                            .environmentObject(gameDoor)
-                    } else if let pot = item as? Pot {
-                        PotCell(pot: pot)
-                            .environmentObject(gameDoor)
-                    } else if let sport = item as? Sport {
-                        SportCell(sport: sport)
-                            .environmentObject(gameDoor)
-                    } else if let performance = item as? Performance {
-                        PerformanceCell(performance: performance)
-                            .environmentObject(gameDoor)
-                    }
+            ForEach(items, id: \.description) { item in
+                if let athletic = item as? Athletic {
+                    AthleticCell(athletic: athletic)
+                        .environmentObject(gameDoor)
+                        .contextMenu {
+                            Text("Delete")
+                                .inDeleteButton {
+                                    gameDoor.delete(athletic)
+                                }
+                        }
+                } else if let pot = item as? Pot {
+                    PotCell(pot: pot)
+                        .environmentObject(gameDoor)
+                } else if let sport = item as? Sport {
+                    SportCell(sport: sport)
+                        .environmentObject(gameDoor)
+                } else if let performance = item as? Performance {
+                    PerformanceCell(performance: performance)
+                        .environmentObject(gameDoor)
                 }
-            } else {
+            }
+            if isPlaceHolderVisible {
                 Text(placeHolder)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
+                    .transition(.slide)
             }
         }
     }

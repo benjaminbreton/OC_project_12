@@ -44,6 +44,13 @@ fileprivate struct LightSimpleFont: ViewModifier {
             .foregroundColor(.textLight)
     }
 }
+fileprivate struct DeleteFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().lightFontSize))
+            .foregroundColor(.delete)
+    }
+}
 fileprivate struct LinkFont: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -83,5 +90,8 @@ extension View {
     }
     func withSportIconFont(lineCount: CGFloat) -> some View {
         modifier(SportIconFont(lineCount: lineCount))
+    }
+    func withDeleteFont() -> some View {
+        modifier(DeleteFont())
     }
 }
