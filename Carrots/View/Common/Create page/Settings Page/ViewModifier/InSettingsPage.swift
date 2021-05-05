@@ -16,12 +16,14 @@ fileprivate struct InSettingsPage: ViewModifier {
     private let title: String
     private let confirmAction: () -> Void
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    var confirmationIsDisabled: Binding<Bool>?
     
     // MARK: - Init
     
-    init(title: String, confirmAction: @escaping () -> Void) {
+    init(title: String, confirmationIsDisabled: Binding<Bool>?, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
+        self.confirmationIsDisabled = confirmationIsDisabled
     }
     
     // MARK: - Body
@@ -33,7 +35,7 @@ fileprivate struct InSettingsPage: ViewModifier {
             ScrollView(.vertical) {
                 content
             }
-            ConfirmButton {
+            ConfirmButton(isDisabled: confirmationIsDisabled) {
                 confirmAction()
                 mode.wrappedValue.dismiss()
             }
@@ -52,7 +54,7 @@ extension View {
      - parameter title: Title which will appear in the navigation bar.
      - parameter confirmAction: Actions to do when user confirm its choices.
      */
-    func inSettingsPage(_ title: String, confirmAction: @escaping () -> Void) -> some View {
-        modifier(InSettingsPage(title: title, confirmAction: confirmAction))
+    func inSettingsPage(_ title: String, confirmationButtonIsDisabled: Binding<Bool>? = nil, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, confirmationIsDisabled: confirmationButtonIsDisabled, confirmAction: confirmAction))
     }
 }

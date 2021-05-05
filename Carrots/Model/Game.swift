@@ -12,7 +12,7 @@ import CoreData
 
 struct Game {
     /// Game's settings saved in Userdefaults.
-    private(set) var settings = Settings()
+    private(set) var settings: Settings
     /// Coredatastack used to save and load datas from CoreData.
     private let coreDataStack: CoreDataStack
     /// All  registered athletics.
@@ -37,13 +37,13 @@ extension Game {
     /// Create game with the entered Coredatastack.
     /// - parameter coreDataStack: Coredatastack used to save and load datas from CoreData (Coredatastack() by default).
     init(coreDataStack: CoreDataStack = CoreDataStack()) {
+        self.settings = Settings()
         self.coreDataStack = coreDataStack
         athletics = []
         sports = []
         performances = []
         allCommonPoints = 0
         commonPot = getCommonPot()
-        settings.gameAlreadyExists = true
         if settings.gameAlreadyExists {
             athletics = getEntitiesWithDescriptor(with: "name", ascending: true)
             sports = getEntitiesWithDescriptor(with: "name", ascending: true)
@@ -51,7 +51,14 @@ extension Game {
             allCommonPoints = getAllCommonPoints()
             getAthleticsEvolution()
         }
+        settings.gameAlreadyExists = true
         self.coreDataStack.saveContext()
+    }
+    
+    mutating func updateSettings(predictedAmountDate: Date, pointsForOneEuro: String?) {
+        guard let points = pointsForOneEuro, points.count < 5, let intPoints = Int(points) else { return }
+        settings.predictedAmountDate = predictedAmountDate
+        settings.pointsForOneEuro = intPoints
     }
 
 }
@@ -66,15 +73,13 @@ extension Game {
      Every day, athletics can get evolution of their performances during the last 30 days. This method updates athletics evolution if necessary.
      */
     mutating func getAthleticsEvolution() {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
         for athletic in athletics {
-            if let value = athletic.getEvolution(for: today) {
+            if let value = athletic.getEvolution(for: settings.today) {
                 let evolutionData = EvolutionData(context: coreDataStack.viewContext)
                 evolutionData.athletic = athletic
-                evolutionData.date = today
+                evolutionData.date = settings.today
                 evolutionData.value = value
-                deleteEvolutionDatas(athletic.evolutionDatasToClean(for: today))
+                deleteEvolutionDatas(athletic.evolutionDatasToClean(for: settings.today))
             }
         }
     }

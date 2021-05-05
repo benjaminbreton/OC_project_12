@@ -74,7 +74,7 @@
 		03DD81FF261F00520028A0A5 /* InRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FE261F00520028A0A5 /* InRectangle.swift */; };
 		03DD8203261F00620028A0A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8202261F00620028A0A5 /* Fonts.swift */; };
 		03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD820B261F01190028A0A5 /* NavigationPageView.swift */; };
-		03DD8212261F013C0028A0A5 /* PotsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */; };
+		03DD8212261F013C0028A0A5 /* PotsGeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8211261F013C0028A0A5 /* PotsGeneralSettings.swift */; };
 		03DD8216261F01620028A0A5 /* PotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8215261F01620028A0A5 /* PotCell.swift */; };
 		03DD821A261F01870028A0A5 /* WithNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8219261F01870028A0A5 /* WithNavigationLink.swift */; };
 		03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8221261F01D60028A0A5 /* PotAddings.swift */; };
@@ -169,7 +169,7 @@
 		03DD81FE261F00520028A0A5 /* InRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InRectangle.swift; sourceTree = "<group>"; };
 		03DD8202261F00620028A0A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		03DD820B261F01190028A0A5 /* NavigationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPageView.swift; sourceTree = "<group>"; };
-		03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsSettingsView.swift; sourceTree = "<group>"; };
+		03DD8211261F013C0028A0A5 /* PotsGeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsGeneralSettings.swift; sourceTree = "<group>"; };
 		03DD8215261F01620028A0A5 /* PotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotCell.swift; sourceTree = "<group>"; };
 		03DD8219261F01870028A0A5 /* WithNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithNavigationLink.swift; sourceTree = "<group>"; };
 		03DD8221261F01D60028A0A5 /* PotAddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotAddings.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 				032AFA0E261756ED00D61E28 /* PotsHome.swift */,
 				03DD8221261F01D60028A0A5 /* PotAddings.swift */,
 				03DD8215261F01620028A0A5 /* PotCell.swift */,
-				03DD8211261F013C0028A0A5 /* PotsSettingsView.swift */,
+				03DD8211261F013C0028A0A5 /* PotsGeneralSettings.swift */,
 			);
 			path = Pots;
 			sourceTree = "<group>";
@@ -691,7 +691,7 @@
 				0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */,
 				03C564A72630301C0056756A /* DetailsDateDisplayer.swift in Sources */,
 				03DD8226261F0A540028A0A5 /* InButton.swift in Sources */,
-				03DD8212261F013C0028A0A5 /* PotsSettingsView.swift in Sources */,
+				03DD8212261F013C0028A0A5 /* PotsGeneralSettings.swift in Sources */,
 				032AFA0F261756ED00D61E28 /* PotsHome.swift in Sources */,
 				03DD81FB261F00390028A0A5 /* InCellRectangle.swift in Sources */,
 				03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */,

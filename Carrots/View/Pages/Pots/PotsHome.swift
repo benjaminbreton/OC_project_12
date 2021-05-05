@@ -25,7 +25,9 @@ struct PotsHome: View {
         .inNavigationHome(
             title: "pots",
             buttonImage: "gear",
-            buttonDestination: PotsSettingsView(date: Date(), pointsForOneEuro: "")
+            buttonDestination: PotsGeneralSettings(
+                date: gameDoor.predictedAmountDate,
+                pointsForOneEuro: gameDoor.pointsForOneEuro)
                 .environmentObject(gameDoor)
         )
     }

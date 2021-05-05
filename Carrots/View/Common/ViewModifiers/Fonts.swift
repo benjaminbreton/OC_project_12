@@ -52,10 +52,17 @@ fileprivate struct DeleteFont: ViewModifier {
     }
 }
 fileprivate struct LinkFont: ViewModifier {
+    var isLinkDisabled: Binding<Bool>?
+    private var disablingLink: Bool {
+        if let isLinkDisabled = isLinkDisabled {
+            return isLinkDisabled.wrappedValue
+        }
+        return false
+    }
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().titleFontSize))
-            .foregroundColor(.link)
+            .foregroundColor(disablingLink ? .textLight : .link)
     }
 }
 fileprivate struct SportIconFont: ViewModifier {
@@ -82,8 +89,8 @@ extension View {
     func withBigSimpleFont() -> some View {
         modifier(BigSimpleFont())
     }
-    func withLinkFont() -> some View {
-        modifier(LinkFont())
+    func withLinkFont(_ isLinkDisabled: Binding<Bool>? = nil) -> some View {
+        modifier(LinkFont(isLinkDisabled: isLinkDisabled))
     }
     func withBigTitleFont() -> some View {
         modifier(BigTitleFont())

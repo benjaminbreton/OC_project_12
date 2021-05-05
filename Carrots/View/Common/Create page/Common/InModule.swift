@@ -10,6 +10,8 @@ fileprivate struct InModule: ViewModifier {
     let title: String?
     let alignment: Alignment
     let explanations: String?
+    var isWrong: Binding<Bool>?
+    let wrongExplanations: String?
     func body(content: Content) -> some View {
         VStack {
             if let title = title {
@@ -22,6 +24,13 @@ fileprivate struct InModule: ViewModifier {
                         .withLightSimpleFont()
                         .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 }
+                if let isWrong = isWrong {
+                    if isWrong.wrappedValue, let explanations = wrongExplanations {
+                        Text(explanations)
+                            .withDeleteFont()
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
                 content
             }
             .inRectangle(alignment)
@@ -30,10 +39,10 @@ fileprivate struct InModule: ViewModifier {
     }
 }
 extension View {
-    func inModule(_ title: String? = nil, explanations: String? = nil) -> some View {
-        modifier(InModule(title: title, alignment: .leading, explanations: explanations))
+    func inModule(_ title: String? = nil, explanations: String? = nil, isWrong: Binding<Bool>? = nil, wrongExplanations: String? = nil) -> some View {
+        modifier(InModule(title: title, alignment: .leading, explanations: explanations, isWrong: isWrong, wrongExplanations: wrongExplanations))
     }
-    func inCenteredModule(_ title: String? = nil, explanations: String? = nil) -> some View {
-        modifier(InModule(title: title, alignment: .center, explanations: explanations))
+    func inCenteredModule(_ title: String? = nil, explanations: String? = nil, isWrong: Binding<Bool>? = nil, wrongExplanations: String? = nil) -> some View {
+        modifier(InModule(title: title, alignment: .center, explanations: explanations, isWrong: isWrong, wrongExplanations: wrongExplanations))
     }
 }

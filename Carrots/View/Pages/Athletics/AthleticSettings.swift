@@ -20,7 +20,7 @@ struct AthleticSettings: View {
     @State var image: UIImage?
     /// Current image's data.
     var data: Data? {
-        image?.pngData()
+        image?.jpegData(compressionQuality: 1)
     }
     
     // MARK: - Body

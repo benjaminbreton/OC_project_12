@@ -12,6 +12,13 @@ class GameDoor: ObservableObject {
     var commonPot: Pot? { game.commonPot }
     var sports: [Sport] { game.sports }
     var performances: [Performance] { game.performances }
+    var pointsForOneEuro: String {
+        let formatter = NumberFormatter()
+        let count = game.settings.pointsForOneEuro
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: NSNumber(value: count)) ?? "0"
+    }
+    var predictedAmountDate: Date { game.settings.predictedAmountDate }
     init(_ coreDataStack: CoreDataStack) {
         game = Game(coreDataStack: coreDataStack)
     }
@@ -37,5 +44,8 @@ class GameDoor: ObservableObject {
     }
     func delete(_ athletic: Athletic) {
         game.deleteAthletic(athletic)
+    }
+    func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?) {
+        game.updateSettings(predictedAmountDate: date, pointsForOneEuro: pointsForOneEuro)
     }
 }

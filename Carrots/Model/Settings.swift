@@ -17,8 +17,17 @@ struct Settings {
     @UserDefault(key: "gameAlreadyExists", defaultValue: false)
     var gameAlreadyExists: Bool
     /// Date used to get statistics.
-    @UserDefault(key: "predictedAmountDate", defaultValue: Date() + 30 * 24 * 3600)
+    @UserDefault(key: "predictedAmountDate", defaultValue: Date() - 24 * 3600)
     var predictedAmountDate: Date
+    var today: Date {
+        let calendar = Calendar.current
+        return calendar.startOfDay(for: Date())
+    }
+    init() {
+        if predictedAmountDate < today {
+            predictedAmountDate = today + 30 * 24 * 3600
+        }
+    }
 }
 
 @propertyWrapper
