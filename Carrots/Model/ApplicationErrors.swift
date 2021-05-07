@@ -7,7 +7,16 @@
 
 import Foundation
 enum ApplicationErrors: Error, CustomStringConvertible {
-    case existingAthletic, existingSport, unknownSportIndex, performanceWithoutAthletic, cantReturnStats
+    // athletics
+    case existingAthletic
+    // sports
+    case existingSport, unknownSportIndex
+    // performance
+    case performanceWithoutAthletic
+    // stats
+    case cantReturnStats
+    // entities
+    case noCommonPot, severalCommonPots(Int)
     var description: String {
         switch self {
         case .existingAthletic:
@@ -20,6 +29,10 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "Performance without athletic"
         case .cantReturnStats:
             return "Can't return stats"
+        case .noCommonPot:
+            return "No common pot"
+        case .severalCommonPots(let count):
+            return "Several common pots: \(count)"
         }
     }
     @discardableResult

@@ -20,10 +20,15 @@ class Entities {
         let predicate = NSPredicate(format: "owner == %@", 0)
         let request: NSFetchRequest<Pot> = Pot.fetchRequest()
         request.predicate = predicate
-        guard let result = try? context.fetch(request) else {
+        guard let result = try? context.fetch(request) else { return nil }
+        guard result.count == 1 else {
+            if result.count == 0 {
+                ApplicationErrors.log(.noCommonPot)
+            } else {
+                ApplicationErrors.log(.severalCommonPots(result.count))
+            }
             return nil
         }
-        guard result.count == 1 else { return nil }
         return result[0]
     }
     var allAthletics: [Athletic] { getEntities(by: "name", ascending: true) }
