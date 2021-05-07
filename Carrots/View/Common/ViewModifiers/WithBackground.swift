@@ -12,7 +12,9 @@ fileprivate struct WithBackground: ViewModifier {
             Rectangle()
                 .fill(LinearGradient(gradient: Gradient(colors: [.backgroundFirst, .backgroundSecond]), startPoint: .topLeading, endPoint: .bottomTrailing))
                 .edgesIgnoringSafeArea(.all)
+                .zIndex(0)
             content
+                .zIndex(1)
         }
     }
 }

@@ -26,11 +26,13 @@ struct AthleticCell: View {
     var body: some View {
         ZStack(alignment: .leading) {
             HStack(alignment: .center) {
+                
                 AthleticImage(image: image, radius: ViewCommonSettings().commonHeight * 2, rotation: $rotation)
                 Text(athletic.name ?? "No name")
                     .padding()
                     .withBigSimpleFont()
             }
+            
         }
         .frame(height: ViewCommonSettings().commonHeight * 4)
         .inRectangle(.leading)
@@ -38,6 +40,13 @@ struct AthleticCell: View {
             destination: AthleticDetails(athletic: athletic)
                 .environmentObject(gameDoor)
         )
+        .contextMenu {
+            Text("Delete")
+                .inDeleteButton {
+                    gameDoor.delete(athletic)
+                }
+        }
+        .withCellAnimation()
         
     }
 }

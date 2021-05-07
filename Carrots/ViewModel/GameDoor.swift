@@ -12,6 +12,7 @@ class GameDoor: ObservableObject {
     var commonPot: Pot? { game.commonPot }
     var sports: [Sport] { game.sports }
     var performances: [Performance] { game.performances }
+    @Published private(set) var askedForReload: Bool = false
     var pointsForOneEuro: String {
         let formatter = NumberFormatter()
         let count = game.settings.pointsForOneEuro
@@ -50,5 +51,9 @@ class GameDoor: ObservableObject {
     }
     func getError() -> ApplicationErrors? {
         return game.getError()
+    }
+    func askForReload() {
+        askedForReload = true
+        askedForReload = false
     }
 }

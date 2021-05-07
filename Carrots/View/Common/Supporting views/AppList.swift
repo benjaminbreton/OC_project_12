@@ -42,40 +42,136 @@ struct AppList<T: NSManagedObject>: View {
         }
     }
 }
+
 fileprivate struct SimpleList<T: NSManagedObject>: View {
     let items: [T]
     let placeHolder: String
     @EnvironmentObject var gameDoor: GameDoor
     private var isPlaceHolderVisible: Bool { items.count == 0 }
+    
     var body: some View {
         Group {
-            ForEach(items, id: \.description) { item in
-                if let athletic = item as? Athletic {
-                    AthleticCell(athletic: athletic)
-                        .environmentObject(gameDoor)
-                        .contextMenu {
-                            Text("Delete")
-                                .inDeleteButton {
-                                    gameDoor.delete(athletic)
-                                }
-                        }
-                } else if let pot = item as? Pot {
-                    PotCell(pot: pot)
-                        .environmentObject(gameDoor)
-                } else if let sport = item as? Sport {
-                    SportCell(sport: sport)
-                        .environmentObject(gameDoor)
-                } else if let performance = item as? Performance {
-                    PerformanceCell(performance: performance)
-                        .environmentObject(gameDoor)
-                }
+            if let athletics = items as? [Athletic] {
+                AthleticsList(athletics: athletics)
+                    .environmentObject(gameDoor)
+            }
+            if let pots = items as? [Pot] {
+                PotsList(pots: pots)
+                    .environmentObject(gameDoor)
+            }
+            if let sports = items as? [Sport] {
+                SportsList(sports: sports)
+                    .environmentObject(gameDoor)
+            }
+            if let performances = items as? [Performance] {
+                PerformancesList(performances: performances)
+                    .environmentObject(gameDoor)
             }
             if isPlaceHolderVisible {
                 Text(placeHolder)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
-                    .transition(.slide)
+                    .withCellAnimation()
             }
         }
     }
+}
+
+fileprivate struct AthleticsList: View {
+    let athletics: [Athletic]
+    @EnvironmentObject var gameDoor: GameDoor
+    var body: some View {
+        VStack {
+            ForEach(athletics, id: \.description) { athletic in
+                if !athletic.willBeDeleted {
+                    AthleticCell(athletic: athletic)
+                        .environmentObject(gameDoor)
+//                        .canBeDeleted {
+//                            gameDoor.delete(athletic)
+//                        }
+                        
+                }
+            }
+        }
+    }
+}
+
+fileprivate struct PotsList: View {
+    let pots: [Pot]
+    @EnvironmentObject var gameDoor: GameDoor
+    
+    var body: some View {
+        Group {
+            ForEach(pots, id: \.description) { pot in
+                PotCell(pot: pot)
+                    .environmentObject(gameDoor)
+            }
+        }
+    }
+}
+
+fileprivate struct SportsList: View {
+    let sports: [Sport]
+    //@State var isItemHidden: [Pot: Bool]
+    @EnvironmentObject var gameDoor: GameDoor
+    
+    var body: some View {
+        Group {
+            ForEach(sports, id: \.description) { sport in
+                SportCell(sport: sport)
+                    .environmentObject(gameDoor)
+            }
+        }
+    }
+}
+
+fileprivate struct PerformancesList: View {
+    let performances: [Performance]
+    //@State var isItemHidden: [Pot: Bool]
+    @EnvironmentObject var gameDoor: GameDoor
+    
+    var body: some View {
+        Group {
+            ForEach(performances, id: \.description) { performance in
+                PerformanceCell(performance: performance)
+                    .environmentObject(gameDoor)
+            }
+        }
+    }
+}
+
+// MARK: - View modifiers
+
+fileprivate struct WithCellAnimation: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .animation(.linear)
+            .transition(.move(edge: .trailing))
+    }
+}
+
+fileprivate struct CanBeDeleted: ViewModifier {
+    let deleteAction: () -> Void
+    func body(content: Content) -> some View {
+        content
+            .contextMenu {
+                Text("Delete")
+                    .inDeleteButton(action: deleteAction)
+            }
+            .withCellAnimation()
+    }
+}
+
+// MARK: - View Extension
+
+
+
+extension View {
+    func withCellAnimation() -> some View {
+        modifier(WithCellAnimation())
+    }
+    fileprivate func canBeDeleted(deleteAction: @escaping () -> Void) -> some View {
+        modifier(CanBeDeleted(deleteAction: deleteAction))
+    }
+    
 }

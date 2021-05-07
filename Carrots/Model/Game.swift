@@ -53,8 +53,8 @@ extension Game {
         }
         settings.gameAlreadyExists = true
         self.coreDataStack.saveContext()
+        
     }
-    
     mutating func updateSettings(predictedAmountDate: Date, pointsForOneEuro: String?) {
         guard let points = pointsForOneEuro, points.count < 5, let intPoints = Int(points) else { return }
         settings.predictedAmountDate = predictedAmountDate
@@ -121,6 +121,7 @@ extension Game {
     private mutating func addNewAthletic(_ name: String, image: Data?) {
         let athletic = Athletic(context: coreDataStack.viewContext)
         athletic.creationDate = Date()
+        athletic.willBeDeleted = false
         getNewPot(for: athletic)
         updateAthletic(athletic, name: name, image: image)
     }
@@ -140,6 +141,8 @@ extension Game {
     /// - parameter athletic: Athletic to delete.
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
     mutating func deleteAthletic(_ athletic: Athletic) {
+        athletic.willBeDeleted = true
+        updateProperties()
         deleteAthleticPerformances(athletic)
         deleteEvolutionDatas(athletic.evolutionDatas)
         coreDataStack.viewContext.delete(athletic)
@@ -403,3 +406,4 @@ extension Game {
         return error
     }
 }
+

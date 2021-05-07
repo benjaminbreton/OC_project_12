@@ -4,6 +4,7 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="willBeDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="evolutionDatasSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvolutionData" inverseName="athletic" inverseEntity="EvolutionData"/>
         <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="athleticsSet" inverseEntity="Performance"/>
         <relationship name="pot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pot" inverseName="owner" inverseEntity="Pot"/>
@@ -39,7 +40,7 @@
         <relationship name="performances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Performance" inverseName="sport" inverseEntity="Performance"/>
     </entity>
     <elements>
-        <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="133"/>
+        <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="134"/>
         <element name="EvolutionData" positionX="-130.3831787109375" positionY="-507.9654235839844" width="128" height="88"/>
         <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="148"/>
         <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="134"/>
