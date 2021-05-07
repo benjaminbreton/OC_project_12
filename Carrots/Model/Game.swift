@@ -45,9 +45,9 @@ extension Game {
         allCommonPoints = 0
         commonPot = getCommonPot()
         if settings.gameAlreadyExists {
-            athletics = getEntitiesWithDescriptor(with: "name", ascending: true)
-            sports = getEntitiesWithDescriptor(with: "name", ascending: true)
-            performances = getEntitiesWithDescriptor(with: "date", ascending: false)
+            athletics = coreDataStack.entities.allAthletics
+            sports = coreDataStack.entities.allSports
+            performances = coreDataStack.entities.allPerformances
             allCommonPoints = getAllCommonPoints()
             getAthleticsEvolution()
         }
@@ -199,12 +199,7 @@ extension Game {
         coreDataStack.saveContext()
         return pot
     }
-    private func getEntitiesWithDescriptor<Entity: NSManagedObject>(with descriptor: String, ascending: Bool) -> [Entity] {
-        guard let request = Entity.fetchRequest() as? NSFetchRequest<Entity> else { return [] }
-        request.sortDescriptors = [NSSortDescriptor(key: descriptor, ascending: ascending)]
-        guard let result = try? coreDataStack.viewContext.fetch(request) else { return [] }
-        return result
-    }
+    
     private func getCommonPot() -> Pot {
         let request: NSFetchRequest<Pot> = Pot.fetchRequest()
         let predicate = NSPredicate(format: "owner == nil")
@@ -221,9 +216,9 @@ extension Game {
     }
     /// Update athletics array.
     mutating private func updateProperties() {
-        athletics = getEntitiesWithDescriptor(with: "name", ascending: true)
-        performances = getEntitiesWithDescriptor(with: "date", ascending: false)
-        sports = getEntitiesWithDescriptor(with: "name", ascending: true)
+        athletics = coreDataStack.entities.allAthletics
+        performances = coreDataStack.entities.allPerformances
+        sports = coreDataStack.entities.allSports
         coreDataStack.saveContext()
     }
 }

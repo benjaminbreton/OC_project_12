@@ -83,6 +83,7 @@
 		03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */; };
 		03DE95882604C51800FBAA4F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95872604C51800FBAA4F /* Game.swift */; };
 		03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */; };
+		03E1F9C726453B8600DA870F /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F9C626453B8600DA870F /* Entities.swift */; };
 		03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F472092615FB8A002CE23D /* HomeView.swift */; };
 		03F787232631B8DC00735510 /* SportDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F787222631B8DC00735510 /* SportDetails.swift */; };
 /* End PBXBuildFile section */
@@ -178,6 +179,7 @@
 		03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		03DE95872604C51800FBAA4F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoreDataStack.swift; sourceTree = "<group>"; };
+		03E1F9C626453B8600DA870F /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		03F472092615FB8A002CE23D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03F787222631B8DC00735510 /* SportDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				03DE95832604C4CF00FBAA4F /* CoreDataStack.swift */,
+				03E1F9C626453B8600DA870F /* Entities.swift */,
 				034AB62A26010E5B0034C1E2 /* Carrots.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -673,6 +676,7 @@
 				033503382638227600E2BD99 /* Performance.swift in Sources */,
 				03264BDA26203E78003F6429 /* AthleticImage.swift in Sources */,
 				03648EB4263C01E8004EE0AA /* InNavigationHome.swift in Sources */,
+				03E1F9C726453B8600DA870F /* Entities.swift in Sources */,
 				03342BC8262B1088002FE0BE /* SettingsCustomPicker.swift in Sources */,
 				03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */,
 				03CAE4672641259400C9309D /* InModule.swift in Sources */,

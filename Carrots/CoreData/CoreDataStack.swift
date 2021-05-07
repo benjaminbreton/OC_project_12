@@ -26,6 +26,8 @@ open class CoreDataStack {
         persistentContainer.viewContext
     }
     
+    lazy var entities = Entities(viewContext)
+    
     // MARK: - Init
     
     /// Init used to set persistentContainer in a FakeCoreDataStack.
@@ -45,6 +47,6 @@ open class CoreDataStack {
             }
         }
     }
-    
-    
+
 }
+
