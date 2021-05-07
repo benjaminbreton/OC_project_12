@@ -30,7 +30,7 @@ struct AthleticSettings: View {
             SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
             SettingsAthleticImagePicker(image: $image)
         }
-        .inSettingsPage(name == "" ? "New athletic":"\(name) settings", confirmAction: {
+        .inSettingsPage(name == "" ? "New athletic":"\(name) settings", gameDoor: _gameDoor, confirmAction: {
             if let athletic = athletic {
                 gameDoor.update(athletic, name: name, image: data)
             } else {

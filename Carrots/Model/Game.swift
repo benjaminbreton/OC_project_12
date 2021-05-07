@@ -400,3 +400,11 @@ extension Game {
         coreDataStack.saveContext()
     }
 }
+
+extension Game {
+    mutating func getError() -> ApplicationErrors? {
+        let error = self.error
+        self.error = nil
+        return error
+    }
+}

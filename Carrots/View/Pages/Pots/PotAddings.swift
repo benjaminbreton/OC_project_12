@@ -20,7 +20,7 @@ struct PotAddings: View {
             SettingsSegmentedPicker(title: "Modification type", selection: $selection, instructions: "Choose the modification to do", possibilities: ["+ add money", "- withdraw money"])
             SettingsTextfield(title: "Amount", placeHolder: placeHolder, value: $amount, keyboard: .decimalPad)
         }
-        .inSettingsPage("\(pot?.description ?? "No name")") {
+        .inSettingsPage("\(pot?.description ?? "No name")", gameDoor: _gameDoor) {
             
         }
     }

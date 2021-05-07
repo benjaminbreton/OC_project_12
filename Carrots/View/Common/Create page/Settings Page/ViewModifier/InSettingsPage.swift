@@ -17,13 +17,17 @@ fileprivate struct InSettingsPage: ViewModifier {
     private let confirmAction: () -> Void
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var confirmationIsDisabled: Binding<Bool>?
+    @EnvironmentObject var gameDoor: GameDoor
+    @State var error: ApplicationErrors? = nil
+    @State var showAlert: Bool = false
     
     // MARK: - Init
     
-    init(title: String, confirmationIsDisabled: Binding<Bool>?, confirmAction: @escaping () -> Void) {
+    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Binding<Bool>?, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
         self.confirmationIsDisabled = confirmationIsDisabled
+        self._gameDoor = gameDoor
     }
     
     // MARK: - Body
@@ -37,11 +41,29 @@ fileprivate struct InSettingsPage: ViewModifier {
             }
             ConfirmButton(isDisabled: confirmationIsDisabled) {
                 confirmAction()
+                error = gameDoor.getError()
+                guard error == nil else {
+                    showAlert = true
+                    return
+                }
                 mode.wrappedValue.dismiss()
             }
         }
         .inNavigationPageView(title: title)
         .closeKeyboardOnTap()
+        .alert(isPresented: $showAlert) {
+            if let error = error {
+                return Alert(
+                    title: Text("Error"),
+                    message: Text(error.description),
+                    dismissButton: .default(Text("OK")))
+            } else {
+                return Alert(
+                    title: Text("Error"),
+                    message: Text("An error occurred."),
+                    dismissButton: .default(Text("OK")))
+            }
+        }
     }
 }
 
@@ -54,7 +76,7 @@ extension View {
      - parameter title: Title which will appear in the navigation bar.
      - parameter confirmAction: Actions to do when user confirm its choices.
      */
-    func inSettingsPage(_ title: String, confirmationButtonIsDisabled: Binding<Bool>? = nil, confirmAction: @escaping () -> Void) -> some View {
-        modifier(InSettingsPage(title: title, confirmationIsDisabled: confirmationButtonIsDisabled, confirmAction: confirmAction))
+    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Binding<Bool>? = nil, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, confirmAction: confirmAction))
     }
 }

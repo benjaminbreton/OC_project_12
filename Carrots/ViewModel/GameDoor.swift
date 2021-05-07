@@ -48,4 +48,7 @@ class GameDoor: ObservableObject {
     func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?) {
         game.updateSettings(predictedAmountDate: date, pointsForOneEuro: pointsForOneEuro)
     }
+    func getError() -> ApplicationErrors? {
+        return game.getError()
+    }
 }

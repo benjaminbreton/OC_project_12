@@ -21,7 +21,7 @@ struct SportSettings: View {
             SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, value: $valueForOnePoint)
             SettingsSportIconPicker(icon: $icon)
         }
-        .inSettingsPage(name == "" ? "new sport":"\(name) settings") {
+        .inSettingsPage(name == "" ? "new sport":"\(name) settings", gameDoor: _gameDoor) {
             guard unity.count == 1 else { return }
             if let sport = sport {
                 gameDoor.update(sport, name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)

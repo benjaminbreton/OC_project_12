@@ -32,7 +32,7 @@ struct PotsGeneralSettings: View {
                 limits: (minCount: 1, maxCount: 3),
                 limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
         }
-        .inSettingsPage("general settings", confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
+        .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
             gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro)
         }
     }

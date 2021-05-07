@@ -21,7 +21,7 @@ struct PerformanceSettings: View {
             SettingsSportValue(placeholder: "Choose a sport", unity: selectedSport.count == 1 ? selectedSport[0].unityInt16.sportUnityType : nil, value: $value)
             SettingsCustomToggleWithExplications(title: "Pot", question: "Add to common pot ? ", isOn: $addToCommonPot, explicationsIsOn: "Points will be added to common pot", explicationsIsOff: "Points will be added to athletics pots", textLines: 2)
         }
-        .inSettingsPage("new performance", confirmAction: {
+        .inSettingsPage("new performance", gameDoor: _gameDoor, confirmAction: {
             guard selectedAthletics.count > 0, selectedSport.count == 1 else { return }
             gameDoor.addPerformance(sport: selectedSport[0], athletics: selectedAthletics, value: value, addToCommonPot: addToCommonPot)
         })
