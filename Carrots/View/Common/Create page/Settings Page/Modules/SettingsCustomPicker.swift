@@ -219,9 +219,11 @@ fileprivate class PickerTextView<T: CustomStringConvertible>: UITextView, UIPick
     // MARK: - UIPickerView methods
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if maximumSelection == 1 && selectionIndex == nil {
+        if selectionIndex == nil {
             selectionIndex = 0
-            selectedObjects = [data[0]]
+            if maximumSelection == 1 {
+                selectedObjects = [data[0]]
+            }
         }
         return 1
     }
