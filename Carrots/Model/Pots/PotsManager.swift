@@ -10,6 +10,8 @@ import CoreData
 class PotsManager {
     let coreDataStack: CoreDataStack
     
+    var today: Date { Calendar.current.startOfDay(for: Date()) }
+    
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
     }
@@ -23,9 +25,6 @@ class PotsManager {
         let pot = Pot(context: coreDataStack.viewContext)
         pot.amount = 0
         pot.creationDate = Date()
-        pot.evolutionType = Pot.EvolutionType.same.int16
-        pot.lastEvolution = 0
-        pot.lastEvolutionDate = Date()
         pot.points = 0
         coreDataStack.saveContext()
         return pot
@@ -36,11 +35,11 @@ class PotsManager {
     /// Add money to a pot.
     /// - parameter athletic: The athletic for whom money has to be added (nil to add to the common pot).
     /// - parameter amount: Amount to add.
-    func addMoney(for athletic: Athletic?, amount: Double) -> ApplicationErrors? {
+    func addMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int) -> ApplicationErrors? {
         let result = getPot(of: athletic)
         switch result {
         case .success(let pot):
-            pot.amount += amount
+            pot.changeAmount(amount, with: pointsForOneEuro)
             return nil
         case . failure(let error):
             return error
@@ -49,11 +48,11 @@ class PotsManager {
     /// Withdraw money to a pot.
     /// - parameter athletic: The athletic for whom money has to be withdrawn (nil to withdraw to the common pot).
     /// - parameter amount: Amount to withdraw.
-    func withdrawMoney(for athletic: Athletic?, amount: Double) -> ApplicationErrors? {
+    func withdrawMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int) -> ApplicationErrors? {
         let result = getPot(of: athletic)
         switch result {
         case .success(let pot):
-            pot.amount -= amount
+            pot.changeAmount(-amount, with: pointsForOneEuro)
             return nil
         case . failure(let error):
             return error
@@ -71,5 +70,42 @@ class PotsManager {
             return .success(pot)
         }
     }
+    
+    // MARK: - Evolution
+    
+    /**
+     Every day, athletics can get evolution of their performances during the last 30 days. This method updates athletics evolution if necessary.
+     */
+    func getEvolution() {
+        for pot in coreDataStack.entities.allPots {
+            if let value = pot.getEvolution(for: today) {
+                let evolutionData = EvolutionData(context: coreDataStack.viewContext)
+                evolutionData.pot = pot
+                evolutionData.date = today
+                evolutionData.value = value
+                deleteEvolutionDatas(pot.evolutionDatasToClean(for: today))
+            }
+        }
+    }
+    
+    private func deleteEvolutionDatas(_ evolutionDatas: [EvolutionData]) {
+        if evolutionDatas.count > 0 {
+            for evolutionData in evolutionDatas {
+                coreDataStack.viewContext.delete(evolutionData)
+            }
+        }
+    }
+    
+    func deleteEvolutionDatas(of athletic: Athletic? = nil) -> ApplicationErrors? {
+        let evolutionDatas = athletic == nil ? coreDataStack.entities.commonPot?.evolutionDatas ?? [] : athletic?.pot?.evolutionDatas ?? []
+        if evolutionDatas.count > 0 {
+            for evolutionData in evolutionDatas {
+                coreDataStack.viewContext.delete(evolutionData)
+            }
+        }
+        return nil
+    }
+    
+    
     
 }

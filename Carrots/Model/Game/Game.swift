@@ -24,11 +24,7 @@ struct Game {
     /// Pot used as common pot.
     private(set) var commonPot: Pot?
     /// Error.
-    private(set) var error: ApplicationErrors?
-    /// All points added to the common pot.
-    var allCommonPoints: Double
-    /// Last asked statistics.
-    var askedStatistics: Pot.Statistics?
+    private var error: ApplicationErrors?
     let athleticsManager: AthleticsManager
     let sportsManager: SportsManager
     let performancesManager: PerformancesManager
@@ -49,7 +45,6 @@ extension Game {
         athletics = []
         sports = []
         performances = []
-        allCommonPoints = 0
         athleticsManager = AthleticsManager(coreDataStack)
         sportsManager = SportsManager(coreDataStack)
         performancesManager = PerformancesManager(coreDataStack)
@@ -63,11 +58,11 @@ extension Game {
     
     /// Update athletics array.
     mutating func refresh() {
+        guard error == nil else { return }
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
         sports = coreDataStack.entities.allSports
-        allCommonPoints = getAllCommonPoints()
-        athleticsManager.getEvolution()
+        potsManager.getEvolution()
         coreDataStack.saveContext()
     }
     
@@ -132,35 +127,19 @@ extension Game {
 extension Game {
     
     mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
-        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
+        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, pointsForOneEuro: settings.pointsForOneEuro)
         refresh()
     }
     
     mutating func delete(_ performance: Performance) {
-        error = performancesManager.delete(performance)
+        error = performancesManager.delete(performance, pointsForOneEuro: settings.pointsForOneEuro)
         refresh()
     }
     mutating func deletePerformances<T: NSManagedObject>(of item: T) {
-        error = performancesManager.delete(of: item)
+        error = performancesManager.delete(of: item, pointsForOneEuro: settings.pointsForOneEuro)
         refresh()
     }
 
-}
-
-
-
-// MARK: - Supporting methods
-    
-extension Game {
-    
-    private func getAllCommonPoints() -> Double {
-        if performances.count > 0 {
-            return Double(performances.map({ $0.addedToCommonPot ? $0.potAddings : 0 }).reduce(0, +))
-        } else {
-            return 0
-        }
-    }
-    
 }
 
 // MARK: - Change money
@@ -170,17 +149,19 @@ extension Game {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let amount = formatter.number(from: amount) as? Double else { return }
-        error = potsManager.addMoney(for: athletic, amount: amount)
+        error = potsManager.addMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro)
         refresh()
     }
     mutating func withdrawMoney(for athletic: Athletic? = nil, amount: String) {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let amount = formatter.number(from: amount) as? Double else { return }
-        error = potsManager.withdrawMoney(for: athletic, amount: amount)
+        error = potsManager.withdrawMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro)
         refresh()
     }
 }
+
+// MARK: - Get error
 
 extension Game {
     mutating func getError() -> ApplicationErrors? {

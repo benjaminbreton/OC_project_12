@@ -23,39 +23,9 @@ public class Athletic: NSManagedObject {
         return performances
     }
     var evolutionDatas: [EvolutionData] {
-        guard let evolutionSet = evolutionDatasSet, let evolutions = evolutionSet.allObjects as? [EvolutionData] else {
-            return []
-        }
-        return evolutions
+        pot?.evolutionDatas ?? []
     }
-    func getEvolution(for date: Date) -> Double? {
-        let calendar = Calendar.current
-        if evolutionDatas.count > 0 {
-            guard let creationDate = creationDate, let lastEvolution = evolutionDatas.last, let lastEvolutionDate = lastEvolution.date, lastEvolutionDate < date else { return nil }
-            return getEvolutionValue(from: creationDate, to: date)
-        } else if let creationDate = creationDate, calendar.startOfDay(for: creationDate) < date {
-            return getEvolutionValue(from: creationDate, to: date)
-        } else {
-            return nil
-        }
-    }
-    private func getEvolutionValue(from start: Date, to end: Date) -> Double {
-        let interval = DateInterval(start: start, end: end)
-        return allPoints / interval.duration
-    }
-    func evolutionDatasToClean(for date: Date) -> [EvolutionData] {
-        let date = date - 30 * 24 * 3600
-        var evolutionDatas: [EvolutionData] = []
-        for evolutionData in evolutionDatas {
-            guard let evolutionDate = evolutionData.date else { return [] }
-            if evolutionDate <= date {
-                evolutionDatas.append(evolutionData)
-            }
-        }
-        guard evolutionDatas.count > 0 else { return evolutionDatas }
-        evolutionDatas.remove(at: evolutionDatas.count - 1)
-        return evolutionDatas
-    }
+    
     func update(name: String?, image: Data?) {
         self.name = name
         self.image = image

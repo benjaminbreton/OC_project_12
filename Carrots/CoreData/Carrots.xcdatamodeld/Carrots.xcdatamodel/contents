@@ -5,14 +5,13 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="willBeDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="evolutionDatasSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvolutionData" inverseName="athletic" inverseEntity="EvolutionData"/>
         <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="athleticsSet" inverseEntity="Performance"/>
         <relationship name="pot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pot" inverseName="owner" inverseEntity="Pot"/>
     </entity>
     <entity name="EvolutionData" representedClassName=".EvolutionData" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="athletic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="evolutionDatasSet" inverseEntity="Athletic"/>
+        <relationship name="pot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pot" inverseName="evolutionDatasSet" inverseEntity="Pot"/>
     </entity>
     <entity name="Performance" representedClassName=".Performance" syncable="YES" codeGenerationType="category">
         <attribute name="addedToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -26,10 +25,8 @@
     <entity name="Pot" representedClassName=".Pot" syncable="YES" codeGenerationType="category">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="evolutionType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="lastEvolution" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lastEvolutionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="points" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="evolutionDatasSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EvolutionData" inverseName="pot" inverseEntity="EvolutionData"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
     </entity>
     <entity name="Sport" representedClassName=".Sport" syncable="YES" codeGenerationType="category">
@@ -40,10 +37,10 @@
         <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Performance" inverseName="sport" inverseEntity="Performance"/>
     </entity>
     <elements>
-        <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="134"/>
-        <element name="EvolutionData" positionX="-130.3831787109375" positionY="-507.9654235839844" width="128" height="88"/>
+        <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="133"/>
+        <element name="EvolutionData" positionX="404.6488647460938" positionY="-611.8679351806641" width="128" height="88"/>
         <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="148"/>
-        <element name="Pot" positionX="418.00830078125" positionY="-428.2539978027345" width="128" height="134"/>
+        <element name="Pot" positionX="424.7550048828125" positionY="-477.9354553222656" width="128" height="118"/>
         <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="104"/>
     </elements>
 </model>

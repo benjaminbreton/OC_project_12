@@ -17,32 +17,7 @@ class AthleticsManager {
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
     }
-    
-    // MARK: - Evolution
-    
-    /**
-     Every day, athletics can get evolution of their performances during the last 30 days. This method updates athletics evolution if necessary.
-     */
-    func getEvolution() {
-        for athletic in coreDataStack.entities.allAthletics {
-            if let value = athletic.getEvolution(for: today) {
-                let evolutionData = EvolutionData(context: coreDataStack.viewContext)
-                evolutionData.athletic = athletic
-                evolutionData.date = today
-                evolutionData.value = value
-                deleteEvolutionDatas(athletic.evolutionDatasToClean(for: today))
-            }
-        }
-    }
-    
-    private func deleteEvolutionDatas(_ evolutionDatas: [EvolutionData]) {
-        if evolutionDatas.count > 0 {
-            for evolutionData in evolutionDatas {
-                coreDataStack.viewContext.delete(evolutionData)
-            }
-        }
-    }
-    
+
     // MARK: - Add
     
     /// Add athletic to the game.
@@ -93,23 +68,10 @@ class AthleticsManager {
     /// - parameter completionHandler: Code to execute when athletic has been deleted.
     func delete(_ athletic: Athletic) -> ApplicationErrors? {
         //deletePerformances(athletic)
-        deleteEvolutionDatas(athletic.evolutionDatas)
+        
+        //deleteEvolutionDatas(athletic.evolutionDatas)
         coreDataStack.viewContext.delete(athletic)
         coreDataStack.saveContext()
         return nil
     }
-    /// Delete performances in which the only athletic is an athletic to delete, without cancelling earned points.
-    /// - parameter athletic: The athletic to be deleted.
-//    private func deletePerformances(_ athletic: Athletic) {
-//        let performances: [Performance] = athletic.performances
-//        for performance in performances {
-//            let athletics: [Athletic] = performance.athletics
-//            if athletics.count == 1 && athletics[0] == athletic {
-//                performPerformanceDeletion(performance, cancelPoints: false)
-//            }
-//        }
-//    }
-    
-    
-    
 }

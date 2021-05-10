@@ -26,19 +26,19 @@ public class Performance: NSManagedObject {
     
     /// Add points earned with a performance to pot depending on performance's parameters.
     /// - parameter performance: Performance with which points have been earned.
-    func addPoints(to pots: [Pot?]) {
+    func addPoints(to pots: [Pot?], with pointsForOneEuro: Int) {
         for optionalPot in pots {
             if let pot = optionalPot {
-                pot.changePoints(potAddings)
+                pot.changePoints(Int(potAddings), with: pointsForOneEuro)
             }
         }
     }
     /// Cancel points added in pots by a performance.
     /// - parameter performance: Performance which added points.
-    func cancelPoints(to pots: [Pot?]) {
+    func cancelPoints(to pots: [Pot?], with pointsForOneEuro: Int) {
         for optionalPot in pots {
             if let pot = optionalPot {
-                pot.changePoints(-potAddings)
+                pot.changePoints(-Int(potAddings), with: pointsForOneEuro)
             }
         }
     }
