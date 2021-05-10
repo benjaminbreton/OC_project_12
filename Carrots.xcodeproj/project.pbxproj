@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		030585E326395A03002015A7 /* DetailsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030585E226395A03002015A7 /* DetailsText.swift */; };
+		0305890826491F4C00AB6B28 /* PotsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0305890726491F4C00AB6B28 /* PotsManager.swift */; };
 		0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AE3E260A40CB007FBAA1 /* Pot.swift */; };
 		030DB54C261352320054D140 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54B261352320054D140 /* Settings.swift */; };
 		030DB55026135EFE0054D140 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54F26135EFE0054D140 /* ViewModel.swift */; };
@@ -103,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		030585E226395A03002015A7 /* DetailsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsText.swift; sourceTree = "<group>"; };
+		0305890726491F4C00AB6B28 /* PotsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsManager.swift; sourceTree = "<group>"; };
 		0307AE3E260A40CB007FBAA1 /* Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pot.swift; sourceTree = "<group>"; };
 		030DB54B261352320054D140 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		030DB54F26135EFE0054D140 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				0307AE3E260A40CB007FBAA1 /* Pot.swift */,
+				0305890726491F4C00AB6B28 /* PotsManager.swift */,
 			);
 			path = Pots;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				03648EA8263BE715004EE0AA /* Int+pagesProperties.swift in Sources */,
 				03CE074D262D75C10054BDC0 /* UIFont+appFonts.swift in Sources */,
 				03F787232631B8DC00735510 /* SportDetails.swift in Sources */,
+				0305890826491F4C00AB6B28 /* PotsManager.swift in Sources */,
 				03192E6E262ABE02000D572E /* UIColor+appColors.swift in Sources */,
 				034FC149262ECD6B0081ADB2 /* InDetailsPageWithModificationDestination.swift in Sources */,
 				0335034726384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift in Sources */,

@@ -29,7 +29,7 @@ public class Performance: NSManagedObject {
     func addPoints(to pots: [Pot?]) {
         for optionalPot in pots {
             if let pot = optionalPot {
-                pot.addPoints(potAddings)
+                pot.changePoints(potAddings)
             }
         }
     }
@@ -38,7 +38,7 @@ public class Performance: NSManagedObject {
     func cancelPoints(to pots: [Pot?]) {
         for optionalPot in pots {
             if let pot = optionalPot {
-                pot.addPoints(-potAddings)
+                pot.changePoints(-potAddings)
             }
         }
     }

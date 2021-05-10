@@ -32,6 +32,7 @@ struct Game {
     let athleticsManager: AthleticsManager
     let sportsManager: SportsManager
     let performancesManager: PerformancesManager
+    let potsManager: PotsManager
 }
 
 // MARK: - Init
@@ -40,8 +41,11 @@ extension Game {
     /// Create game with the entered Coredatastack.
     /// - parameter coreDataStack: Coredatastack used to save and load datas from CoreData (Coredatastack() by default).
     init(coreDataStack: CoreDataStack = CoreDataStack()) {
+        // load settings
         self.settings = Settings()
+        // get CoreDataStack
         self.coreDataStack = coreDataStack
+        // set default properties
         athletics = []
         sports = []
         performances = []
@@ -49,71 +53,96 @@ extension Game {
         athleticsManager = AthleticsManager(coreDataStack)
         sportsManager = SportsManager(coreDataStack)
         performancesManager = PerformancesManager(coreDataStack)
-        commonPot = getCommonPot()
-        if settings.gameAlreadyExists {
-            athletics = coreDataStack.entities.allAthletics
-            sports = coreDataStack.entities.allSports
-            performances = coreDataStack.entities.allPerformances
-            allCommonPoints = getAllCommonPoints()
-            athleticsManager.getEvolution()
-        }
+        potsManager = PotsManager(coreDataStack)
+        commonPot = coreDataStack.entities.commonPot
+        if commonPot == nil { commonPot = potsManager.create() }
         settings.gameAlreadyExists = true
-        self.coreDataStack.saveContext()
-        
+        // load game
+        refresh()
     }
+    
+    /// Update athletics array.
+    mutating func refresh() {
+        athletics = coreDataStack.entities.allAthletics
+        performances = coreDataStack.entities.allPerformances
+        sports = coreDataStack.entities.allSports
+        allCommonPoints = getAllCommonPoints()
+        athleticsManager.getEvolution()
+        coreDataStack.saveContext()
+    }
+    
+}
+
+// MARK: - Athletics
+
+extension Game {
     
     mutating func addAthletic(name: String?, image: Data?) {
         guard let name = name else { return }
-        let pot = getNewPot()
+        let pot = potsManager.create()
         error = athleticsManager.add(name: name, image: image, pot: pot)
-        updateProperties()
+        refresh()
     }
     mutating func modify(_ athletic: Athletic, name: String?, image: Data?){
         guard let name = name else { return }
         error = athleticsManager.modify(athletic, name: name, image: image)
-        updateProperties()
+        refresh()
     }
     mutating func delete(_ athletic: Athletic) {
         athletic.willBeDeleted = true
         coreDataStack.saveContext()
-        updateProperties()
+        refresh()
         error = athleticsManager.delete(athletic)
-        updateProperties()
+        refresh()
     }
+}
+
+// MARK: - Settings
+
+extension Game {
     mutating func updateSettings(predictedAmountDate: Date, pointsForOneEuro: String?) {
         guard let points = pointsForOneEuro, points.count < 5, let intPoints = Int(points) else { return }
         settings.predictedAmountDate = predictedAmountDate
         settings.pointsForOneEuro = intPoints
     }
-    
+}
+
+// MARK: - Sports
+
+extension Game {
     mutating func addSport(name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
         error = sportsManager.add(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
-        updateProperties()
+        refresh()
     }
     
     mutating func modify(_ sport: Sport, name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
         guard let name = name else { return }
         error = sportsManager.modify(sport, name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
-        updateProperties()
+        refresh()
     }
     
     mutating func delete(_ sport: Sport) {
         error = sportsManager.delete(sport)
-        updateProperties()
+        refresh()
     }
+}
+
+// MARK: - Performances
+
+extension Game {
     
     mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
         error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
-        updateProperties()
+        refresh()
     }
     
     mutating func delete(_ performance: Performance) {
         error = performancesManager.delete(performance)
-        updateProperties()
+        refresh()
     }
     mutating func deletePerformances<T: NSManagedObject>(of item: T) {
         error = performancesManager.delete(of: item)
-        updateProperties()
+        refresh()
     }
 
 }
@@ -123,48 +152,7 @@ extension Game {
 // MARK: - Supporting methods
     
 extension Game {
-    /// Convert a set in an array.
-    /// - parameter set: The set to be converted.
-    /// - returns: The array based on the set.
-    private func getArrayFromSet<T: NSManagedObject>(_ set: NSSet?) -> [T] {
-        guard let arraySet = set, let array = arraySet.allObjects as? [T] else { return [] }
-        return array
-    }
-    /// Get a pot from its owner.
-    /// - parameter athletic: Pot's owner (nil to get the common pot).
-    /// - returns: Asked pot.
-    private func getPot(of athletic: Athletic? = nil) -> Pot {
-        if let athletic = athletic, let pot = athletic.pot {
-            return pot
-        } else {
-            guard let commonPot = commonPot else { return getNewPot() }
-            return commonPot
-        }
-    }
-    /// Create a new pot for its future owner.
-    /// - parameter athletic: Future pot's owner (nil to create the common pot).
-    /// - returns: The new pot.
-    @discardableResult
-    private func getNewPot(for athletic: Athletic? = nil) -> Pot {
-        let pot = Pot(context: coreDataStack.viewContext)
-        pot.amount = 0
-        pot.owner = athletic
-        pot.creationDate = Date()
-        pot.evolutionType = Pot.EvolutionType.same.int16
-        pot.lastEvolution = 0
-        pot.lastEvolutionDate = Date()
-        pot.points = 0
-        coreDataStack.saveContext()
-        return pot
-    }
     
-    private func getCommonPot() -> Pot {
-        let request: NSFetchRequest<Pot> = Pot.fetchRequest()
-        let predicate = NSPredicate(format: "owner == nil")
-        request.predicate = predicate
-        guard let pots = try? coreDataStack.viewContext.fetch(request), pots.count > 0 else { return getNewPot() }
-        return pots[0]
-    }
     private func getAllCommonPoints() -> Double {
         if performances.count > 0 {
             return Double(performances.map({ $0.addedToCommonPot ? $0.potAddings : 0 }).reduce(0, +))
@@ -172,68 +160,25 @@ extension Game {
             return 0
         }
     }
-    /// Update athletics array.
-    mutating private func updateProperties() {
-        athletics = coreDataStack.entities.allAthletics
-        performances = coreDataStack.entities.allPerformances
-        sports = coreDataStack.entities.allSports
-        coreDataStack.saveContext()
-    }
-}
-
-
-
-
-// MARK: - Performances
-
-extension Game {
     
-    
-}
-
-// MARK: - Statistics
-
-extension Game {
-    /// Get athletic's or common pot's statistics.
-    /// - parameter athletic: The athletic for whom statistics have to be getted (nil to get common pot's statistics).
-    mutating func getStatistics(for athletic: Athletic? = nil) {
-        let pot = getPot(of: athletic)
-        pot.getStatistics(allCommonPoints: allCommonPoints, predictedAmountDate: settings.predictedAmountDate) { statistics in
-            self.askedStatistics = statistics
-            self.settings.predictedAmountDate = statistics.predictedAmountDate
-            self.coreDataStack.saveContext()
-        }
-    }
 }
 
 // MARK: - Change money
 
 extension Game {
-    /// Add money to a pot.
-    /// - parameter athletic: The athletic for whom money has to be added (nil to add to the common pot).
-    /// - parameter amount: Amount to add.
-    mutating func addMoney(for athletic: Athletic? = nil, amount: Double) {
-        let pot = getPot(of: athletic)
-        pot.amount += amount
-        if let athletic = athletic {
-            athletic.pot = pot
-        } else {
-            commonPot = pot
-        }
-        coreDataStack.saveContext()
+    mutating func addMoney(for athletic: Athletic? = nil, amount: String) {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        guard let amount = formatter.number(from: amount) as? Double else { return }
+        error = potsManager.addMoney(for: athletic, amount: amount)
+        refresh()
     }
-    /// Withdraw money to a pot.
-    /// - parameter athletic: The athletic for whom money has to be withdrawn (nil to withdraw to the common pot).
-    /// - parameter amount: Amount to withdraw.
-    mutating func withdrawMoney(for athletic: Athletic? = nil, amount: Double) {
-        let pot = getPot(of: athletic)
-        pot.amount -= amount
-        if let athletic = athletic {
-            athletic.pot = pot
-        } else {
-            commonPot = pot
-        }
-        coreDataStack.saveContext()
+    mutating func withdrawMoney(for athletic: Athletic? = nil, amount: String) {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        guard let amount = formatter.number(from: amount) as? Double else { return }
+        error = potsManager.withdrawMoney(for: athletic, amount: amount)
+        refresh()
     }
 }
 

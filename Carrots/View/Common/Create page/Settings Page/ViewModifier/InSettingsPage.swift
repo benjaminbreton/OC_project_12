@@ -41,8 +41,7 @@ fileprivate struct InSettingsPage: ViewModifier {
             }
             ConfirmButton(isDisabled: confirmationIsDisabled) {
                 confirmAction()
-                error = gameDoor.getError()
-                guard error == nil else {
+                guard gameDoor.error == nil else {
                     showAlert = true
                     return
                 }

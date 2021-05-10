@@ -21,7 +21,7 @@ public class Pot: NSManagedObject {
     var formattedEvolutionType: EvolutionType {
         evolutionType.potEvolutionType
     }
-    func addPoints(_ count: Int64) {
+     func changePoints(_ count: Int64) {
         let countCheck = convertPoints(Double(count))
         amount += countCheck.amount
         points += countCheck.leftPoints

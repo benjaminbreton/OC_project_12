@@ -8,7 +8,7 @@
 import Foundation
 enum ApplicationErrors: Error, CustomStringConvertible {
     // athletics
-    case existingAthletic
+    case existingAthletic, noPot(Athletic?)
     // sports
     case existingSport, unknownSportIndex
     // performance
@@ -33,6 +33,9 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "No common pot"
         case .severalCommonPots(let count):
             return "Several common pots: \(count)"
+        case .noPot(let athletic):
+            guard let athletic = athletic else { return "No common pot." }
+            return "No pot for \(athletic.description)."
         }
     }
     @discardableResult
@@ -40,7 +43,7 @@ enum ApplicationErrors: Error, CustomStringConvertible {
         #if DEBUG
         print("""
             ###> ERROR <###
-            ### Error \(error),
+            ### > \(error),
             ### took place on file \(file),
             ### line \(line),
             ### function \(function).
