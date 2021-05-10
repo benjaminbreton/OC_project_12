@@ -120,6 +120,9 @@ fileprivate struct SportsList: View {
             ForEach(sports, id: \.description) { sport in
                 SportCell(sport: sport)
                     .environmentObject(gameDoor)
+                    .canBeDeleted {
+                        gameDoor.delete(sport)
+                    }
             }
         }
     }
@@ -127,14 +130,18 @@ fileprivate struct SportsList: View {
 
 fileprivate struct PerformancesList: View {
     let performances: [Performance]
-    //@State var isItemHidden: [Pot: Bool]
     @EnvironmentObject var gameDoor: GameDoor
+//    let athleticOwner: Athletic?
+//    let sportOwner: Sport?
     
     var body: some View {
         Group {
             ForEach(performances, id: \.description) { performance in
                 PerformanceCell(performance: performance)
                     .environmentObject(gameDoor)
+                    .canBeDeleted {
+                        gameDoor.delete(performance)
+                    }
             }
         }
     }

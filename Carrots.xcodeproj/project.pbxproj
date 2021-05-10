@@ -84,6 +84,9 @@
 		03DE95882604C51800FBAA4F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95872604C51800FBAA4F /* Game.swift */; };
 		03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */; };
 		03E1F9C726453B8600DA870F /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F9C626453B8600DA870F /* Entities.swift */; };
+		03E1F9CB26457BAA00DA870F /* AthleticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F9CA26457BAA00DA870F /* AthleticsManager.swift */; };
+		03E1F9D526457ED300DA870F /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F9D426457ED300DA870F /* SportsManager.swift */; };
+		03E1F9DB2645851100DA870F /* PerformancesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F9DA2645851100DA870F /* PerformancesManager.swift */; };
 		03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F472092615FB8A002CE23D /* HomeView.swift */; };
 		03F787232631B8DC00735510 /* SportDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F787222631B8DC00735510 /* SportDetails.swift */; };
 /* End PBXBuildFile section */
@@ -180,6 +183,9 @@
 		03DE95872604C51800FBAA4F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCoreDataStack.swift; sourceTree = "<group>"; };
 		03E1F9C626453B8600DA870F /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		03E1F9CA26457BAA00DA870F /* AthleticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsManager.swift; sourceTree = "<group>"; };
+		03E1F9D426457ED300DA870F /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
+		03E1F9DA2645851100DA870F /* PerformancesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesManager.swift; sourceTree = "<group>"; };
 		03F472092615FB8A002CE23D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03F787222631B8DC00735510 /* SportDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -518,15 +524,66 @@
 		03DE95752604BF9A00FBAA4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				03DE95872604C51800FBAA4F /* Game.swift */,
-				030DB54B261352320054D140 /* Settings.swift */,
-				0307AE3E260A40CB007FBAA1 /* Pot.swift */,
-				03832129260899F3003EE886 /* Sport.swift */,
-				0383212026088DEF003EE886 /* ApplicationErrors.swift */,
-				03D3C7B9260C7B1400DDA29F /* Athletic.swift */,
-				033503372638227600E2BD99 /* Performance.swift */,
+				03E1F9D326457E8700DA870F /* Support */,
+				03E1F9D226457E8400DA870F /* Game */,
+				03E1F9D126457E7F00DA870F /* Athletics */,
+				03E1F9D026457E7C00DA870F /* Pots */,
+				03E1F9CF26457E7800DA870F /* Sports */,
+				03E1F9CE26457E7100DA870F /* Performances */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		03E1F9CE26457E7100DA870F /* Performances */ = {
+			isa = PBXGroup;
+			children = (
+				033503372638227600E2BD99 /* Performance.swift */,
+				03E1F9DA2645851100DA870F /* PerformancesManager.swift */,
+			);
+			path = Performances;
+			sourceTree = "<group>";
+		};
+		03E1F9CF26457E7800DA870F /* Sports */ = {
+			isa = PBXGroup;
+			children = (
+				03832129260899F3003EE886 /* Sport.swift */,
+				03E1F9D426457ED300DA870F /* SportsManager.swift */,
+			);
+			path = Sports;
+			sourceTree = "<group>";
+		};
+		03E1F9D026457E7C00DA870F /* Pots */ = {
+			isa = PBXGroup;
+			children = (
+				0307AE3E260A40CB007FBAA1 /* Pot.swift */,
+			);
+			path = Pots;
+			sourceTree = "<group>";
+		};
+		03E1F9D126457E7F00DA870F /* Athletics */ = {
+			isa = PBXGroup;
+			children = (
+				03D3C7B9260C7B1400DDA29F /* Athletic.swift */,
+				03E1F9CA26457BAA00DA870F /* AthleticsManager.swift */,
+			);
+			path = Athletics;
+			sourceTree = "<group>";
+		};
+		03E1F9D226457E8400DA870F /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				03DE95872604C51800FBAA4F /* Game.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		03E1F9D326457E8700DA870F /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				030DB54B261352320054D140 /* Settings.swift */,
+				0383212026088DEF003EE886 /* ApplicationErrors.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		03F472082615FB66002CE23D /* View */ = {
@@ -659,6 +716,7 @@
 				03B1DF9C262C8D5D00B590AC /* InSettingsPage.swift in Sources */,
 				03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */,
 				03D038FC261D9488004B8C30 /* LogoView.swift in Sources */,
+				03E1F9CB26457BAA00DA870F /* AthleticsManager.swift in Sources */,
 				03DD822B261F23960028A0A5 /* AthleticsHome.swift in Sources */,
 				03264BE426205333003F6429 /* ConfirmButton.swift in Sources */,
 				03B1DFB0262C8EE500B590AC /* CloseKeyboardOnTap.swift in Sources */,
@@ -691,6 +749,7 @@
 				03BBF2662625CFDC00D41B8B /* PerformanceCell.swift in Sources */,
 				03648EA4263BE6D5004EE0AA /* HomeTab.swift in Sources */,
 				034FC13C262EC71A0081ADB2 /* NavigationBarButton.swift in Sources */,
+				03E1F9D526457ED300DA870F /* SportsManager.swift in Sources */,
 				034AB62C26010E5B0034C1E2 /* Carrots.xcdatamodeld in Sources */,
 				0383212626088E0C003EE886 /* Error+userDescription.swift in Sources */,
 				03C564A72630301C0056756A /* DetailsDateDisplayer.swift in Sources */,
@@ -702,6 +761,7 @@
 				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
 				03264BEF262056E4003F6429 /* SportsHome.swift in Sources */,
 				03BBF2622625CE3600D41B8B /* PerformancesHome.swift in Sources */,
+				03E1F9DB2645851100DA870F /* PerformancesManager.swift in Sources */,
 				03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */,
 				03264BF726208E36003F6429 /* SportIcon.swift in Sources */,
 				03648EA8263BE715004EE0AA /* Int+pagesProperties.swift in Sources */,

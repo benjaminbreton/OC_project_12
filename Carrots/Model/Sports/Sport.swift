@@ -10,6 +10,12 @@ import CoreData
 public class Sport: NSManagedObject {
     /// Sport's unity type.
     var unityType: UnityType { unityInt16.sportUnityType }
+    var performances: [Performance] {
+        guard let performancesSet = performancesSet, let performances = performancesSet.allObjects as? [Performance] else {
+            return []
+        }
+        return performances
+    }
     override public var description: String { name ?? "No name" }
     func pointsToAdd(for value: Int64) -> Int64 {
         guard valueForOnePoint > 0 else { return 0 }
