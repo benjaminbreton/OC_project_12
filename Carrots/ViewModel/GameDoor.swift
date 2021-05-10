@@ -91,4 +91,14 @@ class GameDoor: ObservableObject {
         game.refresh()
     }
     
+    // MARK: - Money
+    
+    func changeMoney(for athletic: Athletic? = nil, amount: String, operation: Int) {
+        if operation == 0 {
+            game.addMoney(for: athletic, amount: amount)
+        } else {
+            game.withdrawMoney(for: athletic, amount: amount)
+        }
+    }
+    
 }

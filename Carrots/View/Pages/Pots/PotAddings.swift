@@ -11,6 +11,7 @@ struct PotAddings: View {
     let pot: Pot?
     @State var selection: Int = 0
     @State var amount: String = ""
+    @State var confirmationButtonIsDisabled: Bool = false
     var placeHolder: String {
         selection == 0 ? "Amount to add" : "Amount to withdraw"
     }
@@ -18,10 +19,10 @@ struct PotAddings: View {
     var body: some View {
         VStack {
             SettingsSegmentedPicker(title: "Modification type", selection: $selection, instructions: "Choose the modification to do", possibilities: ["+ add money", "- withdraw money"])
-            SettingsTextfield(title: "Amount", placeHolder: placeHolder, value: $amount, keyboard: .decimalPad)
+            SettingsTextfield(title: "Amount", placeHolder: placeHolder, value: $amount, keyboard: .decimalPad, isWrong: $confirmationButtonIsDisabled, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose an amount", maxCount: nil))
         }
-        .inSettingsPage("\(pot?.description ?? "No name")", gameDoor: _gameDoor) {
-            
+        .inSettingsPage("\(pot?.description ?? "No name")", gameDoor: _gameDoor, confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
+            gameDoor.changeMoney(for: pot?.owner, amount: amount, operation: selection)
         }
     }
 }

@@ -106,7 +106,7 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
                 Text(placeHolder)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
-                    .animation(.linear)
+                    .animation(.easeIn)
                     .transition(.opacity)
             }
         }
@@ -230,7 +230,7 @@ fileprivate struct CanBeDeleted: ViewModifier {
                 }
             }
             .opacity(opacity)
-            .animation(.linear)
+            .animation(.easeIn)
             .transition(.opacity)
             .onAnimationCompleted(for: opacity, completion: deleteAction)
     }

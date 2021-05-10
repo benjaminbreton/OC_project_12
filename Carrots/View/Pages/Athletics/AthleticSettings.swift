@@ -18,6 +18,8 @@ struct AthleticSettings: View {
     @State var name: String
     /// Current image.
     @State var image: UIImage?
+    @State var confirmationButtonIsDisabled: Bool = false
+    
     /// Current image's data.
     var data: Data? {
         image?.jpegData(compressionQuality: 1)
@@ -27,10 +29,10 @@ struct AthleticSettings: View {
     
     var body: some View {
         VStack {
-            SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default)
+            SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default, explanations: nil, isWrong: $confirmationButtonIsDisabled, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
             SettingsAthleticImagePicker(image: $image)
         }
-        .inSettingsPage(name == "" ? "New athletic":"\(name) settings", gameDoor: _gameDoor, confirmAction: {
+        .inSettingsPage(name == "" ? "New athletic":"\(name) settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: $confirmationButtonIsDisabled, confirmAction: {
             if let athletic = athletic {
                 gameDoor.update(athletic, name: name, image: data)
             } else {
