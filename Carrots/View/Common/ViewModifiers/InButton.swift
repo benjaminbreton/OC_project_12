@@ -31,23 +31,11 @@ fileprivate struct InButton: ViewModifier {
         .disabled(disablingButton)
     }
 }
-fileprivate struct InDeleteButton: ViewModifier {
-    let action: () -> Void
-    func body(content: Content) -> some View {
-        Button(action: action) {
-            content
-                .withDeleteFont()
-        }
-    }
-}
 
 // MARK: - View's extension
 
 extension View {
     func inButton(isDisabled: Binding<Bool>? = nil, action: @escaping () -> Void) -> some View {
         modifier(InButton(isDisabled: isDisabled, action: action))
-    }
-    func inDeleteButton(action: @escaping () -> Void) -> some View {
-        modifier(InDeleteButton(action: action))
     }
 }

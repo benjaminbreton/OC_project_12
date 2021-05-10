@@ -40,13 +40,6 @@ struct AthleticCell: View {
             destination: AthleticDetails(athletic: athletic)
                 .environmentObject(gameDoor)
         )
-        .contextMenu {
-            Text("Delete")
-                .inDeleteButton {
-                    gameDoor.delete(athletic)
-                }
-        }
-        .withCellAnimation()
         
     }
 }

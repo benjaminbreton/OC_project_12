@@ -7,13 +7,31 @@
 
 import SwiftUI
 import CoreData
+
+// MARK: - AppList
+
+/**
+ A list of applications entities : Athletics, Pots, Performances or Sports.
+ */
 struct AppList<T: NSManagedObject>: View {
-    let items: [T]
-    let placeHolder: String
-    let title: String?
-    let commonPot: Pot?
-    let withDivider: Bool
+    
+    // MARK: - Properties
+    
+    /// App's viewmodel.
     @EnvironmentObject var gameDoor: GameDoor
+    /// Items to display.
+    let items: [T]
+    /// Text to display if items property is empty.
+    let placeHolder: String
+    /// List's title.
+    let title: String?
+    /// Common pot to display in a pots list.
+    let commonPot: Pot?
+    /// A boolean indicating whether dividers have to be added at the list's top and bottom.
+    let withDivider: Bool
+    
+    // MARK: - Init
+    
     init(_ items: [T], placeHolder: String, commonPot: Pot? = nil, title: String? = nil, withDivider: Bool = true) {
         self.items = items
         self.placeHolder = placeHolder
@@ -21,6 +39,9 @@ struct AppList<T: NSManagedObject>: View {
         self.title = title
         self.withDivider = withDivider
     }
+    
+    // MARK: - Body
+    
     var body: some View {
         VStack {
             if withDivider { Divider() }
@@ -43,11 +64,25 @@ struct AppList<T: NSManagedObject>: View {
     }
 }
 
+// MARK: - SimpleList
+
+/**
+ Elements to display in an AppList.
+ */
 fileprivate struct SimpleList<T: NSManagedObject>: View {
-    let items: [T]
-    let placeHolder: String
+    
+    // MARK: - Properties
+    
+    /// App's viewmodel.
     @EnvironmentObject var gameDoor: GameDoor
+    /// Items to display.
+    let items: [T]
+    /// Text to display if items property is empty.
+    let placeHolder: String
+    /// A boolean indicating whether the placeholder has to be displayed or not.
     private var isPlaceHolderVisible: Bool { items.count == 0 }
+    
+    // MARK: - Body
     
     var body: some View {
         Group {
@@ -71,31 +106,39 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
                 Text(placeHolder)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
-                    .withCellAnimation()
+                    .animation(.linear)
+                    .transition(.opacity)
             }
         }
     }
 }
 
+// MARK: - AthleticsList
+
+/**
+ List to display if items are of athletic's type.
+ */
 fileprivate struct AthleticsList: View {
     let athletics: [Athletic]
     @EnvironmentObject var gameDoor: GameDoor
     var body: some View {
         VStack {
             ForEach(athletics, id: \.description) { athletic in
-                if !athletic.willBeDeleted {
-                    AthleticCell(athletic: athletic)
-                        .environmentObject(gameDoor)
-//                        .canBeDeleted {
-//                            gameDoor.delete(athletic)
-//                        }
-                        
-                }
+                AthleticCell(athletic: athletic)
+                    .environmentObject(gameDoor)
+                    .canBeDeleted {
+                        gameDoor.delete(athletic)
+                    }
             }
         }
     }
 }
 
+// MARK: - PotsList
+
+/**
+ List to display if items are of pot's type.
+ */
 fileprivate struct PotsList: View {
     let pots: [Pot]
     @EnvironmentObject var gameDoor: GameDoor
@@ -110,6 +153,11 @@ fileprivate struct PotsList: View {
     }
 }
 
+// MARK: - SportsList
+
+/**
+ List to display if items are of sport's type.
+ */
 fileprivate struct SportsList: View {
     let sports: [Sport]
     //@State var isItemHidden: [Pot: Bool]
@@ -128,11 +176,16 @@ fileprivate struct SportsList: View {
     }
 }
 
+// MARK: - PerformancesList
+
+/**
+ List to display if items are of performance's type.
+ */
 fileprivate struct PerformancesList: View {
     let performances: [Performance]
     @EnvironmentObject var gameDoor: GameDoor
-//    let athleticOwner: Athletic?
-//    let sportOwner: Sport?
+    //    let athleticOwner: Athletic?
+    //    let sportOwner: Sport?
     
     var body: some View {
         Group {
@@ -147,38 +200,90 @@ fileprivate struct PerformancesList: View {
     }
 }
 
-// MARK: - View modifiers
+// MARK: - CanBeDeleted
 
-fileprivate struct WithCellAnimation: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .animation(.linear)
-            .transition(.move(edge: .trailing))
-    }
-}
-
+/**
+ Add a context menu with a delete button to delete a cell.
+ */
 fileprivate struct CanBeDeleted: ViewModifier {
+    
+    // MARK: - Properties
+    
+    /// Cell's opacity.
+    @State private var opacity: Double = 1
+    /// Action to perform when cell's animation is over.
     let deleteAction: () -> Void
+    
+    // MARK: - Body
+    
     func body(content: Content) -> some View {
         content
             .contextMenu {
-                Text("Delete")
-                    .inDeleteButton(action: deleteAction)
+                HStack {
+                    Text("Delete")
+                    Image(systemName: "trash")
+                }
+                .inButton {
+                    withAnimation(.easeIn(duration: 0.5)) {
+                        opacity = 0
+                    }
+                }
             }
-            .withCellAnimation()
+            .opacity(opacity)
+            .animation(.linear)
+            .transition(.opacity)
+            .onAnimationCompleted(for: opacity, completion: deleteAction)
     }
 }
 
-// MARK: - View Extension
-
-
+// MARK: - View's Extension
 
 extension View {
-    func withCellAnimation() -> some View {
-        modifier(WithCellAnimation())
-    }
     fileprivate func canBeDeleted(deleteAction: @escaping () -> Void) -> some View {
         modifier(CanBeDeleted(deleteAction: deleteAction))
     }
+    fileprivate func onAnimationCompleted<Value: VectorArithmetic>(for value: Value, completion: @escaping () -> Void) -> ModifiedContent<Self, OnAnimationCompleted<Value>> {
+        return modifier(OnAnimationCompleted(observedValue: value, completion: completion))
+    }
     
+}
+
+// MARK: - OnAnimationCompleted
+
+struct OnAnimationCompleted<Value>: AnimatableModifier where Value: VectorArithmetic {
+    
+    /// While animating, SwiftUI changes the old input value to the new target value using this property. This value is set to the old value until the animation completes.
+    var animatableData: Value {
+        didSet {
+            notifyCompletionIfFinished()
+        }
+    }
+    
+    /// The target value for which we're observing. This value is directly set once the animation starts. During animation, `animatableData` will hold the oldValue and is only updated to the target value once the animation completes.
+    private var targetValue: Value
+    
+    /// The completion callback which is called once the animation completes.
+    private var completion: () -> Void
+    
+    init(observedValue: Value, completion: @escaping () -> Void) {
+        self.completion = completion
+        self.animatableData = observedValue
+        targetValue = observedValue
+    }
+    
+    /// Verifies whether the current animation is finished and calls the completion callback if true.
+    private func notifyCompletionIfFinished() {
+        guard animatableData == targetValue else { return }
+        
+        /// Dispatching is needed to take the next runloop for the completion callback.
+        /// This prevents errors like "Modifying state during view update, this will cause undefined behavior."
+        DispatchQueue.main.async {
+            self.completion()
+        }
+    }
+    
+    func body(content: Content) -> some View {
+        /// We're not really modifying the view so we can directly return the original input value.
+        return content
+    }
 }

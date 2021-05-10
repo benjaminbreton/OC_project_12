@@ -18,6 +18,7 @@ struct HomeTab: View {
                 }
                 .tag(0)
                 .environmentObject(gameDoor)
+                .onAppear { gameDoor.refresh() }
             AthleticsHome()
                 .tabItem {
                     Image(systemName: "figure.walk.circle.fill")
@@ -25,7 +26,7 @@ struct HomeTab: View {
                 }
                 .tag(1)
                 .environmentObject(gameDoor)
-            
+                .onAppear { gameDoor.refresh() }
             SportsHome()
                 .tabItem {
                     Image(systemName: "bicycle.circle.fill")
@@ -33,6 +34,7 @@ struct HomeTab: View {
                 }
                 .tag(2)
                 .environmentObject(gameDoor)
+                .onAppear { gameDoor.refresh() }
             PerformancesHome()
                 .tabItem {
                     Image(systemName: "arrow.up.right.circle.fill")
@@ -40,6 +42,7 @@ struct HomeTab: View {
                 }
                 .tag(3)
                 .environmentObject(gameDoor)
+                .onAppear { gameDoor.refresh() }
         }
         .accentColor(.tab)
     }

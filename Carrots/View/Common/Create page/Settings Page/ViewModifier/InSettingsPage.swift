@@ -53,8 +53,8 @@ fileprivate struct InSettingsPage: ViewModifier {
         .alert(isPresented: $showAlert) {
             if let error = error {
                 return Alert(
-                    title: Text("Error"),
-                    message: Text(error.description),
+                    title: Text(error.userTitle),
+                    message: Text(error.userMessage),
                     dismissButton: .default(Text("OK")))
             } else {
                 return Alert(

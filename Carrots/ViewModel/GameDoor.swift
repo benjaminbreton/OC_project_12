@@ -85,4 +85,10 @@ class GameDoor: ObservableObject {
         return game.getError()
     }
     
+    // MARK: - Refresh
+    
+    func refresh() {
+        game.refresh()
+    }
+    
 }
