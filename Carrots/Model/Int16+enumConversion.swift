@@ -13,6 +13,8 @@ extension Int16 {
             return .distance
         case 2:
             return .time
+        case 3:
+            return .oneShot
         default:
             return .count
         }

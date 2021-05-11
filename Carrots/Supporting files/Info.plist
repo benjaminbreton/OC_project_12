@@ -28,6 +28,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>sportive.ttf</string>
 		<string>akaPosse.ttf</string>
 		<string>kirsty.otf</string>
 		<string>sportstfb.ttf</string>

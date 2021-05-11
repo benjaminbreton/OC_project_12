@@ -19,8 +19,13 @@ public class Sport: NSManagedObject {
     override public var description: String { name ?? "No name" }
     func pointsToAdd(for value: Int64) -> Int64 {
         guard valueForOnePoint > 0 else { return 0 }
-        let points = value / valueForOnePoint
-        return points * valueForOnePoint > value ? points - 1 : points
+        switch unityInt16.sportUnityType {
+        case .oneShot:
+            return valueForOnePoint
+        default:
+            let points = value / valueForOnePoint
+            return points * valueForOnePoint > value ? points - 1 : points
+        }
     }
     func update(name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
         guard let name = name, let icon = icon, let unityType = unityType else { return }
@@ -32,7 +37,7 @@ public class Sport: NSManagedObject {
     /// Sport's unity type enumeration.
     enum UnityType: CustomStringConvertible {
         
-        case distance, time, count
+        case distance, time, count, oneShot
         
         /// Sport's unity type int16 to save in coredata.
         var int16: Int16 {
@@ -41,6 +46,8 @@ public class Sport: NSManagedObject {
                 return 1
             case .time:
                 return 2
+            case .oneShot:
+                return 3
             case .count:
                 return 0
             }
@@ -51,6 +58,8 @@ public class Sport: NSManagedObject {
                 return "distance"
             case .time:
                 return "time"
+            case .oneShot:
+                return "one shot"
             case .count:
                 return "count"
             }
@@ -61,7 +70,7 @@ public class Sport: NSManagedObject {
                 return [" km"]
             case .time:
                 return [" h ", " m ", " s"]
-            case .count:
+            default:
                 return [""]
             }
         }
@@ -71,8 +80,22 @@ public class Sport: NSManagedObject {
                 return ["distance"]
             case .time:
                 return ["hours", "min.", "sec."]
+            case .oneShot:
+                return ["earned points"]
             case .count:
                 return ["count"]
+            }
+        }
+        var explanations: String {
+            switch self {
+            case .distance:
+                return "You have to indicate here the necessary distance to reach to get one point."
+            case .time:
+                return "You have to indicate here the necessary exercice's duration to get one point."
+            case .count:
+                return "You have to indicate here the necessary count to get one point."
+            case .oneShot:
+                return "You have to indicate here the number of points earned each time this sport has been made. "
             }
         }
         func value(for inputs: [String?]) -> Int64 {
@@ -112,7 +135,6 @@ public class Sport: NSManagedObject {
                 return realisation[0]
             }
         }
-        
         
     }
     

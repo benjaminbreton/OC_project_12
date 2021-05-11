@@ -14,11 +14,32 @@ struct SettingsSportValue: View {
         }
     }
     @Binding var value: [String]
+    enum Caller: Equatable { case sport, performance }
+    let caller: Caller
+    let valueForOnePoint: Int64
+    
+    init(placeholder: String, unity: Sport.UnityType?, valueForOnePoint: Binding<[String]>, caller: Caller, existingValueForOnePoint: Int64? = nil) {
+        self.placeholder = placeholder
+        self.unity = unity
+        self._value = valueForOnePoint
+        self.caller = caller
+        self.valueForOnePoint = existingValueForOnePoint ?? 0
+    }
+    
     var body: some View {
         ZStack {
             if let sportUnity = unity {
                 HStack {
                     switch sportUnity {
+                    case .oneShot:
+                        switch caller {
+                        case .sport:
+                            TextField(sportUnity.placeholders[0], text: $value[0])
+                            Text(sportUnity.symbols[0])
+                        case .performance:
+                            Text("By doing this sport, you'll earn \(valueForOnePoint) points.")
+                                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        }
                     case .time:
                         TextField(sportUnity.placeholders[0], text: $value[0])
                         Text(sportUnity.symbols[0])
@@ -37,7 +58,7 @@ struct SettingsSportValue: View {
         }
         .frame(height: ViewCommonSettings().textLineHeight)
         .keyboardType(.numberPad)
-        .inModule("Value")
+        .inModule(caller == .sport ? "Value for one point" : "Performance", explanations: caller == .sport ? unity?.explanations : nil)
     }
 }
 

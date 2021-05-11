@@ -67,7 +67,7 @@ class ViewCommonSettings {
     
     let regularFontName: String = "kirsty"
     let titleFontName: String = "akaPosse"
-    let iconsFontName: String = "sportstfb"
+    let iconsFontName: String = "sportive"
     
     // MARK: - UIFonts
     
@@ -83,7 +83,7 @@ class ViewCommonSettings {
     // MARK: - Specials
     
     var sportsIconsCharacters: [String] {
-        let characters = "ABEHKMOTWXZabfntw8$*/='#@&_;!|{}]"
+        let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
         return characters.map({ "\($0)" })
     }
     

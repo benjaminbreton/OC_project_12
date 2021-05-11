@@ -14,12 +14,18 @@ struct SportSettings: View {
     @State var unity: [Sport.UnityType] = []
     @State var valueForOnePoint: [String] = ["0", "0", "0"]
     @State var confirmationButtonIsDisabled: Bool = false
-    let unities: [Sport.UnityType] = [.count, .distance, .time]
+    let unities: [Sport.UnityType] = [.count, .distance, .time, .oneShot]
     var body: some View {
         VStack {
-            SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default, explanations: nil, isWrong: $confirmationButtonIsDisabled, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
+            SettingsTextfield(
+                title: "Name",
+                placeHolder: "Name",
+                value: $name,
+                keyboard: .default,
+                isWrong: $confirmationButtonIsDisabled,
+                limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
             SettingsCustomPicker(title: "Unity", data: unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
-            SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, value: $valueForOnePoint)
+            SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, valueForOnePoint: $valueForOnePoint, caller: .sport)
             SettingsSportIconPicker(icon: $icon)
         }
         .inSettingsPage(name == "" ? "new sport":"\(name) settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
