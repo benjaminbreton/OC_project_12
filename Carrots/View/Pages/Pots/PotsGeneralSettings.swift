@@ -10,7 +10,8 @@ struct PotsGeneralSettings: View {
     @EnvironmentObject var gameDoor: GameDoor
     @State var date: Date
     @State var pointsForOneEuro: String
-    @State var confirmationButtonIsDisabled: Bool = false
+    @State var arePointsWrong: Bool = false
+    var confirmationButtonIsDisabled: Bool { arePointsWrong }
     var body: some View {
         VStack() {
             SettingsDatePicker(title: "Prevision date", date: $date, range: .afterToday, explanations: """
@@ -28,11 +29,11 @@ struct PotsGeneralSettings: View {
         Points can be converted in euros in each pot.
         Set here the necessary number of points to earn one euro.
         """,
-                isWrong: $confirmationButtonIsDisabled,
+                isWrong: $arePointsWrong,
                 limits: (minCount: 1, maxCount: 3),
                 limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
         }
-        .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
+        .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
             gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro)
         }
     }

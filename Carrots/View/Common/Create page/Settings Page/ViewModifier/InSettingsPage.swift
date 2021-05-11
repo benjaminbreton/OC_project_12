@@ -16,14 +16,14 @@ fileprivate struct InSettingsPage: ViewModifier {
     private let title: String
     private let confirmAction: () -> Void
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    var confirmationIsDisabled: Binding<Bool>?
+    var confirmationIsDisabled: Bool?
     @EnvironmentObject var gameDoor: GameDoor
     @State var error: ApplicationErrors? = nil
     @State var showAlert: Bool = false
     
     // MARK: - Init
     
-    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Binding<Bool>?, confirmAction: @escaping () -> Void) {
+    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Bool?, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
         self.confirmationIsDisabled = confirmationIsDisabled
@@ -75,7 +75,7 @@ extension View {
      - parameter title: Title which will appear in the navigation bar.
      - parameter confirmAction: Actions to do when user confirm its choices.
      */
-    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Binding<Bool>? = nil, confirmAction: @escaping () -> Void) -> some View {
+    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Bool? = nil, confirmAction: @escaping () -> Void) -> some View {
         modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, confirmAction: confirmAction))
     }
 }

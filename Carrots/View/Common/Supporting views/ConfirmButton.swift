@@ -8,8 +8,8 @@
 import SwiftUI
 struct ConfirmButton: View {
     let action: () -> Void
-    var isDisabled: Binding<Bool>?
-    init(isDisabled: Binding<Bool>? = nil, action: @escaping () -> Void) {
+    var isDisabled: Bool?
+    init(isDisabled: Bool? = nil, action: @escaping () -> Void) {
         self.action = action
         self.isDisabled = isDisabled
     }

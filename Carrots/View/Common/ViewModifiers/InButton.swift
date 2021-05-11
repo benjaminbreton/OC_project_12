@@ -11,15 +11,15 @@ import SwiftUI
 
 fileprivate struct InButton: ViewModifier {
     let action: () -> Void
-    var isDisabled: Binding<Bool>?
+    var isDisabled: Bool?
     private var disablingButton: Bool {
         if let isDisabled = isDisabled {
-            return isDisabled.wrappedValue
+            return isDisabled
         } else {
             return false
         }
     }
-    init(isDisabled: Binding<Bool>?, action: @escaping () -> Void) {
+    init(isDisabled: Bool?, action: @escaping () -> Void) {
         self.action = action
         self.isDisabled = isDisabled
     }
@@ -35,7 +35,7 @@ fileprivate struct InButton: ViewModifier {
 // MARK: - View's extension
 
 extension View {
-    func inButton(isDisabled: Binding<Bool>? = nil, action: @escaping () -> Void) -> some View {
+    func inButton(isDisabled: Bool? = nil, action: @escaping () -> Void) -> some View {
         modifier(InButton(isDisabled: isDisabled, action: action))
     }
 }

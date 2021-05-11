@@ -13,7 +13,8 @@ struct SportSettings: View {
     @State var icon: String
     @State var unity: [Sport.UnityType] = []
     @State var valueForOnePoint: [String] = ["0", "0", "0"]
-    @State var confirmationButtonIsDisabled: Bool = false
+    @State var isNameEmpty: Bool = false
+    var confirmationButtonIsDisabled: Bool { isNameEmpty || unity.count == 0 || valueForOnePoint == ["0", "0", "0"] }
     let unities: [Sport.UnityType] = [.count, .distance, .time, .oneShot]
     var body: some View {
         VStack {
@@ -22,13 +23,13 @@ struct SportSettings: View {
                 placeHolder: "Name",
                 value: $name,
                 keyboard: .default,
-                isWrong: $confirmationButtonIsDisabled,
+                isWrong: $isNameEmpty,
                 limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
             SettingsCustomPicker(title: "Unity", data: unities, selectedObjects: $unity, maximumSelection: 1, lineCount: 1)
             SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, valueForOnePoint: $valueForOnePoint, caller: .sport)
             SettingsSportIconPicker(icon: $icon)
         }
-        .inSettingsPage(name == "" ? "new sport":"\(name) settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: $confirmationButtonIsDisabled) {
+        .inSettingsPage(name == "" ? "new sport":"\(name) settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
             guard unity.count == 1 else { return }
             if let sport = sport {
                 gameDoor.update(sport, name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)
