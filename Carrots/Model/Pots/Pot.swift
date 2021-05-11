@@ -20,7 +20,7 @@ public class Pot: NSManagedObject {
             return owner.allPoints
         } else {
             let request: NSFetchRequest<Performance> = Performance.fetchRequest()
-            let predicate = NSPredicate(format: "addedToCommonPot == %@", true)
+            let predicate = NSPredicate(format: "addedToCommonPot == YES")
             request.predicate = predicate
             guard let performances = try? managedObjectContext?.fetch(request) else { return 0 }
             let points = performances.map({ Double($0.potAddings) * Double($0.initialAthleticsCount) }).reduce(0, +)
@@ -36,6 +36,14 @@ public class Pot: NSManagedObject {
         return result
     }
     var computedAmount: Double = 0
+}
+
+// MARK: - Refresh
+
+extension Pot {
+    func refresh(with pointsForOneEuro: Int) {
+        computeAmount(with: pointsForOneEuro)
+    }
 }
 
 // MARK: - Points

@@ -62,7 +62,7 @@ extension Game {
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
         sports = coreDataStack.entities.allSports
-        potsManager.getEvolution()
+        potsManager.refresh(with: settings.pointsForOneEuro)
         coreDataStack.saveContext()
     }
     

@@ -73,21 +73,6 @@ class PotsManager {
     
     // MARK: - Evolution
     
-    /**
-     Every day, athletics can get evolution of their performances during the last 30 days. This method updates athletics evolution if necessary.
-     */
-    func getEvolution() {
-        for pot in coreDataStack.entities.allPots {
-            if let value = pot.getEvolution(for: today) {
-                let evolutionData = EvolutionData(context: coreDataStack.viewContext)
-                evolutionData.pot = pot
-                evolutionData.date = today
-                evolutionData.value = value
-                deleteEvolutionDatas(pot.evolutionDatasToClean(for: today))
-            }
-        }
-    }
-    
     private func deleteEvolutionDatas(_ evolutionDatas: [EvolutionData]) {
         if evolutionDatas.count > 0 {
             for evolutionData in evolutionDatas {
@@ -106,6 +91,23 @@ class PotsManager {
         return nil
     }
     
+    // MARK: - Refresh pots
     
+    /**
+     Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
+     - parameter pointsForOneEuro: Needed number of points to get one euro.
+     */
+    func refresh(with pointsForOneEuro: Int) {
+        for pot in coreDataStack.entities.allPots {
+            pot.refresh(with: pointsForOneEuro)
+            if let value = pot.getEvolution(for: today) {
+                let evolutionData = EvolutionData(context: coreDataStack.viewContext)
+                evolutionData.pot = pot
+                evolutionData.date = today
+                evolutionData.value = value
+                deleteEvolutionDatas(pot.evolutionDatasToClean(for: today))
+            }
+        }
+    }
     
 }
