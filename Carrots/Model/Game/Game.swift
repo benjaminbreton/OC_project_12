@@ -50,7 +50,7 @@ extension Game {
         performancesManager = PerformancesManager(coreDataStack)
         potsManager = PotsManager(coreDataStack)
         commonPot = coreDataStack.entities.commonPot
-        if commonPot == nil { commonPot = potsManager.create() }
+        if commonPot == nil { commonPot = potsManager.create(today: settings.now) }
         settings.gameAlreadyExists = true
         // load game
         refresh()
@@ -62,7 +62,8 @@ extension Game {
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
         sports = coreDataStack.entities.allSports
-        potsManager.refresh(with: settings.pointsForOneEuro)
+        potsManager.refresh(with: settings.pointsForOneEuro, today: settings.today)
+        athleticsManager.refresh(today: settings.today)
         coreDataStack.saveContext()
     }
     
@@ -74,8 +75,9 @@ extension Game {
     
     mutating func addAthletic(name: String?, image: Data?) {
         guard let name = name else { return }
-        let pot = potsManager.create()
-        error = athleticsManager.add(name: name, image: image, pot: pot)
+        let today = settings.now
+        let pot = potsManager.create(today: today)
+        error = athleticsManager.add(name: name, image: image, pot: pot, today: today)
         refresh()
     }
     mutating func modify(_ athletic: Athletic, name: String?, image: Data?){
@@ -127,7 +129,7 @@ extension Game {
 extension Game {
     
     mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
-        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, pointsForOneEuro: settings.pointsForOneEuro)
+        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, pointsForOneEuro: settings.pointsForOneEuro, date: settings.now)
         refresh()
     }
     

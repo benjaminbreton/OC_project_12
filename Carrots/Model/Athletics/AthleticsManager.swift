@@ -12,10 +12,11 @@ import CoreData
 class AthleticsManager {
     
     let coreDataStack: CoreDataStack
-    var today: Date { Calendar.current.startOfDay(for: Date()) }
+    let evolutionDatasManager: EvolutionDatasManager
     
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
+        self.evolutionDatasManager = EvolutionDatasManager(coreDataStack)
     }
 
     // MARK: - Add
@@ -23,9 +24,9 @@ class AthleticsManager {
     /// Add athletic to the game.
     /// - parameter name: Athletic's name to add.
     /// - parameter completionHandler: Code to execute when athletic has been added.
-    func add(name: String, image: Data?, pot: Pot) -> ApplicationErrors? {
+    func add(name: String, image: Data?, pot: Pot, today: Date) -> ApplicationErrors? {
         if alreadyExists(name) { return .log(.existingAthletic) }
-        create(name: name, image: image, pot: pot)
+        create(name: name, image: image, pot: pot, today: today)
         coreDataStack.saveContext()
         return nil
     }
@@ -42,12 +43,13 @@ class AthleticsManager {
     }
     /// Create an athletic.
     /// - parameter name: Athletic's name to create.
-    private func create(name: String, image: Data?, pot: Pot) {
+    private func create(name: String, image: Data?, pot: Pot, today: Date) {
         let athletic = Athletic(context: coreDataStack.viewContext)
-        athletic.creationDate = Date()
+        athletic.creationDate = today
         athletic.willBeDeleted = false
         athletic.pot = pot
         modify(athletic, name: name, image: image)
+        evolutionDatasManager.create(for: athletic, value: 0, date: today)
     }
     
     // MARK: - Modify
@@ -73,5 +75,21 @@ class AthleticsManager {
         coreDataStack.viewContext.delete(athletic)
         coreDataStack.saveContext()
         return nil
+    }
+    
+    // MARK: - Evolution
+    
+    /**
+     Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
+     - parameter pointsForOneEuro: Needed number of points to get one euro.
+     */
+    func refresh(today: Date) {
+        for athletic in coreDataStack.entities.allAthletics {
+            if let value = athletic.getEvolution(for: today) {
+                print("create athletic evolution")
+                evolutionDatasManager.create(for: athletic, value: value, date: today)
+                evolutionDatasManager.delete(athletic.evolutionDatasToClean(for: today))
+            }
+        }
     }
 }

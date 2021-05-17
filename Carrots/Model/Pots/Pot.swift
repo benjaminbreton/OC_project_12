@@ -11,22 +11,26 @@ import CoreData
 // MARK: - Properties
 
 public class Pot: NSManagedObject {
+    /// Pot's description
     public override var description: String {
         guard let name = owner?.name else { return "Common pot" }
         return name
     }
+    /// All points added to the pot.
     var allPoints: Double {
         if let owner = owner {
-            return owner.allPoints
+            return owner.allPotPoints
         } else {
             let request: NSFetchRequest<Performance> = Performance.fetchRequest()
             let predicate = NSPredicate(format: "addedToCommonPot == YES")
             request.predicate = predicate
             guard let performances = try? managedObjectContext?.fetch(request) else { return 0 }
+            print(performances.count)
             let points = performances.map({ Double($0.potAddings) * Double($0.initialAthleticsCount) }).reduce(0, +)
             return points
         }
     }
+    /// Amount to display.
     var formattedAmount: String {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
@@ -35,12 +39,17 @@ public class Pot: NSManagedObject {
         guard let result = formatter.string(from: NSNumber(value: computedAmount)) else { return "0.00" }
         return result
     }
+    /// Computed amount with the compute function.
     var computedAmount: Double = 0
 }
 
 // MARK: - Refresh
 
 extension Pot {
+    /**
+     Refresh the computed amount.
+     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     */
     func refresh(with pointsForOneEuro: Int) {
         computeAmount(with: pointsForOneEuro)
     }
@@ -49,12 +58,19 @@ extension Pot {
 // MARK: - Points
 
 extension Pot {
-    
+    /**
+     Change the pot's points.
+     - parameter count: Number of points to add.
+     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     */
     func changePoints(_ count: Int, with pointsForOneEuro: Int) {
         points += Double(count)
         computeAmount(with: pointsForOneEuro)
     }
-    
+    /**
+     Method to call to block points changings.
+     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     */
     func fixPoints(with pointsForOneEuro: Int) {
         computeAmount(with: pointsForOneEuro)
         self.amount = computedAmount
@@ -66,15 +82,25 @@ extension Pot {
 // MARK: - Amount
 
 extension Pot {
-    
+    /**
+     Change the pot's amount.
+     - parameter count: Amount to add.
+     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     */
     func changeAmount(_ count: Double, with pointsForOneEuro: Int) {
         amount += count
         computeAmount(with: pointsForOneEuro)
     }
-    
+    /**
+    Compute the amount regarding the points and the saved amount.
+     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     */
     private func computeAmount(with pointsForOneEuro: Int) {
+        // change points in euro
         let euroPoints: Double = points / Double(pointsForOneEuro == 0 ? 1 : pointsForOneEuro)
+        // add saved amount
         let newAmount = euroPoints + amount
+        // format the result
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let stringNumber = formatter.string(from: NSNumber(value: newAmount)), let result = Double(stringNumber) else { return }
@@ -86,9 +112,10 @@ extension Pot {
 // MARK: - Evolution
 
 extension Pot {
-    
+    /// Evolution type to display on the pots page.
     var evolution: EvolutionType {
-        evolutionDatas.count >= 2 ? EvolutionType.determinate(from: evolutionDatas[evolutionDatas.count - 2].value, to: evolutionDatas[evolutionDatas.count - 1].value) : .same
+        
+        return evolutionDatas.count >= 2 ? EvolutionType.determinate(from: evolutionDatas[evolutionDatas.count - 2].value, to: evolutionDatas[evolutionDatas.count - 1].value) : .same
     }
     
     enum EvolutionType {
@@ -130,12 +157,20 @@ extension Pot {
 // MARK: - Evolution datas
 
 extension Pot {
+    /// Pot's evolution datas.
     var evolutionDatas: [EvolutionData] {
         guard let evolutionSet = evolutionDatasSet, let evolutions = evolutionSet.allObjects as? [EvolutionData] else {
             return []
         }
-        return evolutions
+        return evolutions.sorted {
+            $0.date ?? Date() < $1.date ?? Date()
+        }
     }
+    /**
+     Check if an evolution has already been created for the current day, and eventually returns the evolution to add.
+     - parameter date: Date of the evolution to get.
+     - returns: The number of points per hour, or *nil* if an evolution has already been created for the date entered in parameter.
+     */
     func getEvolution(for date: Date) -> Double? {
         let calendar = Calendar.current
         if evolutionDatas.count > 0 {
@@ -147,12 +182,20 @@ extension Pot {
             return nil
         }
     }
+    /**
+     Returns the number of points earned per hour.
+     - parameter start: Date of the pot's creation.
+     - parameter end: Date of the evolution to get.
+     - returns: The number of points per hour.
+     */
     private func getEvolutionValue(from start: Date, to end: Date) -> Double {
         let interval = DateInterval(start: start, end: end)
-        return allPoints / interval.duration
+        return allPoints / interval.duration * 3600
     }
-    
-    
+    /**
+     Keep datas for the last 30 days, plus one.
+     - returns: The left datas.
+     */
     func evolutionDatasToClean(for date: Date) -> [EvolutionData] {
         let date = date - 30 * 24 * 3600
         var evolutionDatas: [EvolutionData] = []

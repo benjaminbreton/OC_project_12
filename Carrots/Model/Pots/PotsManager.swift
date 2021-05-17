@@ -9,11 +9,10 @@ import Foundation
 import CoreData
 class PotsManager {
     let coreDataStack: CoreDataStack
-    
-    var today: Date { Calendar.current.startOfDay(for: Date()) }
-    
+    let evolutionDatasManager: EvolutionDatasManager
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
+        self.evolutionDatasManager = EvolutionDatasManager(coreDataStack)
     }
 
     // MARK: - Creation
@@ -21,11 +20,12 @@ class PotsManager {
     /// Create a new pot for its future owner.
     /// - parameter athletic: Future pot's owner (nil to create the common pot).
     /// - returns: The new pot.
-    func create() -> Pot {
+    func create(today: Date) -> Pot {
         let pot = Pot(context: coreDataStack.viewContext)
         pot.amount = 0
-        pot.creationDate = Date()
+        pot.creationDate = today
         pot.points = 0
+        evolutionDatasManager.create(for: pot, value: 0, date: today)
         coreDataStack.saveContext()
         return pot
     }
@@ -71,41 +71,20 @@ class PotsManager {
         }
     }
     
-    // MARK: - Evolution
-    
-    private func deleteEvolutionDatas(_ evolutionDatas: [EvolutionData]) {
-        if evolutionDatas.count > 0 {
-            for evolutionData in evolutionDatas {
-                coreDataStack.viewContext.delete(evolutionData)
-            }
-        }
-    }
-    
-    func deleteEvolutionDatas(of athletic: Athletic? = nil) -> ApplicationErrors? {
-        let evolutionDatas = athletic == nil ? coreDataStack.entities.commonPot?.evolutionDatas ?? [] : athletic?.pot?.evolutionDatas ?? []
-        if evolutionDatas.count > 0 {
-            for evolutionData in evolutionDatas {
-                coreDataStack.viewContext.delete(evolutionData)
-            }
-        }
-        return nil
-    }
-    
     // MARK: - Refresh pots
     
     /**
      Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
      - parameter pointsForOneEuro: Needed number of points to get one euro.
      */
-    func refresh(with pointsForOneEuro: Int) {
+    func refresh(with pointsForOneEuro: Int, today: Date) {
         for pot in coreDataStack.entities.allPots {
             pot.refresh(with: pointsForOneEuro)
+            print(today)
             if let value = pot.getEvolution(for: today) {
-                let evolutionData = EvolutionData(context: coreDataStack.viewContext)
-                evolutionData.pot = pot
-                evolutionData.date = today
-                evolutionData.value = value
-                deleteEvolutionDatas(pot.evolutionDatasToClean(for: today))
+                print("create pot evolution")
+                evolutionDatasManager.create(for: pot, value: value, date: today)
+                evolutionDatasManager.delete(pot.evolutionDatasToClean(for: today))
             }
         }
     }

@@ -83,10 +83,24 @@ fileprivate struct EvolutionGraph: Shape {
         guard let max = datas.map({ $0.value }).max() else { return 1 }
         return max * 1.5
     }
-    private var today: Date {
-        let calendar = Calendar.current
-        return calendar.startOfDay(for: Date())
+    private var days: Double {
+        #if DAYSAGO45
+            return 45
+        #elseif DAYSAGO31
+            return 31
+        #elseif DAYSAGO20
+            return 20
+        #elseif DAYSAGO18
+            return 18
+        #elseif DAYSAGO12
+            return 12
+        #elseif DAYSAGO05
+            return 5
+        #else
+            return 0
+        #endif
     }
+    private var today: Date { Calendar.current.startOfDay(for: Date() - days * 24 * 3600) }
     /// First date : 30 days ago.
     private var minDate: Date {
         return today - totalTime
@@ -95,6 +109,7 @@ fileprivate struct EvolutionGraph: Shape {
     // MARK: - Drawing the shape
     
     func path(in rect: CGRect) -> Path {
+        print(unwrappedDatas)
         var path = Path()
         // get points to add to the shape
         let points = getPoints(in: rect)

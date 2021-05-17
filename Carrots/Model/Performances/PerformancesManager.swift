@@ -24,9 +24,9 @@ class PerformancesManager {
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter addToCommonPot: Boolean which indicates whether the points have to be added to the common pot or not.
     /// - parameter completionHandler: Actions to do once performance has been added.
-    func add(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, pointsForOneEuro: Int) -> ApplicationErrors? {
+    func add(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, pointsForOneEuro: Int, date: Date) -> ApplicationErrors? {
         guard athletics.count > 0 else { return .log(.performanceWithoutAthletic) }
-        let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
+        let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, date: date)
         performance.addPoints(
             to: addToCommonPot ?
                 Array.init(repeating: coreDataStack.entities.commonPot, count: athletics.count)
@@ -42,13 +42,13 @@ class PerformancesManager {
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter coreDataStack: Coredatastack in which the performance has to be made.
     /// - returns: The created performance.
-    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) -> Performance {
+    private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, date: Date) -> Performance {
         let performance = Performance(context: coreDataStack.viewContext)
         performance.sport = sport
         performance.athleticsSet = NSSet(array: athletics)
         performance.value = sport.unityType.value(for: value)
         performance.addedToCommonPot = addToCommonPot
-        performance.date = Date()
+        performance.date = date
         performance.potAddings = sport.pointsToAdd(for: performance.value)
         performance.initialAthleticsCount = Int16(athletics.count)
         return performance
