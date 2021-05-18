@@ -18,10 +18,10 @@ struct Settings {
     var gameAlreadyExists: Bool
     /// Date used to get statistics.
     @UserDefault(key: "predictedAmountDate", defaultValue: Date() - 24 * 3600)
-    var predictedAmountDate: Date
+    var predictionDate: Date
     init() {
-        if predictedAmountDate < Date().today {
-            predictedAmountDate = Date().today + 30 * 24 * 3600
+        if predictionDate < Date().today {
+            predictionDate = Date().today + 30 * 24 * 3600
         }
     }
 }

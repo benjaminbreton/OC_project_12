@@ -24,7 +24,7 @@ class PerformancesManager {
     /// - parameter value: Performance's value, depending on sport's unit type.
     /// - parameter addToCommonPot: Boolean which indicates whether the points have to be added to the common pot or not.
     /// - parameter completionHandler: Actions to do once performance has been added.
-    func add(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, pointsForOneEuro: Int, date: Date) -> ApplicationErrors? {
+    func add(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, pointsForOneEuro: Int, date: Date, predictionDate: Date) -> ApplicationErrors? {
         guard athletics.count > 0 else { return .log(.performanceWithoutAthletic) }
         let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, date: date)
         performance.addPoints(
@@ -32,7 +32,8 @@ class PerformancesManager {
                 Array.init(repeating: coreDataStack.entities.commonPot, count: athletics.count)
                 :
                 athletics.map({ $0.pot }),
-            with: pointsForOneEuro)
+            with: pointsForOneEuro,
+            for: predictionDate)
         coreDataStack.saveContext()
         return nil
     }
@@ -58,19 +59,19 @@ class PerformancesManager {
     
     /// Delete performance.
     /// - parameter performance: Performance to delete.
-    func delete(_ performance: Performance, pointsForOneEuro: Int) -> ApplicationErrors? {
-        performPerformanceDeletion(performance, cancelPoints: true, pointsForOneEuro: pointsForOneEuro)
+    func delete(_ performance: Performance, pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
+        performPerformanceDeletion(performance, cancelPoints: true, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
         return nil
     }
-    func delete<T: NSManagedObject>(of item: T, pointsForOneEuro: Int) -> ApplicationErrors? {
+    func delete<T: NSManagedObject>(of item: T, pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
         if let athletic = item as? Athletic {
             for performance in athletic.performances {
-                performPerformanceDeletion(performance, cancelPoints: false, pointsForOneEuro: pointsForOneEuro)
+                performPerformanceDeletion(performance, cancelPoints: false, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
             }
         }
         if let sport = item as? Sport {
             for performance in sport.performances {
-                performPerformanceDeletion(performance, cancelPoints: false, pointsForOneEuro: pointsForOneEuro)
+                performPerformanceDeletion(performance, cancelPoints: false, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
             }
         }
         return nil
@@ -78,7 +79,7 @@ class PerformancesManager {
     /// Delete performance.
     /// - parameter performance: Performance to delete.
     /// - parameter cancelPoints: Boolean which indicates whether the points earned by the performance have to be cancelled or not.
-    private func performPerformanceDeletion(_ performance: Performance, cancelPoints: Bool, pointsForOneEuro: Int) {
+    private func performPerformanceDeletion(_ performance: Performance, cancelPoints: Bool, pointsForOneEuro: Int, predictionDate: Date) {
         if cancelPoints {
             performance.cancelPoints(
                 to:
@@ -89,7 +90,8 @@ class PerformancesManager {
                     :
                                         
                     performance.athletics.map({ $0.pot }),
-                with: pointsForOneEuro)
+                with: pointsForOneEuro,
+                for: predictionDate)
         }
         coreDataStack.viewContext.delete(performance)
         coreDataStack.saveContext()

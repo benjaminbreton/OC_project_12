@@ -62,7 +62,7 @@ extension Game {
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
         sports = coreDataStack.entities.allSports
-        potsManager.refresh(with: settings.pointsForOneEuro)
+        potsManager.refresh(with: settings.pointsForOneEuro, for: settings.predictionDate)
         athleticsManager.refresh()
         coreDataStack.saveContext()
     }
@@ -97,10 +97,11 @@ extension Game {
 // MARK: - Settings
 
 extension Game {
-    mutating func updateSettings(predictedAmountDate: Date, pointsForOneEuro: String?) {
+    mutating func updateSettings(predictionDate: Date, pointsForOneEuro: String?) {
         guard let points = pointsForOneEuro, points.count < 5, let intPoints = Int(points) else { return }
-        settings.predictedAmountDate = predictedAmountDate
+        settings.predictionDate = predictionDate
         settings.pointsForOneEuro = intPoints
+        potsManager.refresh(with: intPoints, for: predictionDate)
     }
 }
 
@@ -129,16 +130,16 @@ extension Game {
 extension Game {
     
     mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
-        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, pointsForOneEuro: settings.pointsForOneEuro, date: Date().now)
+        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, pointsForOneEuro: settings.pointsForOneEuro, date: Date().now, predictionDate: settings.predictionDate)
         refresh()
     }
     
     mutating func delete(_ performance: Performance) {
-        error = performancesManager.delete(performance, pointsForOneEuro: settings.pointsForOneEuro)
+        error = performancesManager.delete(performance, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
         refresh()
     }
     mutating func deletePerformances<T: NSManagedObject>(of item: T) {
-        error = performancesManager.delete(of: item, pointsForOneEuro: settings.pointsForOneEuro)
+        error = performancesManager.delete(of: item, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
         refresh()
     }
 
@@ -151,14 +152,14 @@ extension Game {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let amount = formatter.number(from: amount) as? Double else { return }
-        error = potsManager.addMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro)
+        error = potsManager.addMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
         refresh()
     }
     mutating func withdrawMoney(for athletic: Athletic? = nil, amount: String) {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let amount = formatter.number(from: amount) as? Double else { return }
-        error = potsManager.withdrawMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro)
+        error = potsManager.withdrawMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
         refresh()
     }
 }

@@ -31,7 +31,7 @@ struct PotCell: View {
                 Image(systemName: pot?.evolution.image.name ?? "arrow.forward.square")
                     .foregroundColor(pot?.evolution.image.colorInt16.potEvolutionColor)
                     .withTitleFont()
-                Text("expected: \(pot?.formattedAmount ?? "")")
+                Text("expected: \(pot?.formattedPredictionAmount ?? "")")
                     .withSimpleFont()
                     .scaledToFill()
                     .layoutPriority(1)

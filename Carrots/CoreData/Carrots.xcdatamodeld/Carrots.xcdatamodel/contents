@@ -28,6 +28,7 @@
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="points" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="predictedAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="evolutionDatasSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EvolutionData" inverseName="pot" inverseEntity="EvolutionData"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athletic" inverseName="pot" inverseEntity="Athletic"/>
     </entity>
@@ -42,7 +43,7 @@
         <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="148"/>
         <element name="EvolutionData" positionX="257.8504028320313" positionY="-503.8699035644531" width="128" height="103"/>
         <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="148"/>
-        <element name="Pot" positionX="424.7550048828125" positionY="-477.9354553222656" width="128" height="118"/>
+        <element name="Pot" positionX="424.7550048828125" positionY="-477.9354553222656" width="128" height="133"/>
         <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="104"/>
     </elements>
 </model>

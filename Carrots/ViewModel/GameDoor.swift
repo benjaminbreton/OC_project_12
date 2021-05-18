@@ -23,7 +23,7 @@ class GameDoor: ObservableObject {
         formatter.maximumFractionDigits = 0
         return formatter.string(from: NSNumber(value: count)) ?? "0"
     }
-    var predictedAmountDate: Date { game.settings.predictedAmountDate }
+    var predictedAmountDate: Date { game.settings.predictionDate }
     var error: ApplicationErrors? { getError() }
     
     // MARK: - Init
@@ -76,7 +76,7 @@ class GameDoor: ObservableObject {
     // MARK: - Settings
     
     func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?) {
-        game.updateSettings(predictedAmountDate: date, pointsForOneEuro: pointsForOneEuro)
+        game.updateSettings(predictionDate: date, pointsForOneEuro: pointsForOneEuro)
     }
     
     // MARK: - Errors

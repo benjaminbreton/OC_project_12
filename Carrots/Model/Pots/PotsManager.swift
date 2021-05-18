@@ -35,11 +35,11 @@ class PotsManager {
     /// Add money to a pot.
     /// - parameter athletic: The athletic for whom money has to be added (nil to add to the common pot).
     /// - parameter amount: Amount to add.
-    func addMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int) -> ApplicationErrors? {
+    func addMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
         let result = getPot(of: athletic)
         switch result {
         case .success(let pot):
-            pot.changeAmount(amount, with: pointsForOneEuro)
+            pot.changeAmount(amount, with: pointsForOneEuro, for: predictionDate)
             return nil
         case . failure(let error):
             return error
@@ -48,11 +48,11 @@ class PotsManager {
     /// Withdraw money to a pot.
     /// - parameter athletic: The athletic for whom money has to be withdrawn (nil to withdraw to the common pot).
     /// - parameter amount: Amount to withdraw.
-    func withdrawMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int) -> ApplicationErrors? {
+    func withdrawMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
         let result = getPot(of: athletic)
         switch result {
         case .success(let pot):
-            pot.changeAmount(-amount, with: pointsForOneEuro)
+            pot.changeAmount(-amount, with: pointsForOneEuro, for: predictionDate)
             return nil
         case . failure(let error):
             return error
@@ -77,14 +77,13 @@ class PotsManager {
      Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
      - parameter pointsForOneEuro: Needed number of points to get one euro.
      */
-    func refresh(with pointsForOneEuro: Int) {
+    func refresh(with pointsForOneEuro: Int, for predictionDate: Date) {
         for pot in coreDataStack.entities.allPots {
-            pot.refresh(with: pointsForOneEuro)
             if let value = pot.getEvolution(for: Date().today) {
-                print("create pot evolution")
                 evolutionDatasManager.create(for: pot, value: value, date: Date().today)
                 evolutionDatasManager.delete(pot.evolutionDatasToClean(for: Date().today))
             }
+            pot.refresh(with: pointsForOneEuro, for: predictionDate)
         }
     }
     

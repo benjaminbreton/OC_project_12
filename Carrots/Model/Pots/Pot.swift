@@ -39,8 +39,19 @@ public class Pot: NSManagedObject {
         guard let result = formatter.string(from: NSNumber(value: computedAmount)) else { return "0.00" }
         return result
     }
+    /// Prediction amount to display.
+    var formattedPredictionAmount: String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        guard let result = formatter.string(from: NSNumber(value: computedPredictionAmount)) else { return "0.00" }
+        return result
+    }
     /// Computed amount with the compute function.
     var computedAmount: Double = 0
+    /// Computed prediction amount with the compute function.
+    var computedPredictionAmount: Double = 0
 }
 
 // MARK: - Refresh
@@ -50,8 +61,8 @@ extension Pot {
      Refresh the computed amount.
      - parameter pointsForOneEuro: Number of points needed to get one euro.
      */
-    func refresh(with pointsForOneEuro: Int) {
-        computeAmount(with: pointsForOneEuro)
+    func refresh(with pointsForOneEuro: Int, for predictionDate: Date) {
+        computeAmount(with: pointsForOneEuro, for: predictionDate)
     }
 }
 
@@ -63,16 +74,16 @@ extension Pot {
      - parameter count: Number of points to add.
      - parameter pointsForOneEuro: Number of points needed to get one euro.
      */
-    func changePoints(_ count: Int, with pointsForOneEuro: Int) {
+    func changePoints(_ count: Int, with pointsForOneEuro: Int, for predictionDate: Date) {
         points += Double(count)
-        computeAmount(with: pointsForOneEuro)
+        computeAmount(with: pointsForOneEuro, for: predictionDate)
     }
     /**
      Method to call to block points changings.
      - parameter pointsForOneEuro: Number of points needed to get one euro.
      */
-    func fixPoints(with pointsForOneEuro: Int) {
-        computeAmount(with: pointsForOneEuro)
+    func fixPoints(with pointsForOneEuro: Int, for predictionDate: Date) {
+        computeAmount(with: pointsForOneEuro, for: predictionDate)
         self.amount = computedAmount
         points = 0
     }
@@ -87,24 +98,32 @@ extension Pot {
      - parameter count: Amount to add.
      - parameter pointsForOneEuro: Number of points needed to get one euro.
      */
-    func changeAmount(_ count: Double, with pointsForOneEuro: Int) {
+    func changeAmount(_ count: Double, with pointsForOneEuro: Int, for predictionDate: Date) {
         amount += count
-        computeAmount(with: pointsForOneEuro)
+        computeAmount(with: pointsForOneEuro, for: predictionDate)
     }
     /**
     Compute the amount regarding the points and the saved amount.
      - parameter pointsForOneEuro: Number of points needed to get one euro.
      */
-    private func computeAmount(with pointsForOneEuro: Int) {
-        // change points in euro
-        let euroPoints: Double = points / Double(pointsForOneEuro == 0 ? 1 : pointsForOneEuro)
-        // add saved amount
-        let newAmount = euroPoints + amount
+    private func computeAmount(with pointsForOneEuro: Int, for predictionDate: Date) {
+        let newAmount = amount + convertPointsInEuro(points, with: pointsForOneEuro)
+        let newPredictionAmount = newAmount + computePredictedGain(with: pointsForOneEuro, for: predictionDate)
         // format the result
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
-        guard let stringNumber = formatter.string(from: NSNumber(value: newAmount)), let result = Double(stringNumber) else { return }
-        computedAmount = result
+        guard let stringRegularAmount = formatter.string(from: NSNumber(value: newAmount)), let regularAmount = Double(stringRegularAmount), let stringPredictionAmount = formatter.string(from: NSNumber(value: newPredictionAmount)), let predictionAmount = Double(stringPredictionAmount) else { return }
+        computedAmount = regularAmount
+        computedPredictionAmount = predictionAmount
+    }
+    private func computePredictedGain(with pointsForOneEuro: Int, for predictionDate: Date) -> Double {
+        guard predictionDate > Date().today, let evolution = evolutionDatas.last else { return 0 }
+        let interval = DateInterval(start: Date().today, end: predictionDate)
+        let points = interval.duration / 3600 * evolution.value
+        return convertPointsInEuro(points, with: pointsForOneEuro)
+    }
+    private func convertPointsInEuro(_ points: Double, with pointsForOneEuro: Int) -> Double {
+        return points / Double(pointsForOneEuro == 0 ? 1 : pointsForOneEuro)
     }
     
 }
