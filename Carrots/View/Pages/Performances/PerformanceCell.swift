@@ -10,7 +10,7 @@ struct PerformanceCell: View {
     @EnvironmentObject var gameDoor: GameDoor
     let performance: Performance
     private var lineCount: CGFloat {
-        2
+        3
     }
     private var rowHeight: CGFloat {
         ViewCommonSettings().textLineHeight * lineCount
@@ -21,8 +21,8 @@ struct PerformanceCell: View {
     }
     private var formattedValue: String {
         guard let sport = performance.sport else { return "" }
-        let unity = sport.unityInt16.sportUnityType
-        return "Realised: \(unity.singleString(for: performance.value))"
+        let unity = sport.unityType
+        return unity != .oneShot ? "Realised: \(unity.singleString(for: performance.value))" : "*one shot*"
     }
     var body: some View {
         HStack(alignment: .center) {
@@ -33,11 +33,14 @@ struct PerformanceCell: View {
                 Text(performance.formattedDate)
                     .withLightSimpleFont()
                 CommonHeightSpacer()
-//                Text(athleticsNames)
-//                    .withSimpleFont()
-//                CommonHeightSpacer()
                 Text(formattedValue)
                     .withSimpleFont()
+                CommonHeightSpacer()
+                HStack(spacing: 0.7) {
+                    ForEach(performance.athletics) { athletic in
+                        AthleticImage(image: UIImage(data: athletic.image ?? Data()), radius: ViewCommonSettings().textLineHeight / 3)
+                    }
+                }
             }
             .frame(height: rowHeight)
         }

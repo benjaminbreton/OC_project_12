@@ -19,7 +19,6 @@ struct AthleticCell: View {
         guard let data = athletic.image else { return nil }
         return UIImage(data: data)
     }
-    @State var rotation: Double = 0
     
     // MARK: - Body
     
@@ -27,7 +26,7 @@ struct AthleticCell: View {
         ZStack(alignment: .leading) {
             HStack(alignment: .center) {
                 
-                AthleticImage(image: image, radius: ViewCommonSettings().commonHeight * 2, rotation: $rotation)
+                AthleticImage(image: image, radius: ViewCommonSettings().commonHeight * 2)
                 Text(athletic.name ?? "No name")
                     .padding()
                     .withBigSimpleFont()

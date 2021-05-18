@@ -12,7 +12,6 @@ struct AthleticImage: View {
     
     let image: UIImage?
     let radius: CGFloat
-    @Binding var rotation: Double
     
     // MARK: - Body
     
@@ -24,7 +23,6 @@ struct AthleticImage: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .rotationEffect(.init(degrees: rotation))
                 
             } else {
                 Image(systemName: "person")

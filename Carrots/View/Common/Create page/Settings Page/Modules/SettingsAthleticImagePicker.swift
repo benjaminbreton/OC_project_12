@@ -19,7 +19,6 @@ fileprivate struct AthleticImageWithButtons: View {
     @Binding var image: UIImage?
     let radius: CGFloat
     @State private var isShowPicker: Bool = false
-    @State var rotation: Double = 0
     @State private var source: UIImagePickerController.SourceType? {
         didSet {
             isShowPicker = true
@@ -28,7 +27,7 @@ fileprivate struct AthleticImageWithButtons: View {
     var body: some View {
         let sizeMultiplier: CGFloat = 0.4
         return ZStack(alignment: .center) {
-            AthleticImage(image: image, radius: radius, rotation: $rotation)
+            AthleticImage(image: image, radius: radius)
             VStack(alignment: .center) {
                 Spacer()
                     .frame(width: radius * 2, height: radius * 1.7, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)

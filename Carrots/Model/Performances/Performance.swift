@@ -13,7 +13,9 @@ public class Performance: NSManagedObject {
         guard let athleticsSet = athleticsSet, let athletics = athleticsSet.allObjects as? [Athletic] else {
             return []
         }
-        return athletics
+        return athletics.sorted {
+            $0.name ?? "No name" < $1.name ?? "No name"
+        }
     }
     var formattedDate: String {
         let formatter = DateFormatter()

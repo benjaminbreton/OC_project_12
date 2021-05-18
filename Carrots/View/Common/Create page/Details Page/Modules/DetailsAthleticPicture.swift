@@ -9,11 +9,10 @@ import SwiftUI
 struct DetailsAthleticPicture: View {
     let image: UIImage?
     let radius = UIScreen.main.bounds.width / 4
-    @State var rotation: Double = 0
     var body: some View {
         VStack {
             CommonHeightSpacer()
-            AthleticImage(image: image, radius: radius, rotation: $rotation)
+            AthleticImage(image: image, radius: radius)
                 .inCenteredModule()
             CommonHeightSpacer(5)
         }
