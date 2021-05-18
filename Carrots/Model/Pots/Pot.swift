@@ -112,6 +112,7 @@ extension Pot {
         // format the result
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
+        formatter.locale = Locale(identifier: "en-EN")
         guard let stringRegularAmount = formatter.string(from: NSNumber(value: newAmount)), let regularAmount = Double(stringRegularAmount), let stringPredictionAmount = formatter.string(from: NSNumber(value: newPredictionAmount)), let predictionAmount = Double(stringPredictionAmount) else { return }
         computedAmount = regularAmount
         computedPredictionAmount = predictionAmount
