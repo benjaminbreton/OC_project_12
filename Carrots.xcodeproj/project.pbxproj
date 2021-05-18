@@ -13,6 +13,7 @@
 		030DB54C261352320054D140 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54B261352320054D140 /* Settings.swift */; };
 		030DB55026135EFE0054D140 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54F26135EFE0054D140 /* ViewModel.swift */; };
 		030EA01B26539D52006CA0A0 /* Date+SchemeDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030EA01A26539D52006CA0A0 /* Date+SchemeDates.swift */; };
+		030EA01F26540AF4006CA0A0 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030EA01E26540AF3006CA0A0 /* HelpView.swift */; };
 		03192E6E262ABE02000D572E /* UIColor+appColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03192E6D262ABE02000D572E /* UIColor+appColors.swift */; };
 		03264BD226203D58003F6429 /* Color+appColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD126203D58003F6429 /* Color+appColors.swift */; };
 		03264BD626203E3D003F6429 /* AthleticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD526203E3D003F6429 /* AthleticCell.swift */; };
@@ -111,6 +112,7 @@
 		030DB54B261352320054D140 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		030DB54F26135EFE0054D140 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		030EA01A26539D52006CA0A0 /* Date+SchemeDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+SchemeDates.swift"; sourceTree = "<group>"; };
+		030EA01E26540AF3006CA0A0 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		03192E6D262ABE02000D572E /* UIColor+appColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appColors.swift"; sourceTree = "<group>"; };
 		03264BD126203D58003F6429 /* Color+appColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+appColors.swift"; sourceTree = "<group>"; };
 		03264BD526203E3D003F6429 /* AthleticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticCell.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			isa = PBXGroup;
 			children = (
 				032AFA332617648800D61E28 /* AppList.swift */,
+				030EA01E26540AF3006CA0A0 /* HelpView.swift */,
 				03264BE326205333003F6429 /* ConfirmButton.swift */,
 				03B1DFA9262C8DF700B590AC /* CommonSpacers.swift */,
 			);
@@ -755,6 +758,7 @@
 				03E1F9C726453B8600DA870F /* Entities.swift in Sources */,
 				03342BC8262B1088002FE0BE /* SettingsCustomPicker.swift in Sources */,
 				03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */,
+				030EA01F26540AF4006CA0A0 /* HelpView.swift in Sources */,
 				03CAE4672641259400C9309D /* InModule.swift in Sources */,
 				03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */,
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,

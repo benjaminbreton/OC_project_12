@@ -48,10 +48,28 @@ struct SportSettings: View {
                 selectedObjects: $unity,
                 maximumSelection: 1,
                 lineCount: 1)
-            SettingsSportValue(placeholder: "Choose an unity", unity: unity.count == 1 ? unity[0] : nil, valueForOnePoint: $valueForOnePoint, caller: .sport)
+            SettingsSportValue(
+                placeholder: "Choose an unity",
+                unity: unity.count == 1 ? unity[0] : nil,
+                valueForOnePoint: $valueForOnePoint,
+                caller: .sport)
             SettingsSportIconPicker(icon: $icon)
         }
-        .inSettingsPage(name == "" ? "new sport":"\(name) settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
+        .inSettingsPage(
+            name == "" ? "new sport":"\(name) settings",
+            gameDoor: _gameDoor,
+            confirmationButtonIsDisabled: confirmationButtonIsDisabled,
+            helpText: """
+            To add a sport, you have to choose its name.
+
+            Then, choose the unity to measure each performance of this sport.
+
+            Depending on the choosen unity, you have to set up the needed value to get one point.
+
+            Finally, choose a picture.
+
+            When it's done, you can click on the confirmation button.
+            """) {
             guard unity.count == 1 else { return }
             if let sport = sport {
                 gameDoor.update(sport, name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)

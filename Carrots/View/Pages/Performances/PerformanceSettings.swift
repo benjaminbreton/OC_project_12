@@ -31,24 +31,49 @@ struct PerformanceSettings: View {
                 )
             )
     }
-    
-    /*
-     (unity[0] != .time && (valueForOnePoint[0] == "" || Int(valueForOnePoint[0]) ?? 0 == 0)) ||
-     (unity[0] == .time && valueForOnePoint.map({ Int($0) ?? 0 }).reduce(0, +) == 0)
-     */
     var body: some View {
         VStack {
-            SettingsCustomPicker(title: "Athletics", data: athleticsArray, selectedObjects: $selectedAthletics, maximumSelection: 0, lineCount: 2)
-            SettingsCustomPicker(title: "Sport", data: sportsArray, selectedObjects: $selectedSport, maximumSelection: 1, lineCount: 1)
+            SettingsCustomPicker(
+                title: "Athletics",
+                data: athleticsArray,
+                selectedObjects: $selectedAthletics,
+                maximumSelection: 0,
+                lineCount: 2)
+            SettingsCustomPicker(
+                title: "Sport",
+                data: sportsArray,
+                selectedObjects: $selectedSport,
+                maximumSelection: 1,
+                lineCount: 1)
             SettingsSportValue(
                 placeholder: "Choose a sport",
                 unity: selectedSport.count == 1 ? selectedSport[0].unityInt16.sportUnityType : nil,
                 valueForOnePoint: $value,
                 caller: .performance,
                 existingValueForOnePoint: selectedSport.count == 1 ? selectedSport[0].valueForOnePoint : nil)
-            SettingsCustomToggleWithExplications(title: "Pot", question: "Add to common pot ? ", isOn: $addToCommonPot, explicationsIsOn: "Points will be added to common pot", explicationsIsOff: "Points will be added to athletics pots", textLines: 2)
+            SettingsCustomToggleWithExplanations(
+                title: "Pot",
+                question: "Add to common pot ? ",
+                isOn: $addToCommonPot,
+                explanationsAreOn: "Points will be added to common pot",
+                explanationsAreOff: "Points will be added to athletics pots",
+                textLines: 2)
         }
-        .inSettingsPage("new performance", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
+        .inSettingsPage(
+            "new performance",
+            gameDoor: _gameDoor,
+            confirmationButtonIsDisabled: confirmationButtonIsDisabled,
+            helpText: """
+            To add a performance :
+
+            Choose athletics who did it. You can add several athletics. To add athletics : select an athletic on the list and click on the plus button.
+
+            Choose performance's sport.
+
+            Set the realised performance to convert it on points.
+
+            Finally, choose a pot to add points : common pot, or athletics pots.
+            """) {
             guard selectedAthletics.count > 0, selectedSport.count == 1 else { return }
             gameDoor.addPerformance(sport: selectedSport[0], athletics: selectedAthletics, value: value, addToCommonPot: addToCommonPot)
         }

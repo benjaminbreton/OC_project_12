@@ -25,6 +25,7 @@ class GameDoor: ObservableObject {
     }
     var predictedAmountDate: Date { game.settings.predictionDate }
     var error: ApplicationErrors? { getError() }
+    var showHelp: Bool { game.showHelp }
     
     // MARK: - Init
     
@@ -75,8 +76,8 @@ class GameDoor: ObservableObject {
     
     // MARK: - Settings
     
-    func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?) {
-        game.updateSettings(predictionDate: date, pointsForOneEuro: pointsForOneEuro)
+    func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?, showHelp: Bool) {
+        game.updateSettings(predictionDate: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
     }
     
     // MARK: - Errors

@@ -20,14 +20,23 @@ struct PotsHome: View {
                             - add new athletic's informations and confirm.
                             """,
                        commonPot: gameDoor.commonPot,
-                       title: "Athletics pots")
+                       title: "Athletics pots",
+                       helpText: """
+                            Here is the page where you can see all the pots, if you already have added some athletics.
+
+                            Each pot shows you its amount, and its expected value on a certain date if athletics keep doing performances on the same rythm.
+
+                            By choosing the gear, you can set general pots settings, such as the needed number of points to get one euro and the date for the predicted amount.
+
+                            By choosing a pot, you can add or withdraw some money to it.
+                            """)
             .environmentObject(gameDoor)
         .inNavigationHome(
             title: "pots",
             buttonImage: "gear",
             buttonDestination: PotsGeneralSettings(
                 date: gameDoor.predictedAmountDate,
-                pointsForOneEuro: gameDoor.pointsForOneEuro)
+                pointsForOneEuro: gameDoor.pointsForOneEuro, showHelp: gameDoor.showHelp)
                 .environmentObject(gameDoor)
         )
     }

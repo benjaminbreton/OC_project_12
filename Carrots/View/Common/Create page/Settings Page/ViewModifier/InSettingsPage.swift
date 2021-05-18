@@ -20,14 +20,17 @@ fileprivate struct InSettingsPage: ViewModifier {
     @EnvironmentObject var gameDoor: GameDoor
     @State var error: ApplicationErrors? = nil
     @State var showAlert: Bool = false
+    private let helpText: String?
+    @State var showHelp: Bool = false
     
     // MARK: - Init
     
-    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Bool?, confirmAction: @escaping () -> Void) {
+    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Bool?, helpText: String?, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
         self.confirmationIsDisabled = confirmationIsDisabled
         self._gameDoor = gameDoor
+        self.helpText = helpText
     }
     
     // MARK: - Body
@@ -36,6 +39,9 @@ fileprivate struct InSettingsPage: ViewModifier {
         VStack(alignment: .center) {
             Divider()
             CommonHeightSpacer()
+            if let text = helpText {
+                HelpView(text: text, isShown: $showHelp, hasToBeShown: gameDoor.showHelp)
+            }
             ScrollView(.vertical) {
                 content
             }
@@ -75,7 +81,7 @@ extension View {
      - parameter title: Title which will appear in the navigation bar.
      - parameter confirmAction: Actions to do when user confirm its choices.
      */
-    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Bool? = nil, confirmAction: @escaping () -> Void) -> some View {
-        modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, confirmAction: confirmAction))
+    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, confirmAction: confirmAction))
     }
 }

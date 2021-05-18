@@ -30,14 +30,19 @@ struct AppList<T: NSManagedObject>: View {
     /// A boolean indicating whether dividers have to be added at the list's top and bottom.
     let withDivider: Bool
     
+    let helpText: String?
+    
+    @State private var showHelp: Bool = false
+    
     // MARK: - Init
     
-    init(_ items: [T], placeHolder: String, commonPot: Pot? = nil, title: String? = nil, withDivider: Bool = true) {
+    init(_ items: [T], placeHolder: String, commonPot: Pot? = nil, title: String? = nil, withDivider: Bool = true, helpText: String? = nil) {
         self.items = items
         self.placeHolder = placeHolder
         self.commonPot = commonPot
         self.title = title
         self.withDivider = withDivider
+        self.helpText = helpText
     }
     
     // MARK: - Body
@@ -45,6 +50,9 @@ struct AppList<T: NSManagedObject>: View {
     var body: some View {
         VStack {
             if withDivider { Divider() }
+            if let text = helpText {
+                HelpView(text: text, isShown: $showHelp, hasToBeShown: gameDoor.showHelp)
+            }
             ScrollView(withDivider ? .vertical : []) {
                 if items.count > 0 {
                     if let commonPot = commonPot {

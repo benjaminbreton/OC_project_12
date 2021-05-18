@@ -33,7 +33,18 @@ struct AthleticSettings: View {
             SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default, explanations: nil, isWrong: $isNameEmpty, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
             SettingsAthleticImagePicker(image: $image)
         }
-        .inSettingsPage(name == "" ? "New athletic":"\(name) settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, confirmAction: {
+        .inSettingsPage(
+            name == "" ? "New athletic":"\(name) settings",
+            gameDoor: _gameDoor,
+            confirmationButtonIsDisabled: confirmationButtonIsDisabled,
+            helpText: """
+            To add or modify athletic, you have to choose its name.
+
+            You can, if you want, add a picture.
+
+            When it's done, click on the confirmation button.
+            """,
+            confirmAction: {
             if let athletic = athletic {
                 gameDoor.update(athletic, name: name, image: data)
             } else {

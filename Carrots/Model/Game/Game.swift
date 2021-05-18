@@ -25,6 +25,7 @@ struct Game {
     private(set) var commonPot: Pot?
     /// Error.
     private var error: ApplicationErrors?
+    var showHelp: Bool { settings.showHelp }
     let athleticsManager: AthleticsManager
     let sportsManager: SportsManager
     let performancesManager: PerformancesManager
@@ -97,10 +98,11 @@ extension Game {
 // MARK: - Settings
 
 extension Game {
-    mutating func updateSettings(predictionDate: Date, pointsForOneEuro: String?) {
+    mutating func updateSettings(predictionDate: Date, pointsForOneEuro: String?, showHelp: Bool) {
         guard let points = pointsForOneEuro, points.count < 5, let intPoints = Int(points) else { return }
         settings.predictionDate = predictionDate
         settings.pointsForOneEuro = intPoints
+        settings.showHelp = showHelp
         potsManager.refresh(with: intPoints, for: predictionDate)
     }
 }

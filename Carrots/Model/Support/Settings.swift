@@ -19,6 +19,9 @@ struct Settings {
     /// Date used to get statistics.
     @UserDefault(key: "predictedAmountDate", defaultValue: Date() - 24 * 3600)
     var predictionDate: Date
+    /// Boolean used to know if help has to be shown or not.
+    @UserDefault(key: "showHelp", defaultValue: true)
+    var showHelp: Bool
     init() {
         if predictionDate < Date().today {
             predictionDate = Date().today + 30 * 24 * 3600

@@ -10,6 +10,7 @@ struct PotsGeneralSettings: View {
     @EnvironmentObject var gameDoor: GameDoor
     @State var date: Date
     @State var pointsForOneEuro: String
+    @State var showHelp: Bool
     @State var arePointsWrong: Bool = false
     var confirmationButtonIsDisabled: Bool { arePointsWrong }
     var body: some View {
@@ -32,9 +33,10 @@ struct PotsGeneralSettings: View {
                 isWrong: $arePointsWrong,
                 limits: (minCount: 1, maxCount: 3),
                 limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
+            SettingsCustomToggle(title: "Help", question: "Do you want help to be shown ?", isOn: $showHelp)
         }
         .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
-            gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro)
+            gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
         }
     }
 }

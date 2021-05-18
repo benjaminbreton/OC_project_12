@@ -27,24 +27,13 @@ struct PerformancesHome: View {
             No performances have been added.
 
             To add a performance \(instructions)
-            """)
-//        VStack {
-//            Divider()
-//            if viewModel.performances.count > 0 {
-//                    ListBase(items: viewModel.performances.map({
-//                        PerformanceCell(performance: $0)
-//                    }))
-//            } else {
-//                Text("""
-//            No performances have been added.
-//
-//            To add a performance \(instructions)
-//            """)
-//                    .withSimpleFont()
-//                    .inRectangle(.topLeading)
-//            }
-//            Divider()
-//        }
+            """, helpText: """
+                        This page shows you the list of performances.
+
+                        By choosing the plus button, you can add a performance.
+
+                        By stay pressed on a performance, you can delete it (the deletion on this page will cancel all points earned because of it).
+                        """)
         .inNavigationHome(
             title: "performances",
             buttonImage: "gauge.badge.plus",

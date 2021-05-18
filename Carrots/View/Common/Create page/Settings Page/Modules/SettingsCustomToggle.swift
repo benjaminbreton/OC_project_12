@@ -15,17 +15,17 @@ struct SettingsCustomToggle: View {
             .inModule(title)
     }
 }
-struct SettingsCustomToggleWithExplications: View {
+struct SettingsCustomToggleWithExplanations: View {
     let title: String
     let question: String
     @Binding var isOn: Bool
-    let explicationsIsOn: String
-    let explicationsIsOff: String
+    let explanationsAreOn: String
+    let explanationsAreOff: String
     let textLines: CGFloat
     var body: some View {
         VStack {
             Toggle(question, isOn: _isOn)
-            Text(isOn ? explicationsIsOn : explicationsIsOff)
+            Text(isOn ? explanationsAreOn : explanationsAreOff)
                 .frame(height: ViewCommonSettings().textLineHeight * textLines)
                 .withLightSimpleFont()
         }
