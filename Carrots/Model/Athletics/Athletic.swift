@@ -32,7 +32,9 @@ public class Athletic: NSManagedObject {
         guard let performancesSet = performancesSet, let performances = performancesSet.allObjects as? [Performance] else {
             return []
         }
-        return performances
+        return performances.sorted {
+            $0.date ?? Date().today > $1.date ?? Date().today
+        }
     }
     func update(name: String?, image: Data?) {
         self.name = name

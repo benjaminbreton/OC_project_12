@@ -83,12 +83,12 @@ class AthleticsManager {
      Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
      - parameter pointsForOneEuro: Needed number of points to get one euro.
      */
-    func refresh(today: Date) {
+    func refresh() {
         for athletic in coreDataStack.entities.allAthletics {
-            if let value = athletic.getEvolution(for: today) {
+            if let value = athletic.getEvolution(for: Date().today) {
                 print("create athletic evolution")
-                evolutionDatasManager.create(for: athletic, value: value, date: today)
-                evolutionDatasManager.delete(athletic.evolutionDatasToClean(for: today))
+                evolutionDatasManager.create(for: athletic, value: value, date: Date().today)
+                evolutionDatasManager.delete(athletic.evolutionDatasToClean(for: Date().today))
             }
         }
     }

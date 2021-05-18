@@ -20,12 +20,12 @@ class PotsManager {
     /// Create a new pot for its future owner.
     /// - parameter athletic: Future pot's owner (nil to create the common pot).
     /// - returns: The new pot.
-    func create(today: Date) -> Pot {
+    func create(for today: Date = Date().today) -> Pot {
         let pot = Pot(context: coreDataStack.viewContext)
         pot.amount = 0
         pot.creationDate = today
         pot.points = 0
-        evolutionDatasManager.create(for: pot, value: 0, date: today)
+        evolutionDatasManager.create(for: pot, value: 0, date: Date().today)
         coreDataStack.saveContext()
         return pot
     }
@@ -77,14 +77,13 @@ class PotsManager {
      Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
      - parameter pointsForOneEuro: Needed number of points to get one euro.
      */
-    func refresh(with pointsForOneEuro: Int, today: Date) {
+    func refresh(with pointsForOneEuro: Int) {
         for pot in coreDataStack.entities.allPots {
             pot.refresh(with: pointsForOneEuro)
-            print(today)
-            if let value = pot.getEvolution(for: today) {
+            if let value = pot.getEvolution(for: Date().today) {
                 print("create pot evolution")
-                evolutionDatasManager.create(for: pot, value: value, date: today)
-                evolutionDatasManager.delete(pot.evolutionDatasToClean(for: today))
+                evolutionDatasManager.create(for: pot, value: value, date: Date().today)
+                evolutionDatasManager.delete(pot.evolutionDatasToClean(for: Date().today))
             }
         }
     }

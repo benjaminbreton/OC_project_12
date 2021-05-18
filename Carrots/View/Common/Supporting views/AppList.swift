@@ -45,7 +45,7 @@ struct AppList<T: NSManagedObject>: View {
     var body: some View {
         VStack {
             if withDivider { Divider() }
-            ScrollView {
+            ScrollView(withDivider ? .vertical : []) {
                 if items.count > 0 {
                     if let commonPot = commonPot {
                         PotCell(pot: commonPot)

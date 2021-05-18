@@ -114,7 +114,6 @@ extension Pot {
 extension Pot {
     /// Evolution type to display on the pots page.
     var evolution: EvolutionType {
-        
         return evolutionDatas.count >= 2 ? EvolutionType.determinate(from: evolutionDatas[evolutionDatas.count - 2].value, to: evolutionDatas[evolutionDatas.count - 1].value) : .same
     }
     
