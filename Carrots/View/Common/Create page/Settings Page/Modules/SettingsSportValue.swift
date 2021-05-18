@@ -58,7 +58,7 @@ struct SettingsSportValue: View {
         }
         .frame(height: ViewCommonSettings().textLineHeight)
         .keyboardType(.numberPad)
-        .inModule(caller == .sport ? "Value for one point" : "Performance", explanations: caller == .sport ? unity?.explanations : nil)
+        .inModule(caller == .sport ? "Needs to get 1 point" : "Performance", explanations: caller == .sport ? unity?.explanations : nil)
     }
 }
 

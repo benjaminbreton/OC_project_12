@@ -12,9 +12,30 @@ struct PerformanceSettings: View {
     var athleticsArray: [Athletic] { gameDoor.athletics }
     @State var selectedAthletics: [Athletic] = []
     @State var selectedSport: [Sport] = []
-    @State var value: [String] = ["0", "0", "0"]
+    @State var value: [String] = ["", "", ""]
     @State var addToCommonPot: Bool = true
-    var confirmationButtonIsDisabled: Bool { selectedAthletics.count == 0 || selectedSport.count != 1 || (selectedSport[0].unityInt16.sportUnityType != .oneShot && value == ["0", "0", "0"]) }
+    /// Check if confirmation button has to be disabled.
+    var confirmationButtonIsDisabled: Bool {
+        // 3 conditions for the button to be disabled (only one can disable the button) :
+        // 1. no athletics have been selected
+        selectedAthletics.count == 0 ||
+            // 2. no sport has been selected
+            selectedSport.count != 1 ||
+            // 3. the sport's unity type is not one shot and ...
+            (selectedSport[0].unityInt16.sportUnityType != .oneShot &&
+                (
+                    // ... it's not time and the first value is empty or null
+                    (selectedSport[0].unityInt16.sportUnityType != .time && Int(value[0]) ?? 0 == 0) ||
+                        // ... it's time and all values are empty or null
+                    (selectedSport[0].unityInt16.sportUnityType == .time && value.map({ Int($0) ?? 0 }).reduce(0, +) == 0)
+                )
+            )
+    }
+    
+    /*
+     (unity[0] != .time && (valueForOnePoint[0] == "" || Int(valueForOnePoint[0]) ?? 0 == 0)) ||
+     (unity[0] == .time && valueForOnePoint.map({ Int($0) ?? 0 }).reduce(0, +) == 0)
+     */
     var body: some View {
         VStack {
             SettingsCustomPicker(title: "Athletics", data: athleticsArray, selectedObjects: $selectedAthletics, maximumSelection: 0, lineCount: 2)

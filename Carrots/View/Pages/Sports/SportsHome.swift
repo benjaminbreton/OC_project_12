@@ -17,7 +17,7 @@ struct SportsHome: View {
             .inNavigationHome(
                 title: "sports",
                 buttonImage: "plus.circle",
-                buttonDestination: SportSettings(sport: nil, name: "", icon: "A")
+                buttonDestination: SportSettings(sport: nil, name: "", icon: "A", unity: [], valueForOnePoint: ["", "", ""])
                     .environmentObject(gameDoor)
             )
     }
