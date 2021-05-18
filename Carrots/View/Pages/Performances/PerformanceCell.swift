@@ -20,8 +20,7 @@ struct PerformanceCell: View {
         return "Athletics: \(athleticsNames)"
     }
     private var formattedValue: String {
-        guard let sport = performance.sport else { return "" }
-        let unity = sport.unityType
+        let unity = performance.initialUnity.sportUnityType
         return unity != .oneShot ? "Realised: \(unity.singleString(for: performance.value))" : "*one shot*"
     }
     var body: some View {

@@ -48,8 +48,11 @@ struct PerformancesHome: View {
         .inNavigationHome(
             title: "performances",
             buttonImage: "gauge.badge.plus",
-            buttonDestination: PerformanceSettings()
-                .environmentObject(gameDoor)
+            buttonDestination:
+                gameDoor.athletics.count > 0 && gameDoor.sports.count > 0 ?
+                PerformanceSettings().environmentObject(gameDoor)
+                :
+                nil
         )
     }
 }

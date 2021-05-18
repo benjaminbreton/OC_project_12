@@ -52,6 +52,7 @@ class PerformancesManager {
         performance.date = date
         performance.potAddings = sport.pointsToAdd(for: performance.value)
         performance.initialAthleticsCount = Int16(athletics.count)
+        performance.initialUnity = sport.unityInt16
         return performance
     }
     
