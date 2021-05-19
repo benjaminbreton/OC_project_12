@@ -88,7 +88,7 @@ extension Athletic {
     func evolutionDatasToClean(for date: Date) -> [EvolutionData] {
         let date = date - 30 * 24 * 3600
         var evolutionDatas: [EvolutionData] = []
-        for evolutionData in evolutionDatas {
+        for evolutionData in self.evolutionDatas {
             guard let evolutionDate = evolutionData.date else { return [] }
             if evolutionDate <= date {
                 evolutionDatas.append(evolutionData)

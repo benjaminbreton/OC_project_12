@@ -86,7 +86,6 @@ class AthleticsManager {
     func refresh() {
         for athletic in coreDataStack.entities.allAthletics {
             if let value = athletic.getEvolution(for: Date().today) {
-                print("create athletic evolution")
                 evolutionDatasManager.create(for: athletic, value: value, date: Date().today)
                 evolutionDatasManager.delete(athletic.evolutionDatasToClean(for: Date().today))
             }

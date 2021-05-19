@@ -20,7 +20,7 @@ struct DetailsEvolutionGraph: View {
     private let height: CGFloat = ViewCommonSettings().commonHeight * 12
     /// Minimum and maximum values of datas.
     private var values: (min: String, max: String) {
-        guard let max = datas.map({ $0.value }).max(), let min = datas.map({ $0.value }).min() else { return (min: "---", max: "---") }
+        guard let max = datas.map({ $0.value }).max(), let min = minValue == nil ? datas.map({ $0.value }).min() : minValue else { return (min: "---", max: "---") }
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
@@ -28,36 +28,73 @@ struct DetailsEvolutionGraph: View {
         return (min: formatter.string(from: NSNumber(value: min)) ?? "---", max: formatter.string(from: NSNumber(value: max)) ?? "---")
     }
     
+    var minValue: Double? {
+        guard let firstDate = datas[0].date, let secondDate = datas[1].date else { return nil }
+        let minDate = Date().today - 30 * 3600 * 24
+        if firstDate < minDate {
+            let firstDuration = DateInterval(start: firstDate, end: minDate).duration
+            let secondDuration = DateInterval(start: firstDate, end: secondDate).duration
+            return datas[0].value + ((datas[1].value - datas[0].value) / secondDuration) * firstDuration
+        } else {
+            return nil
+        }
+    }
+    
+    @State var helpIsShown: Bool = false
+    
+    let helpCanBeShown: Bool
+    
     // MARK: - Body
     
     var body: some View {
-        ZStack {
-            if datas.count < 2 {
-                // no graphic can be displayed
-                VStack {
-                    Text("No evolution can be displayed the first day.")
-                        .withLightSimpleFont()
-                }
-            } else {
-                // graphic
-                VStack {
-                    // description
-                    Text("\(description)\nmin.: \(values.min) - max.: \(values.max)")
-                        .withLightSimpleFont()
-                    // graphic itself
-                    EvolutionGraph(datas: datas)
-                        .stroke(lineWidth: ViewCommonSettings().shapeLine)
-                        .fill(LinearGradient(gradient: Gradient(colors: [.graphFirst, .graphSecond]), startPoint: .leading, endPoint: .trailing))
-                }
-            }
-            // frame's rectangle
-            Rectangle()
-                .stroke(lineWidth: ViewCommonSettings().shapeLine)
-                .foregroundColor(.graphFirst)
+        
+        /*
+         
+         */
+        VStack {
+            HelpView(
+            text: """
+            This graphic shows the evolution of the number of points earned per hour by the athletic.
             
+            This number is obtained by dividing the total number of points earned by the athletic by the time elapsed since the athletic was added to the application.
+            
+            The lowest point of the curve below represents \(values.min) points per hour.
+            The highest point of the curve below represents \(values.max) points per hour.
+            
+            The graphic's update happends the first time the application is open each day.
+            """,
+            isShown: $helpIsShown,
+            hasToBeShown: helpCanBeShown)
+            ZStack {
+                if datas.count < 2 {
+                    // no graphic can be displayed
+                    VStack {
+                        Text("No evolution can be displayed the first day.")
+                            .withLightSimpleFont()
+                    }
+                } else {
+                    
+                    // graphic
+                    VStack {
+                        // description
+                        Text("\(description)\nmin.: \(values.min) - max.: \(values.max)")
+                            .withLightSimpleFont()
+                        // graphic itself
+                        EvolutionGraph(datas: datas)
+                            .stroke(lineWidth: ViewCommonSettings().shapeLine)
+                            .fill(LinearGradient(gradient: Gradient(colors: [.graphFirst, .graphSecond]), startPoint: .leading, endPoint: .trailing))
+                    }
+                }
+                // frame's rectangle
+                Rectangle()
+                    .stroke(lineWidth: ViewCommonSettings().shapeLine)
+                    .foregroundColor(.graphFirst)
+                
+            }
+            .frame(height: height)
         }
-        .frame(height: height)
         .inModule(title)
+        
     }
 }
 
@@ -91,7 +128,6 @@ fileprivate struct EvolutionGraph: Shape {
     // MARK: - Drawing the shape
     
     func path(in rect: CGRect) -> Path {
-        print(unwrappedDatas)
         var path = Path()
         // get points to add to the shape
         let points = getPoints(in: rect)

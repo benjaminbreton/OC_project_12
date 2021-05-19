@@ -25,7 +25,6 @@ public class Pot: NSManagedObject {
             let predicate = NSPredicate(format: "addedToCommonPot == YES")
             request.predicate = predicate
             guard let performances = try? managedObjectContext?.fetch(request) else { return 0 }
-            print(performances.count)
             let points = performances.map({ Double($0.potAddings) * Double($0.initialAthleticsCount) }).reduce(0, +)
             return points
         }
