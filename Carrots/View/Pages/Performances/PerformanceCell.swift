@@ -21,20 +21,20 @@ struct PerformanceCell: View {
     }
     private var formattedValue: String {
         let unity = performance.initialUnity.sportUnityType
-        return unity != .oneShot ? "Realised: \(unity.singleString(for: performance.value))" : "*one shot*"
+        return unity != .oneShot ? "\(unity.singleString(for: performance.value))" : "*one shot*"
     }
     var body: some View {
         HStack(alignment: .center) {
-            SportIcon(icon: performance.sport?.icon ?? "", lineCount: lineCount)
+            SportIcon(icon: performance.initialSportIcon ?? "", lineCount: lineCount)
                 .frame(width: rowHeight, height: rowHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             CommonWidthSpacer()
             VStack(alignment: .leading) {
                 Text(performance.formattedDate)
                     .withLightSimpleFont()
-                CommonHeightSpacer()
+                CommonHeightSpacer(0.5)
                 Text(formattedValue)
                     .withSimpleFont()
-                CommonHeightSpacer()
+                CommonHeightSpacer(0.5)
                 HStack(spacing: 0.7) {
                     ForEach(performance.athletics) { athletic in
                         AthleticImage(image: UIImage(data: athletic.image ?? Data()), radius: ViewCommonSettings().textLineHeight / 3)

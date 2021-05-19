@@ -53,6 +53,7 @@ class PerformancesManager {
         performance.potAddings = sport.pointsToAdd(for: performance.value)
         performance.initialAthleticsCount = Int16(athletics.count)
         performance.initialUnity = sport.unityInt16
+        performance.initialSportIcon = sport.icon
         return performance
     }
     

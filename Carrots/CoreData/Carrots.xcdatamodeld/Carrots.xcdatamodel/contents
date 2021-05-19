@@ -19,6 +19,7 @@
         <attribute name="addedToCommonPot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="initialAthleticsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="initialSportIcon" optional="YES" attributeType="String"/>
         <attribute name="initialUnity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="potAddings" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -43,7 +44,7 @@
     <elements>
         <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="148"/>
         <element name="EvolutionData" positionX="257.8504028320313" positionY="-503.8699035644531" width="128" height="103"/>
-        <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="163"/>
+        <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="164"/>
         <element name="Pot" positionX="424.7550048828125" positionY="-477.9354553222656" width="128" height="133"/>
         <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="104"/>
     </elements>
