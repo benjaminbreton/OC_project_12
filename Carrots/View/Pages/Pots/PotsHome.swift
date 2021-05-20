@@ -31,13 +31,6 @@ struct PotsHome: View {
                             By choosing a pot, you can add or withdraw some money to it.
                             """)
             .environmentObject(gameDoor)
-        .inNavigationHome(
-            title: "pots",
-            buttonImage: "gear",
-            buttonDestination: PotsGeneralSettings(
-                date: gameDoor.predictedAmountDate,
-                pointsForOneEuro: gameDoor.pointsForOneEuro, showHelp: gameDoor.showHelp)
-                .environmentObject(gameDoor)
-        )
+        .inNavigationHome(title: "pots")
     }
 }

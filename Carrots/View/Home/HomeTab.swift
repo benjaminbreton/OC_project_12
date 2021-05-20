@@ -43,6 +43,14 @@ struct HomeTab: View {
                 .tag(3)
                 .environmentObject(gameDoor)
                 .onAppear { gameDoor.refresh() }
+            GeneralSettings(date: gameDoor.predictedAmountDate, pointsForOneEuro: gameDoor.pointsForOneEuro, showHelp: gameDoor.showHelp)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("settings")
+                }
+                .tag(4)
+                .environmentObject(gameDoor)
+                .onAppear{ gameDoor.refresh() }
         }
         .accentColor(.tab)
     }

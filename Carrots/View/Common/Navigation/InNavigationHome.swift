@@ -31,6 +31,10 @@ extension View {
     func inNavigationHome<T: View>(title: String, buttonImage: String, buttonDestination: T?) -> some View {
         modifier((InNavigationHome(title: title, buttonImage: buttonImage, buttonDestination: buttonDestination)))
     }
+    func inNavigationHome(title: String) -> some View {
+        let destination: Text? = nil
+        return modifier(InNavigationHome(title: title, buttonImage: "", buttonDestination: destination))
+    }
 }
 
 

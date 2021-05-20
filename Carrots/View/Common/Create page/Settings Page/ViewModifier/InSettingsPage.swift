@@ -22,15 +22,18 @@ fileprivate struct InSettingsPage: ViewModifier {
     @State var showAlert: Bool = false
     private let helpText: String?
     @State var showHelp: Bool = false
-    
+    var closeAfter: Bool
+    var closeAfterMessage: (title: String, message: String)?
     // MARK: - Init
     
-    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Bool?, helpText: String?, confirmAction: @escaping () -> Void) {
+    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Bool?, helpText: String?, closeAfterMessage: (title: String, message: String)?, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
         self.confirmationIsDisabled = confirmationIsDisabled
         self._gameDoor = gameDoor
         self.helpText = helpText
+        self.closeAfter = closeAfterMessage == nil
+        self.closeAfterMessage = closeAfterMessage
     }
     
     // MARK: - Body
@@ -51,7 +54,11 @@ fileprivate struct InSettingsPage: ViewModifier {
                     showAlert = true
                     return
                 }
-                mode.wrappedValue.dismiss()
+                if closeAfter {
+                    mode.wrappedValue.dismiss()
+                } else {
+                    showAlert = true
+                }
             }
         }
         .inNavigationPageView(title: title)
@@ -61,6 +68,11 @@ fileprivate struct InSettingsPage: ViewModifier {
                 return Alert(
                     title: Text(error.userTitle),
                     message: Text(error.userMessage),
+                    dismissButton: .default(Text("OK")))
+            } else if let tuple = closeAfterMessage {
+                return Alert(
+                    title: Text(tuple.title),
+                    message: Text(tuple.message),
                     dismissButton: .default(Text("OK")))
             } else {
                 return Alert(
@@ -81,7 +93,7 @@ extension View {
      - parameter title: Title which will appear in the navigation bar.
      - parameter confirmAction: Actions to do when user confirm its choices.
      */
-    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, confirmAction: @escaping () -> Void) -> some View {
-        modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, confirmAction: confirmAction))
+    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, closeAfterMessage: (title: String, message: String)? = nil, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, closeAfterMessage: closeAfterMessage, confirmAction: confirmAction))
     }
 }

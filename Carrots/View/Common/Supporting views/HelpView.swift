@@ -30,7 +30,7 @@ struct HelpView: View {
                             Text("""
                                 Click here again to close this help.
 
-                                You can disable all helps on the settings page (pots page, and gear button on the navigation bar).
+                                You can disable all helps on the settings page.
                                 """)
                         }
                     }

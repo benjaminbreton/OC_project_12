@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct PotsGeneralSettings: View {
+struct GeneralSettings: View {
     @EnvironmentObject var gameDoor: GameDoor
     @State var date: Date
     @State var pointsForOneEuro: String
@@ -16,27 +16,28 @@ struct PotsGeneralSettings: View {
     var body: some View {
         VStack() {
             SettingsDatePicker(title: "Prevision date", date: $date, range: .afterToday, explanations: """
-                                The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
-                                
-                                You can set this date here.
-                                """)
+                    The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
+                    
+                    You can set this date here.
+                    """)
             SettingsTextfield(
                 title: "Points for one euro",
                 placeHolder: "points",
                 value: $pointsForOneEuro,
                 keyboard: .numberPad,
                 explanations: """
-        In this application, athletics can earn points by doing some sports performances.
-        Points can be converted in euros in each pot.
-        Set here the necessary number of points to earn one euro.
-        """,
+                    In this application, athletics can earn points by doing some sports performances.
+                    Points can be converted in euros in each pot.
+                    Set here the necessary number of points to earn one euro.
+                    """,
                 isWrong: $arePointsWrong,
                 limits: (minCount: 1, maxCount: 3),
                 limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
             SettingsCustomToggle(title: "Help", question: "Do you want help to be shown ?", isOn: $showHelp)
         }
-        .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
+        .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "Saved", message: "Settings have been saved without errors.")) {
             gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
         }
+        .inNavigationHome(title: "general settings")
     }
 }
