@@ -27,7 +27,11 @@ struct HelpView: View {
                             Text(text)
                                 .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                             CommonHeightSpacer()
-                            Text("Click here again to close this help.")
+                            Text("""
+                                Click here again to close this help.
+
+                                You can disable all helps on the settings page (pots page, and gear button on the navigation bar).
+                                """)
                         }
                     }
                     .inRectangle(.leading)

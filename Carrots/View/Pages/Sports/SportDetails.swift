@@ -25,7 +25,12 @@ struct SportDetails: View {
             genericTitle: sport.name ?? "No name",
             specificTitle: "Details",
             destinationToModify: SportSettings(sport: sport, name: sport.name ?? "No name", icon: sport.icon ?? "", unity: [sport.unityType], valueForOnePoint: sport.unityType.stringArray(for: sport.valueForOnePoint))
-                .environmentObject(gameDoor)
+                .environmentObject(gameDoor),
+            helpText: """
+                You can see on this page all informations about a sport, \(sport.name ?? "No name")'s informations here : name, icon, unity to measure performances on this sport, the needed value to get one point (directly the number of points you can earn in cas of one shot unity), and the performances.
+
+                By stay pressed on a performance, you can delete it.
+                """
         )
     }
 }

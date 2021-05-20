@@ -34,8 +34,14 @@ struct AthleticDetails: View {
             genericTitle: athletic.name ?? "No name",
             specificTitle: "Profile",
             destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data()))
-                .environmentObject(gameDoor)
-        
+                .environmentObject(gameDoor),
+            helpText: """
+                This page is an athletic's profile, \(athletic.name ?? "No name")'s here.
+
+                You will see his informations, his evolution, and his performances.
+
+                By stay pressed on a performance, you can delete it. This action will delete the athletic's participation on this performance, but not the performance itself (except if the athletic was alone). To delete the performance, you have to do the same action on the dedicated performances page.
+                """
         )
     }
 }

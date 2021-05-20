@@ -7,35 +7,7 @@
 
 import SwiftUI
 
-// MARK: - ViewModifier without modification page
-
-fileprivate struct InDetailsPageWithoutModificationDestination: ViewModifier {
-    
-    // MARK: - Property
-    
-    private let title: String
-    
-    // MARK: - Init
-    
-    init(title: String) {
-        self.title = title
-    }
-    
-    // MARK: - Body
-    
-    func body(content: Content) -> some View {
-        VStack {
-            Divider()
-            ScrollView(.vertical) {
-                content
-            }
-            Divider()
-        }
-        .inNavigationPageView(title: title)
-    }
-}
-
-// MARK: - ViewModifier with modification page
+// MARK: - ViewModifier
 
 fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifier {
     
@@ -44,13 +16,17 @@ fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifi
     private let genericTitle: String
     private let specificTitle: String
     private let destinationToModify: T
+    private let helpText: String?
+    @State var showHelp: Bool = false
+    @EnvironmentObject var gameDoor: GameDoor
     
     // MARK: - Init
     
-    init(genericTitle: String, specificTitle: String, destinationToModify: T) {
+    init(genericTitle: String, specificTitle: String, destinationToModify: T, helpText: String?) {
         self.genericTitle = genericTitle
         self.specificTitle = specificTitle
         self.destinationToModify = destinationToModify
+        self.helpText = helpText
     }
     
     // MARK: - Body
@@ -58,12 +34,17 @@ fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifi
     func body(content: Content) -> some View {
         VStack {
             Divider()
-            HStack {
-                Text(specificTitle)
-                    .withBigTitleFont()
-                Image(systemName: "square.and.pencil")
-                    .withNavigationLink(destination: destinationToModify)
-                    .withLinkFont()
+            VStack {
+                HStack {
+                    Text(specificTitle)
+                        .withBigTitleFont()
+                    Image(systemName: "square.and.pencil")
+                        .withNavigationLink(destination: destinationToModify)
+                        .withLinkFont()
+                }
+                if let text = helpText {
+                    HelpView(text: text, isShown: $showHelp, hasToBeShown: gameDoor.showHelp)
+                }
             }
             Divider()
             ScrollView(.vertical) {
@@ -85,16 +66,8 @@ extension View {
      - parameter specificTitle: Title which will appear in the page, next to the modification button.
      - parameter destinationToModify: View used to modify the object (this view has to be a setting page).
      */
-    func inDetailsPage<T: View>(genericTitle: String, specificTitle: String, destinationToModify: T) -> some View {
-        modifier(InDetailsPageWithModificationDestination(genericTitle: genericTitle, specificTitle: specificTitle, destinationToModify: destinationToModify))
-    }
-    /**
-     Used to show details about an object.
-     This ViewModifier has to be used on a VStack containing one or several Details Page Modules. If the specified object can be modified, choose the other method containing the *destinationToModify* parameter.
-     - parameter genericTitle: Title which will appear in the navigation bar.
-     */
-    func inDetailsPage(genericTitle: String) -> some View {
-        modifier(InDetailsPageWithoutModificationDestination(title: genericTitle))
+    func inDetailsPage<T: View>(genericTitle: String, specificTitle: String, destinationToModify: T, helpText: String? = nil) -> some View {
+        modifier(InDetailsPageWithModificationDestination(genericTitle: genericTitle, specificTitle: specificTitle, destinationToModify: destinationToModify, helpText: helpText))
     }
 }
 
