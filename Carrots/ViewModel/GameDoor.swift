@@ -25,7 +25,7 @@ class GameDoor: ObservableObject {
     }
     var predictedAmountDate: Date { game.settings.predictionDate }
     var error: ApplicationErrors? { getError() }
-    var showHelp: Bool { game.showHelp }
+    var showHelp: Bool { game.settings.showHelp }
     
     // MARK: - Init
     
@@ -70,8 +70,8 @@ class GameDoor: ObservableObject {
     func delete(_ performance: Performance) {
         game.delete(performance)
     }
-    func deletePerformances<T: NSManagedObject>(of item: T) {
-        game.deletePerformances(of: item)
+    func deletePerformance(_ performance: Performance, of athletic: Athletic) {
+        game.deletePerformance(performance, of: athletic)
     }
     
     // MARK: - Settings

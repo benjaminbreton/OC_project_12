@@ -29,6 +29,7 @@ struct DetailsEvolutionGraph: View {
     }
     
     var minValue: Double? {
+        guard datas.count > 1 else { return nil }
         guard let firstDate = datas[0].date, let secondDate = datas[1].date else { return nil }
         let minDate = Date().today - 30 * 3600 * 24
         if firstDate < minDate {

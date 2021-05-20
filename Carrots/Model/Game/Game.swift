@@ -25,7 +25,6 @@ struct Game {
     private(set) var commonPot: Pot?
     /// Error.
     private var error: ApplicationErrors?
-    var showHelp: Bool { settings.showHelp }
     let athleticsManager: AthleticsManager
     let sportsManager: SportsManager
     let performancesManager: PerformancesManager
@@ -140,8 +139,8 @@ extension Game {
         error = performancesManager.delete(performance, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
         refresh()
     }
-    mutating func deletePerformances<T: NSManagedObject>(of item: T) {
-        error = performancesManager.delete(of: item, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
+    mutating func deletePerformance(_ performance: Performance, of athletic: Athletic) {
+        error = performancesManager.delete(performance, of: athletic, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
         refresh()
     }
 

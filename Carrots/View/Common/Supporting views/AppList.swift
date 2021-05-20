@@ -32,17 +32,20 @@ struct AppList<T: NSManagedObject>: View {
     
     let helpText: String?
     
+    let source: Athletic?
+    
     @State private var showHelp: Bool = false
     
     // MARK: - Init
     
-    init(_ items: [T], placeHolder: String, commonPot: Pot? = nil, title: String? = nil, withDivider: Bool = true, helpText: String? = nil) {
+    init(_ items: [T], placeHolder: String, commonPot: Pot? = nil, title: String? = nil, withDivider: Bool = true, helpText: String? = nil, source: Athletic? = nil) {
         self.items = items
         self.placeHolder = placeHolder
         self.commonPot = commonPot
         self.title = title
         self.withDivider = withDivider
         self.helpText = helpText
+        self.source = source
     }
     
     // MARK: - Body
@@ -64,7 +67,7 @@ struct AppList<T: NSManagedObject>: View {
                             .withTitleFont()
                     }
                 }
-                SimpleList(items: items, placeHolder: placeHolder)
+                SimpleList(items: items, placeHolder: placeHolder, source: source)
                     .environmentObject(gameDoor)
             }
             if withDivider { Divider() }
@@ -90,6 +93,8 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
     /// A boolean indicating whether the placeholder has to be displayed or not.
     private var isPlaceHolderVisible: Bool { items.count == 0 }
     
+    let source: Athletic?
+    
     // MARK: - Body
     
     var body: some View {
@@ -107,7 +112,7 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
                     .environmentObject(gameDoor)
             }
             if let performances = items as? [Performance] {
-                PerformancesList(performances: performances)
+                PerformancesList(performances: performances, source: source)
                     .environmentObject(gameDoor)
             }
             if isPlaceHolderVisible {
@@ -189,11 +194,10 @@ fileprivate struct SportsList: View {
 /**
  List to display if items are of performance's type.
  */
-fileprivate struct PerformancesList: View {
+fileprivate struct PerformancesList<T: NSManagedObject>: View {
     let performances: [Performance]
     @EnvironmentObject var gameDoor: GameDoor
-    //    let athleticOwner: Athletic?
-    //    let sportOwner: Sport?
+    let source: Athletic?
     
     var body: some View {
         Group {
@@ -201,7 +205,11 @@ fileprivate struct PerformancesList: View {
                 PerformanceCell(performance: performance)
                     .environmentObject(gameDoor)
                     .canBeDeleted {
-                        gameDoor.delete(performance)
+                        if let source = source {
+                            gameDoor.deletePerformance(performance, of: source)
+                        } else {
+                            gameDoor.delete(performance)
+                        }
                     }
             }
         }

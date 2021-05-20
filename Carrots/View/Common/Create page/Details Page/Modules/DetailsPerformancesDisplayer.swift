@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailsPerformancesDisplayer: View {
     let performances: [Performance]
     var count: Int { performances.count }
+    let source: Athletic?
     var body: some View {
         VStack {
             HStack {
@@ -18,12 +19,9 @@ struct DetailsPerformancesDisplayer: View {
             }
             .inModule("Performances")
             if performances.count > 0 {
-                AppList(performances, placeHolder: "No performances.", withDivider: false)
+                AppList(performances, placeHolder: "No performances.", withDivider: false, source: source)
                     .frame(height: ViewCommonSettings().textLineHeight * 4 * (CGFloat(performances.count + 1)))
 
-//                ListBase(items: performances.map({ PerformanceCell(performance: $0)}))
-//                    .frame(height: ViewCommonSettings().textLineHeight * 2 * (CGFloat(performances.count + 1)))
-//                    .inModule()
             }
         }
     }

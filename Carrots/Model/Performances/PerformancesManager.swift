@@ -65,16 +65,14 @@ class PerformancesManager {
         performPerformanceDeletion(performance, cancelPoints: true, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
         return nil
     }
-    func delete<T: NSManagedObject>(of item: T, pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
-        if let athletic = item as? Athletic {
-            for performance in athletic.performances {
-                performPerformanceDeletion(performance, cancelPoints: false, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
-            }
-        }
-        if let sport = item as? Sport {
-            for performance in sport.performances {
-                performPerformanceDeletion(performance, cancelPoints: false, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
-            }
+    func delete(_ performance: Performance, of athletic: Athletic, pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
+        let newArray = performance.athletics.map({ $0 == athletic ? nil : $0 }).compactMap({ $0 })
+        if newArray.count > 0 {
+            performance.athleticsSet = NSSet(array: newArray)
+            performance.cancelPoints(to: [performance.addedToCommonPot ? coreDataStack.entities.commonPot : athletic.pot], with: pointsForOneEuro, for: predictionDate)
+            performance.initialAthleticsCount -= 1
+        } else {
+            performPerformanceDeletion(performance, cancelPoints: true, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
         }
         return nil
     }
