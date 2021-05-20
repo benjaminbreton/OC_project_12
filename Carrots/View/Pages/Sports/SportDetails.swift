@@ -17,8 +17,9 @@ struct SportDetails: View {
             DetailsText(title: "Unity",
                         texts: [
                             "type: ": (text: sport.unityInt16.sportUnityType.description, order: 1),
-                            "needs to get 1 point :": (text: "\(sport.valueForOnePoint)", order: 2)
+                            sport.unityType == .oneShot ? "one shot: " : "needs to get 1 point: ": (text: "\(sport.unityType.singleString(for: sport.valueForOnePoint))", order: 2)
             ])
+            DetailsPerformancesDisplayer(performances: sport.performances, source: nil)
         }
         .inDetailsPage(
             genericTitle: "sport details",

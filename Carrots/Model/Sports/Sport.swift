@@ -70,6 +70,8 @@ public class Sport: NSManagedObject {
                 return [" km"]
             case .time:
                 return [" h ", " m ", " s"]
+            case .oneShot:
+                return [" pts"]
             default:
                 return [""]
             }
@@ -129,7 +131,7 @@ public class Sport: NSManagedObject {
             switch self {
             case .time:
                 return "\(realisation[0])\(symbols[0])\(realisation[1])\(symbols[1])\(realisation[2])\(symbols[2])"
-            case .distance:
+            case .distance, .oneShot:
                 return "\(realisation[0])\(symbols[0])"
             default:
                 return realisation[0]
