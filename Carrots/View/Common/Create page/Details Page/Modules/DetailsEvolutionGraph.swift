@@ -53,24 +53,14 @@ struct DetailsEvolutionGraph: View {
          
          */
         VStack {
-            HelpView(
-            text: """
-            This graphic shows the evolution of the number of points earned per hour by the athletic.
-            
-            This number is obtained by dividing the total number of points earned by the athletic by the time elapsed since the athletic was added to the application.
-            
-            The lowest point of the curve below represents \(values.min) points per hour.
-            The highest point of the curve below represents \(values.max) points per hour.
-            
-            The graphic's update happends the first time the application is open each day.
-            """,
+            HelpView(text: "graphic",
             isShown: $helpIsShown,
             hasToBeShown: helpCanBeShown)
             ZStack {
                 if datas.count < 2 {
                     // no graphic can be displayed
                     VStack {
-                        Text("No evolution can be displayed the first day.")
+                        Text("graphic.noEvolution".localized)
                             .withLightSimpleFont()
                     }
                 } else {

@@ -32,9 +32,9 @@ struct SportCell: View {
             Spacer()
               .frame(width: ViewCommonSettings().commonHeight)
             VStack(alignment: .leading) {
-                Text(sport.name ?? "No name")
+                Text(sport.name ?? "all.noName".localized)
                     .withBigSimpleFont()
-                Text("unity: \(sport.unityInt16.sportUnityType.description)")
+                Text("\(sport.unityType.description)")
                     .withSimpleFont()
             }
             .frame(height: rowHeight)

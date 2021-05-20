@@ -1,0 +1,163 @@
+/* 
+  Localizable.strings
+  Carrots
+
+  Created by Benjamin Breton on 20/05/2021.
+  
+*/
+
+// MARK: - All
+
+"all.noName" = "Aucun nom";
+"all.name" = "Nom";
+
+// MARK: - Athletics
+
+"athletics.title" = "sportifs";
+"athletics.title.maj" = "Sportifs";
+"athletics.none" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif, appuyer sur le bouton + en haut de l'écran, et entrer les informations du sportif.";
+"athletics.details.creationDate" = "Date de création";
+"athletics.details.evolution" = "Évolution";
+"athletics.details.title" = "Profil";
+"athletics.settings.nameLimit" = "Vous devez choisir un nom.";
+"athletics.settings.new" = "Nouveau sportif";
+
+// MARK: - Confirmation
+
+"confirmation.title" = "Confirmer";
+
+// MARK: - Date
+
+"date.ask" = "sélectionnez une date";
+
+// MARK: - Deletion
+
+"deletion.title" = "supprimer";
+
+// MARK: - Graphic
+
+"graphic.noEvolution" = "Aucune évolution ne peut être affichée le premier jour.";
+"graphic.description" = "Points gagnés par heure les 30 derniers jours.";
+
+// MARK: - Help
+
+"help.proposal" = "Besoin d'aide ? cliquez ici";
+"help.title" = "Aide :";
+"help.end" = "Cliquez de nouveau ici pour fermer l'aide.\n\nVous pouvez désactiver toutes les aides dans la page paramètres.";
+"help.graphic" = "Ce graphique montre l'évolution du nombre de points gagnés par heure par le sportif.\n\nCe nombre est obtenu en divisant le nombre total de points gagnés par le sportif par le temps écoulé depuis son ajout dans l'application.\n\nIl est indiqué au-dessus du graphique la valeur du point le plus bas (min) ainsi que la valeur du point le plus haut (max) de la courbe.\n\nLa mise à jour du graphique s'effectue une fois par jour lors du premier lancement de l'application.";
+"help.potsList" = "Vous pouvez consulter ici la liste de toutes les cagnottes, si vous avez déjà ajouté un ou plusieurs sportifs.\nChaque cagnotte indique son montant, et le montant prévisionnel à une certaine date si les sportifs continuent d'effectuer des performances au même rythme.\nEn choisissant une cagnotte, vous pouvez y ajouter ou y soustraire de l'argent.";
+"help.potsAddings" = "Sur cette page, vous pouvez ajouter à ou retirer de l'argent d'une cagnotte.\n\nVous avez juste à sélectionner une opération (ajout ou retrait), entrer le montant, et confirmer quand c'est terminé.";
+"help.athleticsList" = "Cette page présente la liste des sportifs.\nEn choisissant le bouton plus, vous pouvez ajouter un sportif.\nEn choisissant un sportif, vous pouvez voir ses statistiques et le modifier.\nEn restant appuyé sur un sportif, vous pouvez le supprimer.";
+"help.athleticsDetails" = "Cette page est le profil d'un sportif.\n\nVous pouvez y voir ses informations, son évolution, et ses performances.\n\nEn restant appuyé sur une performance, vous pouvez l'effacer. Cette action effacera la participation du sportif à cette performance, mais n'effacera pas la performance elle-même (sauf si le sportif était seul). Pour effacer une performance, vous devez effectuer la même action dans la page performances ci-dessous.";
+"help.athleticsSettings" = "Pour ajouter ou modifier un sportif, vous devez choisir son nom.\nVous pouvez, si vous le souhaitez, ajouter une image.\nConfirmez lorsque c'est terminé.";
+"help.sportsList" = "Cette page présente la liste des sports.\n\nEn choisissant le bouton +, vous pouvez ajouter un sport.\n\nEn choisissant un sport, vous pouvez en consulter les détails et éventuellement le modifier.\n\nEn restant appuyé sur un sport, vous pouvez le supprimer.";
+"help.sportsDetails" = "Vous pouvez sur cette page toutes les informations concernant un sport : ses nom, icône, l'unité permettant de mesurer une performance, la valeur nécessaire pour gagner un point (directement le nombre de points gagnés dans le cas d'une unité en une fois), et les performances.\n\nEn restant appuyé sur une performance, vous pouvez la supprimer.";
+"help.sportsSettings" = "Pour ajouter un sport, vous devez choisir son nom.\n\nEnsuite, choisissez l'unité permettant de mesurer chaque performance de ce sport.\n\nSelon l'unité choisie, vous devrez entrer la valeur nécessaire pour l'obtention d'un point.\n\nEnfin, choisissez une icône.\n\nQuand c'est terminé, vous pouvez confirmer.";
+"help.performancesList" = "Cette page présente la liste des performances.\n\nEn choisissant le bouton +, vous pouvez ajouter une performance.\n\nEn restant appuyé sur une performance, vous pourrez la supprimer (cela entraînera la suppression des points gagnés grâce à elle).";
+"help.performancesSettings" = "Pour ajouter une performance:\n\nChoisissez les sportifs qui l'ont effectuée. Vous pouvez ajouter plusieurs sportifs. Pour ajouter des sportifs : sélectionner un sportif dans la liste et cliquer sur le bouton +.\n\nChoisissez le sport.\n\nEntrer la performance réalisée à convertir en points.\n\nEnfin, choisissez la cagnotte dans laquelle verser les points : cagnotte commune, ou celles des sportifs.";
+
+// MARK: - Icon
+
+"icon.title" = "Icône";
+
+// MARK: - Image
+
+"image.title" = "Image";
+
+// MARK: - Performances
+
+"performances.title" = "performances";
+"performances.title.maj" = "Performances";
+"performances.none" = "Aucune performance.";
+"performances.none.noAthletics" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif :\n- aller dans la page sportifs ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sportif et confirmer.";
+"performances.none.noSports" = "Aucun sport n'a été ajouté.\n\nPour ajouter un sport :\n- aller dans la page sports ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sport et confirmer.";
+"performances.none.noPerformances" = "Aucune performance n'a été ajoutée.\n\nPour ajouter une performance :\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations de la nouvelle performance et confirmer.";
+"performances.oneShot" = "*en une fois*";
+"performances.settings.sportsInstructions" = "Choisissez un sport";
+"performances.settings.addPotQuestion" = "Ajouter les points à la cagnotte commune ?";
+"performances.settings.addExplanationsOn" = "Les points seront ajoutés à la cagnotte commune.";
+"performances.settings.addExplanationsOff" = "Les points seront ajoutés aux cagnottes de chacun des sportifs.";
+"performances.new" = "nouvelle performance";
+
+// MARK: - Picker
+
+"picker.choices1" = "Choisissez 1 ";
+"picker.choices1plus" = "Choisissez au moins 1 ";
+"picker.chooseClick" = "Cliquez ici pour choisir ";
+
+// MARK: - Points
+
+"points.title" = "points";
+
+// MARK: - Pots
+
+"pots.title" = "cagnottes";
+"pots.title.maj" = "Cagnottes";
+"pots.noAthletics" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif :\n- aller dans la page sportifs ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sportif et confirmer.";
+"pots.athleticsPots" = "Cagnottes des sportifs";
+"pots.warning" = "Rappelez-vous que les sommes affichées ici ne correspondent pas à de l'argent offert par l'application et ses prorpriétaires, mais de l'argent que vous pouvez vous permettre de mettre de côté vu vos efforts.";
+"pots.addings.addPlaceholder" = "Montant à ajouter";
+"pots.addings.addTitle" = "+ ajouter de l'argent";
+"pots.addings.withdrawTitle" = "- retirer de l'argent";
+"pots.addings.withdrawPlaceholder" = "Montant à retirer";
+"pots.addings.modificationTitle" = "Type de modification";
+"pots.addings.modificationInstructions" = "Choisissez une modification à effectuer.";
+"pots.addings.amountTitle" = "Montant";
+"pots.addings.amountLimitMin" = "Vous devez choisir un montant.";
+"pots.commonPot" = "Cagnotte commune";
+
+// MARK: - Settings
+
+"settings.title" = "paramètres";
+"settings.navigationTitle" = "paramètres généraux";
+"settings.date.title" = "Date de prévision";
+"settings.date.explanations" = "L'application fournit, pour chaque cagnotte, un montant prévisionnel à une certaine date si les sportifs continuent d'effectuer des performances sur le même rythme.\nVous pouvez choisir cette date ici.";
+"settings.conversion.title" = "Conversion en argent";
+"settings.conversion.explanations1" = "Dans cette application, les sportifs peuvent gagner des points en effectuant des performances.\nLes points peuvent être convertis en ";
+"settings.conversion.explanations2" = " que vous pourrez dépenser de votre propre argent pour chaque cagnotte.\nEntrez ici le nombre de points nécessaires pour obtenir 1 ";
+"settings.conversion.limitExplanationsMin" = "Entrez un nombre.";
+"settings.conversion.limitExplanationsMax" = "Le nombre doit être inférieur à 1 000.";
+"settings.help.title" = "Aide";
+"settings.help.question" = "Voulez-vous que l'aide soit affichée ?";
+"settings.alert.title" = "Sauvegardé";
+"settings.alert.message" = "Les paramètres ont été sauvegardés.";
+
+// MARK: - Sports
+
+"sports.title" = "sports";
+"sports.title.sing.maj" = "Sport";
+"sports.noSports" = "Aucun sport n'a été ajouté.\nPour ajouter un sport, appuyer sur le bouton + en haut de l'écran, et renseigner ses informations.";
+"sports.details.unityTitle" = "Unité de mesure";
+"sports.details.unityTypeTitle" = "Type:";
+"sports.unityType.distance.description" = "distance";
+"sports.unityType.time.description" = "temps";
+"sports.unityType.oneShot.description" = "en une fois";
+"sports.unityType.count.description" = "compte";
+"sports.unityType.distance.symbols1" = " m";
+"sports.unityType.time.symbols1" = " h ";
+"sports.unityType.time.symbols2" = " m ";
+"sports.unityType.time.symbols3" = " s";
+"sports.unityType.oneShot.symbols1" = " pts";
+"sports.unityType.count.symbols1" = "";
+"sports.unityType.distance.placeholder1" = "distance";
+"sports.unityType.time.placeholder1" = "heures";
+"sports.unityType.time.placeholder2" = "min.";
+"sports.unityType.time.placeholder3" = "sec.";
+"sports.unityType.oneShot.placeholder1" = "points gagnés";
+"sports.unityType.count.placeholder1" = "compte";
+"sports.unityType.distance.explanations" = "Vous devez indiquer la distance nécessaire pour gagner un point.";
+"sports.unityType.time.explanations" = "Vous devez indiquer la durée nécessaire de l'exercice pour gagner un point.";
+"sports.unityType.oneShot.explanations" = "Vous devez indiquer le nombre de points gagnés à chaque fois que ce sport sera effectué.";
+"sports.unityType.count.explanations" = "Vous devez indiquer le compte nécessaire pour gagner un point.";
+"sports.details.oneShot" = "En une fois :";
+"sports.details.needs" = "Pour 1 point :";
+"sports.details.title" = "Détails";
+"sports.settings.limitName" = "Vous devez choisir un nom.";
+"sports.settings.valuePlaceholder" = "Choisissez une unité";
+"sports.settings.new" = "nouveau sport";
+
+// MARK: - Sports value
+
+"sportValue.oneShotGain" = "En faisant ce sport, vous gagnerez ";
+"sportValue.performanceTitle" = "Performance";
+"sportValue.sportTitle" = "Conversion en points";

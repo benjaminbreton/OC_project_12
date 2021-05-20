@@ -37,7 +37,7 @@ struct SettingsSportValue: View {
                             TextField(sportUnity.placeholders[0], text: $value[0])
                             Text(sportUnity.symbols[0])
                         case .performance:
-                            Text("By doing this sport, you'll earn \(valueForOnePoint) points.")
+                            Text("\("sportValue.oneShotGain".localized)\(valueForOnePoint) points.")
                                 .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                         }
                     case .time:
@@ -58,7 +58,7 @@ struct SettingsSportValue: View {
         }
         .frame(height: ViewCommonSettings().textLineHeight)
         .keyboardType(.numberPad)
-        .inModule(caller == .sport ? "Needs to get 1 point" : "Performance", explanations: caller == .sport ? unity?.explanations : nil)
+        .inModule(caller == .sport ? "sportValue.sportTitle".localized : "sportValue.performanceTitle".localized, explanations: caller == .sport ? unity?.explanations : nil)
     }
 }
 

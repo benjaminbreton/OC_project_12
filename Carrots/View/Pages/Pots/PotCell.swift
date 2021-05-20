@@ -13,7 +13,7 @@ struct PotCell: View {
         if let athletic = pot?.owner {
             return athletic.name ?? ""
         } else {
-            return "Common pot"
+            return "pots.commonPot".localized
         }
     }
     var body: some View {

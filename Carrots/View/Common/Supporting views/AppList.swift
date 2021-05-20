@@ -236,7 +236,7 @@ fileprivate struct CanBeDeleted: ViewModifier {
         content
             .contextMenu {
                 HStack {
-                    Text("Delete")
+                    Text("deletion.title".localized)
                     Image(systemName: "trash")
                 }
                 .inButton {

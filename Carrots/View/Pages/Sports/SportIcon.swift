@@ -15,12 +15,6 @@ struct SportIcon: View {
                 .foregroundColor(.backCell)
             Text(icon)
                 .withSportIconFont(lineCount: lineCount)
-            /*
-            Circle()
-                .stroke(lineWidth: ViewCommonSettings().lineWidth)
-                .foregroundColor(.image)
-                .opacity(selectedIndex?.wrappedValue == index ? 1 : 0)
- */
         }
     }
 }

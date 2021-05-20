@@ -69,13 +69,13 @@ fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
         self._selectionIndex = selectionIndex
         self._selectedObjects = selectedObjects
         self.maximumSelection = maximumSelection
-        defaultText = maximumSelection == 1 ? "Choose 1 \(title.lowercased())" : "Choose at least 1 \(title.lowercased())"
+        defaultText = maximumSelection == 1 ? "\("picker.choices1".localized)\(title.lowercased())" : "\("picker.choices1plus".localized)\(title.lowercased())"
         textView = PickerTextView(data: data, selectionIndex: selectionIndex, selectedObjects: selectedObjects, maximumSelection: maximumSelection)
         setTextView(title)
     }
     private func setTextView(_ title: String) {
         textView.font = UIFont(name: ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize)
-        textView.text = "Click here to choose \(title.lowercased())"
+        textView.text = "\("picker.chooseClick".localized)\(title.lowercased())"
         textView.textAlignment = .center
     }
 

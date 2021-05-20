@@ -36,40 +36,30 @@ struct SportSettings: View {
     var body: some View {
         VStack {
             SettingsTextfield(
-                title: "Name",
-                placeHolder: "Name",
+                title: "all.name".localized,
+                placeHolder: "all.name".localized,
                 value: $name,
                 keyboard: .default,
                 isWrong: $isNameEmpty,
-                limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
+                limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "sports.settings.limitName".localized, maxCount: nil))
             SettingsCustomPicker(
-                title: "Unity",
+                title: "sports.details.unityTitle".localized,
                 data: unities,
                 selectedObjects: $unity,
                 maximumSelection: 1,
                 lineCount: 1)
             SettingsSportValue(
-                placeholder: "Choose an unity",
+                placeholder: "sports.settings.valuePlaceholder".localized,
                 unity: unity.count == 1 ? unity[0] : nil,
                 valueForOnePoint: $valueForOnePoint,
                 caller: .sport)
             SettingsSportIconPicker(icon: $icon)
         }
         .inSettingsPage(
-            name == "" ? "new sport":"\(name) settings",
+            name == "" ? "sports.settings.new".localized:"\(name)",
             gameDoor: _gameDoor,
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
-            helpText: """
-            To add a sport, you have to choose its name.
-
-            Then, choose the unity to measure each performance of this sport.
-
-            Depending on the choosen unity, you have to set up the needed value to get one point.
-
-            Finally, choose a picture.
-
-            When it's done, you can click on the confirmation button.
-            """) {
+            helpText: "sportsSettings") {
             guard unity.count == 1 else { return }
             if let sport = sport {
                 gameDoor.update(sport, name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)

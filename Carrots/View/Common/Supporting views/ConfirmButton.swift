@@ -18,7 +18,7 @@ struct ConfirmButton: View {
             Divider()
             Spacer()
                 .frame(width: .none, height: ViewCommonSettings().commonHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            Text("Confirm")
+            Text("confirmation.title".localized)
                 .inButton(isDisabled: isDisabled, action: action)
             Spacer()
                 .frame(width: .none, height: ViewCommonSettings().commonHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)

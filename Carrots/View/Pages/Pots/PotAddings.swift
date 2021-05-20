@@ -14,24 +14,18 @@ struct PotAddings: View {
     @State var amountIsWrong: Bool = false
     var confirmationButtonIsDisabled: Bool { amountIsWrong }
     var placeHolder: String {
-        selection == 0 ? "Amount to add" : "Amount to withdraw"
+        selection == 0 ? "pots.addings.addPlaceholder".localized : "pots.addings.withdrawPlaceholder".localized
     }
     
     var body: some View {
         VStack {
-            SettingsSegmentedPicker(title: "Modification type", selection: $selection, instructions: "Choose the modification to do", possibilities: ["+ add money", "- withdraw money"])
-            SettingsTextfield(title: "Amount", placeHolder: placeHolder, value: $amount, keyboard: .decimalPad, isWrong: $amountIsWrong, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose an amount", maxCount: nil))
+            SettingsSegmentedPicker(title: "pots.addings.modificationTitle".localized, selection: $selection, instructions: "pots.addings.modificationInstructions".localized, possibilities: ["pots.addings.addTitle".localized, "pots.addings.withdrawTitle".localized])
+            SettingsTextfield(title: "pots.addings.amountTitle".localized, placeHolder: placeHolder, value: $amount, keyboard: .decimalPad, isWrong: $amountIsWrong, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "pots.addings.amountLimitMin".localized, maxCount: nil))
         }
         .inSettingsPage("\(pot?.description ?? "No name")",
                         gameDoor: _gameDoor,
                         confirmationButtonIsDisabled: confirmationButtonIsDisabled,
-                        helpText: """
-                        On this page, you can add to or withdraw money from a pot, \(pot?.description ?? "No name") here.
-
-                        You just have to select an operation (add or withdraw money), and then enter the amount to add or withdraw.
-
-                        Hit confirmation's button when it's done.
-                        """) {
+                        helpText: "potsAddings") {
             gameDoor.changeMoney(for: pot?.owner, amount: amount, operation: selection)
         }
     }

@@ -19,7 +19,7 @@ struct SettingsSportIconPicker: View {
     
     var body: some View {
         SettingsSportIconScrollView(icon: _icon)
-            .inModule("Icon")
+            .inModule("icon.title".localized)
     }
 }
 

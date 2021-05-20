@@ -30,20 +30,14 @@ struct AthleticSettings: View {
     
     var body: some View {
         VStack {
-            SettingsTextfield(title: "Name", placeHolder: "Name", value: $name, keyboard: .default, explanations: nil, isWrong: $isNameEmpty, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose a name", maxCount: nil))
+            SettingsTextfield(title: "all.name".localized, placeHolder: "all.name".localized, value: $name, keyboard: .default, explanations: nil, isWrong: $isNameEmpty, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "athletics.settings.nameLimit".localized, maxCount: nil))
             SettingsAthleticImagePicker(image: $image)
         }
         .inSettingsPage(
-            name == "" ? "New athletic":"\(name) settings",
+            name == "" ? "athletics.settings.new".localized:"\(name)",
             gameDoor: _gameDoor,
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
-            helpText: """
-            To add or modify athletic, you have to choose its name.
-
-            You can, if you want, add a picture.
-
-            When it's done, click on the confirmation button.
-            """,
+            helpText: "athleticsSettings",
             confirmAction: {
             if let athletic = athletic {
                 gameDoor.update(athletic, name: name, image: data)

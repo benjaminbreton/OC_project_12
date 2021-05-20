@@ -34,15 +34,15 @@ struct SettingsDatePicker: View {
             switch range {
             case .afterToday:
                 DatePicker(selection: _date, in: Date()..., displayedComponents: .date) {
-                    Text("Select a date")
+                    Text("date.ask".localized)
                 }
             case .beforeToday:
                 DatePicker(selection: _date, in: ...Date(), displayedComponents: .date) {
-                    Text("Select a date")
+                    Text("date.ask".localized)
                 }
             case .any:
                 DatePicker(selection: _date, displayedComponents: .date) {
-                    Text("Select a date")
+                    Text("date.ask".localized)
                 }
             }
         }

@@ -1,0 +1,164 @@
+/* 
+  Localizable.strings
+  Carrots
+
+  Created by Benjamin Breton on 20/05/2021.
+  
+*/
+
+// MARK: - All
+
+"all.noName" = "No name";
+"all.name" = "Name";
+
+// MARK: - Athletics
+
+"athletics.title" = "athletics";
+"athletics.title.maj" = "Athletics";
+"athletics.none" = "No athletics have been added.\n\nTo add an athletic, press the + button on the top of the screen, and set athletic's informations.";
+"athletics.details.creationDate" = "Creation date";
+"athletics.details.evolution" = "Evolution";
+"athletics.details.title" = "Profile";
+"athletics.settings.nameLimit" = "You have to choose a name.";
+"athletics.settings.new" = "New athletic";
+
+// MARK: - Confirmation
+
+"confirmation.title" = "Confirm";
+
+// MARK: - Date
+
+"date.ask" = "select a date";
+
+// MARK: - Deletion
+
+"deletion.title" = "delete";
+
+// MARK: - Graphic
+
+"graphic.noEvolution" = "No evolution can be displayed the first day.";
+"graphic.description" = "Points earned per hour the last 30 days.";
+
+// MARK: - Help
+
+"help.proposal" = "Need some help ? click here";
+"help.title" = "Help:";
+"help.end" = "Click here again to close this help.\n\nYou can disable all helps on the settings page.";
+"help.graphic" = "This graphic shows the evolution of the number of points earned per hour by the athletic.\n\nThis number is obtained by dividing the total number of points earned by the athletic by the time elapsed since the athletic was added to the application.\n\nThe lowest point of the curve below represents \(values.min) points per hour.\n\nThe highest point of the curve below represents \(values.max) points per hour.\n\nThe graphic's update happends the first time the application is open each day.";
+"help.potsList" = "Here is the page where you can see all the pots, if you already have added some athletics.\nEach pot shows you its amount, and its expected value on a certain date if athletics keep doing performances on the same rythm.\nBy choosing a pot, you can add or withdraw some money to it.";
+"help.potsAddings" = "On this page, you can add to or withdraw money from a pot.\n\nYou just have to select an operation (add or withdraw money), and then enter the amount to add or withdraw.\n\nHit confirmation's button when it's done.";
+"help.athleticsList" = "This page shows you the list of athletics.\nBy choosing the plus button, you can add an athletic.\nBy choosing an athletic, you can see his statistics and modify him.\nBy stay pressed on an athletic, you can delete him.";
+"help.athleticsDetails" = "This page is an athletic's profile.\n\nYou will see his informations, his evolution, and his performances.\n\nBy stay pressed on a performance, you can delete it. This action will delete the athletic's participation on this performance, but not the performance itself (except if the athletic was alone). To delete the performance, you have to do the same action on the dedicated performances page.";
+"help.athleticsSettings" = "To add or modify athletic, you have to choose its name.\nYou can, if you want, add a picture.\nWhen it's done, click on the confirmation button.";
+"help.sportsList" = "This page shows you the list of sports.\n\nBy choosing the plus button, you can add a sport.\n\nBy choosing a sport, you can see its details and eventually modify it.\n\nBy stay pressed on a sport, you can delete it.";
+"help.sportsDetails" = "You can see on this page all informations about a sport : name, icon, unity to measure performances of this sport, the needed value to get one point (directly the number of points you can earn in case of one shot unity), and the performances.\n\nBy stay pressed on a performance, you can delete it.";
+"help.sportsSettings" = "To add or modify a sport, you have to choose its name.\n\nThen, choose the unity to measure each performance of this sport.\n\nDepending on the choosen unity, you have to set up the needed value to get one point.\n\nFinally, choose a picture.\n\nWhen it's done, you can click on the confirmation button.";
+"help.performancesList" = "This page shows you the list of performances.\n\nBy choosing the plus button, you can add a performance.\n\nBy stay pressed on a performance, you can delete it (the deletion on this page will cancel all points earned because of it).";
+"help.performancesSettings" = "To add a performance:\n\nChoose athletics who did it. You can add several athletics. To add athletics : select an athletic on the list and click on the plus button.\n\nChoose performance's sport.\n\nSet the realised performance to convert it on points.\n\nFinally, choose a pot to add points : common pot, or athletics pots.";
+
+// MARK: - Icon
+
+"icon.title" = "Icon";
+
+// MARK: - Image
+
+"image.title" = "Image";
+
+// MARK: - Performances
+
+"performances.title" = "performances";
+"performances.title.maj" = "Performances";
+"performances.none" = "No performances.";
+"performances.none.noAthletics" = "No athletics have been added.\n\nTo add an athletic:\n- go on athletics page below;\n- select the + button on the top of the screen;\n- add new athletic's informations and confirm.";
+"performances.none.noSports" = "No sports have been added.\n\nTo add a sport:\n- go on sports page below;\n- select the + button on the top of the screen;\n- add new sport's informations and confirm.";
+"performances.none.noPerformances" = "No performances have been added.\n\nTo add a performance:\n- select the + button on the top of the screen;\n- add new performance's informations and confirm.";
+"performances.oneShot" = "*one shot*";
+"performances.settings.sportsInstructions" = "Choose a sport";
+"performances.settings.addPotQuestion" = "Add points to common pot ?";
+"performances.settings.addExplanationsOn" = "Points will be added to the common pot.";
+"performances.settings.addExplanationsOff" = "Points will be added to each athletics pot.";
+"performances.new" = "new performance";
+
+// MARK: - Picker
+
+"picker.choices1" = "Choose 1 ";
+"picker.choices1plus" = "Choose at least 1 ";
+"picker.chooseClick" = "Click here to choose ";
+
+// MARK: - Points
+
+"points.title" = "points";
+
+// MARK: - Pots
+
+"pots.title" = "pots";
+"pots.title.maj" = "Pots";
+"pots.noAthletics" = "No athletics have been added.\n\nTo add an athletic:\n- go on athletics page below;\n- select the + button on the top of the screen;\n- add new athletic's informations and confirm.";
+"pots.athleticsPots" = "Athletics pots";
+"pots.warning" = "Remember that the amounts displayed here are not money offered by the application and its owners, but money that you can afford to put aside for your efforts.";
+"pots.addings.addPlaceholder" = "Amount to add";
+"pots.addings.addTitle" = "+ add money";
+"pots.addings.withdrawTitle" = "- withdraw money";
+"pots.addings.withdrawPlaceholder" = "Amount to withdraw";
+"pots.addings.modificationTitle" = "Modification type";
+"pots.addings.modificationInstructions" = "Choose the modification to do.";
+"pots.addings.amountTitle" = "Amount";
+"pots.addings.amountLimitMin" = "You have to choose an amount.";
+"pots.commonPot" = "Common pot";
+
+// MARK: - Settings
+
+"settings.title" = "settings";
+"settings.navigationTitle" = "general settings";
+"settings.date.title" = "Prevision date";
+"settings.date.explanations" = "The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.\nYou can set this date here.";
+"settings.conversion.title" = "Money conversion";
+"settings.conversion.explanations1" = "In this application, athletics can earn points by doing some sports performances.\nPoints can be converted in ";
+"settings.conversion.explanations2" = " you can spend from your own money for each pot.\nSet here the necessary number of points to earn 1 ";
+"settings.conversion.limitExplanationsMin" = "Enter a number.";
+"settings.conversion.limitExplanationsMax" = "The number has to be inferior than 1,000.";
+"settings.help.title" = "Help";
+"settings.help.question" = "Do you want help to be shown ?";
+"settings.alert.title" = "Saved";
+"settings.alert.message" = "The settings have been saved.";
+
+// MARK: - Sports
+
+"sports.title" = "sports";
+"sports.title.sing.maj" = "Sport";
+"sports.noSports" = "No sports have been added.\nTo add a sport, press the + button on the top of the screen, and set sport's informations.";
+"sports.details.unityTitle" = "Measurement unity";
+"sports.details.unityTypeTitle" = "Type:";
+"sports.unityType.distance.description" = "distance";
+"sports.unityType.time.description" = "time";
+"sports.unityType.oneShot.description" = "one shot";
+"sports.unityType.count.description" = "count";
+"sports.unityType.distance.symbols1" = " m";
+"sports.unityType.time.symbols1" = " h ";
+"sports.unityType.time.symbols2" = " m ";
+"sports.unityType.time.symbols3" = " s";
+"sports.unityType.oneShot.symbols1" = " pts";
+"sports.unityType.count.symbols1" = "";
+"sports.unityType.distance.placeholder1" = "distance";
+"sports.unityType.time.placeholder1" = "hours";
+"sports.unityType.time.placeholder2" = "min.";
+"sports.unityType.time.placeholder3" = "sec.";
+"sports.unityType.oneShot.placeholder1" = "earned points";
+"sports.unityType.count.placeholder1" = "count";
+"sports.unityType.distance.explanations" = "You have to indicate here the necessary distance to reach to get one point.";
+"sports.unityType.time.explanations" = "You have to indicate here the necessary exercice's duration to get one point.";
+"sports.unityType.oneShot.explanations" = "You have to indicate here the number of points earned each time this sport has been made.";
+"sports.unityType.count.explanations" = "You have to indicate here the necessary count to get one point.";
+"sports.details.oneShot" = "One shot:";
+"sports.details.needs" = "Needs to get 1 point:";
+"sports.details.title" = "Details";
+"sports.settings.limitName" = "You have to choose a name.";
+"sports.settings.valuePlaceholder" = "Choose an unity";
+"sports.settings.new" = "new sport";
+
+// MARK: - Sport value
+
+"sportValue.oneShotGain" = "By doing this sport, you'll earn ";
+"sportValue.performanceTitle" = "Performance";
+"sportValue.sportTitle" = "Points conversion";
+

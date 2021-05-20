@@ -27,7 +27,7 @@ struct AthleticCell: View {
             HStack(alignment: .center) {
                 
                 AthleticImage(image: image, radius: ViewCommonSettings().commonHeight * 2)
-                Text(athletic.name ?? "No name")
+                Text(athletic.name ?? "all.noName".localized)
                     .padding()
                     .withBigSimpleFont()
             }

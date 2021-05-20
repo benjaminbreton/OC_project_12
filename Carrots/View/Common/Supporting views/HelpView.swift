@@ -11,6 +11,7 @@ struct HelpView: View {
     let text: String
     @Binding var isShown: Bool
     var hasToBeShown: Bool
+    private var completeText: String { "help.\(text)".localized }
     var body: some View {
         Group {
             if hasToBeShown {
@@ -20,18 +21,14 @@ struct HelpView: View {
                     VStack {
                         HStack {
                             Image(systemName: "questionmark.diamond.fill")
-                            Text("\(isShown ? "Help :" : "Need some help ? click here")")
+                            Text("\(isShown ? "help.title".localized : "help.proposal".localized)")
                         }
                         if isShown {
                             CommonHeightSpacer()
-                            Text(text)
+                            Text(completeText)
                                 .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                             CommonHeightSpacer()
-                            Text("""
-                                Click here again to close this help.
-
-                                You can disable all helps on the settings page.
-                                """)
+                            Text("help.end".localized)
                         }
                     }
                     .inRectangle(.leading)

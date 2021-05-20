@@ -15,13 +15,9 @@ struct PerformanceCell: View {
     private var rowHeight: CGFloat {
         ViewCommonSettings().textLineHeight * lineCount
     }
-    private var athleticsNames: String {
-        let athleticsNames = performance.athletics.map({ "\($0.name ?? "No name")" }).joined(separator: ", ")
-        return "Athletics: \(athleticsNames)"
-    }
     private var formattedValue: String {
         let unity = performance.initialUnity.sportUnityType
-        return unity != .oneShot ? "\(unity.singleString(for: performance.value))" : "*one shot*"
+        return unity != .oneShot ? "\(unity.singleString(for: performance.value))" : "performances.oneShot".localized
     }
     var body: some View {
         HStack(alignment: .center) {

@@ -16,7 +16,7 @@ public class Sport: NSManagedObject {
         }
         return performances
     }
-    override public var description: String { name ?? "No name" }
+    override public var description: String { name ?? "all.noName".localized }
     func pointsToAdd(for value: Int64) -> Int64 {
         guard valueForOnePoint > 0 else { return 0 }
         switch unityInt16.sportUnityType {
@@ -39,6 +39,21 @@ public class Sport: NSManagedObject {
         
         case distance, time, count, oneShot
         
+        /// Key base to get a string from the localizable files.
+        var localizedKey: String {
+            let base = "sports.unityType."
+            switch self {
+            case .distance:
+                return "\(base)distance."
+            case .time:
+                return "\(base)time."
+            case .oneShot:
+                return "\(base)oneShot."
+            case .count:
+                return "\(base)count."
+            }
+        }
+        
         /// Sport's unity type int16 to save in coredata.
         var int16: Int16 {
             switch self {
@@ -53,52 +68,26 @@ public class Sport: NSManagedObject {
             }
         }
         var description: String {
-            switch self {
-            case .distance:
-                return "distance"
-            case .time:
-                return "time"
-            case .oneShot:
-                return "one shot"
-            case .count:
-                return "count"
-            }
+            "\(localizedKey)description".localized
         }
         var symbols: [String] {
             switch self {
-            case .distance:
-                return [" km"]
             case .time:
-                return [" h ", " m ", " s"]
-            case .oneShot:
-                return [" pts"]
+                return ["\(localizedKey)symbols1".localized, "\(localizedKey)symbols2".localized, "\(localizedKey)symbols3".localized]
             default:
-                return [""]
+                return ["\(localizedKey)symbols1".localized]
             }
         }
         var placeholders: [String] {
             switch self {
-            case .distance:
-                return ["distance"]
             case .time:
-                return ["hours", "min.", "sec."]
-            case .oneShot:
-                return ["earned points"]
-            case .count:
-                return ["count"]
+                return ["\(localizedKey)placeholder1".localized, "\(localizedKey)placeholder2".localized, "\(localizedKey)placeholder3".localized]
+            default:
+                return ["\(localizedKey)placeholder1".localized]
             }
         }
         var explanations: String {
-            switch self {
-            case .distance:
-                return "You have to indicate here the necessary distance to reach to get one point."
-            case .time:
-                return "You have to indicate here the necessary exercice's duration to get one point."
-            case .count:
-                return "You have to indicate here the necessary count to get one point."
-            case .oneShot:
-                return "You have to indicate here the number of points earned each time this sport has been made. "
-            }
+            "\(localizedKey)explanations".localized
         }
         func value(for inputs: [String?]) -> Int64 {
             guard inputs.count == 3 else { return 0 }
@@ -144,4 +133,3 @@ public class Sport: NSManagedObject {
     
     
 }
-

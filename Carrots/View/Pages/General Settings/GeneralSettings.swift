@@ -13,31 +13,24 @@ struct GeneralSettings: View {
     @State var showHelp: Bool
     @State var arePointsWrong: Bool = false
     var confirmationButtonIsDisabled: Bool { arePointsWrong }
+    private var moneyName: String { "\(Locale.current.localizedString(forCurrencyCode: Locale.current.currencyCode ?? "") ?? "euro")" }
     var body: some View {
         VStack() {
-            SettingsDatePicker(title: "Prevision date", date: $date, range: .afterToday, explanations: """
-                    The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.
-                    
-                    You can set this date here.
-                    """)
+            SettingsDatePicker(title: "settings.date.title".localized, date: $date, range: .afterToday, explanations: "settings.date.explanations".localized)
             SettingsTextfield(
-                title: "Points for one euro",
-                placeHolder: "points",
+                title: "settings.conversion.title".localized,
+                placeHolder: "points.title".localized,
                 value: $pointsForOneEuro,
                 keyboard: .numberPad,
-                explanations: """
-                    In this application, athletics can earn points by doing some sports performances.
-                    Points can be converted in euros in each pot.
-                    Set here the necessary number of points to earn one euro.
-                    """,
+                explanations: "\("settings.conversion.explanations1".localized)\(moneyName)\("settings.conversion.explanations2".localized)\(moneyName).",
                 isWrong: $arePointsWrong,
                 limits: (minCount: 1, maxCount: 3),
                 limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
-            SettingsCustomToggle(title: "Help", question: "Do you want help to be shown ?", isOn: $showHelp)
+            SettingsCustomToggle(title: "settings.help.title".localized, question: "settings.help.question".localized, isOn: $showHelp)
         }
-        .inSettingsPage("general settings", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "Saved", message: "Settings have been saved without errors.")) {
+        .inSettingsPage("settings.navigationTitle".localized, gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
             gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
         }
-        .inNavigationHome(title: "general settings")
+        .inNavigationHome(title: "settings.navigationTitle".localized)
     }
 }
