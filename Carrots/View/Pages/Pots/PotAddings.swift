@@ -22,7 +22,16 @@ struct PotAddings: View {
             SettingsSegmentedPicker(title: "Modification type", selection: $selection, instructions: "Choose the modification to do", possibilities: ["+ add money", "- withdraw money"])
             SettingsTextfield(title: "Amount", placeHolder: placeHolder, value: $amount, keyboard: .decimalPad, isWrong: $amountIsWrong, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "You have to choose an amount", maxCount: nil))
         }
-        .inSettingsPage("\(pot?.description ?? "No name")", gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled) {
+        .inSettingsPage("\(pot?.description ?? "No name")",
+                        gameDoor: _gameDoor,
+                        confirmationButtonIsDisabled: confirmationButtonIsDisabled,
+                        helpText: """
+                        On this page, you can add to or withdraw money from a pot, \(pot?.description ?? "No name") here.
+
+                        You just have to select an operation (add or withdraw money), and then enter the amount to add or withdraw.
+
+                        Hit confirmation's button when it's done.
+                        """) {
             gameDoor.changeMoney(for: pot?.owner, amount: amount, operation: selection)
         }
     }

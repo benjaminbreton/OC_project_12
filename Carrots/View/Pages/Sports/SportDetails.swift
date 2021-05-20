@@ -22,8 +22,8 @@ struct SportDetails: View {
             DetailsPerformancesDisplayer(performances: sport.performances, source: nil)
         }
         .inDetailsPage(
-            genericTitle: "sport details",
-            specificTitle: sport.name ?? "No name",
+            genericTitle: sport.name ?? "No name",
+            specificTitle: "Details",
             destinationToModify: SportSettings(sport: sport, name: sport.name ?? "No name", icon: sport.icon ?? "", unity: [sport.unityType], valueForOnePoint: sport.unityType.stringArray(for: sport.valueForOnePoint))
                 .environmentObject(gameDoor)
         )

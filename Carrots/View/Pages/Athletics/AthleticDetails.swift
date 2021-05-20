@@ -31,8 +31,8 @@ struct AthleticDetails: View {
             
         }
         .inDetailsPage(
-            genericTitle: "profile",
-            specificTitle: athletic.name ?? "No name",
+            genericTitle: athletic.name ?? "No name",
+            specificTitle: "Profile",
             destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data()))
                 .environmentObject(gameDoor)
         
