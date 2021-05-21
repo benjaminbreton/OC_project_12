@@ -34,13 +34,15 @@ struct PerformanceSettings: View {
     var body: some View {
         VStack {
             SettingsCustomPicker(
-                title: "athletics.title.maj".localized,
+                titleOne: "athletics.title.sing.maj".localized,
+                titleMany: "athletics.title.maj".localized,
                 data: athleticsArray,
                 selectedObjects: $selectedAthletics,
                 maximumSelection: 0,
                 lineCount: 2)
             SettingsCustomPicker(
-                title: "sports.title.sing.maj".localized,
+                titleOne: "sports.title.sing.maj".localized,
+                titleMany: "sports.title.sing.maj".localized,
                 data: sportsArray,
                 selectedObjects: $selectedSport,
                 maximumSelection: 1,

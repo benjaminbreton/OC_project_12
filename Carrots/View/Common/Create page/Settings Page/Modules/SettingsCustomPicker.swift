@@ -16,7 +16,8 @@ struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     
     @State var selectionIndex: Int? = nil
     @Binding var selectedObjects: [T]
-    let title: String
+    let titleOne: String
+    let titleMany: String
     let data: [T]
     let maximumSelection: Int
     let lineCount: CGFloat
@@ -31,8 +32,9 @@ struct SettingsCustomPicker<T: CustomStringConvertible>: View {
      - parameter maximumSelection: Maximum number of objects which can be selected by the user.
      - parameter lineCount: Number of lines of the textview.
      */
-    init(title: String, data: [T], selectedObjects: Binding<[T]>, maximumSelection: Int, lineCount: CGFloat) {
-        self.title = title
+    init(titleOne: String, titleMany: String, data: [T], selectedObjects: Binding<[T]>, maximumSelection: Int, lineCount: CGFloat) {
+        self.titleOne = titleOne
+        self.titleMany = titleMany
         self.data = data
         self._selectedObjects = selectedObjects
         self.maximumSelection = maximumSelection
@@ -42,9 +44,9 @@ struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     // MARK: - View
     
     var body: some View {
-        PickerView(title, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
+        PickerView(titleOne: titleOne, titleMany: titleMany, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
             .frame(height: ViewCommonSettings().textLineHeight * lineCount)
-            .inModule(title)
+            .inModule(titleMany)
     }
 }
 
@@ -64,18 +66,18 @@ fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
     
     // MARK: - Init
     
-    init(_ title: String, data: [T], selectionIndex: Binding<Int?>, selectedObjects: Binding<[T]>, maximumSelection: Int) {
+    init(titleOne: String, titleMany: String, data: [T], selectionIndex: Binding<Int?>, selectedObjects: Binding<[T]>, maximumSelection: Int) {
         self.data = data
         self._selectionIndex = selectionIndex
         self._selectedObjects = selectedObjects
         self.maximumSelection = maximumSelection
-        defaultText = maximumSelection == 1 ? "\("picker.choices1".localized)\(title.lowercased())" : "\("picker.choices1plus".localized)\(title.lowercased())"
+        defaultText = maximumSelection == 1 ? "\("picker.choices1".localized)\(titleOne.lowercased())" : "\("picker.choices1plus".localized)\(titleOne.lowercased())"
         textView = PickerTextView(data: data, selectionIndex: selectionIndex, selectedObjects: selectedObjects, maximumSelection: maximumSelection)
-        setTextView(title)
+        setTextView(titleMany)
     }
     private func setTextView(_ title: String) {
         textView.font = UIFont(name: ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize)
-        textView.text = "\("picker.chooseClick".localized)\(title.lowercased())"
+        textView.text = "\(maximumSelection == 1 ? "picker.chooseClickOne".localized : "picker.chooseClickMany".localized)\(title.lowercased())"
         textView.textAlignment = .center
     }
 

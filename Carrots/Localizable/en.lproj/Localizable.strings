@@ -15,6 +15,7 @@
 
 "athletics.title" = "athletics";
 "athletics.title.maj" = "Athletics";
+"athletics.title.sing.maj" = "Athletic";
 "athletics.none" = "No athletics have been added.\n\nTo add an athletic, press the + button on the top of the screen, and set athletic's informations.";
 "athletics.details.creationDate" = "Creation date";
 "athletics.details.evolution" = "Evolution";
@@ -90,7 +91,8 @@
 
 "picker.choices1" = "Choose 1 ";
 "picker.choices1plus" = "Choose at least 1 ";
-"picker.chooseClick" = "Click here to choose ";
+"picker.chooseClickOne" = "Click here to choose ";
+"picker.chooseClickMany" = "Click here to choose ";
 
 // MARK: - Points
 
@@ -119,7 +121,6 @@
 // MARK: - Settings
 
 "settings.title" = "settings";
-"settings.navigationTitle" = "general settings";
 "settings.date.title" = "Prevision date";
 "settings.date.explanations" = "The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.\nYou can set this date here.";
 "settings.conversion.title" = "Money conversion";

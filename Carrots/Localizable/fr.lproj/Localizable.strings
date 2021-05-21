@@ -15,6 +15,7 @@
 
 "athletics.title" = "sportifs";
 "athletics.title.maj" = "Sportifs";
+"athletics.title.sing.maj" = "Sportif";
 "athletics.none" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif, appuyer sur le bouton + en haut de l'écran, et entrer les informations du sportif.";
 "athletics.details.creationDate" = "Date de création";
 "athletics.details.evolution" = "Évolution";
@@ -84,13 +85,14 @@
 "performances.settings.addPotQuestion" = "Ajouter les points à la cagnotte commune ?";
 "performances.settings.addExplanationsOn" = "Les points seront ajoutés à la cagnotte commune.";
 "performances.settings.addExplanationsOff" = "Les points seront ajoutés aux cagnottes de chacun des sportifs.";
-"performances.new" = "nouvelle performance";
+"performances.new" = "nouvelle perf.";
 
 // MARK: - Picker
 
 "picker.choices1" = "Choisissez 1 ";
 "picker.choices1plus" = "Choisissez au moins 1 ";
-"picker.chooseClick" = "Cliquez ici pour choisir ";
+"picker.chooseClickOne" = "Cliquez ici pour choisir 1 ";
+"picker.chooseClickMany" = "Cliquez ici pour choisir des ";
 
 // MARK: - Points
 
@@ -119,7 +121,6 @@
 // MARK: - Settings
 
 "settings.title" = "paramètres";
-"settings.navigationTitle" = "paramètres généraux";
 "settings.date.title" = "Date de prévision";
 "settings.date.explanations" = "L'application fournit, pour chaque cagnotte, un montant prévisionnel à une certaine date si les sportifs continuent d'effectuer des performances sur le même rythme.\nVous pouvez choisir cette date ici.";
 "settings.conversion.title" = "Conversion en argent";

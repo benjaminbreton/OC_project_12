@@ -28,9 +28,9 @@ struct GeneralSettings: View {
                 limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
             SettingsCustomToggle(title: "settings.help.title".localized, question: "settings.help.question".localized, isOn: $showHelp)
         }
-        .inSettingsPage("settings.navigationTitle".localized, gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
+        .inSettingsPage("settings.title".localized, gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
             gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
         }
-        .inNavigationHome(title: "settings.navigationTitle".localized)
+        .inNavigationHome(title: "settings.title".localized)
     }
 }

@@ -43,7 +43,8 @@ struct SportSettings: View {
                 isWrong: $isNameEmpty,
                 limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "sports.settings.limitName".localized, maxCount: nil))
             SettingsCustomPicker(
-                title: "sports.details.unityTitle".localized,
+                titleOne: "sports.details.unityTitle".localized,
+                titleMany: "sports.details.unityTitle".localized,
                 data: unities,
                 selectedObjects: $unity,
                 maximumSelection: 1,
