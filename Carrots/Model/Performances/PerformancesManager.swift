@@ -18,31 +18,39 @@ class PerformancesManager {
     
     // MARK: - Add
     
-    /// Add performance.
-    /// - parameter sport: Performance's sport.
-    /// - parameter athletics: Athletics who made the performance.
-    /// - parameter value: Performance's value, depending on sport's unit type.
-    /// - parameter addToCommonPot: Boolean which indicates whether the points have to be added to the common pot or not.
-    /// - parameter completionHandler: Actions to do once performance has been added.
-    func add(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, pointsForOneEuro: Int, date: Date, predictionDate: Date) -> ApplicationErrors? {
-        guard athletics.count > 0 else { return .log(.performanceWithoutAthletic) }
+    /**
+     Add a performance.
+     - parameter sport: The sport in which the performance has been made.
+     - parameter athletics: Athletics who did the performance.
+     - parameter value: The performance's value.
+     - parameter addToCommonPot: A boolean which indicates whether the points have to be added to the common pot, or the athletics pots.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter date: The performance's date.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     - returns: If an error occurred, the error's type is returned.
+     */
+    func add(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, moneyConversion: Int, date: Date, predictionDate: Date) -> ApplicationErrors? {
+        guard athletics.count > 0 else { return nil }
         let performance = getNewPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, date: date)
         performance.addPoints(
             to: addToCommonPot ?
                 Array.init(repeating: coreDataStack.entities.commonPot, count: athletics.count)
                 :
                 athletics.map({ $0.pot }),
-            with: pointsForOneEuro,
+            with: moneyConversion,
             for: predictionDate)
         coreDataStack.saveContext()
         return nil
     }
-    /// Get new performance with choosen parameters.
-    /// - parameter sport: Performance's sport.
-    /// - parameter athletics: Athletics who made the performance.
-    /// - parameter value: Performance's value, depending on sport's unit type.
-    /// - parameter coreDataStack: Coredatastack in which the performance has to be made.
-    /// - returns: The created performance.
+    /**
+     Create a performance.
+     - parameter sport: The sport in which the performance has been made.
+     - parameter athletics: Athletics who did the performance.
+     - parameter value: The performance's value.
+     - parameter addToCommonPot: A boolean which indicates whether the points have to be added to the common pot, or the athletics pots.
+     - parameter date: The performance's date.
+     - returns: The created performance.
+     */
     private func getNewPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, date: Date) -> Performance {
         let performance = Performance(context: coreDataStack.viewContext)
         performance.sport = sport
@@ -59,27 +67,45 @@ class PerformancesManager {
     
     // MARK: - Delete
     
-    /// Delete performance.
-    /// - parameter performance: Performance to delete.
-    func delete(_ performance: Performance, pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
-        performPerformanceDeletion(performance, cancelPoints: true, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
+    /**
+     Delete a performance.
+     - parameter performance: The performance to delete.
+     - parameter moneyConversion: Necessary number of points to get one money's
+     unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     */
+    func delete(_ performance: Performance, moneyConversion: Int, predictionDate: Date) -> ApplicationErrors? {
+        performPerformanceDeletion(performance, cancelPoints: true, moneyConversion: moneyConversion, predictionDate: predictionDate)
         return nil
     }
-    func delete(_ performance: Performance, of athletic: Athletic, pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
+    /**
+     Delete an athletic's participation on a performance.
+     - parameter performance: The performance.
+     - parameter athletic: The athletic for whom the performance has to be deleted.
+     - parameter moneyConversion: Necessary number of points to get one money's
+     unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     */
+    func delete(_ performance: Performance, of athletic: Athletic, moneyConversion: Int, predictionDate: Date) -> ApplicationErrors? {
         let newArray = performance.athletics.map({ $0 == athletic ? nil : $0 }).compactMap({ $0 })
         if newArray.count > 0 {
             performance.athleticsSet = NSSet(array: newArray)
-            performance.cancelPoints(to: [performance.addedToCommonPot ? coreDataStack.entities.commonPot : athletic.pot], with: pointsForOneEuro, for: predictionDate)
+            performance.cancelPoints(to: [performance.addedToCommonPot ? coreDataStack.entities.commonPot : athletic.pot], with: moneyConversion, for: predictionDate)
             performance.initialAthleticsCount -= 1
         } else {
-            performPerformanceDeletion(performance, cancelPoints: true, pointsForOneEuro: pointsForOneEuro, predictionDate: predictionDate)
+            performPerformanceDeletion(performance, cancelPoints: true, moneyConversion: moneyConversion, predictionDate: predictionDate)
         }
         return nil
     }
-    /// Delete performance.
-    /// - parameter performance: Performance to delete.
-    /// - parameter cancelPoints: Boolean which indicates whether the points earned by the performance have to be cancelled or not.
-    private func performPerformanceDeletion(_ performance: Performance, cancelPoints: Bool, pointsForOneEuro: Int, predictionDate: Date) {
+    /**
+     Delete a performance.
+     - parameter performance: The performance to delete.
+     - parameter cancelPoints: Boolean which indicates whether the points earned by the performance have to be cancelled or not.
+     - parameter moneyConversion: Necessary number of points to get one money's
+     unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     */
+    private func performPerformanceDeletion(_ performance: Performance, cancelPoints: Bool, moneyConversion: Int, predictionDate: Date) {
         if cancelPoints {
             performance.cancelPoints(
                 to:
@@ -90,7 +116,7 @@ class PerformancesManager {
                     :
                                         
                     performance.athletics.map({ $0.pot }),
-                with: pointsForOneEuro,
+                with: moneyConversion,
                 for: predictionDate)
         }
         coreDataStack.viewContext.delete(performance)

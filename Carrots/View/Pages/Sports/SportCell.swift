@@ -16,13 +16,13 @@ struct SportCell: View {
     var valueArray: [String] {
         switch sport.unityInt16.sportUnityType {
         case .time:
-            let date = DateComponents(second: Int(sport.valueForOnePoint))
+            let date = DateComponents(second: Int(sport.pointsConversion))
             guard let hours = date.hour, let minutes = date.minute, let seconds = date.second else {
                 return ["0", "0", "0"]
             }
             return ["\(hours)", "\(minutes)", "\(seconds)"]
         default:
-            return ["\(Int(sport.valueForOnePoint))", "0", "0"]
+            return ["\(Int(sport.pointsConversion))", "0", "0"]
         }
     }
     var body: some View {

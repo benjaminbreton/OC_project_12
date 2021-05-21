@@ -206,7 +206,7 @@ fileprivate struct PerformancesList<T: NSManagedObject>: View {
                     .environmentObject(gameDoor)
                     .canBeDeleted {
                         if let source = source {
-                            gameDoor.deletePerformance(performance, of: source)
+                            gameDoor.delete(performance, of: source)
                         } else {
                             gameDoor.delete(performance)
                         }

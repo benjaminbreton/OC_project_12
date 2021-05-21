@@ -18,21 +18,28 @@ public class Sport: NSManagedObject {
     }
     override public var description: String { name ?? "all.noName".localized }
     func pointsToAdd(for value: Int64) -> Int64 {
-        guard valueForOnePoint > 0 else { return 0 }
+        guard pointsConversion > 0 else { return 0 }
         switch unityInt16.sportUnityType {
         case .oneShot:
-            return valueForOnePoint
+            return pointsConversion
         default:
-            let points = value / valueForOnePoint
-            return points * valueForOnePoint > value ? points - 1 : points
+            let points = value / pointsConversion
+            return points * pointsConversion > value ? points - 1 : points
         }
     }
-    func update(name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
-        guard let name = name, let icon = icon, let unityType = unityType else { return }
+    /**
+     Update the sport.
+     - parameter name: Sport's name.
+     - parameter icon: Sport's icon's character.
+     - parameter unityType: The unity used to measure a sport's performance (Int16 format, property int16 of Sport.UnityType).
+     - parameter pointsConversion: The needed performance's value to get one point, or the earned points each time this sport has been made.
+     - returns: If an error occurred, the error's type is returned.
+     */
+    func update(name: String, icon: String, unityType: Int16, pointsConversion: [String?]) {
         self.name = name
         self.icon = icon
         self.unityInt16 = unityType
-        self.valueForOnePoint = self.unityType.value(for: valueForOnePoint)
+        self.pointsConversion = self.unityType.value(for: pointsConversion)
     }
     /// Sport's unity type enumeration.
     enum UnityType: CustomStringConvertible {

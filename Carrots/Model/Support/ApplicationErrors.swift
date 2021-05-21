@@ -8,13 +8,9 @@
 import Foundation
 enum ApplicationErrors: Error, CustomStringConvertible {
     // athletics
-    case existingAthletic, noPot(Athletic?)
+    case existingAthletic
     // sports
-    case existingSport, unknownSportIndex
-    // performance
-    case performanceWithoutAthletic
-    // stats
-    case cantReturnStats
+    case existingSport
     // entities
     case noCommonPot, severalCommonPots(Int)
     /// Error's description used in the console for the development team.
@@ -24,19 +20,10 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "Existing athletic's name"
         case .existingSport:
             return "Existing sport's name"
-        case .unknownSportIndex:
-            return "Sport index out of range"
-        case .performanceWithoutAthletic:
-            return "Performance without athletic"
-        case .cantReturnStats:
-            return "Can't return stats"
         case .noCommonPot:
             return "No common pot"
         case .severalCommonPots(let count):
             return "Several common pots: \(count)"
-        case .noPot(let athletic):
-            guard let athletic = athletic else { return "No common pot." }
-            return "No pot for \(athletic.description)."
         }
     }
     /**

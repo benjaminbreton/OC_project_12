@@ -40,7 +40,7 @@ struct AthleticSettings: View {
             helpText: "athleticsSettings",
             confirmAction: {
             if let athletic = athletic {
-                gameDoor.update(athletic, name: name, image: data)
+                gameDoor.modify(athletic, name: name, image: data)
             } else {
                 gameDoor.addAthletic(name: name, image: data)
             }

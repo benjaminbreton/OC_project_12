@@ -50,9 +50,9 @@ struct PerformanceSettings: View {
             SettingsSportValue(
                 placeholder: "performances.settings.sportsInstructions".localized,
                 unity: selectedSport.count == 1 ? selectedSport[0].unityInt16.sportUnityType : nil,
-                valueForOnePoint: $value,
+                pointsConversion: $value,
                 caller: .performance,
-                existingValueForOnePoint: selectedSport.count == 1 ? selectedSport[0].valueForOnePoint : nil)
+                existingPointsConversion: selectedSport.count == 1 ? selectedSport[0].pointsConversion : nil)
             SettingsCustomToggleWithExplanations(
                 title: "pots.title.maj".localized,
                 question: "performances.settings.addPotQuestion".localized,

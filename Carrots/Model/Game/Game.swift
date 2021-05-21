@@ -25,10 +25,14 @@ struct Game {
     private(set) var commonPot: Pot?
     /// Error.
     private var error: ApplicationErrors?
-    let athleticsManager: AthleticsManager
-    let sportsManager: SportsManager
-    let performancesManager: PerformancesManager
-    let potsManager: PotsManager
+    /// Class managing athletics creation, modification and deletion
+    private let athleticsManager: AthleticsManager
+    /// Class managing sports creation, modification and deletion
+    private let sportsManager: SportsManager
+    /// Class managing performances creation, modification and deletion
+    private let performancesManager: PerformancesManager
+    /// Class managing pots creation, modification and deletion
+    private let potsManager: PotsManager
 }
 
 // MARK: - Init
@@ -56,39 +60,52 @@ extension Game {
         refresh()
     }
     
-    /// Update athletics array.
+    /**
+     Ask to refresh all properties.
+     */
     mutating func refresh() {
         guard error == nil else { return }
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
         sports = coreDataStack.entities.allSports
-        potsManager.refresh(with: settings.pointsForOneEuro, for: settings.predictionDate)
+        potsManager.refresh(with: settings.moneyConversion, for: settings.predictionDate)
         athleticsManager.refresh()
         coreDataStack.saveContext()
     }
-    
 }
 
 // MARK: - Athletics
 
 extension Game {
     
+    /**
+     Add athletic.
+     - parameter name: Athletic's name.
+     - parameter image: Athletic's image's data.
+     */
     mutating func addAthletic(name: String?, image: Data?) {
         guard let name = name else { return }
         let today = Date().now
         let pot = potsManager.create(for: today)
-        error = athleticsManager.add(name: name, image: image, pot: pot, today: today)
+        error = athleticsManager.add(name: name, image: image, pot: pot, creationDate: today)
         refresh()
     }
+    /**
+     Modify an athletic.
+     - parameter athletic : Athletic to modify.
+     - parameter name: Athletic's name.
+     - parameter image: Athletic's image's data.
+     */
     mutating func modify(_ athletic: Athletic, name: String?, image: Data?){
         guard let name = name else { return }
         error = athleticsManager.modify(athletic, name: name, image: image)
         refresh()
     }
+    /**
+     Delete an athletic.
+     - parameter athletic: Athletic to delete.
+     */
     mutating func delete(_ athletic: Athletic) {
-        athletic.willBeDeleted = true
-        coreDataStack.saveContext()
-        refresh()
         error = athleticsManager.delete(athletic)
         refresh()
     }
@@ -97,13 +114,22 @@ extension Game {
 // MARK: - Settings
 
 extension Game {
-    mutating func updateSettings(predictionDate: Date, pointsForOneEuro: String?, showHelp: Bool) {
-        guard let points = pointsForOneEuro, points.count < 5, let intPoints = Int(points) else { return }
+    /**
+     Settings modification.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter showHelp: Boolean which indicates if help texts have to be shown or not.
+     */
+    mutating func updateSettings(predictionDate: Date, moneyConversion: String?, showHelp: Bool) {
+        guard let points = moneyConversion, points.count < 5, let intPoints = Int(points) else { return }
         settings.predictionDate = predictionDate
-        settings.pointsForOneEuro = intPoints
+        settings.moneyConversion = intPoints
         settings.showHelp = showHelp
         potsManager.refresh(with: intPoints, for: predictionDate)
     }
+    /**
+     Validate pots warning, so that the warning will not appear again.
+     */
     mutating func validateWarning() {
         settings.didValidateWarning = true
     }
@@ -112,17 +138,35 @@ extension Game {
 // MARK: - Sports
 
 extension Game {
-    mutating func addSport(name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
-        error = sportsManager.add(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
+    /**
+     Add sport.
+     - parameter name: Sport's name.
+     - parameter icon: Sport's icon's character.
+     - parameter unityType: The unity used to measure a sport's performance.
+     - parameter pointsConversion: The needed performance's value to get one point, or the earned points each time this sport has been made.
+     */
+    mutating func addSport(name: String?, icon: String?, unityType: Sport.UnityType?, pointsConversion: [String?]) {
+        guard let name = name, let icon = icon, let unityType = unityType else { return }
+        error = sportsManager.add(name: name, icon: icon, unityType: unityType, pointsConversion: pointsConversion)
         refresh()
     }
-    
-    mutating func modify(_ sport: Sport, name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
-        guard let name = name else { return }
-        error = sportsManager.modify(sport, name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
+    /**
+     Modify sport.
+     - parameter sport: The sport to modify.
+     - parameter name: Sport's name.
+     - parameter icon: Sport's icon's character.
+     - parameter unityType: The unity used to measure a sport's performance.
+     - parameter pointsConversion: The needed performance's value to get one point, or the earned points each time this sport has been made.
+     */
+    mutating func modify(_ sport: Sport, name: String?, icon: String?, unityType: Sport.UnityType?, pointsConversion: [String?]) {
+        guard let name = name, let icon = icon, let unityType = unityType else { return }
+        error = sportsManager.modify(sport, name: name, icon: icon, unityType: unityType, pointsConversion: pointsConversion)
         refresh()
     }
-    
+    /**
+     Delete sport.
+     - parameter sport: The sport to delete.
+     */
     mutating func delete(_ sport: Sport) {
         error = sportsManager.delete(sport)
         refresh()
@@ -133,17 +177,29 @@ extension Game {
 
 extension Game {
     
+    /**
+     Add a performance.
+     - parameter sport: The sport in which the performance has been made.
+     - parameter athletics: Athletics who did the performance.
+     - parameter value: The performance's value.
+     - parameter addToCommonPot: A boolean which indicates whether the points have to be added to the common pot, or the athletics pots.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     */
     mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
-        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, pointsForOneEuro: settings.pointsForOneEuro, date: Date().now, predictionDate: settings.predictionDate)
+        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, moneyConversion: settings.moneyConversion, date: Date().now, predictionDate: settings.predictionDate)
         refresh()
     }
-    
-    mutating func delete(_ performance: Performance) {
-        error = performancesManager.delete(performance, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
-        refresh()
-    }
-    mutating func deletePerformance(_ performance: Performance, of athletic: Athletic) {
-        error = performancesManager.delete(performance, of: athletic, pointsForOneEuro: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
+    /**
+     Delete a performance.
+     - parameter performance: The performance to delete.
+     - parameter athletic: If the performance has to be deleted for a single athletic, set the athletic for whom the performance has to be deleted; otherwise, to delete the performance for all athletics, set *nil*.
+     */
+    mutating func delete(_ performance: Performance, of athletic: Athletic?) {
+        if let athletic = athletic {
+            error = performancesManager.delete(performance, of: athletic, moneyConversion: settings.moneyConversion, predictionDate: settings.predictionDate)
+        } else {
+            error = performancesManager.delete(performance, moneyConversion: settings.moneyConversion, predictionDate: settings.predictionDate)
+        }
         refresh()
     }
 
@@ -152,18 +208,28 @@ extension Game {
 // MARK: - Change money
 
 extension Game {
+    /**
+     Add money to a pot.
+     - parameter athletic: The pot's owner, set *nil* to modify the common pot.
+     - parameter amount: The amount to add.
+     */
     mutating func addMoney(for athletic: Athletic? = nil, amount: String) {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let amount = formatter.number(from: amount) as? Double else { return }
-        error = potsManager.addMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
+        error = potsManager.addMoney(for: athletic, amount: amount, with: settings.moneyConversion, predictionDate: settings.predictionDate)
         refresh()
     }
+    /**
+     Withdraw money from a pot.
+     - parameter athletic: The pot's owner, set *nil* to modify the common pot.
+     - parameter amount: The amount or withdraw.
+     */
     mutating func withdrawMoney(for athletic: Athletic? = nil, amount: String) {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         guard let amount = formatter.number(from: amount) as? Double else { return }
-        error = potsManager.withdrawMoney(for: athletic, amount: amount, with: settings.pointsForOneEuro, predictionDate: settings.predictionDate)
+        error = potsManager.withdrawMoney(for: athletic, amount: amount, with: settings.moneyConversion, predictionDate: settings.predictionDate)
         refresh()
     }
 }
@@ -171,6 +237,9 @@ extension Game {
 // MARK: - Get error
 
 extension Game {
+    /**
+     Get the error in the *error* property, and then set *nil* instead.
+     */
     mutating func getError() -> ApplicationErrors? {
         let error = self.error
         self.error = nil

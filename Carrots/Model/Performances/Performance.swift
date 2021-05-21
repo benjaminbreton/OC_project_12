@@ -25,22 +25,27 @@ public class Performance: NSManagedObject {
         guard let date = date else { return "" }
         return formatter.string(from: date)
     }
-    
-    /// Add points earned with a performance to pot depending on performance's parameters.
-    /// - parameter performance: Performance with which points have been earned.
-    func addPoints(to pots: [Pot?], with pointsForOneEuro: Int, for predictionDate: Date) {
+    /**
+     Add points earned with a performance to pots depending on performance's parameters.
+     - parameter pots: Pots in which the points have to be added.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     */
+    func addPoints(to pots: [Pot?], with moneyConversion: Int, for predictionDate: Date) {
         for optionalPot in pots {
             if let pot = optionalPot {
-                pot.changePoints(Int(potAddings), with: pointsForOneEuro, for: predictionDate)
+                pot.changePoints(Int(potAddings), with: moneyConversion, for: predictionDate)
             }
         }
     }
     /// Cancel points added in pots by a performance.
     /// - parameter performance: Performance which added points.
-    func cancelPoints(to pots: [Pot?], with pointsForOneEuro: Int, for predictionDate: Date) {
+    /// - parameter moneyConversion: Necessary number of points to get one money's unity.
+    /// - parameter predictionDate: Setted date to predict a pot's amount.
+    func cancelPoints(to pots: [Pot?], with moneyConversion: Int, for predictionDate: Date) {
         for optionalPot in pots {
             if let pot = optionalPot {
-                pot.changePoints(-Int(potAddings), with: pointsForOneEuro, for: predictionDate)
+                pot.changePoints(-Int(potAddings), with: moneyConversion, for: predictionDate)
             }
         }
     }

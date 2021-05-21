@@ -7,98 +7,186 @@
 
 import Foundation
 import CoreData
+
+// MARK: - Properties
+
 class GameDoor: ObservableObject {
-    
-    // MARK: - Properties
-    
+    /// Instance of game.
     @Published private var game: Game
+    /// Athletics list.
     var athletics: [Athletic] { game.athletics }
+    /// Common pot.
     var commonPot: Pot? { game.commonPot }
+    /// Sports list.
     var sports: [Sport] { game.sports }
+    /// Performances list
     var performances: [Performance] { game.performances }
-    @Published private(set) var askedForReload: Bool = false
-    var pointsForOneEuro: String {
+    /// String to display in settings to page to set the money conversion.
+    var moneyConversion: String {
         let formatter = NumberFormatter()
-        let count = game.settings.pointsForOneEuro
+        let count = game.settings.moneyConversion
         formatter.maximumFractionDigits = 0
         return formatter.string(from: NSNumber(value: count)) ?? "0"
     }
-    var predictedAmountDate: Date { game.settings.predictionDate }
+    /// Setted date to predict a pot's amount.
+    var predictionDate: Date { game.settings.predictionDate }
+    /// Returned error, if error happened.
     var error: ApplicationErrors? { getError() }
+    /// Boolean indicating whether help texts have to be shown or not.
     var showHelp: Bool { game.settings.showHelp }
+    /// Boolean indicating whether the pots warning has been validated or not.
     var didValidateWarning: Bool { game.settings.didValidateWarning }
-    
-    // MARK: - Init
-    
+
+// MARK: - Init
+
     init(_ coreDataStack: CoreDataStack) {
         game = Game(coreDataStack: coreDataStack)
     }
+}
+
+// MARK: - Athletics
+
+extension GameDoor {
     
-    // MARK: - Athletics
-    
+    /**
+     Add athletic.
+     - parameter name: Athletic's name.
+     - parameter image: Athletic's image's data.
+     */
     func addAthletic(name: String?, image: Data?) {
-        guard let name = name, !name.isEmpty else { return }
         game.addAthletic(name: name, image: image)
     }
-    func update(_ athletic: Athletic, name: String?, image: Data?) {
-        guard let name = name, !name.isEmpty else { return }
+    /**
+     Modify an athletic.
+     - parameter athletic : Athletic to modify.
+     - parameter name: Athletic's name.
+     - parameter image: Athletic's image's data.
+     */
+    func modify(_ athletic: Athletic, name: String?, image: Data?) {
         game.modify(athletic, name: name, image: image)
     }
+    /**
+     Delete an athletic.
+     - parameter athletic: Athletic to delete.
+     */
     func delete(_ athletic: Athletic) {
         game.delete(athletic)
     }
-    
-    // MARK: - Sports
-    
-    func addSport(name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
-        guard let name = name, !name.isEmpty, let icon = icon, !icon.isEmpty, let unityType = unityType else { return }
-        game.addSport(name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
+}
+
+// MARK: - Sports
+
+extension GameDoor {
+
+    /**
+     Add sport.
+     - parameter name: Sport's name.
+     - parameter icon: Sport's icon's character.
+     - parameter unityType: The unity used to measure a sport's performance.
+     - parameter pointsConversion: The needed performance's value to get one point, or the earned points each time this sport has been made.
+     */
+    func addSport(name: String?, icon: String?, unityType: Sport.UnityType?, pointsConversion: [String?]) {
+        game.addSport(name: name, icon: icon, unityType: unityType, pointsConversion: pointsConversion)
     }
-    func update(_ sport: Sport, name: String?, icon: String?, unityType: Int16?, valueForOnePoint: [String?]) {
-        guard let name = name, !name.isEmpty, let icon = icon, !icon.isEmpty, let unityType = unityType else { return }
-        game.modify(sport, name: name, icon: icon, unityType: unityType, valueForOnePoint: valueForOnePoint)
+    /**
+     Modify sport.
+     - parameter sport: The sport to modify.
+     - parameter name: Sport's name.
+     - parameter icon: Sport's icon's character.
+     - parameter unityType: The unity used to measure a sport's performance.
+     - parameter pointsConversion: The needed performance's value to get one point, or the earned points each time this sport has been made.
+     */
+    func modify(_ sport: Sport, name: String?, icon: String?, unityType: Sport.UnityType?, pointsConversion: [String?]) {
+        game.modify(sport, name: name, icon: icon, unityType: unityType, pointsConversion: pointsConversion)
     }
+    /**
+     Delete sport.
+     - parameter sport: The sport to delete.
+     */
     func delete(_ sport: Sport) {
         game.delete(sport)
     }
-    
-    // MARK: - Performances
-    
-    
+}
+
+// MARK: - Performances
+
+extension GameDoor {
+
+    /**
+     Add a performance.
+     - parameter sport: The sport in which the performance has been made.
+     - parameter athletics: Athletics who did the performance.
+     - parameter value: The performance's value.
+     - parameter addToCommonPot: A boolean which indicates whether the points have to be added to the common pot, or the athletics pots.
+     */
     func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
         game.addPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
     }
-    func delete(_ performance: Performance) {
-        game.delete(performance)
+    /**
+     Delete a performance.
+     - parameter performance: The performance to delete.
+     - parameter athletic: If the performance has to be deleted for a single athletic, set the athletic for whom the performance has to be deleted; otherwise, to delete the performance for all athletics, set *nil*.
+     */
+    func delete(_ performance: Performance, of athletic: Athletic? = nil) {
+        game.delete(performance, of: athletic)
     }
-    func deletePerformance(_ performance: Performance, of athletic: Athletic) {
-        game.deletePerformance(performance, of: athletic)
+}
+
+// MARK: - Settings
+
+extension GameDoor {
+
+    /**
+     Settings modification.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter showHelp: Boolean which indicates if help texts have to be shown or not.
+     */
+    func modifySettings(predictionDate: Date, moneyConversion: String?, showHelp: Bool) {
+        game.updateSettings(predictionDate: predictionDate, moneyConversion: moneyConversion, showHelp: showHelp)
     }
-    
-    // MARK: - Settings
-    
-    func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?, showHelp: Bool) {
-        game.updateSettings(predictionDate: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
-    }
-    
+    /**
+     Validate pots warning, so that the warning will not appear again.
+     */
     func validateWarning() {
         game.validateWarning()
     }
+}
+
+// MARK: - Errors
+
+extension GameDoor {
     
-    // MARK: - Errors
-    
+    /**
+     Method called by the property *error* when views asked if an error occurred.
+     */
     private func getError() -> ApplicationErrors? {
         return game.getError()
     }
+}
+
+// MARK: - Refresh
+
+extension GameDoor {
     
-    // MARK: - Refresh
-    
+    /**
+     Ask to refresh all properties.
+     */
     func refresh() {
         game.refresh()
     }
+}
+
+// MARK: - Money
+
+extension GameDoor {
     
-    // MARK: - Money
-    
+    /**
+     Add or withdraw money from a pot.
+     - parameter athletic: The pot's owner, set *nil* to modify the common pot.
+     - parameter amount: The amount to add or withdraw.
+     - parameter operation: The operation to perform: 0 = add, 1 = withdraw.
+     */
     func changeMoney(for athletic: Athletic? = nil, amount: String, operation: Int) {
         if operation == 0 {
             game.addMoney(for: athletic, amount: amount)

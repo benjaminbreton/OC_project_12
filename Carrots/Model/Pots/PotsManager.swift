@@ -32,42 +32,42 @@ class PotsManager {
     
     // MARK: - Money
     
-    /// Add money to a pot.
-    /// - parameter athletic: The athletic for whom money has to be added (nil to add to the common pot).
-    /// - parameter amount: Amount to add.
-    func addMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
-        let result = getPot(of: athletic)
-        switch result {
-        case .success(let pot):
-            pot.changeAmount(amount, with: pointsForOneEuro, for: predictionDate)
-            return nil
-        case . failure(let error):
-            return error
-        }
+    /**
+     Add money to a pot.
+     - parameter athletic: The pot's owner, set *nil* to modify the common pot.
+     - parameter amount: The amount to add.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     - returns: If an error occurred, the error's type is returned.
+     */
+    func addMoney(for athletic: Athletic?, amount: Double, with moneyConversion: Int, predictionDate: Date) -> ApplicationErrors? {
+        guard let pot = getPot(of: athletic) else { return nil }
+        pot.changeAmount(amount, with: moneyConversion, for: predictionDate)
+        return nil
     }
-    /// Withdraw money to a pot.
-    /// - parameter athletic: The athletic for whom money has to be withdrawn (nil to withdraw to the common pot).
-    /// - parameter amount: Amount to withdraw.
-    func withdrawMoney(for athletic: Athletic?, amount: Double, with pointsForOneEuro: Int, predictionDate: Date) -> ApplicationErrors? {
-        let result = getPot(of: athletic)
-        switch result {
-        case .success(let pot):
-            pot.changeAmount(-amount, with: pointsForOneEuro, for: predictionDate)
-            return nil
-        case . failure(let error):
-            return error
-        }
+    /**
+     Withdraw money from a pot.
+     - parameter athletic: The pot's owner, set *nil* to modify the common pot.
+     - parameter amount: The amount or withdraw.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     - returns: If an error occurred, the error's type is returned.
+     */
+    func withdrawMoney(for athletic: Athletic?, amount: Double, with moneyConversion: Int, predictionDate: Date) -> ApplicationErrors? {
+        guard let pot = getPot(of: athletic) else { return nil }
+        pot.changeAmount(-amount, with: moneyConversion, for: predictionDate)
+        return nil
     }
     
     // MARK: - Support
     
-    private func getPot(of athletic: Athletic?) -> Result<Pot, ApplicationErrors> {
+    private func getPot(of athletic: Athletic?) -> Pot? {
         if let athletic = athletic {
-            guard let pot = athletic.pot else { return .failure(.log(.noPot(athletic))) }
-            return .success(pot)
+            guard let pot = athletic.pot else { return nil }
+            return pot
         } else {
-            guard let pot = coreDataStack.entities.commonPot else { return .failure(.log(.noPot(nil)))}
-            return .success(pot)
+            guard let pot = coreDataStack.entities.commonPot else { return nil }
+            return pot
         }
     }
     
@@ -75,15 +75,16 @@ class PotsManager {
     
     /**
      Refresh pots amount and their evolution if necessary : every day, athletics can get evolution of their performances during the last 30 days.
-     - parameter pointsForOneEuro: Needed number of points to get one euro.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
      */
-    func refresh(with pointsForOneEuro: Int, for predictionDate: Date) {
+    func refresh(with moneyConversion: Int, for predictionDate: Date) {
         for pot in coreDataStack.entities.allPots {
             if let value = pot.getEvolution(for: Date().today) {
                 evolutionDatasManager.create(for: pot, value: value, date: Date().today)
                 evolutionDatasManager.delete(pot.evolutionDatasToClean(for: Date().today))
             }
-            pot.refresh(with: pointsForOneEuro, for: predictionDate)
+            pot.refresh(with: moneyConversion, for: predictionDate)
         }
     }
     

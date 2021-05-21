@@ -12,13 +12,13 @@ struct SportSettings: View {
     @State var name: String
     @State var icon: String
     @State var unity: [Sport.UnityType]
-    @State var valueForOnePoint: [String]
+    @State var pointsConversion: [String]
     @State var isNameEmpty: Bool = false
     var confirmationButtonIsDisabled: Bool {
         isNameEmpty ||
             unity.count == 0 ||
-            (unity[0] != .time && Int(valueForOnePoint[0]) ?? 0 == 0) ||
-            (unity[0] == .time && valueForOnePoint.map({ Int($0) ?? 0 }).reduce(0, +) == 0)
+            (unity[0] != .time && Int(pointsConversion[0]) ?? 0 == 0) ||
+            (unity[0] == .time && pointsConversion.map({ Int($0) ?? 0 }).reduce(0, +) == 0)
     }
     private let unities: [Sport.UnityType] = [.count, .distance, .time, .oneShot]
     private var choosenUnity: Int? {
@@ -52,7 +52,7 @@ struct SportSettings: View {
             SettingsSportValue(
                 placeholder: "sports.settings.valuePlaceholder".localized,
                 unity: unity.count == 1 ? unity[0] : nil,
-                valueForOnePoint: $valueForOnePoint,
+                pointsConversion: $pointsConversion,
                 caller: .sport)
             SettingsSportIconPicker(icon: $icon)
         }
@@ -63,9 +63,9 @@ struct SportSettings: View {
             helpText: "sportsSettings") {
             guard unity.count == 1 else { return }
             if let sport = sport {
-                gameDoor.update(sport, name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)
+                gameDoor.modify(sport, name: name, icon: icon, unityType: unity[0], pointsConversion: pointsConversion)
             } else {
-                gameDoor.addSport(name: name, icon: icon, unityType: unity[0].int16, valueForOnePoint: valueForOnePoint)
+                gameDoor.addSport(name: name, icon: icon, unityType: unity[0], pointsConversion: pointsConversion)
             }
         }
     }

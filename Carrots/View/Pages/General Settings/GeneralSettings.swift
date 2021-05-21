@@ -9,7 +9,8 @@ import SwiftUI
 struct GeneralSettings: View {
     @EnvironmentObject var gameDoor: GameDoor
     @State var date: Date
-    @State var pointsForOneEuro: String
+    /// Necessary number of points to get one money's unity.
+    @State var moneyConversion: String
     @State var showHelp: Bool
     @State var arePointsWrong: Bool = false
     var confirmationButtonIsDisabled: Bool { arePointsWrong }
@@ -20,7 +21,7 @@ struct GeneralSettings: View {
             SettingsTextfield(
                 title: "settings.conversion.title".localized,
                 placeHolder: "points.title".localized,
-                value: $pointsForOneEuro,
+                value: $moneyConversion,
                 keyboard: .numberPad,
                 explanations: "\("settings.conversion.explanations1".localized)\(moneyName)\("settings.conversion.explanations2".localized)\(moneyName).",
                 isWrong: $arePointsWrong,
@@ -29,7 +30,7 @@ struct GeneralSettings: View {
             SettingsCustomToggle(title: "settings.help.title".localized, question: "settings.help.question".localized, isOn: $showHelp)
         }
         .inSettingsPage("settings.title".localized, gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
-            gameDoor.updatePotsGeneralSettings(date: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
+            gameDoor.modifySettings(predictionDate: date, moneyConversion: moneyConversion, showHelp: showHelp)
         }
         .inNavigationHome(title: "settings.title".localized)
     }

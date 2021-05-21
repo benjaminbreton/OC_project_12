@@ -7,17 +7,17 @@
 
 import Foundation
 struct Settings {
-    /// Needed points to get one euro.
-    @UserDefault(key: "pointsForOneEuro", defaultValue: 100)
-    var pointsForOneEuro: Int
+    /// Necessary number of points to get one money's unity.
+    @UserDefault(key: "moneyConversion", defaultValue: 100)
+    var moneyConversion: Int
     /// Indicates whether introduction has been seen or not.
     @UserDefault(key: "didSeeIntroduction", defaultValue: false)
     var didSeeIntroduction: Bool
     /// Indicates whether game has to be created from scratch or if some datas exist.
     @UserDefault(key: "gameAlreadyExists", defaultValue: false)
     var gameAlreadyExists: Bool
-    /// Date used to get statistics.
-    @UserDefault(key: "predictedAmountDate", defaultValue: Date() - 24 * 3600)
+    /// Setted date to predict a pot's amount.
+    @UserDefault(key: "predictionDate", defaultValue: Date() - 24 * 3600)
     var predictionDate: Date
     /// Boolean used to know if help has to be shown or not.
     @UserDefault(key: "showHelp", defaultValue: true)

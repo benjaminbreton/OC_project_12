@@ -58,10 +58,11 @@ public class Pot: NSManagedObject {
 extension Pot {
     /**
      Refresh the computed amount.
-     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
      */
-    func refresh(with pointsForOneEuro: Int, for predictionDate: Date) {
-        computeAmount(with: pointsForOneEuro, for: predictionDate)
+    func refresh(with moneyConversion: Int, for predictionDate: Date) {
+        computeAmount(with: moneyConversion, for: predictionDate)
     }
 }
 
@@ -71,18 +72,20 @@ extension Pot {
     /**
      Change the pot's points.
      - parameter count: Number of points to add.
-     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
      */
-    func changePoints(_ count: Int, with pointsForOneEuro: Int, for predictionDate: Date) {
+    func changePoints(_ count: Int, with moneyConversion: Int, for predictionDate: Date) {
         points += Double(count)
-        computeAmount(with: pointsForOneEuro, for: predictionDate)
+        computeAmount(with: moneyConversion, for: predictionDate)
     }
     /**
      Method to call to block points changings.
-     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
      */
-    func fixPoints(with pointsForOneEuro: Int, for predictionDate: Date) {
-        computeAmount(with: pointsForOneEuro, for: predictionDate)
+    func fixPoints(with moneyConversion: Int, for predictionDate: Date) {
+        computeAmount(with: moneyConversion, for: predictionDate)
         self.amount = computedAmount
         points = 0
     }
@@ -95,19 +98,21 @@ extension Pot {
     /**
      Change the pot's amount.
      - parameter count: Amount to add.
-     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
      */
-    func changeAmount(_ count: Double, with pointsForOneEuro: Int, for predictionDate: Date) {
+    func changeAmount(_ count: Double, with moneyConversion: Int, for predictionDate: Date) {
         amount += count
-        computeAmount(with: pointsForOneEuro, for: predictionDate)
+        computeAmount(with: moneyConversion, for: predictionDate)
     }
     /**
     Compute the amount regarding the points and the saved amount.
-     - parameter pointsForOneEuro: Number of points needed to get one euro.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
      */
-    private func computeAmount(with pointsForOneEuro: Int, for predictionDate: Date) {
-        let newAmount = amount + convertPointsInEuro(points, with: pointsForOneEuro)
-        let newPredictionAmount = newAmount + computePredictedGain(with: pointsForOneEuro, for: predictionDate)
+    private func computeAmount(with moneyConversion: Int, for predictionDate: Date) {
+        let newAmount = amount + convertPointsInMoney(points, with: moneyConversion)
+        let newPredictionAmount = newAmount + computePredictedGain(with: moneyConversion, for: predictionDate)
         // format the result
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
@@ -116,14 +121,23 @@ extension Pot {
         computedAmount = regularAmount
         computedPredictionAmount = predictionAmount
     }
-    private func computePredictedGain(with pointsForOneEuro: Int, for predictionDate: Date) -> Double {
+    /**
+     Compute the predicted gain regarding the earned points since the athletic's creation and the prediction date.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter predictionDate: Setted date to predict a pot's amount.
+     */
+    private func computePredictedGain(with moneyConversion: Int, for predictionDate: Date) -> Double {
         guard predictionDate > Date().today, let evolution = evolutionDatas.last else { return 0 }
         let interval = DateInterval(start: Date().today, end: predictionDate)
         let points = interval.duration / 3600 * evolution.value
-        return convertPointsInEuro(points, with: pointsForOneEuro)
+        return convertPointsInMoney(points, with: moneyConversion)
     }
-    private func convertPointsInEuro(_ points: Double, with pointsForOneEuro: Int) -> Double {
-        return points / Double(pointsForOneEuro == 0 ? 1 : pointsForOneEuro)
+    /**
+     Convert points in money regarding the money conversion rate.
+     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     */
+    private func convertPointsInMoney(_ points: Double, with moneyConversion: Int) -> Double {
+        return points / Double(moneyConversion == 0 ? 1 : moneyConversion)
     }
     
 }

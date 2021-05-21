@@ -16,14 +16,14 @@ struct SettingsSportValue: View {
     @Binding var value: [String]
     enum Caller: Equatable { case sport, performance }
     let caller: Caller
-    let valueForOnePoint: Int64
+    let pointsConversion: Int64
     
-    init(placeholder: String, unity: Sport.UnityType?, valueForOnePoint: Binding<[String]>, caller: Caller, existingValueForOnePoint: Int64? = nil) {
+    init(placeholder: String, unity: Sport.UnityType?, pointsConversion: Binding<[String]>, caller: Caller, existingPointsConversion: Int64? = nil) {
         self.placeholder = placeholder
         self.unity = unity
-        self._value = valueForOnePoint
+        self._value = pointsConversion
         self.caller = caller
-        self.valueForOnePoint = existingValueForOnePoint ?? 0
+        self.pointsConversion = existingPointsConversion ?? 0
     }
     
     var body: some View {
@@ -37,7 +37,7 @@ struct SettingsSportValue: View {
                             TextField(sportUnity.placeholders[0], text: $value[0])
                             Text(sportUnity.symbols[0])
                         case .performance:
-                            Text("\("sportValue.oneShotGain".localized)\(valueForOnePoint) points.")
+                            Text("\("sportValue.oneShotGain".localized)\(pointsConversion) points.")
                                 .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                         }
                     case .time:

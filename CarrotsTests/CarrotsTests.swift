@@ -24,7 +24,7 @@ class CarrotsTests: XCTestCase {
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() throws {
         let game = try XCTUnwrap(self.game)
-        XCTAssert(game.settings.pointsForOneEuro == 1000)
+        XCTAssert(game.settings.moneyConversion == 1000)
     }
     
     func testGivenAGameExistsWhenAskForLoadingItThenGameIsLoaded() throws {

@@ -43,7 +43,7 @@ struct HomeTab: View {
                 .tag(3)
                 .environmentObject(gameDoor)
                 .onAppear { gameDoor.refresh() }
-            GeneralSettings(date: gameDoor.predictedAmountDate, pointsForOneEuro: gameDoor.pointsForOneEuro, showHelp: gameDoor.showHelp)
+            GeneralSettings(date: gameDoor.predictionDate, moneyConversion: gameDoor.moneyConversion, showHelp: gameDoor.showHelp)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("settings.title".localized)
