@@ -22,7 +22,7 @@ struct PotAddings: View {
             SettingsSegmentedPicker(title: "pots.addings.modificationTitle".localized, selection: $selection, instructions: "pots.addings.modificationInstructions".localized, possibilities: ["pots.addings.addTitle".localized, "pots.addings.withdrawTitle".localized])
             SettingsTextfield(title: "pots.addings.amountTitle".localized, placeHolder: placeHolder, value: $amount, keyboard: .decimalPad, isWrong: $amountIsWrong, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "pots.addings.amountLimitMin".localized, maxCount: nil))
         }
-        .inSettingsPage("\(pot?.description ?? "No name")",
+        .inSettingsPage("\(pot?.description ?? "all.noName".localized)",
                         gameDoor: _gameDoor,
                         confirmationButtonIsDisabled: confirmationButtonIsDisabled,
                         helpText: "potsAddings") {

@@ -112,6 +112,9 @@
 "pots.addings.amountTitle" = "Montant";
 "pots.addings.amountLimitMin" = "Vous devez choisir un montant.";
 "pots.commonPot" = "Cagnotte commune";
+"pots.commonPot.short" = "Commune";
+"pots.nameStart" = "Cagnotte de ";
+"pots.nameEnd" = "";
 
 // MARK: - Settings
 

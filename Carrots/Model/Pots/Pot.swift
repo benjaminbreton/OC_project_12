@@ -14,7 +14,7 @@ public class Pot: NSManagedObject {
     /// Pot's description
     public override var description: String {
         guard let name = owner?.name else { return "pots.commonPot".localized }
-        return "\(name)'s pot"
+        return "\("pots.nameStart".localized)\(name)\("pots.nameEnd".localized)"
     }
     /// All points added to the pot.
     var allPoints: Double {

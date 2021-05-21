@@ -11,14 +11,14 @@ struct PotCell: View {
     let pot: Pot?
     var name: String {
         if let athletic = pot?.owner {
-            return athletic.name ?? ""
+            return athletic.name ?? "all.noName".localized
         } else {
             return "pots.commonPot".localized
         }
     }
     var body: some View {
         VStack() {
-            HStack {
+            VStack {
                 Text(name)
                     .withBigSimpleFont()
                 Text("\(pot?.formattedAmount ?? "")")

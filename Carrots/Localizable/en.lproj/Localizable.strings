@@ -112,6 +112,9 @@
 "pots.addings.amountTitle" = "Amount";
 "pots.addings.amountLimitMin" = "You have to choose an amount.";
 "pots.commonPot" = "Common pot";
+"pots.commonPot.short" = "Common";
+"pots.nameStart" = "";
+"pots.nameEnd" = "'s pot";
 
 // MARK: - Settings
 
