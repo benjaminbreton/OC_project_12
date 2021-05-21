@@ -104,6 +104,9 @@ extension Game {
         settings.showHelp = showHelp
         potsManager.refresh(with: intPoints, for: predictionDate)
     }
+    mutating func validateWarning() {
+        settings.didValidateWarning = true
+    }
 }
 
 // MARK: - Sports

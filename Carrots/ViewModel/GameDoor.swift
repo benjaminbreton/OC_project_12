@@ -26,6 +26,7 @@ class GameDoor: ObservableObject {
     var predictedAmountDate: Date { game.settings.predictionDate }
     var error: ApplicationErrors? { getError() }
     var showHelp: Bool { game.settings.showHelp }
+    var didValidateWarning: Bool { game.settings.didValidateWarning }
     
     // MARK: - Init
     
@@ -78,6 +79,10 @@ class GameDoor: ObservableObject {
     
     func updatePotsGeneralSettings(date: Date, pointsForOneEuro: String?, showHelp: Bool) {
         game.updateSettings(predictionDate: date, pointsForOneEuro: pointsForOneEuro, showHelp: showHelp)
+    }
+    
+    func validateWarning() {
+        game.validateWarning()
     }
     
     // MARK: - Errors

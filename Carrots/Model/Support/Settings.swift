@@ -22,6 +22,10 @@ struct Settings {
     /// Boolean used to know if help has to be shown or not.
     @UserDefault(key: "showHelp", defaultValue: true)
     var showHelp: Bool
+    /// Boolean used to know if pot's warning has been validated.
+    @UserDefault(key: "didValidateWarning", defaultValue: false)
+    var didValidateWarning: Bool
+    
     init() {
         if predictionDate < Date().today {
             predictionDate = Date().today + 30 * 24 * 3600

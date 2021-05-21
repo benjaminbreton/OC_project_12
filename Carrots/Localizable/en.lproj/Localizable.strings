@@ -102,7 +102,7 @@
 "pots.title.maj" = "Pots";
 "pots.noAthletics" = "No athletics have been added.\n\nTo add an athletic:\n- go on athletics page below;\n- select the + button on the top of the screen;\n- add new athletic's informations and confirm.";
 "pots.athleticsPots" = "Athletics pots";
-"pots.warning" = "Remember that the amounts displayed here are not money offered by the application and its owners, but money that you can afford to put aside for your efforts.";
+"pots.warning" = "Remember that the amounts displayed here are NOT money offered by the app and its owners; but amounts that the app offers you to set aside, from YOUR OWN MONEY, due to your efforts. It is therefore necessary to correctly set up the conversion of points into money in the settings page in line with your budget.";
 "pots.addings.addPlaceholder" = "Amount to add";
 "pots.addings.addTitle" = "+ add money";
 "pots.addings.withdrawTitle" = "- withdraw money";
@@ -121,7 +121,7 @@
 "settings.date.explanations" = "The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.\nYou can set this date here.";
 "settings.conversion.title" = "Money conversion";
 "settings.conversion.explanations1" = "In this application, athletics can earn points by doing some sports performances.\nPoints can be converted in ";
-"settings.conversion.explanations2" = " you can spend from your own money for each pot.\nSet here the necessary number of points to earn 1 ";
+"settings.conversion.explanations2" = " you can spend from your own money for each pot.\n Set this number correctly according to your means so that the application offers you amounts in line with your budget.\nSet here the necessary number of points to earn 1 ";
 "settings.conversion.limitExplanationsMin" = "Enter a number.";
 "settings.conversion.limitExplanationsMax" = "The number has to be inferior than 1,000.";
 "settings.help.title" = "Help";

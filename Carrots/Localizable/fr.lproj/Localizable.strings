@@ -102,7 +102,7 @@
 "pots.title.maj" = "Cagnottes";
 "pots.noAthletics" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif :\n- aller dans la page sportifs ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sportif et confirmer.";
 "pots.athleticsPots" = "Cagnottes des sportifs";
-"pots.warning" = "Rappelez-vous que les sommes affichées ici ne correspondent pas à de l'argent offert par l'application et ses prorpriétaires, mais de l'argent que vous pouvez vous permettre de mettre de côté vu vos efforts.";
+"pots.warning" = "Rappelez-vous que les sommes affichées ici ne correspondent PAS à de l'argent offert par l'application et ses propriétaires, mais des montants que l'application vous propose de mettre de côté, à partir de VOTRE PROPRE ARGENT, vu vos efforts. Il convient donc de paramétrer correctement, dans la page paramètres, la conversion des points en argent en accord avec votre budget.";
 "pots.addings.addPlaceholder" = "Montant à ajouter";
 "pots.addings.addTitle" = "+ ajouter de l'argent";
 "pots.addings.withdrawTitle" = "- retirer de l'argent";
@@ -121,7 +121,7 @@
 "settings.date.explanations" = "L'application fournit, pour chaque cagnotte, un montant prévisionnel à une certaine date si les sportifs continuent d'effectuer des performances sur le même rythme.\nVous pouvez choisir cette date ici.";
 "settings.conversion.title" = "Conversion en argent";
 "settings.conversion.explanations1" = "Dans cette application, les sportifs peuvent gagner des points en effectuant des performances.\nLes points peuvent être convertis en ";
-"settings.conversion.explanations2" = " que vous pourrez dépenser de votre propre argent pour chaque cagnotte.\nEntrez ici le nombre de points nécessaires pour obtenir 1 ";
+"settings.conversion.explanations2" = " que vous pourrez dépenser de votre propre argent pour chaque cagnotte.\nParamétrez correctement ce nombre en fonction de vos moyens afin que l'application vous propose des montants en adéquation avec votre budget.\nEntrez ici le nombre de points nécessaires pour obtenir 1 ";
 "settings.conversion.limitExplanationsMin" = "Entrez un nombre.";
 "settings.conversion.limitExplanationsMax" = "Le nombre doit être inférieur à 1 000.";
 "settings.help.title" = "Aide";

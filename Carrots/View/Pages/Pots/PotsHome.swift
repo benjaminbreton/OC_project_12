@@ -17,18 +17,8 @@ struct PotsHome: View {
                     title: "pots.athleticsPots".localized,
                     helpText: "potsList")
                 .environmentObject(gameDoor)
-            HStack {
-                Image(systemName: "exclamationmark.bubble.fill")
-                Text("pots.warning".localized)
-                Image(systemName: "checkmark.square.fill")
-                    .inButton {
-                        
-                    }
-            }
-            .withLightSimpleFont()
-            .inRectangle(.leading)
-            .fixedSize(horizontal: false, vertical: true)
-            
+            PotsWarning()
+                .environmentObject(gameDoor)
         }
         .inNavigationHome(title: "pots.title".localized)
     }
