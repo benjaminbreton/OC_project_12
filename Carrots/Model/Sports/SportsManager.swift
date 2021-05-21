@@ -9,12 +9,17 @@ import Foundation
 import CoreData
 
 class SportsManager {
+    
+    // MARK: - Properties
+    
+    /// Coredatastack used to save and load datas from CoreData.
     let coreDataStack: CoreDataStack
+    
+    // MARK: - Init
     
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
     }
-    
     
     // MARK: - Add
     
@@ -47,7 +52,6 @@ class SportsManager {
         return false
     }
     
-    
     // MARK: - Modify
     
     /**
@@ -79,5 +83,4 @@ class SportsManager {
         coreDataStack.saveContext()
         return nil
     }
-    
 }

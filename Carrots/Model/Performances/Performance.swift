@@ -9,12 +9,16 @@ import Foundation
 import CoreData
 public class Performance: NSManagedObject {
     
+    // MARK: - Properties
+    
+    /// Performance's description, aka its date.
+    public override var description: String { "\(formattedDate) performance" }
+    /// Formatted value of the performance.
     var formattedValue: String {
         let unity = initialUnity.sportUnityType
         return unity != .oneShot ? "\(unity.singleString(for: value))" : "performances.oneShot".localized
     }
-    
-    public override var description: String { "\(formattedDate) performance" }
+    /// Athletics who did participate to the performance.
     var athletics: [Athletic] {
         guard let athleticsSet = athleticsSet, let athletics = athleticsSet.allObjects as? [Athletic] else {
             return []
@@ -23,6 +27,7 @@ public class Performance: NSManagedObject {
             $0.name ?? "all.noName".localized < $1.name ?? "all.noName".localized
         }
     }
+    /// Formatted performance's date.
     var formattedDate: String {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
@@ -31,6 +36,9 @@ public class Performance: NSManagedObject {
         guard let date = date else { return "" }
         return formatter.string(from: date)
     }
+    
+    // MARK: - Methods
+    
     /**
      Add points earned with a performance to pots depending on performance's parameters.
      - parameter pots: Pots in which the points have to be added.

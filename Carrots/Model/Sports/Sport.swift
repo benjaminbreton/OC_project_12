@@ -190,6 +190,5 @@ extension Sport {
                 return realisation[0]
             }
         }
-        
     }
 }

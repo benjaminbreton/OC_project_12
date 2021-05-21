@@ -8,15 +8,21 @@
 import Foundation
 import CoreData
 
+// MARK: - Property and init
+
 class PerformancesManager {
     
+    /// Coredatastack used to save and load datas from CoreData.
     let coreDataStack: CoreDataStack
     
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
     }
-    
-    // MARK: - Add
+}
+
+// MARK: - Add
+
+extension PerformancesManager {
     
     /**
      Add a performance.
@@ -64,8 +70,11 @@ class PerformancesManager {
         performance.initialSportIcon = sport.icon
         return performance
     }
-    
-    // MARK: - Delete
+}
+
+// MARK: - Delete
+
+extension PerformancesManager {
     
     /**
      Delete a performance.
