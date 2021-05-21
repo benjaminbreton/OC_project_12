@@ -7,12 +7,18 @@
 
 import Foundation
 enum ApplicationErrors: Error, CustomStringConvertible {
+    
+    // MARK: - Types
+    
     // athletics
     case existingAthletic
     // sports
     case existingSport
     // entities
     case noCommonPot, severalCommonPots(Int)
+    
+    // MARK: - Properties
+    
     /// Error's description used in the console for the development team.
     var description: String {
         switch self {
@@ -26,6 +32,9 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "Several common pots: \(count)"
         }
     }
+    
+    // MARK: - Method
+    
     /**
      Method called when an error occured to know where the error happends, and what is the error.
      - parameter error: The error.

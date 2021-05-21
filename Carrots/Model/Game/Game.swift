@@ -59,9 +59,14 @@ extension Game {
         // load game
         refresh()
     }
+}
+
+// MARK: - Refresh
+
+extension Game {
     
     /**
-     Ask to refresh all properties.
+     Refresh all properties.
      */
     mutating func refresh() {
         guard error == nil else { return }
