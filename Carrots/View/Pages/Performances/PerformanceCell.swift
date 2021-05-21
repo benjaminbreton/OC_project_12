@@ -19,6 +19,16 @@ struct PerformanceCell: View {
         let unity = performance.initialUnity.sportUnityType
         return unity != .oneShot ? "\(unity.singleString(for: performance.value))" : "performances.oneShot".localized
     }
+    private var didReachedMaxAthletics: Bool { performance.athletics.count > 5 }
+    private var athleticsToShow: [Athletic] {
+        if performance.athletics.count > 5 {
+            var athletics = performance.athletics
+            athletics.removeLast(performance.athletics.count - 5)
+            return athletics
+        } else {
+            return performance.athletics
+        }
+    }
     var body: some View {
         HStack(alignment: .center) {
             SportIcon(icon: performance.initialSportIcon ?? "", lineCount: lineCount)
@@ -32,8 +42,12 @@ struct PerformanceCell: View {
                     .withSimpleFont()
                 CommonHeightSpacer(0.5)
                 HStack(spacing: 0.7) {
-                    ForEach(performance.athletics) { athletic in
+                    ForEach(athleticsToShow) { athletic in
                         AthleticImage(image: UIImage(data: athletic.image ?? Data()), radius: ViewCommonSettings().textLineHeight / 3)
+                    }
+                    if didReachedMaxAthletics {
+                        Image(systemName: "plus.circle.fill")
+                            .withLightSimpleFont()
                     }
                 }
             }
