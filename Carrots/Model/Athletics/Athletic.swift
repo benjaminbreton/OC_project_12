@@ -27,7 +27,7 @@ public class Athletic: NSManagedObject {
             return 0
         }
     }
-    public override var description: String { name ?? "" }
+    public override var description: String { name ?? "all.noName".localized }
     var performances: [Performance] {
         guard let performancesSet = performancesSet, let performances = performancesSet.allObjects as? [Performance] else {
             return []

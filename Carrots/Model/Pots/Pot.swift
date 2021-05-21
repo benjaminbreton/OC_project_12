@@ -13,7 +13,7 @@ import CoreData
 public class Pot: NSManagedObject {
     /// Pot's description
     public override var description: String {
-        guard let name = owner?.name else { return "Common pot" }
+        guard let name = owner?.name else { return "pots.commonPot".localized }
         return "\(name)'s pot"
     }
     /// All points added to the pot.

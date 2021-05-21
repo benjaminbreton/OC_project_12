@@ -17,6 +17,7 @@ enum ApplicationErrors: Error, CustomStringConvertible {
     case cantReturnStats
     // entities
     case noCommonPot, severalCommonPots(Int)
+    /// Error's description used in the console for the development team.
     var description: String {
         switch self {
         case .existingAthletic:
@@ -38,6 +39,13 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "No pot for \(athletic.description)."
         }
     }
+    /**
+     Method called when an error occured to know where the error happends, and what is the error.
+     - parameter error: The error.
+     - parameter file: File in which the error happends.
+     - parameter line: Line in which the error happends.
+     - parameter function: Function in which the error happends.
+     */
     @discardableResult
     static func log(_ error: ApplicationErrors, file: String = #file, line: Int = #line, function: String = #function) -> ApplicationErrors {
         #if DEBUG
