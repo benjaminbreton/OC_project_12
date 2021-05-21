@@ -17,14 +17,14 @@ struct SportDetails: View {
             DetailsText(title: "sports.details.unityTitle".localized,
                         texts: [
                             "sports.details.unityTypeTitle".localized: (text: sport.unityInt16.sportUnityType.description, order: 1),
-                            sport.unityType == .oneShot ? "sports.details.oneShot".localized : "sports.details.needs".localized: (text: "\(sport.unityType.singleString(for: sport.pointsConversion))", order: 2)
+                            sport.unityType == .oneShot ? "sports.details.oneShot".localized : "sports.details.needs".localized: (text: "\(sport.pointsConversionSingleString)", order: 2)
                         ])
             DetailsPerformancesDisplayer(performances: sport.performances, source: nil)
         }
         .inDetailsPage(
             genericTitle: sport.name ?? "all.noName".localized,
             specificTitle: "sports.details.title".localized,
-            destinationToModify: SportSettings(sport: sport, name: sport.name ?? "all.noName".localized, icon: sport.icon ?? "A", unity: [sport.unityType], pointsConversion: sport.unityType.stringArray(for: sport.pointsConversion))
+            destinationToModify: SportSettings(sport: sport, name: sport.name ?? "all.noName".localized, icon: sport.icon ?? "A", unity: [sport.unityType], pointsConversion: sport.pointsConversionStringArray)
                 .environmentObject(gameDoor),
             helpText: "sportsDetails"
         )

@@ -7,19 +7,41 @@
 
 import Foundation
 import CoreData
+
+// MARK: - Properties
+
 public class Sport: NSManagedObject {
+    
     /// Sport's unity type.
     var unityType: UnityType { unityInt16.sportUnityType }
+    /// Sport's performances.
     var performances: [Performance] {
         guard let performancesSet = performancesSet, let performances = performancesSet.allObjects as? [Performance] else {
             return []
         }
         return performances
     }
+    /// Sport's description, aka its name.
     override public var description: String { name ?? "all.noName".localized }
+    /// Get the points conversion in an array of Strings regarding the unity type.
+    var pointsConversionStringArray: [String] { unityType.stringArray(for: pointsConversion) }
+    /// Get the points conversion in a single String regarding the unity type.
+    var pointsConversionSingleString: String { unityType.singleString(for: pointsConversion) }
+    
+}
+
+// MARK: - Points
+
+extension Sport {
+    
+    /**
+     Get the points to add regarding the performance's value and the unity type.
+     - parameter value: Performance's value.
+     - returns: Points to add.
+     */
     func pointsToAdd(for value: Int64) -> Int64 {
         guard pointsConversion > 0 else { return 0 }
-        switch unityInt16.sportUnityType {
+        switch unityType {
         case .oneShot:
             return pointsConversion
         default:
@@ -27,6 +49,11 @@ public class Sport: NSManagedObject {
             return points * pointsConversion > value ? points - 1 : points
         }
     }
+}
+
+// MARK: - Update
+
+extension Sport {
     /**
      Update the sport.
      - parameter name: Sport's name.
@@ -41,10 +68,19 @@ public class Sport: NSManagedObject {
         self.unityInt16 = unityType
         self.pointsConversion = self.unityType.value(for: pointsConversion)
     }
-    /// Sport's unity type enumeration.
+}
+
+// MARK: - Unity types
+
+extension Sport {
+
     enum UnityType: CustomStringConvertible {
         
+        // MARK: - Cases
+        
         case distance, time, count, oneShot
+        
+        // MARK: - Properties
         
         /// Key base to get a string from the localizable files.
         var localizedKey: String {
@@ -60,7 +96,6 @@ public class Sport: NSManagedObject {
                 return "\(base)count."
             }
         }
-        
         /// Sport's unity type int16 to save in coredata.
         var int16: Int16 {
             switch self {
@@ -74,9 +109,11 @@ public class Sport: NSManagedObject {
                 return 0
             }
         }
+        /// Description of the type.
         var description: String {
             "\(localizedKey)description".localized
         }
+        /// Symbols to use for displaying a value.
         var symbols: [String] {
             switch self {
             case .time:
@@ -85,6 +122,7 @@ public class Sport: NSManagedObject {
                 return ["\(localizedKey)symbols1".localized]
             }
         }
+        /// Placeholders to use to ask a value.
         var placeholders: [String] {
             switch self {
             case .time:
@@ -93,9 +131,18 @@ public class Sport: NSManagedObject {
                 return ["\(localizedKey)placeholder1".localized]
             }
         }
+        /// Types explanations to display.
         var explanations: String {
             "\(localizedKey)explanations".localized
         }
+        
+        // MARK: - Methods
+        
+        /**
+         Get an Int64 value from Strings.
+         - parameter inputs: Strings to convert.
+         - returns: The Int64.
+         */
         func value(for inputs: [String?]) -> Int64 {
             guard inputs.count == 3 else { return 0 }
             let values: [Int] = inputs.map({ Int($0 ?? "0") ?? 0 })
@@ -106,6 +153,11 @@ public class Sport: NSManagedObject {
                 return Int64(values[0])
             }
         }
+        /**
+         Get an array of Strings from an Int64.
+         - parameter value: The Int64.
+         - returns: The array of Strings.
+         */
         func stringArray(for value: Int64) -> [String] {
             switch self {
             case .time:
@@ -122,6 +174,11 @@ public class Sport: NSManagedObject {
                 return ["\(Int(value))", "0", "0"]
             }
         }
+        /**
+         Get a single, formatted, String from an Int64 value.
+         - parameter value: The Int64 value to convert.
+         - returns: The String.
+         */
         func singleString(for value: Int64) -> String {
             let realisation = stringArray(for: value)
             switch self {
@@ -135,8 +192,4 @@ public class Sport: NSManagedObject {
         }
         
     }
-    
-    
-    
-    
 }

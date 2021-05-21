@@ -11,6 +11,7 @@ import CoreData
 // MARK: - Properties
 
 public class Athletic: NSManagedObject {
+    
     /// All points earned by the Athletic.
     var allPoints: Double {
         if performances.count > 0 {
@@ -27,7 +28,9 @@ public class Athletic: NSManagedObject {
             return 0
         }
     }
+    /// The athletic's description, aka his name.
     public override var description: String { name ?? "all.noName".localized }
+    /// The athletic's performances, sorted by date.
     var performances: [Performance] {
         guard let performancesSet = performancesSet, let performances = performancesSet.allObjects as? [Performance] else {
             return []
@@ -36,17 +39,7 @@ public class Athletic: NSManagedObject {
             $0.date ?? Date().today > $1.date ?? Date().today
         }
     }
-    func update(name: String?, image: Data?) {
-        self.name = name
-        self.image = image
-    }
-}
-
-
-// MARK: - Evolution datas
-
-extension Athletic {
-    /// Pot's evolution datas.
+    /// Athletic's evolution datas.
     var evolutionDatas: [EvolutionData] {
         guard let evolutionSet = evolutionDatasSet, let evolutions = evolutionSet.allObjects as? [EvolutionData] else {
             return []
@@ -55,6 +48,26 @@ extension Athletic {
             $0.date ?? Date() < $1.date ?? Date()
         }
     }
+}
+
+// MARK: - Update
+
+extension Athletic {
+    /**
+     Update athletic's informations.
+     - parameter name: Athletic's name.
+     - parameter image: Athletic's image's datas.
+     */
+    func update(name: String?, image: Data?) {
+        self.name = name
+        self.image = image
+    }
+}
+
+// MARK: - Evolution datas
+
+extension Athletic {
+    
     /**
      Check if an evolution has already been created for the current day, and eventually returns the evolution to add.
      - parameter date: Date of the evolution to get.
@@ -83,7 +96,7 @@ extension Athletic {
     }
     /**
      Keep datas for the last 30 days, plus one.
-     - returns: The left datas.
+     - returns: The datas to keep.
      */
     func evolutionDatasToClean(for date: Date) -> [EvolutionData] {
         let date = date - 30 * 24 * 3600

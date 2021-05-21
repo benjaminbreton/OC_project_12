@@ -8,6 +8,12 @@
 import Foundation
 import CoreData
 public class Performance: NSManagedObject {
+    
+    var formattedValue: String {
+        let unity = initialUnity.sportUnityType
+        return unity != .oneShot ? "\(unity.singleString(for: value))" : "performances.oneShot".localized
+    }
+    
     public override var description: String { "\(formattedDate) performance" }
     var athletics: [Athletic] {
         guard let athleticsSet = athleticsSet, let athletics = athleticsSet.allObjects as? [Athletic] else {

@@ -7,20 +7,16 @@
 
 import SwiftUI
 extension Color {
-    static var text: Color { Color("text") }
-    static var backgroundFirst: Color { Color("backgroundFirst") }
-    static var backgroundSecond: Color { Color("backgroundSecond") }
-    static var link: Color { Color("link") }
-    static var tab: Color { Color("tab") }
-    static var textInverse: Color { Color("textInverse") }
-    static var image: Color { Color("image") }
-    static var backCell: Color { Color("backCell") }
-    static var linkInverse: Color { Color("linkInverse") }
-    static var title: Color { Color("title") }
-    static var textLight: Color { Color("textLight") }
-    static var pickerText: Color { Color("pickerText") }
-    static var pickerBackground: Color { Color("pickerBackground") }
-    static var graphFirst: Color { Color("graphFirst") }
-    static var graphSecond: Color { Color("graphSecond") }
-    static var delete: Color { Color("delete") }
+    static var text: Color { Color("black") }
+    static var backgroundFirst: Color { Color("lightGrey") }
+    static var backgroundSecond: Color { Color("lightOrange") }
+    static var link: Color { Color("green") }
+    static var tab: Color { Color("green") }
+    static var image: Color { Color("orange") }
+    static var backCell: Color { Color("white0p3") }
+    static var title: Color { Color("orange") }
+    static var textLight: Color { Color("grey") }
+    static var graphFirst: Color { Color("lightOrange") }
+    static var graphSecond: Color { Color("darkGrey") }
+    static var delete: Color { Color("red") }
 }

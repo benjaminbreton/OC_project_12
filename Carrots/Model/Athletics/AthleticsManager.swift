@@ -7,12 +7,17 @@
 
 import Foundation
 import CoreData
-// MARK: - Athletics
 
 class AthleticsManager {
     
+    // MARK: - Properties
+    
+    /// Coredatastack used to save and load datas from CoreData.
     let coreDataStack: CoreDataStack
+    /// Used to create and delete evolution datas.
     let evolutionDatasManager: EvolutionDatasManager
+    
+    // MARK: - Init
     
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack

@@ -8,22 +8,32 @@
 import Foundation
 import CoreData
 class PotsManager {
+    
+    // MARK: - Properties
+    
+    /// Coredatastack used to save and load datas from CoreData.
     let coreDataStack: CoreDataStack
+    /// Used to create and delete evolution datas.
     let evolutionDatasManager: EvolutionDatasManager
+    
+    // MARK: - Init
+    
     init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
         self.evolutionDatasManager = EvolutionDatasManager(coreDataStack)
     }
 
     // MARK: - Creation
-
-    /// Create a new pot for its future owner.
-    /// - parameter athletic: Future pot's owner (nil to create the common pot).
-    /// - returns: The new pot.
-    func create(for today: Date = Date().today) -> Pot {
+    
+    /**
+     Create a new pot.
+     - parameter date: The pot's creation date.
+     - returns: The new pot.
+     */
+    func create(for date: Date = Date().today) -> Pot {
         let pot = Pot(context: coreDataStack.viewContext)
         pot.amount = 0
-        pot.creationDate = today
+        pot.creationDate = date
         pot.points = 0
         evolutionDatasManager.create(for: pot, value: 0, date: Date().today)
         coreDataStack.saveContext()
@@ -61,6 +71,11 @@ class PotsManager {
     
     // MARK: - Support
     
+    /**
+     Get a pot regarding its owner.
+     - parameter athletic: The pot's owner, *nil* to get the common pot.
+     - returns: The pot.
+     */
     private func getPot(of athletic: Athletic?) -> Pot? {
         if let athletic = athletic {
             guard let pot = athletic.pot else { return nil }
@@ -84,7 +99,7 @@ class PotsManager {
                 evolutionDatasManager.create(for: pot, value: value, date: Date().today)
                 evolutionDatasManager.delete(pot.evolutionDatasToClean(for: Date().today))
             }
-            pot.refresh(with: moneyConversion, for: predictionDate)
+            pot.computeAmount(with: moneyConversion, for: predictionDate)
         }
     }
     

@@ -15,10 +15,6 @@ struct PerformanceCell: View {
     private var rowHeight: CGFloat {
         ViewCommonSettings().textLineHeight * lineCount
     }
-    private var formattedValue: String {
-        let unity = performance.initialUnity.sportUnityType
-        return unity != .oneShot ? "\(unity.singleString(for: performance.value))" : "performances.oneShot".localized
-    }
     private var didReachedMaxAthletics: Bool { performance.athletics.count > 5 }
     private var athleticsToShow: [Athletic] {
         if performance.athletics.count > 5 {
@@ -38,7 +34,7 @@ struct PerformanceCell: View {
                 Text(performance.formattedDate)
                     .withLightSimpleFont()
                 CommonHeightSpacer(0.5)
-                Text(formattedValue)
+                Text(performance.formattedValue)
                     .withSimpleFont()
                 CommonHeightSpacer(0.5)
                 HStack(spacing: 0.7) {

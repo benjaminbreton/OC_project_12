@@ -28,8 +28,8 @@ struct PotCell: View {
             
             Divider()
             HStack {
-                Image(systemName: pot?.evolution.image.name ?? "arrow.forward.square")
-                    .foregroundColor(pot?.evolution.image.colorInt16.potEvolutionColor)
+                Image(systemName: pot?.evolution.image.name ?? "")
+                    .foregroundColor(Color(pot?.evolution.image.color ?? ""))
                     .withTitleFont()
                 Text("expected: \(pot?.formattedPredictionAmount ?? "")")
                     .withSimpleFont()
