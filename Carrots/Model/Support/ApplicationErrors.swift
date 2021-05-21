@@ -53,32 +53,3 @@ enum ApplicationErrors: Error, CustomStringConvertible {
         return error
     }
 }
-extension Error {
-    var defaultUserTitle: String { "Error" }
-    var defaultUserMessage: String { "An error occurred." }
-    var userTitle: String {
-        if let error = self as? ApplicationErrors {
-            switch error {
-            case .existingAthletic:
-                return "Unavailable name."
-            default:
-                return defaultUserTitle
-            }
-        } else {
-            return defaultUserTitle
-        }
-    }
-    var userMessage: String {
-        if let error = self as? ApplicationErrors {
-            switch error {
-            case .existingAthletic:
-                return "An athletic already exists with this name. Please choose another."
-            default:
-                return defaultUserMessage
-            }
-        } else {
-            return defaultUserMessage
-        }
-    }
-    
-}

@@ -7,20 +7,30 @@
 
 import Foundation
 extension Error {
-    var userDescription: String {
+    var defaultUserTitle: String { "error.default.title".localized }
+    var defaultUserMessage: String { "error.default.message".localized }
+    var userTitle: String {
         if let error = self as? ApplicationErrors {
             switch error {
             case .existingAthletic:
-                return "This name has already been used for another athletic. Please choose another name."
-            case .existingSport:
-                return "This name has already been used for another sport. Please choose another name."
-            case .performanceWithoutAthletic:
-                return "Performance has to have at least one athletic."
+                return "error.existingAthletic.title".localized
             default:
-                return "An error occurres."
+                return defaultUserTitle
             }
         } else {
-            return "An error occurres."
+            return defaultUserTitle
+        }
+    }
+    var userMessage: String {
+        if let error = self as? ApplicationErrors {
+            switch error {
+            case .existingAthletic:
+                return "error.existingAthletic.message".localized
+            default:
+                return defaultUserMessage
+            }
+        } else {
+            return defaultUserMessage
         }
     }
 }

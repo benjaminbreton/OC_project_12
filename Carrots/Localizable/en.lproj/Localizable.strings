@@ -34,6 +34,13 @@
 
 "deletion.title" = "delete";
 
+// MARK: - Error
+
+"error.default.title" = "Error";
+"error.default.message" = "An error occurred.";
+"error.existingAthletic.title" = "Unavailable name";
+"error.existingAthletic.message" = "An athletic already exists with this name. Please choose another.";
+
 // MARK: - Graphic
 
 "graphic.noEvolution" = "No evolution can be displayed the first day.";

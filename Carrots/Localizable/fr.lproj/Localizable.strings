@@ -34,6 +34,13 @@
 
 "deletion.title" = "supprimer";
 
+// MARK: - Error
+
+"error.default.title" = "Erreur";
+"error.default.message" = "Une erreur est survenue.";
+"error.existingAthletic.title" = "Nom indisponible";
+"error.existingAthletic.message" = "Un sportif existe déjà avec ce nom. Merci d'en choisir un autre.";
+
 // MARK: - Graphic
 
 "graphic.noEvolution" = "Aucune évolution ne peut être affichée le premier jour.";
