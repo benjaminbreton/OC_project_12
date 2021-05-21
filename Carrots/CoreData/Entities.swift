@@ -26,6 +26,20 @@ class Entities {
                 ApplicationErrors.log(.noCommonPot)
             } else {
                 ApplicationErrors.log(.severalCommonPots(result.count))
+                for pot in result {
+                    if pot.points > 0 {
+                        let potsToDelete = result.map({ $0 == pot ? nil : $0 }).compactMap({ $0 })
+                        for potToDelete in potsToDelete {
+                            context.delete(potToDelete)
+                        }
+                        try? context.save()
+                        return pot
+                    }
+                }
+                for potToDelete in result {
+                    context.delete(potToDelete)
+                }
+                try? context.save()
             }
             return nil
         }
