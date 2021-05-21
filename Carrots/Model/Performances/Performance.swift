@@ -14,7 +14,7 @@ public class Performance: NSManagedObject {
             return []
         }
         return athletics.sorted {
-            $0.name ?? "No name" < $1.name ?? "No name"
+            $0.name ?? "all.noName".localized < $1.name ?? "all.noName".localized
         }
     }
     var formattedDate: String {
