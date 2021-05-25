@@ -151,6 +151,11 @@ extension GameDoor {
     func validateWarning() {
         game.validateWarning()
     }
+    
+    
+    func setFactorySettingsBack() {
+        game.setFactorySettingsBack()
+    }
 }
 
 // MARK: - Errors

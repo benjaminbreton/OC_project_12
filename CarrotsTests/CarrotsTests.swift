@@ -6,293 +6,273 @@
 //
 
 import XCTest
+import CoreData
 @testable import Carrots
 
 class CarrotsTests: XCTestCase {
     
-    var game: Game?
+    var gameDoor: GameDoor?
     
     override func setUp() {
         let coreDataStack = FakeCoreDataStack()
-        game = Game(coreDataStack: coreDataStack)
+        gameDoor = GameDoor(coreDataStack)
+        gameDoor?.setFactorySettingsBack()
     }
     override func tearDown() {
-        game = nil
+        gameDoor = nil
     }
     
     // MARK: - Game Tests
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() throws {
-        let game = try XCTUnwrap(self.game)
-        XCTAssert(game.settings.moneyConversion == 1000)
-    }
-    
-    func testGivenAGameExistsWhenAskForLoadingItThenGameIsLoaded() throws {
-        var game = try XCTUnwrap(self.game)
-        game.introductionHasBeenSeen()
-        tearDown()
-        setUp()
-        let game2 = try XCTUnwrap(self.game)
-        XCTAssert(game2.settings.didSeeIntroduction)
+        let game = try XCTUnwrap(self.gameDoor)
+        XCTAssertNotNil(game.commonPot)
+        XCTAssert(game.moneyConversion == "100")
     }
     
     // MARK: - Pot tests
     
     func testGivenPotContainsNothingWhenAskToAddMoneyThenMoneyHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        game.addMoney(amount: 10)
-        game.addMoney(for: game.athletics[0], amount: 50)
-        XCTAssert(game.commonPot.amount == 10)
+        let game = try XCTUnwrap(self.gameDoor)
+        let athletic = addAthletic()
+        game.changeMoney(amount: "10", operation: 0)
+        game.changeMoney(for: athletic, amount: "50", operation: 0)
+        XCTAssert(game.commonPot?.amount == 10)
         XCTAssert(game.athletics[0].pot?.amount == 50)
     }
     
     func testGivenPotContainsSomeMoneyWhenAskToWithdrawSomeOfItThenMoneyHasBeenWithdrawn() throws {
-        let game = try XCTUnwrap(self.game)
-        game.addMoney(amount: 100)
-        game.withdrawMoney(amount: 30)
-        addAthletic("Ben", to: game)
-        game.addMoney(for: game.athletics[0], amount: 50)
-        game.withdrawMoney(for: game.athletics[0], amount: 45)
-        XCTAssert(game.commonPot.amount == 70)
-        XCTAssert(game.athletics[0].pot?.amount == 5)
-    }
-    
-    func testGivenAthleticExistsWhenAskToSeePotStatisticsThenStatisticsAreShown() throws {
-        var game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        game.getStatistics(for: game.athletics[0])
-        let statistics = try XCTUnwrap(game.askedStatistics)
-        print(statistics.amount)
-        let formatter = NumberFormatter()
-        formatter.locale = Locale.current
-        formatter.numberStyle = .currency
-        let expectingResult = try XCTUnwrap(formatter.string(from: 0))
-        XCTAssert(statistics.amount == expectingResult)
-        XCTAssert(statistics.evolution == .same)
-        XCTAssert(statistics.predictedAmount == "No prediction can't be done for the first 24 hours.")
+        let game = try XCTUnwrap(self.gameDoor)
+        let athletic = addAthletic()
+        game.changeMoney(amount: "100", operation: 0)
+        game.changeMoney(for: athletic, amount: "50", operation: 0)
+        game.changeMoney(amount: "10", operation: 1)
+        game.changeMoney(for: athletic, amount: "5", operation: 1)
+        XCTAssert(game.commonPot?.amount == 90)
+        XCTAssert(game.athletics[0].pot?.amount == 45)
     }
     
     // MARK: - Athletics tests
     
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
+        let game = try XCTUnwrap(self.gameDoor)
+        addAthletic("Ben")
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
         XCTAssert(game.athletics.count == 1)
         XCTAssert(game.athletics[0].name == "Ben")
     }
     
     func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        game.addAthletic("Ben") { result in
-            switch result {
-            case .success(_):
-                XCTFail()
-            case .failure(let error):
-                print(error)
-                print(error.userDescription)
-                XCTAssert(error == .existingAthletic)
-            }
-        }
+        let game = try XCTUnwrap(self.gameDoor)
+        addAthletic("Ben")
+        addAthletic("Ben")
+        XCTAssert(game.error?.description == ApplicationErrors.existingAthletic.description)
     }
     func testGivenAGameWithAthleticsExistsWhenAskToDeleteOneOfThemThenAthleticIsDeleted() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addAthletic("Elo", to: game)
-        game.deleteAthletic(game.athletics[0]) { result in
-            switch result {
-            case .success(let athletics):
-                XCTAssert(athletics.count == 1)
-                XCTAssert(athletics[0].name == "Elo")
-            case . failure(_):
-                XCTFail()
-            }
+        let game = try XCTUnwrap(self.gameDoor)
+        guard let athletic = addAthletic(), game.error == nil, game.athletics.count == 1 else {
+            XCTFail()
+            return
         }
+        game.delete(athletic)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        XCTAssert(game.athletics.count == 0)
     }
     
     // MARK: - Sports tests
     
     func testGivenAGameExistsWhenAskToAddSportThenSportHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
-        addSport("Marche", to: game)
+        let game = try XCTUnwrap(self.gameDoor)
+        addSport("Walk")
         XCTAssert(game.sports.count == 1)
-        XCTAssert(game.sports[0].name == "Marche")
+        XCTAssert(game.sports[0].name == "Walk")
         XCTAssert(game.sports[0].unityType == .count)
     }
     
     func testGivenASportExistsWhenAskToAddASportWithTheSameNameThenErrorOccures() throws {
-        let game = try XCTUnwrap(self.game)
-        addSport("Marche", to: game)
-        game.addSport("Marche", unityType: .count, valueForOnePoint: 25) { result in
-            switch result {
-            case .success(_):
-                XCTFail()
-            case .failure(let error):
-                XCTAssert(error == .existingSport)
-            }
-        }
+        let game = try XCTUnwrap(self.gameDoor)
+        addSport("Walk")
+        addSport("Walk")
+        XCTAssert(game.error?.description == ApplicationErrors.existingSport.description)
     }
     
     func testGivenSportsExistWhenAskToDeleteOneOfThemThenSportIsDeleted() throws {
-        let game = try XCTUnwrap(self.game)
-        addSport("Marche", to: game)
-        addSport("Rameur", to: game)
-        game.deleteSport(game.sports[0]) { result in
-            switch result {
-            case .success(let sports):
-                XCTAssert(sports.count == 1)
-                XCTAssert(sports[0].name == "Rameur")
-            case .failure(_):
-                XCTFail()
-            }
+        let game = try XCTUnwrap(self.gameDoor)
+        addSport()
+        guard let sport = addSport(), game.error == nil else {
+            XCTFail()
+            return
         }
+        game.delete(sport)
+        XCTAssert(game.error == nil)
+        XCTAssert(game.sports.count == 1)
     }
     
     // MARK: - Performances tests
     
     func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addSport("Marche", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { result in
-            switch result {
-            case .success(_):
-                let pot = game.commonPot
-                XCTAssert(pot.points == 10)
-                XCTAssert(game.performances.count == 1)
-            case .failure(_):
-                XCTFail()
-            }
-        }
-    }
-    
-    func testGivenAGameExistsWhenAskToAddPerformanceWithoutAthleticThenErrorOccures() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addSport("Marche", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: [], value: [10], addToCommonPot: true) { result in
-            switch result {
-            case .success(_):
-                XCTFail()
-            case .failure(let error):
-                XCTAssert(error == .performanceWithoutAthletic)
-            }
-        }
+        let game = try XCTUnwrap(self.gameDoor)
+        guard let athletic = addAthletic(), let sport = addSport(), game.error == nil else { return }
+        game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
+        XCTAssert(game.error == nil)
+        XCTAssert(game.performances.count == 1)
+        XCTAssert(game.commonPot?.points == 1)
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addAthletic("Elo", to: game)
-        addSport("Marche", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: false) { _ in }
-        XCTAssert(game.commonPot.points == 20)
-        XCTAssert(game.athletics[0].pot?.points == 10)
-        XCTAssert(game.athletics[1].pot?.points == 10)
+        let game = try XCTUnwrap(self.gameDoor)
+        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(), game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: true)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: false)
+        XCTAssert(game.error == nil)
+        XCTAssert(game.commonPot?.points == 2)
+        XCTAssert(game.athletics[0].pot?.points == 1)
+        XCTAssert(game.athletics[1].pot?.points == 1)
         XCTAssert(game.performances.count == 2)
     }
     
     
     
     func testGivenPerformancesExistWhenAskToDeleteOneOfThemThenPerformanceIsDeleted() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addSport("Marche", to: game)
-        addSport("Rameur", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
-        game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: true) { _ in }
-        game.deletePerformance(game.performances[0])
-        let pot = game.commonPot
-        XCTAssert(pot.points == 10)
+        let game = try XCTUnwrap(self.gameDoor)
+        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(), game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: true)
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: false)
+        game.delete(game.performances[0])
+        XCTAssert(game.error == nil)
         XCTAssert(game.performances.count == 1)
     }
     
     func testGivenPerformancesExistWhenAskToDeleteAllOfThemThenPerformancesAreDeleted() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addAthletic("Elo", to: game)
-        addSport("Marche", to: game)
-        addSport("Rameur", to: game)
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [10], addToCommonPot: true) { _ in }
-        game.addPerformance(sport: game.sports[1], athletics: game.athletics, value: [100], addToCommonPot: false) { _ in }
-        game.deletePerformance(game.performances[0])
-        game.deletePerformance(game.performances[0])
-        XCTAssert(game.commonPot.points == 0)
-        XCTAssert(game.athletics[0].pot?.points == 0)
-        XCTAssert(game.athletics[1].pot?.points == 0)
+        let game = try XCTUnwrap(self.gameDoor)
+        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(), game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: true)
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: false)
+        game.delete(game.performances[0])
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.delete(game.performances[0])
+        XCTAssert(game.error == nil)
         XCTAssert(game.performances.count == 0)
     }
     
     // MARK: - Several tests
     
     func testGivenPerformancesExistsWhenAthleticSportAndPerformancesHasBeenDeletedThenTheyAreSuccessfullyDeletedAndPointsTotalIsCorrect() throws {
-        let game = try XCTUnwrap(self.game)
-        addAthletic("Ben", to: game)
-        addAthletic("Elo", to: game)
-        let athletic1 = game.athletics[0]
-        let athletic2 = game.athletics[1]
-        addSport("Marche", to: game)
-        let sport = game.sports[0]
-        let commonPot = game.commonPot
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [15], addToCommonPot: true) { _ in }
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [30], addToCommonPot: true) { _ in }
-        game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [100], addToCommonPot: true) { _ in }
-        game.addPerformance(sport: game.sports[0], athletics: [athletic1], value: [50], addToCommonPot: true) { _ in }
-        game.deleteAthletic(athletic1) { result in
-            switch result {
-            case .success(_):
-                game.addPerformance(sport: game.sports[0], athletics: game.athletics, value: [70], addToCommonPot: true) { _ in }
-                game.deletePerformance(game.performances[2])
-                game.deleteSport(sport) { result in
-                    switch result {
-                    case .success(_):
-                        XCTAssert(game.performances.count == 0)
-                        XCTAssert(game.athletics.count == 1)
-                        XCTAssert(game.athletics == [athletic2])
-                        /*
-                         points calculation :
-                         > pot at the beginning : 0
-                         - performance 1, 2 athletics, so :  15 x 2 = +  30pts
-                         > total : 30
-                         - performance 2, 2 athletics, so :  30 x 2 = +  60pts
-                         > total : 90
-                         - performance 3, 2 athletics, so : 100 x 2 = + 200pts
-                         > total : 290
-                         - performance 4, 1 athletic, so :            +  50pts
-                         > total: 340
-                         - athletic1 deletion : his performances are deleted when he was alone, so the performance 4 is deleted ; but the deletion doesn't change points total
-                         > total : 340
-                         - performance 5, 1 athletic, so :            +  70pts
-                         > total : 410
-                         - performance 2 deletion, so :               -  60pts
-                         > total : 350
-                         - sport deletion : all sport's performances are deleted ; but the deletion doesn't change points total
-                         > total : 350
-                         */
-                        XCTAssert(commonPot.points == 350)
-                    case .failure(_):
-                        XCTFail()
-                    }
-                }
-            case .failure(_):
-                XCTFail()
-            }
+        let game = try XCTUnwrap(self.gameDoor)
+        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
+            XCTFail()
+            return
         }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["15", "0", "0"], addToCommonPot: true)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["30", "0", "0"], addToCommonPot: true)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1, athletic2], value: ["100", "0", "0"], addToCommonPot: true)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic1], value: ["50", "0", "0"], addToCommonPot: true)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.delete(athletic1)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic2], value: ["70", "0", "0"], addToCommonPot: true)
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        game.delete(game.performances[3])
+        guard game.error == nil else {
+            XCTFail()
+            return
+        }
+        print(game.performances.count)
+        game.delete(sport)
+        XCTAssert(game.error == nil)
+        print(game.performances.count)
+        XCTAssert(game.performances.count == 4)
+        /*
+         points calculation :
+         > pot at the beginning : 0
+         - performance 1, 2 athletics, so :  15 x 2 = +  30pts
+         > total : 30
+         - performance 2, 2 athletics, so :  30 x 2 = +  60pts
+         > total : 90
+         - performance 3, 2 athletics, so : 100 x 2 = + 200pts
+         > total : 290
+         - performance 4, 1 athletic, so :            +  50pts
+         > total: 340
+         - athletic1 deletion : the deletion doesn't change points total, and performances are still there.
+         > total : 340
+         - performance 5, 1 athletic, so :            +  70pts
+         > total : 410
+         - performance 2 deletion, so :               -  60pts
+         > total : 350
+         - sport deletion : the deletion doesn't change points total, and performances are still there
+         > total : 350
+         */
+        XCTAssert(game.commonPot?.points == 350)
         
     }
     
     // MARK: - Supporting methods
     
-    func addAthletic(_ name: String, to game: Game) {
-        game.addAthletic(name) { _ in
-            return
+    @discardableResult
+    func addAthletic(_ name: String = UUID().uuidString) -> Athletic? {
+        guard let game = gameDoor else { return nil }
+        game.addAthletic(name: name, image: nil)
+        for athletic in game.athletics {
+            if athletic.name == name {
+                return athletic
+            }
         }
+        return nil
     }
-    func addSport(_ name: String, to game: Game) {
-        game.addSport(name, unityType: .count, valueForOnePoint: 1) { _ in
-            return
+    
+    @discardableResult
+    func addSport(_ name: String = UUID().uuidString, icon: String = "A", unityType: Sport.UnityType = .count, pointsConversion: [String?] = ["100", "0", "0"]) -> Sport? {
+        guard let game = gameDoor else { return nil }
+        game.addSport(name: name, icon: icon, unityType: unityType, pointsConversion: pointsConversion)
+        for sport in game.sports {
+            if sport.name == name {
+                return sport
+            }
         }
+        return nil
     }
+
 }

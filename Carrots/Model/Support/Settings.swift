@@ -10,9 +10,6 @@ struct Settings {
     /// Necessary number of points to get one money's unity.
     @UserDefault(key: "moneyConversion", defaultValue: 100)
     var moneyConversion: Int
-    /// Indicates whether introduction has been seen or not.
-    @UserDefault(key: "didSeeIntroduction", defaultValue: false)
-    var didSeeIntroduction: Bool
     /// Indicates whether game has to be created from scratch or if some datas exist.
     @UserDefault(key: "gameAlreadyExists", defaultValue: false)
     var gameAlreadyExists: Bool

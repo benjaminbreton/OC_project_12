@@ -39,8 +39,8 @@ struct Game {
 
 extension Game {
     /// Create game with the entered Coredatastack.
-    /// - parameter coreDataStack: Coredatastack used to save and load datas from CoreData (Coredatastack() by default).
-    init(coreDataStack: CoreDataStack = CoreDataStack()) {
+    /// - parameter coreDataStack: Coredatastack used to save and load datas from CoreData.
+    init(coreDataStack: CoreDataStack) {
         // load settings
         self.settings = Settings()
         // get CoreDataStack
@@ -140,6 +140,15 @@ extension Game {
      */
     mutating func validateWarning() {
         settings.didValidateWarning = true
+    }
+    
+    mutating func setFactorySettingsBack() {
+        settings.moneyConversion = 100
+        settings.gameAlreadyExists = false
+        settings.predictionDate = Date() - 24 * 3600
+        settings.showHelp = true
+        settings.didValidateWarning = false
+        refresh()
     }
 }
 

@@ -41,14 +41,14 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="pointsConversion" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="unityInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Performance" inverseName="sport" inverseEntity="Performance"/>
+        <relationship name="performancesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="sport" inverseEntity="Performance"/>
     </entity>
     <elements>
         <element name="Athletic" positionX="78.67791748046869" positionY="-527.0411682128906" width="128" height="133"/>
-        <element name="EvolutionData" positionX="257.8504028320313" positionY="-503.8699035644531" width="128" height="103"/>
-        <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="164"/>
-        <element name="Pot" positionX="421.960205078125" positionY="-472.3847961425781" width="128" height="133"/>
-        <element name="Sport" positionX="65.5587158203125" positionY="-139.049560546875" width="128" height="104"/>
         <element name="CommonPot" positionX="421.1798095703125" positionY="-318.8106689453125" width="128" height="58"/>
+        <element name="EvolutionData" positionX="257.8504028320313" positionY="-503.8699035644531" width="128" height="103"/>
+        <element name="Performance" positionX="66.75091552734375" positionY="-319.2263793945312" width="128" height="178"/>
+        <element name="Pot" positionX="421.960205078125" positionY="-472.3847961425781" width="128" height="133"/>
+        <element name="Sport" positionX="60.3673095703125" positionY="-101.4369812011719" width="128" height="118"/>
     </elements>
 </model>

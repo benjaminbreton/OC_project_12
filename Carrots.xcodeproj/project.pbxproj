@@ -11,7 +11,6 @@
 		0305890826491F4C00AB6B28 /* PotsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0305890726491F4C00AB6B28 /* PotsManager.swift */; };
 		0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AE3E260A40CB007FBAA1 /* Pot.swift */; };
 		030DB54C261352320054D140 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54B261352320054D140 /* Settings.swift */; };
-		030DB55026135EFE0054D140 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DB54F26135EFE0054D140 /* ViewModel.swift */; };
 		030EA01B26539D52006CA0A0 /* Date+SchemeDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030EA01A26539D52006CA0A0 /* Date+SchemeDates.swift */; };
 		030EA01F26540AF4006CA0A0 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030EA01E26540AF3006CA0A0 /* HelpView.swift */; };
 		03192E6E262ABE02000D572E /* UIColor+appColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03192E6D262ABE02000D572E /* UIColor+appColors.swift */; };
@@ -111,7 +110,6 @@
 		0305890726491F4C00AB6B28 /* PotsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsManager.swift; sourceTree = "<group>"; };
 		0307AE3E260A40CB007FBAA1 /* Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pot.swift; sourceTree = "<group>"; };
 		030DB54B261352320054D140 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		030DB54F26135EFE0054D140 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		030EA01A26539D52006CA0A0 /* Date+SchemeDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+SchemeDates.swift"; sourceTree = "<group>"; };
 		030EA01E26540AF3006CA0A0 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		03192E6D262ABE02000D572E /* UIColor+appColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appColors.swift"; sourceTree = "<group>"; };
@@ -386,7 +384,6 @@
 				034AB62626010E5B0034C1E2 /* SceneDelegate.swift */,
 				034AB62426010E5B0034C1E2 /* AppDelegate.swift */,
 				034AB63526010E5F0034C1E2 /* Info.plist */,
-				030DB54F26135EFE0054D140 /* ViewModel.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -769,7 +766,6 @@
 				034C01CB262DBD93000663AA /* SettingsSportIconPicker.swift in Sources */,
 				0327CDEB2657A74C0053B259 /* PotsWarning.swift in Sources */,
 				034C01C7262DBCD5000663AA /* SettingsAthleticImagePicker.swift in Sources */,
-				030DB55026135EFE0054D140 /* ViewModel.swift in Sources */,
 				0366F882265667900070D4A0 /* String+Localizable.swift in Sources */,
 				034AB62726010E5B0034C1E2 /* SceneDelegate.swift in Sources */,
 				03B1DFB4262C933300B590AC /* SettingsTextfield.swift in Sources */,
