@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03055E8B265D3C3700E1E12B /* PerformancesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03055E8A265D3C3700E1E12B /* PerformancesTests.swift */; };
+		03055E91265D3CCB00E1E12B /* SportsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03055E90265D3CCB00E1E12B /* SportsTests.swift */; };
+		03055E95265D3D0300E1E12B /* PotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03055E94265D3D0300E1E12B /* PotsTests.swift */; };
+		03055E99265D3D3900E1E12B /* AthleticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03055E98265D3D3900E1E12B /* AthleticsTests.swift */; };
+		03055E9D265D3D5B00E1E12B /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03055E9C265D3D5B00E1E12B /* GameTests.swift */; };
+		03055EA3265D40B400E1E12B /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03055EA2265D40B400E1E12B /* SettingsTests.swift */; };
 		030585E326395A03002015A7 /* DetailsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030585E226395A03002015A7 /* DetailsText.swift */; };
 		0305890826491F4C00AB6B28 /* PotsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0305890726491F4C00AB6B28 /* PotsManager.swift */; };
 		0307AE3F260A40CB007FBAA1 /* Pot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307AE3E260A40CB007FBAA1 /* Pot.swift */; };
@@ -39,7 +45,6 @@
 		034AB62E26010E5F0034C1E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034AB62D26010E5F0034C1E2 /* Assets.xcassets */; };
 		034AB63126010E5F0034C1E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034AB63026010E5F0034C1E2 /* Preview Assets.xcassets */; };
 		034AB63426010E5F0034C1E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034AB63226010E5F0034C1E2 /* LaunchScreen.storyboard */; };
-		034AB63F26010E600034C1E2 /* CarrotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034AB63E26010E600034C1E2 /* CarrotsTests.swift */; };
 		034C01C7262DBCD5000663AA /* SettingsAthleticImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C01C6262DBCD5000663AA /* SettingsAthleticImagePicker.swift */; };
 		034C01CB262DBD93000663AA /* SettingsSportIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C01CA262DBD93000663AA /* SettingsSportIconPicker.swift */; };
 		034FC13C262EC71A0081ADB2 /* NavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FC13B262EC71A0081ADB2 /* NavigationBarButton.swift */; };
@@ -106,6 +111,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03055E8A265D3C3700E1E12B /* PerformancesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesTests.swift; sourceTree = "<group>"; };
+		03055E90265D3CCB00E1E12B /* SportsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsTests.swift; sourceTree = "<group>"; };
+		03055E94265D3D0300E1E12B /* PotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsTests.swift; sourceTree = "<group>"; };
+		03055E98265D3D3900E1E12B /* AthleticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsTests.swift; sourceTree = "<group>"; };
+		03055E9C265D3D5B00E1E12B /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
+		03055EA2265D40B400E1E12B /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		030585E226395A03002015A7 /* DetailsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsText.swift; sourceTree = "<group>"; };
 		0305890726491F4C00AB6B28 /* PotsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotsManager.swift; sourceTree = "<group>"; };
 		0307AE3E260A40CB007FBAA1 /* Pot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pot.swift; sourceTree = "<group>"; };
@@ -141,7 +152,6 @@
 		034AB63326010E5F0034C1E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		034AB63526010E5F0034C1E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		034AB63A26010E600034C1E2 /* CarrotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarrotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		034AB63E26010E600034C1E2 /* CarrotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrotsTests.swift; sourceTree = "<group>"; };
 		034AB64026010E600034C1E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		034C01C6262DBCD5000663AA /* SettingsAthleticImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAthleticImagePicker.swift; sourceTree = "<group>"; };
 		034C01CA262DBD93000663AA /* SettingsSportIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSportIconPicker.swift; sourceTree = "<group>"; };
@@ -218,6 +228,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03055E83265D3BD600E1E12B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				03055EA2265D40B400E1E12B /* SettingsTests.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		03055E84265D3BE200E1E12B /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				03055E9C265D3D5B00E1E12B /* GameTests.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		03055E85265D3BE500E1E12B /* EvolutionDatas */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EvolutionDatas;
+			sourceTree = "<group>";
+		};
+		03055E86265D3BF600E1E12B /* Athletics */ = {
+			isa = PBXGroup;
+			children = (
+				03055E98265D3D3900E1E12B /* AthleticsTests.swift */,
+			);
+			path = Athletics;
+			sourceTree = "<group>";
+		};
+		03055E87265D3BFA00E1E12B /* Pots */ = {
+			isa = PBXGroup;
+			children = (
+				03055E94265D3D0300E1E12B /* PotsTests.swift */,
+			);
+			path = Pots;
+			sourceTree = "<group>";
+		};
+		03055E88265D3BFE00E1E12B /* Sports */ = {
+			isa = PBXGroup;
+			children = (
+				03055E90265D3CCB00E1E12B /* SportsTests.swift */,
+			);
+			path = Sports;
+			sourceTree = "<group>";
+		};
+		03055E89265D3C0100E1E12B /* Performances */ = {
+			isa = PBXGroup;
+			children = (
+				03055E8A265D3C3700E1E12B /* PerformancesTests.swift */,
+			);
+			path = Performances;
+			sourceTree = "<group>";
+		};
 		030585F026395C28002015A7 /* Create page */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,7 +434,13 @@
 		034AB63D26010E600034C1E2 /* CarrotsTests */ = {
 			isa = PBXGroup;
 			children = (
-				034AB63E26010E600034C1E2 /* CarrotsTests.swift */,
+				03055E89265D3C0100E1E12B /* Performances */,
+				03055E88265D3BFE00E1E12B /* Sports */,
+				03055E87265D3BFA00E1E12B /* Pots */,
+				03055E86265D3BF600E1E12B /* Athletics */,
+				03055E85265D3BE500E1E12B /* EvolutionDatas */,
+				03055E84265D3BE200E1E12B /* Game */,
+				03055E83265D3BD600E1E12B /* Support */,
 				034AB64026010E600034C1E2 /* Info.plist */,
 				03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */,
 			);
@@ -823,8 +894,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03055E9D265D3D5B00E1E12B /* GameTests.swift in Sources */,
+				03055E95265D3D0300E1E12B /* PotsTests.swift in Sources */,
 				03DE95912604E3B400FBAA4F /* FakeCoreDataStack.swift in Sources */,
-				034AB63F26010E600034C1E2 /* CarrotsTests.swift in Sources */,
+				03055E99265D3D3900E1E12B /* AthleticsTests.swift in Sources */,
+				03055EA3265D40B400E1E12B /* SettingsTests.swift in Sources */,
+				03055E91265D3CCB00E1E12B /* SportsTests.swift in Sources */,
+				03055E8B265D3C3700E1E12B /* PerformancesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

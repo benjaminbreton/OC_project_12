@@ -26,7 +26,8 @@ class GameDoor: ObservableObject {
         let formatter = NumberFormatter()
         let count = game.settings.moneyConversion
         formatter.maximumFractionDigits = 0
-        return formatter.string(from: NSNumber(value: count)) ?? "0"
+        guard let result = formatter.string(from: NSNumber(value: count)) else { return "0" }
+        return result
     }
     /// Setted date to predict a pot's amount.
     var predictionDate: Date { game.settings.predictionDate }
