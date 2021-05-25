@@ -37,7 +37,6 @@ class AthleticsManager {
     func add(name: String, image: Data?, pot: Pot, creationDate: Date) -> ApplicationErrors? {
         if alreadyExists(name) { return .log(.existingAthletic) }
         create(name: name, image: image, pot: pot, creationDate: creationDate)
-        coreDataStack.saveContext()
         return nil
     }
     /// Check if an athletic exists in athletics.
@@ -80,7 +79,6 @@ class AthleticsManager {
         let existingName = athletic.name == name ? false : alreadyExists(name)
         guard !existingName else { return .log(.existingAthletic) }
         athletic.update(name: name, image: image)
-        coreDataStack.saveContext()
         return nil
     }
     
@@ -96,7 +94,6 @@ class AthleticsManager {
         
         //deleteEvolutionDatas(athletic.evolutionDatas)
         coreDataStack.viewContext.delete(athletic)
-        coreDataStack.saveContext()
         return nil
     }
     

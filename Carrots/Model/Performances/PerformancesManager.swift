@@ -45,7 +45,6 @@ extension PerformancesManager {
                 athletics.map({ $0.pot }),
             with: moneyConversion,
             for: predictionDate)
-        coreDataStack.saveContext()
         return nil
     }
     /**
@@ -129,6 +128,5 @@ extension PerformancesManager {
                 for: predictionDate)
         }
         coreDataStack.viewContext.delete(performance)
-        coreDataStack.saveContext()
     }
 }

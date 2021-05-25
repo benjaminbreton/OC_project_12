@@ -35,7 +35,6 @@ class SportsManager {
         if alreadyExists(name) { return .log(.existingSport) }
         let sport = Sport(context: coreDataStack.viewContext)
         sport.update(name: name, icon: icon, unityType: unityType.int16, pointsConversion: pointsConversion)
-        coreDataStack.saveContext()
         return nil
     }
     /**
@@ -67,7 +66,6 @@ class SportsManager {
         let existingName = sport.name == name ? false : alreadyExists(name)
         guard !existingName else { return .log(.existingSport) }
         sport.update(name: name, icon: icon, unityType: unityType.int16, pointsConversion: pointsConversion)
-        coreDataStack.saveContext()
         return nil
     }
     
@@ -80,7 +78,6 @@ class SportsManager {
      */
     func delete(_ sport: Sport) -> ApplicationErrors? {
         coreDataStack.viewContext.delete(sport)
-        coreDataStack.saveContext()
         return nil
     }
 }

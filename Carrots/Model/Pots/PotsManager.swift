@@ -36,8 +36,15 @@ class PotsManager {
         pot.creationDate = date
         pot.points = 0
         evolutionDatasManager.create(for: pot, value: 0, date: Date().today)
-        coreDataStack.saveContext()
         return pot
+    }
+    /**
+     Create the common pot.
+     */
+    func createCommonPot() {
+        let pot = create()
+        let commonPot = CommonPot(context: coreDataStack.viewContext)
+        commonPot.pot = pot
     }
     
     // MARK: - Money

@@ -15,7 +15,7 @@ enum ApplicationErrors: Error, CustomStringConvertible {
     // sports
     case existingSport
     // entities
-    case noCommonPot, severalCommonPots(Int)
+    case noCommonPot, severalCommonPots(Int), noPotInCommonPot
     
     // MARK: - Properties
     
@@ -30,6 +30,8 @@ enum ApplicationErrors: Error, CustomStringConvertible {
             return "No common pot"
         case .severalCommonPots(let count):
             return "Several common pots: \(count)"
+        case .noPotInCommonPot:
+            return "No pot in common pot entity."
         }
     }
     

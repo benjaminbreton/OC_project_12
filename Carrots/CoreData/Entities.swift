@@ -17,18 +17,17 @@ class Entities {
     // MARK: - Entities properties
     
     var commonPot: Pot? {
-        let predicate = NSPredicate(format: "owner == %@", 0)
-        let request: NSFetchRequest<Pot> = Pot.fetchRequest()
-        request.predicate = predicate
-        guard let result = try? context.fetch(request) else { return nil }
-        guard result.count == 1 else {
+        let result: [CommonPot] = getEntities()
+        guard result.count == 1, let pot = result[0].pot else {
             if result.count == 0 {
                 ApplicationErrors.log(.noCommonPot)
+            } else if result.count == 1, result[0].pot == nil {
+                ApplicationErrors.log(.noPotInCommonPot)
             } else {
                 ApplicationErrors.log(.severalCommonPots(result.count))
-                for pot in result {
-                    if pot.points > 0 {
-                        let potsToDelete = result.map({ $0 == pot ? nil : $0 }).compactMap({ $0 })
+                for commonPot in result {
+                    if let pot = commonPot.pot, pot.points > 0 {
+                        let potsToDelete = result.map({ $0 == commonPot ? nil : $0 }).compactMap({ $0 })
                         for potToDelete in potsToDelete {
                             context.delete(potToDelete)
                         }
@@ -43,7 +42,7 @@ class Entities {
             }
             return nil
         }
-        return result[0]
+        return pot
     }
     var allAthletics: [Athletic] { getEntities(by: "name", ascending: true) }
     var allSports: [Sport] { getEntities(by: "name", ascending: true) }
@@ -58,9 +57,11 @@ class Entities {
     
     // MARK: - Get entities
     
-    func getEntities<Entity: NSManagedObject>(by descriptor: String, ascending: Bool) -> [Entity] {
+    func getEntities<Entity: NSManagedObject>(by descriptor: String? = nil, ascending: Bool? = nil) -> [Entity] {
         guard let request = Entity.fetchRequest() as? NSFetchRequest<Entity> else { return [] }
-        request.sortDescriptors = [NSSortDescriptor(key: descriptor, ascending: ascending)]
+        if let descriptor = descriptor, let ascending = ascending {
+            request.sortDescriptors = [NSSortDescriptor(key: descriptor, ascending: ascending)]
+        }
         guard let result = try? context.fetch(request) else { return [] }
         return result
     }

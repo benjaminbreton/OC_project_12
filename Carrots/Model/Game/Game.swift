@@ -53,8 +53,10 @@ extension Game {
         sportsManager = SportsManager(coreDataStack)
         performancesManager = PerformancesManager(coreDataStack)
         potsManager = PotsManager(coreDataStack)
+        if !settings.gameAlreadyExists {
+            potsManager.createCommonPot()
+        }
         commonPot = coreDataStack.entities.commonPot
-        if commonPot == nil { commonPot = potsManager.create() }
         settings.gameAlreadyExists = true
         // load game
         refresh()
@@ -70,6 +72,7 @@ extension Game {
      */
     mutating func refresh() {
         guard error == nil else { return }
+        commonPot = coreDataStack.entities.commonPot
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
         sports = coreDataStack.entities.allSports
