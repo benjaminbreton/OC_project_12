@@ -10,6 +10,7 @@
 
 "all.noName" = "No name";
 "all.name" = "Name";
+"all.count" = "Count:";
 
 // MARK: - Athletics
 
@@ -91,8 +92,7 @@
 
 "picker.choices1" = "Choose 1 ";
 "picker.choices1plus" = "Choose at least 1 ";
-"picker.chooseClickOne" = "Click here to choose ";
-"picker.chooseClickMany" = "Click here to choose ";
+"picker.chooseClick" = "Click here to choose";
 
 // MARK: - Points
 
@@ -117,6 +117,8 @@
 "pots.commonPot.short" = "Common";
 "pots.nameStart" = "";
 "pots.nameEnd" = "'s pot";
+"pots.cell.expected" = "expected:";
+"pots.cell.noPrediction" = "no prediction the first day";
 
 // MARK: - Settings
 

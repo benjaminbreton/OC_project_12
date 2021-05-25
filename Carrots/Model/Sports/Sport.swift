@@ -183,12 +183,52 @@ extension Sport {
             let realisation = stringArray(for: value)
             switch self {
             case .time:
-                return "\(realisation[0])\(symbols[0])\(realisation[1])\(symbols[1])\(realisation[2])\(symbols[2])"
+                return "\(getHours(of: realisation))\(getMinutes(of: realisation))\(getSeconds(of: realisation))"
             case .distance, .oneShot:
                 return "\(realisation[0])\(symbols[0])"
             default:
                 return realisation[0]
             }
         }
+        /**
+         Get hours of a time's string array.
+         - parameter strings : The string array.
+         - returns: The hours string.
+         */
+        private func getHours(of strings: [String]) -> String {
+            return getTimeElement(of: strings, at: 0, isFirstElement: true)
+        }
+        /**
+         Get minutes of a time's string array.
+         - parameter strings : The string array.
+         - returns: The minutes string.
+         */
+        private func getMinutes(of strings: [String]) -> String {
+            return getTimeElement(of: strings, at: 1, isFirstElement: strings[0] == "0")
+        }
+        /**
+         Get seconds of a time's string array.
+         - parameter strings : The string array.
+         - returns: The seconds string.
+         */
+        private func getSeconds(of strings: [String]) -> String {
+            return getTimeElement(of: strings, at: 2, isFirstElement: false)
+        }
+        /**
+         Get a time element (hours, minutes or seconds) of a time's string array.
+         - parameter strings : The string array.
+         - parameter index: The element's index in the array.
+         - parameter isFirstElement: Boolean indicating whether this element will be the first in the final string or not.
+         - returns: The element's string.
+         */
+        private func getTimeElement(of strings: [String], at index: Int, isFirstElement: Bool) -> String {
+            if strings[index] == "0" {
+                return ""
+            } else {
+                return strings[index].count == 1 && !isFirstElement ? "0\(strings[index])\(symbols[index])" : "\(strings[index])\(symbols[index])"
+            }
+        }
     }
+    
+    
 }

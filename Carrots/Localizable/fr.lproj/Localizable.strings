@@ -10,6 +10,7 @@
 
 "all.noName" = "Aucun nom";
 "all.name" = "Nom";
+"all.count" = "Nombre:";
 
 // MARK: - Athletics
 
@@ -91,8 +92,7 @@
 
 "picker.choices1" = "Choisissez 1 ";
 "picker.choices1plus" = "Choisissez au moins 1 ";
-"picker.chooseClickOne" = "Cliquez ici pour choisir 1 ";
-"picker.chooseClickMany" = "Cliquez ici pour choisir des ";
+"picker.chooseClick" = "Cliquez ici pour choisir";
 
 // MARK: - Points
 
@@ -117,6 +117,8 @@
 "pots.commonPot.short" = "Commune";
 "pots.nameStart" = "Cagnotte de ";
 "pots.nameEnd" = "";
+"pots.cell.expected" = "prévision :";
+"pots.cell.noPrediction" = "aucune prévision le premier jour";
 
 // MARK: - Settings
 

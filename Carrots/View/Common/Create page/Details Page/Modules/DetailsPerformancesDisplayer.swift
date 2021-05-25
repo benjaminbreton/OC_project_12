@@ -14,7 +14,7 @@ struct DetailsPerformancesDisplayer: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Count : ")
+                Text("all.count".localized)
                 Text("\(count)")
             }
             .inModule("performances.title.maj".localized)

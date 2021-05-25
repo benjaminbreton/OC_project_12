@@ -25,9 +25,10 @@ struct SettingsCustomToggleWithExplanations: View {
     var body: some View {
         VStack {
             Toggle(question, isOn: _isOn)
+                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             Text(isOn ? explanationsAreOn : explanationsAreOff)
-                .frame(height: ViewCommonSettings().textLineHeight * textLines)
                 .withLightSimpleFont()
+                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
         }
         .inModule(title)
     }

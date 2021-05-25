@@ -65,6 +65,10 @@ public class Pot: NSManagedObject {
             $0.date ?? Date() < $1.date ?? Date()
         }
     }
+    var isFirstDay: Bool {
+        guard let date = creationDate else { return false }
+        return Calendar.current.startOfDay(for: date) == Date().today
+    }
 }
 
 // MARK: - Points

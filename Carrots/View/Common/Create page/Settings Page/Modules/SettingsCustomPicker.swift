@@ -77,7 +77,7 @@ fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
     }
     private func setTextView(_ title: String) {
         textView.font = UIFont(name: ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize)
-        textView.text = "\(maximumSelection == 1 ? "picker.chooseClickOne".localized : "picker.chooseClickMany".localized)\(title.lowercased())"
+        textView.text = "\("picker.chooseClick".localized)"
         textView.textAlignment = .center
     }
 

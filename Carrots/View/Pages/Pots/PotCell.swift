@@ -28,13 +28,20 @@ struct PotCell: View {
             
             Divider()
             HStack {
-                Image(systemName: pot?.evolution.image.name ?? "")
-                    .foregroundColor(Color(pot?.evolution.image.color ?? ""))
-                    .withTitleFont()
-                Text("expected: \(pot?.formattedPredictionAmount ?? "")")
-                    .withSimpleFont()
-                    .scaledToFill()
-                    .layoutPriority(1)
+                if pot?.isFirstDay ?? false {
+                    Text("\("pots.cell.noPrediction".localized)")
+                        .withSimpleFont()
+                        .scaledToFill()
+                        .layoutPriority(1)
+                } else {
+                    Image(systemName: pot?.evolution.image.name ?? "")
+                        .foregroundColor(Color(pot?.evolution.image.color ?? ""))
+                        .withTitleFont()
+                    Text("\("pots.cell.expected".localized) \(pot?.formattedPredictionAmount ?? "")")
+                        .withSimpleFont()
+                        .scaledToFill()
+                        .layoutPriority(1)
+                }
             }
             
         }

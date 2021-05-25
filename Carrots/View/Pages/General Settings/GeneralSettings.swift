@@ -26,7 +26,7 @@ struct GeneralSettings: View {
                 explanations: "\("settings.conversion.explanations1".localized)\(moneyName)\("settings.conversion.explanations2".localized)\(moneyName).",
                 isWrong: $arePointsWrong,
                 limits: (minCount: 1, maxCount: 3),
-                limitsExplanations: (minCount: "Enter a number.", maxCount: "The number has to be inferior than 1000"))
+                limitsExplanations: (minCount: "settings.conversion.limitExplanationsMin".localized, maxCount: "settings.conversion.limitExplanationsMax".localized))
             SettingsCustomToggle(title: "settings.help.title".localized, question: "settings.help.question".localized, isOn: $showHelp)
         }
         .inSettingsPage("settings.title".localized, gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
