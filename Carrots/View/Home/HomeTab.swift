@@ -6,47 +6,109 @@
 //
 
 import SwiftUI
+
+// MARK: - HomeTab
+
+/**
+ HomeTab is the view containing the tab view used to select pages between Pots, Athletics, Sports, Performances, and Settings.
+ */
 struct HomeTab: View {
-    @Binding var selection: Int
+    
+    // MARK: - Properties
+    
+    /// The ViewModel.
     @EnvironmentObject var game: GameViewModel
+    /// The selected tab's index.
+    @Binding var selection: Int
+    
+    // MARK: - Body
+    
     var body: some View {
         TabView {
             PotsHome()
-                .tabItem {
-                    Image(systemName: "creditcard.circle.fill")
-                    Text("pots.title".localized)
-                }
-                .tag(0)
-                .onAppear { game.refresh() }
+                .inTabItem(0)
             AthleticsHome()
-                .tabItem {
-                    Image(systemName: "figure.walk.circle.fill")
-                    Text("athletics.title".localized)
-                }
-                .tag(1)
-                .onAppear { game.refresh() }
+                .inTabItem(1)
             SportsHome()
-                .tabItem {
-                    Image(systemName: "bicycle.circle.fill")
-                    Text("sports.title".localized)
-                }
-                .tag(2)
-                .onAppear { game.refresh() }
+                .inTabItem(2)
             PerformancesHome()
-                .tabItem {
-                    Image(systemName: "arrow.up.right.circle.fill")
-                    Text("performances.title".localized)
-                }
-                .tag(3)
-                .onAppear { game.refresh() }
+                .inTabItem(3)
             GeneralSettings(date: game.predictionDate, moneyConversion: game.moneyConversion, showHelp: game.showHelp)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("settings.title".localized)
-                }
-                .tag(4)
-                .onAppear{ game.refresh() }
+                .inTabItem(4)
         }
         .accentColor(.tab)
     }
 }
+
+// MARK: - Tab items ViewModifier
+
+fileprivate struct InTabItem: ViewModifier {
+    
+    // MARK: - Properties
+    
+    /// The ViewModel
+    @EnvironmentObject var game: GameViewModel
+    /// Tab's index.
+    let index: Int
+    /// Image to display.
+    private var image: String { index.tabItemImage }
+    /// Text to display.
+    private var text: String { index.tabItemText }
+    
+    // MARK: - Body
+    
+    func body(content: Content) -> some View {
+        content
+            .tabItem {
+                Image(systemName: image)
+                Text(text)
+            }
+            .tag(index)
+            .onAppear { game.refresh() }
+    }
+}
+
+// MARK: - View's extension
+
+fileprivate extension View {
+    func inTabItem(_ index: Int) -> some View {
+        modifier(InTabItem(index: index))
+    }
+}
+
+// MARK: - Int's extension
+
+fileprivate extension Int {
+    
+    /// Tab items image's name regarding their index.
+    var tabItemImage: String {
+        switch self {
+        case 0:
+            return "creditcard.circle.fill"
+        case 1:
+            return "figure.walk.circle.fill"
+        case 2:
+            return "bicycle.circle.fill"
+        case 3:
+            return "arrow.up.right.circle.fill"
+        default:
+            return "gear"
+        }
+    }
+    /// Tab items text regarding their index.
+    var tabItemText: String {
+        switch self {
+        case 0:
+            return "pots.title".localized
+        case 1:
+            return "athletics.title".localized
+        case 2:
+            return "sports.title".localized
+        case 3:
+            return "performances.title".localized
+        default:
+            return "settings.title".localized
+        }
+    }
+}
+

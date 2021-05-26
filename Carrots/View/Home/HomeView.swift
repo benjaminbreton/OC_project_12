@@ -7,17 +7,29 @@
 
 import SwiftUI
 
+/**
+ HomeView is the first view to be loaded by the app. It loads the game, sets appearances, create the ViewModel and add it as an EnvironmentObject when calling HomeTab.
+ */
 struct HomeView: View {
+    
+    // MARK: - Properties
+    
+    /// The ViewModel.
+    @ObservedObject private var game: GameViewModel
+    /// The selected tab's index.
     @State private var selection = 0
-    @ObservedObject var game: GameViewModel
+    
+    // MARK: - Init
     
     init(_ coreDataStack: CoreDataStack) {
         game = GameViewModel(coreDataStack)
     }
+    
+    // MARK: - Body
+    
     var body: some View {
         setTabAppearance()
         setNavigationAppearance()
-        setUITableViewAppearance()
         return HomeTab(selection: $selection)
             .environmentObject(game)
     }
@@ -27,11 +39,9 @@ struct HomeView: View {
     private func setNavigationAppearance() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : ViewCommonSettings().largeNavigationTitleFont]
     }
-    private func setUITableViewAppearance() {
-        UITableView.appearance().backgroundColor = .clear
-        UITableViewCell.appearance().backgroundColor = .clear
-    }
 }
+
+// MARK: - Preview
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
