@@ -25,11 +25,11 @@ class ViewCommonSettings {
     /// Used to get a responsive size base.
     var commonSizeBase: CGFloat { UIScreen.main.bounds.height / 50 }
     /// Used by sport icon selector to identify the selected icon with a stroked circle.
-    var strokeLineWidth: CGFloat { 3 * commonSizeBase }
+    var strokeLineWidth: CGFloat { commonSizeBase / 4 }
     /// The height of a text line.
     var textLineHeight: CGFloat { 2 * commonSizeBase }
     /// The line width of the athletic's evolution graph.
-    var graphLineWidth: CGFloat { 3 }
+    var graphLineWidth: CGFloat { commonSizeBase / 5 }
     
     // MARK: - Font size
     
