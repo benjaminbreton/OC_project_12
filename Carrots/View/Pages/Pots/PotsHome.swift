@@ -16,9 +16,7 @@ struct PotsHome: View {
                     commonPot: gameDoor.commonPot,
                     title: "pots.athleticsPots".localized,
                     helpText: "potsList")
-                .environmentObject(gameDoor)
             PotsWarning()
-                .environmentObject(gameDoor)
         }
         .inNavigationHome(title: "pots.title".localized)
     }

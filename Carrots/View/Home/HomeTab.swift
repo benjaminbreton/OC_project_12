@@ -17,7 +17,6 @@ struct HomeTab: View {
                     Text("pots.title".localized)
                 }
                 .tag(0)
-                .environmentObject(gameDoor)
                 .onAppear { gameDoor.refresh() }
             AthleticsHome()
                 .tabItem {
@@ -25,7 +24,6 @@ struct HomeTab: View {
                     Text("athletics.title".localized)
                 }
                 .tag(1)
-                .environmentObject(gameDoor)
                 .onAppear { gameDoor.refresh() }
             SportsHome()
                 .tabItem {
@@ -33,7 +31,6 @@ struct HomeTab: View {
                     Text("sports.title".localized)
                 }
                 .tag(2)
-                .environmentObject(gameDoor)
                 .onAppear { gameDoor.refresh() }
             PerformancesHome()
                 .tabItem {
@@ -41,7 +38,6 @@ struct HomeTab: View {
                     Text("performances.title".localized)
                 }
                 .tag(3)
-                .environmentObject(gameDoor)
                 .onAppear { gameDoor.refresh() }
             GeneralSettings(date: gameDoor.predictionDate, moneyConversion: gameDoor.moneyConversion, showHelp: gameDoor.showHelp)
                 .tabItem {
@@ -49,7 +45,6 @@ struct HomeTab: View {
                     Text("settings.title".localized)
                 }
                 .tag(4)
-                .environmentObject(gameDoor)
                 .onAppear{ gameDoor.refresh() }
         }
         .accentColor(.tab)

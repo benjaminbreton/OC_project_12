@@ -24,7 +24,7 @@ struct PerformancesHome: View {
                 buttonImage: "gauge.badge.plus",
                 buttonDestination:
                     gameDoor.athletics.count > 0 && gameDoor.sports.count > 0 ?
-                    PerformanceSettings().environmentObject(gameDoor)
+                    PerformanceSettings()
                     :
                     nil
             )

@@ -17,12 +17,10 @@ struct AthleticsHome: View {
     
     var body: some View {
         AppList(gameDoor.athletics, placeHolder: "athletics.none".localized, helpText: "athleticsList")
-            .environmentObject(gameDoor)
             .inNavigationHome(
                 title: "athletics.title".localized,
                 buttonImage: "person.crop.circle.badge.plus",
                 buttonDestination: AthleticSettings(athletic: nil, name: "", image: nil)
-                    .environmentObject(gameDoor)
             )
     }
 }

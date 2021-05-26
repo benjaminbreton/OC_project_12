@@ -24,8 +24,7 @@ struct SportDetails: View {
         .inDetailsPage(
             genericTitle: sport.name ?? "all.noName".localized,
             specificTitle: "sports.details.title".localized,
-            destinationToModify: SportSettings(sport: sport, name: sport.name ?? "all.noName".localized, icon: sport.icon ?? "A", unity: [sport.unityType], pointsConversion: sport.pointsConversionStringArray)
-                .environmentObject(gameDoor),
+            destinationToModify: SportSettings(sport: sport, name: sport.name ?? "all.noName".localized, icon: sport.icon ?? "A", unity: [sport.unityType], pointsConversion: sport.pointsConversionStringArray),
             helpText: "sportsDetails"
         )
     }

@@ -42,7 +42,6 @@ struct SportCell: View {
         .inRectangle(.leading)
         .withNavigationLink(destination:
                                 SportDetails(sport: sport)
-                                .environmentObject(gameDoor)
         )
         
     }

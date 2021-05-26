@@ -698,8 +698,8 @@
 		03F472082615FB66002CE23D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				034FC12F262EC62A0081ADB2 /* Common */,
 				03DD8206261F00AB0028A0A5 /* Home */,
+				034FC12F262EC62A0081ADB2 /* Common */,
 				030585FA263960E7002015A7 /* Pages */,
 			);
 			path = View;

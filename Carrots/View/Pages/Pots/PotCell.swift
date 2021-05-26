@@ -49,7 +49,6 @@ struct PotCell: View {
         .inCellRectangle()
         .withNavigationLink(
             destination: PotAddings(pot: pot)
-                .environmentObject(gameDoor)
         )
     }
 }

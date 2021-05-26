@@ -68,7 +68,6 @@ struct AppList<T: NSManagedObject>: View {
                     }
                 }
                 SimpleList(items: items, placeHolder: placeHolder, source: source)
-                    .environmentObject(gameDoor)
             }
             if withDivider { Divider() }
         }
@@ -101,19 +100,15 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
         Group {
             if let athletics = items as? [Athletic] {
                 AthleticsList(athletics: athletics)
-                    .environmentObject(gameDoor)
             }
             if let pots = items as? [Pot] {
                 PotsList(pots: pots)
-                    .environmentObject(gameDoor)
             }
             if let sports = items as? [Sport] {
                 SportsList(sports: sports)
-                    .environmentObject(gameDoor)
             }
             if let performances = items as? [Performance] {
                 PerformancesList(performances: performances, source: source)
-                    .environmentObject(gameDoor)
             }
             if isPlaceHolderVisible {
                 Text(placeHolder)
@@ -138,7 +133,6 @@ fileprivate struct AthleticsList: View {
         VStack {
             ForEach(athletics, id: \.description) { athletic in
                 AthleticCell(athletic: athletic)
-                    .environmentObject(gameDoor)
                     .canBeDeleted {
                         gameDoor.delete(athletic)
                     }
@@ -160,7 +154,6 @@ fileprivate struct PotsList: View {
         Group {
             ForEach(pots, id: \.description) { pot in
                 PotCell(pot: pot)
-                    .environmentObject(gameDoor)
             }
         }
     }
@@ -180,7 +173,6 @@ fileprivate struct SportsList: View {
         Group {
             ForEach(sports, id: \.description) { sport in
                 SportCell(sport: sport)
-                    .environmentObject(gameDoor)
                     .canBeDeleted {
                         gameDoor.delete(sport)
                     }
@@ -203,7 +195,6 @@ fileprivate struct PerformancesList<T: NSManagedObject>: View {
         Group {
             ForEach(performances, id: \.description) { performance in
                 PerformanceCell(performance: performance)
-                    .environmentObject(gameDoor)
                     .canBeDeleted {
                         if let source = source {
                             gameDoor.delete(performance, of: source)

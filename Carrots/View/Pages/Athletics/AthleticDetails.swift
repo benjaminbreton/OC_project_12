@@ -33,8 +33,7 @@ struct AthleticDetails: View {
         .inDetailsPage(
             genericTitle: athletic.name ?? "all.noName".localized,
             specificTitle: "athletics.details.title".localized,
-            destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data()))
-                .environmentObject(gameDoor),
+            destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data())),
             helpText: "athleticsDetails"
         )
     }
