@@ -13,12 +13,14 @@ fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifi
     
     // MARK: - Properties
     
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
+    @State private var showHelp: Bool = false
     private let genericTitle: String
     private let specificTitle: String
     private let destinationToModify: T
     private let helpText: String?
-    @State var showHelp: Bool = false
-    @EnvironmentObject var game: GameViewModel
+    
     
     // MARK: - Init
     
