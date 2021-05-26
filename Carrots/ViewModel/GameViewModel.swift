@@ -1,5 +1,5 @@
 //
-//  GameDoor.swift
+//  GameViewModel.swift
 //  Carrots
 //
 //  Created by Benjamin Breton on 04/05/2021.
@@ -10,7 +10,7 @@ import CoreData
 
 // MARK: - Properties
 
-class GameDoor: ObservableObject {
+class GameViewModel: ObservableObject {
     /// Instance of game.
     @Published private var game: Game
     /// Athletics list.
@@ -47,7 +47,7 @@ class GameDoor: ObservableObject {
 
 // MARK: - Athletics
 
-extension GameDoor {
+extension GameViewModel {
     
     /**
      Add athletic.
@@ -77,7 +77,7 @@ extension GameDoor {
 
 // MARK: - Sports
 
-extension GameDoor {
+extension GameViewModel {
 
     /**
      Add sport.
@@ -111,7 +111,7 @@ extension GameDoor {
 
 // MARK: - Performances
 
-extension GameDoor {
+extension GameViewModel {
 
     /**
      Add a performance.
@@ -135,7 +135,7 @@ extension GameDoor {
 
 // MARK: - Settings
 
-extension GameDoor {
+extension GameViewModel {
 
     /**
      Settings modification.
@@ -161,7 +161,7 @@ extension GameDoor {
 
 // MARK: - Errors
 
-extension GameDoor {
+extension GameViewModel {
     
     /**
      Method called by the property *error* when views asked if an error occurred.
@@ -173,7 +173,7 @@ extension GameDoor {
 
 // MARK: - Refresh
 
-extension GameDoor {
+extension GameViewModel {
     
     /**
      Ask to refresh all properties.
@@ -185,7 +185,7 @@ extension GameDoor {
 
 // MARK: - Money
 
-extension GameDoor {
+extension GameViewModel {
     
     /**
      Add or withdraw money from a pot.

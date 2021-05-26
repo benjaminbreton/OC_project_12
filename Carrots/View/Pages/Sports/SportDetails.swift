@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct SportDetails: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let sport: Sport
     var body: some View {
         VStack {

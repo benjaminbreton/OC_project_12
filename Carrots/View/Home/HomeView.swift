@@ -9,17 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var selection = 0
-    @ObservedObject var gameDoor: GameDoor
+    @ObservedObject var game: GameViewModel
     
     init(_ coreDataStack: CoreDataStack) {
-        gameDoor = GameDoor(coreDataStack)
+        game = GameViewModel(coreDataStack)
     }
     var body: some View {
         setTabAppearance()
         setNavigationAppearance()
         setUITableViewAppearance()
         return HomeTab(selection: $selection)
-            .environmentObject(gameDoor)
+            .environmentObject(game)
     }
     private func setTabAppearance() {
         UITabBar.appearance().backgroundImage = UIImage()

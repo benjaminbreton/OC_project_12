@@ -11,22 +11,24 @@ import CoreData
 
 class PerformancesTests: XCTestCase {
     
-    var gameDoor: GameDoor?
+    var game: GameViewModel?
+    
+    var support: CommonTestsSupport { CommonTestsSupport(game) }
     
     override func setUp() {
         let coreDataStack = FakeCoreDataStack()
-        gameDoor = GameDoor(coreDataStack)
-        gameDoor?.setFactorySettingsBack()
+        game = GameViewModel(coreDataStack)
+        game?.setFactorySettingsBack()
     }
     override func tearDown() {
-        gameDoor = nil
+        game = nil
     }
     
     // MARK: - Add
     
     func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.gameDoor)
-        guard let athletic = addAthletic(), let sport = addSport(), game.error == nil else { return }
+        let game = try XCTUnwrap(self.game)
+        guard let athletic = support.addAthletic(), let sport = support.addSport(), game.error == nil else { return }
         game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
         XCTAssertNil(game.error)
         XCTAssert(game.performances.count == 1)
@@ -34,8 +36,8 @@ class PerformancesTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.gameDoor)
-        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(), game.error == nil else {
+        let game = try XCTUnwrap(self.game)
+        guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
         }
@@ -52,8 +54,8 @@ class PerformancesTests: XCTestCase {
     // MARK: - Delete
     
     func testGivenPerformancesExistWhenAskToDeleteOneOfThemThenPerformanceIsDeleted() throws {
-        let game = try XCTUnwrap(self.gameDoor)
-        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(), game.error == nil else {
+        let game = try XCTUnwrap(self.game)
+        guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
         }
@@ -65,8 +67,8 @@ class PerformancesTests: XCTestCase {
     }
     
     func testGivenPerformancesExistWhenAskToDeleteAllOfThemThenPerformancesAreDeleted() throws {
-        let game = try XCTUnwrap(self.gameDoor)
-        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(), game.error == nil else {
+        let game = try XCTUnwrap(self.game)
+        guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
         }
@@ -79,8 +81,8 @@ class PerformancesTests: XCTestCase {
         XCTAssert(game.performances.count == 0)
     }
     func testGivenAPerformanceHasBeenAddedWhenAskingToDeleteItForOneAthleticThenItsDeletedForThisAthletic() throws {
-        let game = try XCTUnwrap(self.gameDoor)
-        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
+        let game = try XCTUnwrap(self.game)
+        guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
             XCTFail()
             return
         }
@@ -98,8 +100,8 @@ class PerformancesTests: XCTestCase {
     // MARK: - Several tests
     
     func testGivenPerformancesExistsWhenAthleticSportAndPerformancesHasBeenDeletedThenTheyAreSuccessfullyDeletedAndPointsTotalIsCorrect() throws {
-        let game = try XCTUnwrap(self.gameDoor)
-        guard let athletic1 = addAthletic(), let athletic2 = addAthletic(), let sport = addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
+        let game = try XCTUnwrap(self.game)
+        guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
             XCTFail()
             return
         }
@@ -143,32 +145,6 @@ class PerformancesTests: XCTestCase {
          > total : 350
          */
         XCTAssert(game.commonPot?.points == 350)
-    }
-    
-    // MARK: - Supporting methods
-    
-    @discardableResult
-    func addAthletic(_ name: String = UUID().uuidString) -> Athletic? {
-        guard let game = gameDoor else { return nil }
-        game.addAthletic(name: name, image: nil)
-        for athletic in game.athletics {
-            if athletic.name == name {
-                return athletic
-            }
-        }
-        return nil
-    }
-    
-    @discardableResult
-    func addSport(_ name: String = UUID().uuidString, icon: String = "A", unityType: Sport.UnityType = .count, pointsConversion: [String?] = ["100", "0", "0"]) -> Sport? {
-        guard let game = gameDoor else { return nil }
-        game.addSport(name: name, icon: icon, unityType: unityType, pointsConversion: pointsConversion)
-        for sport in game.sports {
-            if sport.name == name {
-                return sport
-            }
-        }
-        return nil
     }
 
 }

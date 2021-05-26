@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct SportCell: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let sport: Sport
     let lineCount: CGFloat = 2
     var rowHeight: CGFloat {

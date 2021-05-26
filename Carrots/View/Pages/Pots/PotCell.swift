@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct PotCell: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let pot: Pot?
     var name: String {
         if let athletic = pot?.owner {

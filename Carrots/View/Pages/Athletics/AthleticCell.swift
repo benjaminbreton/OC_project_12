@@ -11,7 +11,7 @@ struct AthleticCell: View {
     // MARK: - Properties
     
     /// Viewmodel.
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     /// Choosen athletic.
     let athletic: Athletic
     /// Choosen athletic's image.

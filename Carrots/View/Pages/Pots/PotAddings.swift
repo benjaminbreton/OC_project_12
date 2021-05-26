@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct PotAddings: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let pot: Pot?
     @State var selection: Int = 0
     @State var amount: String = ""
@@ -23,10 +23,10 @@ struct PotAddings: View {
             SettingsTextfield(title: "pots.addings.amountTitle".localized, placeHolder: placeHolder, value: $amount, keyboard: .decimalPad, isWrong: $amountIsWrong, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "pots.addings.amountLimitMin".localized, maxCount: nil))
         }
         .inSettingsPage("\(pot?.description ?? "all.noName".localized)",
-                        gameDoor: _gameDoor,
+                        game: _game,
                         confirmationButtonIsDisabled: confirmationButtonIsDisabled,
                         helpText: "potsAddings") {
-            gameDoor.changeMoney(for: pot?.owner, amount: amount, operation: selection)
+            game.changeMoney(for: pot?.owner, amount: amount, operation: selection)
         }
     }
 }

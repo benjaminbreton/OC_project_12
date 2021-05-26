@@ -17,7 +17,7 @@ fileprivate struct InSettingsPage: ViewModifier {
     private let confirmAction: () -> Void
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var confirmationIsDisabled: Bool?
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     @State var error: ApplicationErrors? = nil
     @State var showAlert: Bool = false
     private let helpText: String?
@@ -26,11 +26,11 @@ fileprivate struct InSettingsPage: ViewModifier {
     var closeAfterMessage: (title: String, message: String)?
     // MARK: - Init
     
-    init(title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationIsDisabled: Bool?, helpText: String?, closeAfterMessage: (title: String, message: String)?, confirmAction: @escaping () -> Void) {
+    init(title: String, game: EnvironmentObject<GameViewModel>, confirmationIsDisabled: Bool?, helpText: String?, closeAfterMessage: (title: String, message: String)?, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
         self.confirmationIsDisabled = confirmationIsDisabled
-        self._gameDoor = gameDoor
+        self._game = game
         self.helpText = helpText
         self.closeAfter = closeAfterMessage == nil
         self.closeAfterMessage = closeAfterMessage
@@ -43,7 +43,7 @@ fileprivate struct InSettingsPage: ViewModifier {
             Divider()
             CommonHeightSpacer()
             if let text = helpText {
-                HelpView(text: text, isShown: $showHelp, hasToBeShown: gameDoor.showHelp)
+                HelpView(text: text, isShown: $showHelp, hasToBeShown: game.showHelp)
             }
             ScrollView(.vertical) {
                 content
@@ -51,7 +51,7 @@ fileprivate struct InSettingsPage: ViewModifier {
             ConfirmButton(isDisabled: confirmationIsDisabled) {
                 error = nil
                 confirmAction()
-                error = gameDoor.error
+                error = game.error
                 guard error == nil else {
                     showAlert = true
                     return
@@ -95,7 +95,7 @@ extension View {
      - parameter title: Title which will appear in the navigation bar.
      - parameter confirmAction: Actions to do when user confirm its choices.
      */
-    func inSettingsPage(_ title: String, gameDoor: EnvironmentObject<GameDoor>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, closeAfterMessage: (title: String, message: String)? = nil, confirmAction: @escaping () -> Void) -> some View {
-        modifier(InSettingsPage(title: title, gameDoor: gameDoor, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, closeAfterMessage: closeAfterMessage, confirmAction: confirmAction))
+    func inSettingsPage(_ title: String, game: EnvironmentObject<GameViewModel>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, closeAfterMessage: (title: String, message: String)? = nil, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, game: game, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, closeAfterMessage: closeAfterMessage, confirmAction: confirmAction))
     }
 }

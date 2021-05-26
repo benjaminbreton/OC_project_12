@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct PerformanceCell: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let performance: Performance
     private var lineCount: CGFloat {
         3

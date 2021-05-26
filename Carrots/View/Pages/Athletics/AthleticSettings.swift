@@ -11,7 +11,7 @@ struct AthleticSettings: View {
     // MARK: - Properties
     
     /// Viewmodel.
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     /// Choosen athletic ; nil in case of creation of a new one.
     let athletic: Athletic?
     /// Current name.
@@ -35,14 +35,14 @@ struct AthleticSettings: View {
         }
         .inSettingsPage(
             name == "" ? "athletics.settings.new".localized:"\(name)",
-            gameDoor: _gameDoor,
+            game: _game,
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
             helpText: "athleticsSettings",
             confirmAction: {
             if let athletic = athletic {
-                gameDoor.modify(athletic, name: name, image: data)
+                game.modify(athletic, name: name, image: data)
             } else {
-                gameDoor.addAthletic(name: name, image: data)
+                game.addAthletic(name: name, image: data)
             }
         })
     }

@@ -7,9 +7,9 @@
 
 import SwiftUI
 struct SportsHome: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     var body: some View {
-        AppList(gameDoor.sports, placeHolder: "sports.noSports".localized, helpText: "sportsList")
+        AppList(game.sports, placeHolder: "sports.noSports".localized, helpText: "sportsList")
             .inNavigationHome(
                 title: "sports.title".localized,
                 buttonImage: "plus.circle",

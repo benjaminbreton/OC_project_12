@@ -18,7 +18,7 @@ fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifi
     private let destinationToModify: T
     private let helpText: String?
     @State var showHelp: Bool = false
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     
     // MARK: - Init
     
@@ -43,7 +43,7 @@ fileprivate struct InDetailsPageWithModificationDestination<T: View>: ViewModifi
                         .withLinkFont()
                 }
                 if let text = helpText {
-                    HelpView(text: text, isShown: $showHelp, hasToBeShown: gameDoor.showHelp)
+                    HelpView(text: text, isShown: $showHelp, hasToBeShown: game.showHelp)
                 }
             }
             Divider()

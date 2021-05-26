@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct SportSettings: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let sport: Sport?
     @State var name: String
     @State var icon: String
@@ -58,14 +58,14 @@ struct SportSettings: View {
         }
         .inSettingsPage(
             name == "" ? "sports.settings.new".localized:"\(name)",
-            gameDoor: _gameDoor,
+            game: _game,
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
             helpText: "sportsSettings") {
             guard unity.count == 1 else { return }
             if let sport = sport {
-                gameDoor.modify(sport, name: name, icon: icon, unityType: unity[0], pointsConversion: pointsConversion)
+                game.modify(sport, name: name, icon: icon, unityType: unity[0], pointsConversion: pointsConversion)
             } else {
-                gameDoor.addSport(name: name, icon: icon, unityType: unity[0], pointsConversion: pointsConversion)
+                game.addSport(name: name, icon: icon, unityType: unity[0], pointsConversion: pointsConversion)
             }
         }
     }

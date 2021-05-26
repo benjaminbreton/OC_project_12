@@ -7,9 +7,9 @@
 
 import SwiftUI
 struct PerformanceSettings: View {
-    @EnvironmentObject var gameDoor: GameDoor
-    var sportsArray: [Sport] { gameDoor.sports }
-    var athleticsArray: [Athletic] { gameDoor.athletics }
+    @EnvironmentObject var game: GameViewModel
+    var sportsArray: [Sport] { game.sports }
+    var athleticsArray: [Athletic] { game.athletics }
     @State var selectedAthletics: [Athletic] = []
     @State var selectedSport: [Sport] = []
     @State var value: [String] = ["", "", ""]
@@ -63,11 +63,11 @@ struct PerformanceSettings: View {
         }
         .inSettingsPage(
             "performances.new".localized,
-            gameDoor: _gameDoor,
+            game: _game,
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
             helpText: "performancesSettings") {
             guard selectedAthletics.count > 0, selectedSport.count == 1 else { return }
-            gameDoor.addPerformance(sport: selectedSport[0], athletics: selectedAthletics, value: value, addToCommonPot: addToCommonPot)
+            game.addPerformance(sport: selectedSport[0], athletics: selectedAthletics, value: value, addToCommonPot: addToCommonPot)
         }
     }
 

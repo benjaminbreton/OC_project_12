@@ -11,7 +11,7 @@ struct AthleticDetails: View {
     // MARK: - Properties
     
     /// Viewmodel.
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     /// Choosen athletic.
     let athletic: Athletic
     /// Athletic's image.
@@ -26,7 +26,7 @@ struct AthleticDetails: View {
         VStack {
             DetailsAthleticPicture(image: image)
             DetailsDateDisplayer(title: "athletics.details.creationDate".localized, date: athletic.creationDate)
-            DetailsEvolutionGraph(title: "athletics.details.evolution".localized, datas: athletic.evolutionDatas, description: "graphic.description".localized, helpCanBeShown: gameDoor.showHelp)
+            DetailsEvolutionGraph(title: "athletics.details.evolution".localized, datas: athletic.evolutionDatas, description: "graphic.description".localized, helpCanBeShown: game.showHelp)
             DetailsPerformancesDisplayer(performances: athletic.performances, source: athletic)
             
         }

@@ -8,16 +8,16 @@
 import Foundation
 import SwiftUI
 struct PotsWarning: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     var body: some View {
         Group {
-            if gameDoor.athletics.count > 0 && !gameDoor.didValidateWarning {
+            if game.athletics.count > 0 && !game.didValidateWarning {
                 HStack {
                     Image(systemName: "exclamationmark.bubble.fill")
                     Text("pots.warning".localized)
                     Image(systemName: "checkmark.square.fill")
                         .inButton {
-                            gameDoor.validateWarning()
+                            game.validateWarning()
                         }
                 }
                 .withLightSimpleFont()

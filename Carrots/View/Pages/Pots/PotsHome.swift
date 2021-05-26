@@ -7,13 +7,13 @@
 
 import SwiftUI
 struct PotsHome: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     var body: some View {
-        let athleticsPots = gameDoor.athletics.map({ $0.pot ?? Pot() })
+        let athleticsPots = game.athletics.map({ $0.pot ?? Pot() })
         return VStack {
             AppList(athleticsPots,
                     placeHolder: "pots.noAthletics".localized,
-                    commonPot: gameDoor.commonPot,
+                    commonPot: game.commonPot,
                     title: "pots.athleticsPots".localized,
                     helpText: "potsList")
             PotsWarning()

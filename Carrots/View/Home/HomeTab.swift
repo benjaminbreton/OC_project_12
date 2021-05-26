@@ -8,7 +8,7 @@
 import SwiftUI
 struct HomeTab: View {
     @Binding var selection: Int
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     var body: some View {
         TabView {
             PotsHome()
@@ -17,35 +17,35 @@ struct HomeTab: View {
                     Text("pots.title".localized)
                 }
                 .tag(0)
-                .onAppear { gameDoor.refresh() }
+                .onAppear { game.refresh() }
             AthleticsHome()
                 .tabItem {
                     Image(systemName: "figure.walk.circle.fill")
                     Text("athletics.title".localized)
                 }
                 .tag(1)
-                .onAppear { gameDoor.refresh() }
+                .onAppear { game.refresh() }
             SportsHome()
                 .tabItem {
                     Image(systemName: "bicycle.circle.fill")
                     Text("sports.title".localized)
                 }
                 .tag(2)
-                .onAppear { gameDoor.refresh() }
+                .onAppear { game.refresh() }
             PerformancesHome()
                 .tabItem {
                     Image(systemName: "arrow.up.right.circle.fill")
                     Text("performances.title".localized)
                 }
                 .tag(3)
-                .onAppear { gameDoor.refresh() }
-            GeneralSettings(date: gameDoor.predictionDate, moneyConversion: gameDoor.moneyConversion, showHelp: gameDoor.showHelp)
+                .onAppear { game.refresh() }
+            GeneralSettings(date: game.predictionDate, moneyConversion: game.moneyConversion, showHelp: game.showHelp)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("settings.title".localized)
                 }
                 .tag(4)
-                .onAppear{ gameDoor.refresh() }
+                .onAppear{ game.refresh() }
         }
         .accentColor(.tab)
     }

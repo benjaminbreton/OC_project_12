@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct GeneralSettings: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     @State var date: Date
     /// Necessary number of points to get one money's unity.
     @State var moneyConversion: String
@@ -29,8 +29,8 @@ struct GeneralSettings: View {
                 limitsExplanations: (minCount: "settings.conversion.limitExplanationsMin".localized, maxCount: "settings.conversion.limitExplanationsMax".localized))
             SettingsCustomToggle(title: "settings.help.title".localized, question: "settings.help.question".localized, isOn: $showHelp)
         }
-        .inSettingsPage("settings.title".localized, gameDoor: _gameDoor, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
-            gameDoor.modifySettings(predictionDate: date, moneyConversion: moneyConversion, showHelp: showHelp)
+        .inSettingsPage("settings.title".localized, game: _game, confirmationButtonIsDisabled: confirmationButtonIsDisabled, closeAfterMessage: (title: "settings.alert.title".localized, message: "settings.alert.message".localized)) {
+            game.modifySettings(predictionDate: date, moneyConversion: moneyConversion, showHelp: showHelp)
         }
         .inNavigationHome(title: "settings.title".localized)
     }

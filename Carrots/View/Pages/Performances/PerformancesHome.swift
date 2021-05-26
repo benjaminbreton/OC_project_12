@@ -7,23 +7,23 @@
 
 import SwiftUI
 struct PerformancesHome: View {
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     var placeholder: String {
-        if gameDoor.athletics.count == 0 {
+        if game.athletics.count == 0 {
             return "performances.none.noAthletics".localized
-        } else if gameDoor.sports.count == 0 {
+        } else if game.sports.count == 0 {
             return "performances.none.noSports".localized
         } else {
             return "performances.none.noPerformances".localized
         }
     }
     var body: some View {
-        AppList(gameDoor.performances, placeHolder: placeholder, helpText: "performancesList")
+        AppList(game.performances, placeHolder: placeholder, helpText: "performancesList")
             .inNavigationHome(
                 title: "performances.title".localized,
                 buttonImage: "gauge.badge.plus",
                 buttonDestination:
-                    gameDoor.athletics.count > 0 && gameDoor.sports.count > 0 ?
+                    game.athletics.count > 0 && game.sports.count > 0 ?
                     PerformanceSettings()
                     :
                     nil

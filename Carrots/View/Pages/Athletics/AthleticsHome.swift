@@ -11,12 +11,12 @@ struct AthleticsHome: View {
     // MARK: - Properties
     
     /// View model.
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     
     // MARK: - Body
     
     var body: some View {
-        AppList(gameDoor.athletics, placeHolder: "athletics.none".localized, helpText: "athleticsList")
+        AppList(game.athletics, placeHolder: "athletics.none".localized, helpText: "athleticsList")
             .inNavigationHome(
                 title: "athletics.title".localized,
                 buttonImage: "person.crop.circle.badge.plus",

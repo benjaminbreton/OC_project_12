@@ -18,7 +18,7 @@ struct AppList<T: NSManagedObject>: View {
     // MARK: - Properties
     
     /// App's viewmodel.
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     /// Items to display.
     let items: [T]
     /// Text to display if items property is empty.
@@ -54,7 +54,7 @@ struct AppList<T: NSManagedObject>: View {
         VStack {
             if withDivider { Divider() }
             if let text = helpText {
-                HelpView(text: text, isShown: $showHelp, hasToBeShown: gameDoor.showHelp)
+                HelpView(text: text, isShown: $showHelp, hasToBeShown: game.showHelp)
             }
             ScrollView(withDivider ? .vertical : []) {
                 if items.count > 0 {
@@ -84,7 +84,7 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
     // MARK: - Properties
     
     /// App's viewmodel.
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     /// Items to display.
     let items: [T]
     /// Text to display if items property is empty.
@@ -128,13 +128,13 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
  */
 fileprivate struct AthleticsList: View {
     let athletics: [Athletic]
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     var body: some View {
         VStack {
             ForEach(athletics, id: \.description) { athletic in
                 AthleticCell(athletic: athletic)
                     .canBeDeleted {
-                        gameDoor.delete(athletic)
+                        game.delete(athletic)
                     }
             }
         }
@@ -148,7 +148,7 @@ fileprivate struct AthleticsList: View {
  */
 fileprivate struct PotsList: View {
     let pots: [Pot]
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     
     var body: some View {
         Group {
@@ -167,14 +167,14 @@ fileprivate struct PotsList: View {
 fileprivate struct SportsList: View {
     let sports: [Sport]
     //@State var isItemHidden: [Pot: Bool]
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     
     var body: some View {
         Group {
             ForEach(sports, id: \.description) { sport in
                 SportCell(sport: sport)
                     .canBeDeleted {
-                        gameDoor.delete(sport)
+                        game.delete(sport)
                     }
             }
         }
@@ -188,7 +188,7 @@ fileprivate struct SportsList: View {
  */
 fileprivate struct PerformancesList<T: NSManagedObject>: View {
     let performances: [Performance]
-    @EnvironmentObject var gameDoor: GameDoor
+    @EnvironmentObject var game: GameViewModel
     let source: Athletic?
     
     var body: some View {
@@ -197,9 +197,9 @@ fileprivate struct PerformancesList<T: NSManagedObject>: View {
                 PerformanceCell(performance: performance)
                     .canBeDeleted {
                         if let source = source {
-                            gameDoor.delete(performance, of: source)
+                            game.delete(performance, of: source)
                         } else {
-                            gameDoor.delete(performance)
+                            game.delete(performance)
                         }
                     }
             }
