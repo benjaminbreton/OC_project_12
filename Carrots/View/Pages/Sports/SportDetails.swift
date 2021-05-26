@@ -22,7 +22,7 @@ struct SportDetails: View {
             DetailsPerformancesDisplayer(performances: sport.performances, source: nil)
         }
         .inDetailsPage(
-            genericTitle: sport.name ?? "all.noName".localized,
+            navigationTitle: sport.name ?? "all.noName".localized,
             specificTitle: "sports.details.title".localized,
             destinationToModify: SportSettings(sport: sport, name: sport.name ?? "all.noName".localized, icon: sport.icon ?? "A", unity: [sport.unityType], pointsConversion: sport.pointsConversionStringArray),
             helpText: "sportsDetails"

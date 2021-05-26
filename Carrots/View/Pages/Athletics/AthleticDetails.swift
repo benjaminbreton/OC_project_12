@@ -26,12 +26,12 @@ struct AthleticDetails: View {
         VStack {
             DetailsAthleticPicture(image: image)
             DetailsDateDisplayer(title: "athletics.details.creationDate".localized, date: athletic.creationDate)
-            DetailsEvolutionGraph(title: "athletics.details.evolution".localized, datas: athletic.evolutionDatas, description: "graphic.description".localized, helpCanBeShown: game.showHelp)
+            DetailsEvolutionGraph(title: "athletics.details.evolution".localized, datas: athletic.evolutionDatas, description: "graphic.description".localized)
             DetailsPerformancesDisplayer(performances: athletic.performances, source: athletic)
             
         }
         .inDetailsPage(
-            genericTitle: athletic.name ?? "all.noName".localized,
+            navigationTitle: athletic.name ?? "all.noName".localized,
             specificTitle: "athletics.details.title".localized,
             destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data())),
             helpText: "athleticsDetails"

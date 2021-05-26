@@ -49,7 +49,7 @@
 		034C01C7262DBCD5000663AA /* SettingsAthleticImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C01C6262DBCD5000663AA /* SettingsAthleticImagePicker.swift */; };
 		034C01CB262DBD93000663AA /* SettingsSportIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C01CA262DBD93000663AA /* SettingsSportIconPicker.swift */; };
 		034FC13C262EC71A0081ADB2 /* NavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FC13B262EC71A0081ADB2 /* NavigationBarButton.swift */; };
-		034FC149262ECD6B0081ADB2 /* InDetailsPageWithModificationDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FC148262ECD6B0081ADB2 /* InDetailsPageWithModificationDestination.swift */; };
+		034FC149262ECD6B0081ADB2 /* InDetailsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FC148262ECD6B0081ADB2 /* InDetailsPage.swift */; };
 		034FC152262F13D20081ADB2 /* DetailsEvolutionGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FC151262F13D20081ADB2 /* DetailsEvolutionGraph.swift */; };
 		03648EA4263BE6D5004EE0AA /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03648EA3263BE6D5004EE0AA /* HomeTab.swift */; };
 		03648EB4263C01E8004EE0AA /* InNavigationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03648EB3263C01E8004EE0AA /* InNavigationHome.swift */; };
@@ -158,7 +158,7 @@
 		034C01C6262DBCD5000663AA /* SettingsAthleticImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAthleticImagePicker.swift; sourceTree = "<group>"; };
 		034C01CA262DBD93000663AA /* SettingsSportIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSportIconPicker.swift; sourceTree = "<group>"; };
 		034FC13B262EC71A0081ADB2 /* NavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarButton.swift; sourceTree = "<group>"; };
-		034FC148262ECD6B0081ADB2 /* InDetailsPageWithModificationDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InDetailsPageWithModificationDestination.swift; sourceTree = "<group>"; };
+		034FC148262ECD6B0081ADB2 /* InDetailsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InDetailsPage.swift; sourceTree = "<group>"; };
 		034FC151262F13D20081ADB2 /* DetailsEvolutionGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsEvolutionGraph.swift; sourceTree = "<group>"; };
 		03648EA3263BE6D5004EE0AA /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
 		03648EB3263C01E8004EE0AA /* InNavigationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InNavigationHome.swift; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 		030585F526395CE1002015A7 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
-				034FC148262ECD6B0081ADB2 /* InDetailsPageWithModificationDestination.swift */,
+				034FC148262ECD6B0081ADB2 /* InDetailsPage.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -893,7 +893,7 @@
 				03F787232631B8DC00735510 /* SportDetails.swift in Sources */,
 				0305890826491F4C00AB6B28 /* PotsManager.swift in Sources */,
 				03192E6E262ABE02000D572E /* UIColor+appColors.swift in Sources */,
-				034FC149262ECD6B0081ADB2 /* InDetailsPageWithModificationDestination.swift in Sources */,
+				034FC149262ECD6B0081ADB2 /* InDetailsPage.swift in Sources */,
 				0335034726384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift in Sources */,
 				03DD8216261F01620028A0A5 /* PotCell.swift in Sources */,
 				034FC152262F13D20081ADB2 /* DetailsEvolutionGraph.swift in Sources */,

@@ -43,7 +43,7 @@ fileprivate struct InSettingsPage: ViewModifier {
             Divider()
             CommonHeightSpacer()
             if let text = helpText {
-                HelpView(text: text, isShown: $showHelp, hasToBeShown: game.showHelp)
+                HelpView(text: text, isShown: $showHelp)
             }
             ScrollView(.vertical) {
                 content

@@ -9,53 +9,70 @@ import SwiftUI
 
 // MARK: - Container
 
-/// Graphic which represents an array of EvolutionData.
+/**
+ Graphic which represents an array of EvolutionData.
+ */
 struct DetailsEvolutionGraph: View {
     
     // MARK: - Properties
     
-    let title: String
-    let datas: [EvolutionData]
-    let description: String
+    /// Boolean indicating whether graphic's help text is shown or not.
+    @State var helpIsShown: Bool = false
+    /// Module's title.
+    private let title: String
+    /// Datas to display
+    private let datas: [EvolutionData]
+    /// Graphic's description.
+    private let description: String
+    /// Graphic's height.
     private let height: CGFloat = ViewCommonSettings().commonSizeBase * 12
-    /// Minimum and maximum values of datas.
+    /// Minimum and maximum formatted values of datas.
     private var values: (min: String, max: String) {
+        // check if min and max values can be getted
         guard let max = datas.map({ $0.value }).max(), let min = minValue == nil ? datas.map({ $0.value }).min() : minValue else { return (min: "---", max: "---") }
+        // prepare formatter
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
         formatter.locale = Locale.current
+        // returns formatted values
         return (min: formatter.string(from: NSNumber(value: min)) ?? "---", max: formatter.string(from: NSNumber(value: max)) ?? "---")
     }
-    
-    var minValue: Double? {
+    /// Minimum value determination used by the *values* property.
+    private var minValue: Double? {
+        // are there sufficients datas ?
         guard datas.count > 1 else { return nil }
+        // check first dates
         guard let firstDate = datas[0].date, let secondDate = datas[1].date else { return nil }
+        // get the minimum possible date (30 days ago)
         let minDate = Date().today - 30 * 3600 * 24
+        // check if the first date is older than the minimum possible
         if firstDate < minDate {
+            // compute the value of the minimum possible date
             let firstDuration = DateInterval(start: firstDate, end: minDate).duration
             let secondDuration = DateInterval(start: firstDate, end: secondDate).duration
             return datas[0].value + ((datas[1].value - datas[0].value) / secondDuration) * firstDuration
         } else {
+            // the minValue is the firstDate's value, no calculation is needed, returns nil
             return nil
         }
     }
     
-    @State var helpIsShown: Bool = false
+    // MARK: - Init
     
-    let helpCanBeShown: Bool
+    init(title: String, datas: [EvolutionData], description: String) {
+        self.title = title
+        self.datas = datas
+        self.description = description
+    }
     
     // MARK: - Body
     
     var body: some View {
-        
-        /*
-         
-         */
         VStack {
-            HelpView(text: "graphic",
-            isShown: $helpIsShown,
-            hasToBeShown: helpCanBeShown)
+            // display help
+            HelpView(text: "graphic", isShown: $helpIsShown)
+            // display graph
             ZStack {
                 if datas.count < 2 {
                     // no graphic can be displayed

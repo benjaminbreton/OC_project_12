@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 struct HelpView: View {
+    @EnvironmentObject private var game: GameViewModel
     let text: String
     @Binding var isShown: Bool
-    var hasToBeShown: Bool
+    var hasToBeShown: Bool { game.showHelp }
     private var completeText: String { "help.\(text)".localized }
     var body: some View {
         Group {

@@ -6,9 +6,26 @@
 //
 
 import SwiftUI
+/**
+ Display an athletic's picture in a module.
+ */
 struct DetailsAthleticPicture: View {
-    let image: UIImage?
-    let radius = UIScreen.main.bounds.width / 4
+    
+    // MARK: - Properties
+    
+    /// Image to display.
+    private let image: UIImage?
+    /// Radius used to determinate image's size.
+    private let radius = UIScreen.main.bounds.width / 4
+    
+    // MARK: - Init
+    
+    init(image: UIImage?) {
+        self.image = image
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
         VStack {
             CommonHeightSpacer()

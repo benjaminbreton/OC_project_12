@@ -6,11 +6,22 @@
 //
 
 import SwiftUI
+/**
+ Display one or sevral texts in a module.
+ */
 struct DetailsText: View {
-    let title: String
-    let texts: [String: (text: String, order: Int)]
+    
+    // MARK: - Properties
+    
+    /// Module's title.
+    private let title: String
+    /// Texts to display. The *key* is a title to display, the *value* contains a tuple in which has to be indicated the text to display and its order in the module beginning by 1.
+    private let texts: [String: (text: String, order: Int)]
+    /// Texts keys, in the order indicated in the values tuples.
     private var keys: [String] {
+        // get keys
         var allKeys = texts.keys.map({ "\($0.description)" })
+        // order keys
         var keys: [String] = []
         if allKeys.count > 0 {
             for count in 1...allKeys.count {
@@ -31,6 +42,15 @@ struct DetailsText: View {
         }
         return keys
     }
+    
+    // MARK: - Init
+    
+    init(title: String, texts: [String : (text: String, order: Int)]) {
+        self.title = title
+        self.texts = texts
+    }
+    
+    // MARK: - Body
     
     var body: some View {
         VStack {

@@ -54,7 +54,7 @@ struct AppList<T: NSManagedObject>: View {
         VStack {
             if withDivider { Divider() }
             if let text = helpText {
-                HelpView(text: text, isShown: $showHelp, hasToBeShown: game.showHelp)
+                HelpView(text: text, isShown: $showHelp)
             }
             ScrollView(withDivider ? .vertical : []) {
                 if items.count > 0 {
