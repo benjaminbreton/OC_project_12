@@ -480,7 +480,7 @@
 		034FC12F262EC62A0081ADB2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				03DD820A261F00E10028A0A5 /* Common settings */,
+				03DD820A261F00E10028A0A5 /* Settings */,
 				030585F026395C28002015A7 /* Create page */,
 				034FC138262EC6B10081ADB2 /* Navigation */,
 				03DD81F5261EFFF70028A0A5 /* ViewModifiers */,
@@ -608,12 +608,12 @@
 			path = "Supporting views";
 			sourceTree = "<group>";
 		};
-		03DD820A261F00E10028A0A5 /* Common settings */ = {
+		03DD820A261F00E10028A0A5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */,
 			);
-			path = "Common settings";
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		03DD8229261F23860028A0A5 /* Athletics */ = {

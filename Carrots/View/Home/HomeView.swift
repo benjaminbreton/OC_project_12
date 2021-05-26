@@ -25,7 +25,6 @@ struct HomeView: View {
         UITabBar.appearance().backgroundImage = UIImage()
     }
     private func setNavigationAppearance() {
-        UINavigationBar.appearance().titleTextAttributes = [.font : ViewCommonSettings().regularNavigationTitleFont]
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : ViewCommonSettings().largeNavigationTitleFont]
     }
     private func setUITableViewAppearance() {

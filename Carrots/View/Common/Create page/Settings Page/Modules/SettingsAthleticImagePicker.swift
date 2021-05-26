@@ -11,7 +11,7 @@ import UIKit
 struct SettingsAthleticImagePicker: View {
     @Binding var image: UIImage?
     var body: some View {
-        AthleticImageWithButtons(image: _image, radius: ViewCommonSettings().commonHeight * 8)
+        AthleticImageWithButtons(image: _image, radius: ViewCommonSettings().commonSizeBase * 8)
             .inCenteredModule("image.title".localized)
     }
 }

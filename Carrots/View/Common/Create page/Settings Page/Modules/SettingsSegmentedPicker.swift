@@ -29,7 +29,7 @@ struct SettingsSegmentedPicker: View {
             })
             .pickerStyle(SegmentedPickerStyle())
         }
-        .frame(height: ViewCommonSettings().commonHeight * 4)
+        .frame(height: ViewCommonSettings().commonSizeBase * 4)
         .inModule(title)
         
     }

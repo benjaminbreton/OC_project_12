@@ -30,7 +30,7 @@ struct SportCell: View {
             SportIcon(icon: sport.icon ?? "", lineCount: lineCount)
                 .frame(width: rowHeight, height: rowHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             Spacer()
-              .frame(width: ViewCommonSettings().commonHeight)
+              .frame(width: ViewCommonSettings().commonSizeBase)
             VStack(alignment: .leading) {
                 Text(sport.name ?? "all.noName".localized)
                     .withBigSimpleFont()

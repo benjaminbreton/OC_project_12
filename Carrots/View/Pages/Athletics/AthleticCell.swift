@@ -26,14 +26,14 @@ struct AthleticCell: View {
         ZStack(alignment: .leading) {
             HStack(alignment: .center) {
                 
-                AthleticImage(image: image, radius: ViewCommonSettings().commonHeight * 2)
+                AthleticImage(image: image, radius: ViewCommonSettings().commonSizeBase * 2)
                 Text(athletic.name ?? "all.noName".localized)
                     .padding()
                     .withBigSimpleFont()
             }
             
         }
-        .frame(height: ViewCommonSettings().commonHeight * 4)
+        .frame(height: ViewCommonSettings().commonSizeBase * 4)
         .inRectangle(.leading)
         .withNavigationLink(
             destination: AthleticDetails(athletic: athletic)

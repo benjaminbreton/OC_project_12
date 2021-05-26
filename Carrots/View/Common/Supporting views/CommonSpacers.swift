@@ -13,13 +13,13 @@ struct CommonHeightSpacer: View {
     }
     var body: some View {
         Spacer()
-            .frame(height: ViewCommonSettings().commonHeight * quantity)
+            .frame(height: ViewCommonSettings().commonSizeBase * quantity)
         
     }
 }
 struct CommonWidthSpacer: View {
     var body: some View {
         Spacer()
-            .frame(width: ViewCommonSettings().commonHeight)
+            .frame(width: ViewCommonSettings().commonSizeBase)
     }
 }

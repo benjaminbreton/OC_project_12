@@ -17,7 +17,7 @@ struct DetailsEvolutionGraph: View {
     let title: String
     let datas: [EvolutionData]
     let description: String
-    private let height: CGFloat = ViewCommonSettings().commonHeight * 12
+    private let height: CGFloat = ViewCommonSettings().commonSizeBase * 12
     /// Minimum and maximum values of datas.
     private var values: (min: String, max: String) {
         guard let max = datas.map({ $0.value }).max(), let min = minValue == nil ? datas.map({ $0.value }).min() : minValue else { return (min: "---", max: "---") }
@@ -72,13 +72,13 @@ struct DetailsEvolutionGraph: View {
                             .withLightSimpleFont()
                         // graphic itself
                         EvolutionGraph(datas: datas)
-                            .stroke(lineWidth: ViewCommonSettings().shapeLine)
+                            .stroke(lineWidth: ViewCommonSettings().graphLineWidth)
                             .fill(LinearGradient(gradient: Gradient(colors: [.graphFirst, .graphSecond]), startPoint: .leading, endPoint: .trailing))
                     }
                 }
                 // frame's rectangle
                 Rectangle()
-                    .stroke(lineWidth: ViewCommonSettings().shapeLine)
+                    .stroke(lineWidth: ViewCommonSettings().graphLineWidth)
                     .foregroundColor(.graphFirst)
                 
             }
