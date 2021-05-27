@@ -33,7 +33,7 @@ struct HomeTab: View {
                 .inTabItem(2)
             PerformancesHome()
                 .inTabItem(3)
-            GeneralSettings(date: game.predictionDate, moneyConversion: game.moneyConversion, showHelp: game.showHelp)
+            GeneralSettings()
                 .inTabItem(4)
         }
         .accentColor(.tab)
