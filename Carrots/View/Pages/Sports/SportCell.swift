@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ The cell to display in a sports list.
+ */
 struct SportCell: View {
     @EnvironmentObject var game: GameViewModel
     let sport: Sport

@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ First page of performances tab: display the performances list.
+ */
 struct PerformancesHome: View {
     @EnvironmentObject var game: GameViewModel
     var placeholder: String {

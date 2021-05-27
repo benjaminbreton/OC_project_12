@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ First page of sports tab: display the sports list.
+ */
 struct SportsHome: View {
     @EnvironmentObject var game: GameViewModel
     var body: some View {

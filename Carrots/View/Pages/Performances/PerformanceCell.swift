@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ The cell to display in a performances list.
+ */
 struct PerformanceCell: View {
     @EnvironmentObject var game: GameViewModel
     let performance: Performance

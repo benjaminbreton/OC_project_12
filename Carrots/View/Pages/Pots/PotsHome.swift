@@ -7,7 +7,7 @@
 
 import SwiftUI
 /**
- The view displaying all pots.
+ First page of pots tab: display the pots list.
  */
 struct PotsHome: View {
     

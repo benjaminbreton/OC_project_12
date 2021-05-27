@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ Settings page used to create a performance.
+ */
 struct PerformanceSettings: View {
     @EnvironmentObject var game: GameViewModel
     var sportsArray: [Sport] { game.sports }

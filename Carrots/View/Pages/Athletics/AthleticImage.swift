@@ -6,25 +6,38 @@
 //
 
 import SwiftUI
+/**
+ The image to display for an athletic.
+ */
 struct AthleticImage: View {
     
     // MARK: - Properties
     
-    let image: UIImage?
-    let radius: CGFloat
+    private let image: UIImage?
+    private let radius: CGFloat
+    
+    // MARK: - Init
+    
+    init(image: UIImage?, radius: CGFloat) {
+        self.image = image
+        self.radius = radius
+    }
     
     // MARK: - Body
     
     var body: some View {
         ZStack(alignment: .center) {
+            // background
             Circle()
                 .foregroundColor(.backCell)
+            // foreground ...
             if let image = image {
+                // ... if image has been choosen
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                
             } else {
+                // ... if no image : display person by default
                 Image(systemName: "person")
                     .resizable()
                     .foregroundColor(.image)

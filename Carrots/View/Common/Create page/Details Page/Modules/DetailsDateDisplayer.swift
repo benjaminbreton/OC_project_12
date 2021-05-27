@@ -38,6 +38,6 @@ struct DetailsDateDisplayer: View {
     
     var body: some View {
         Text(formattedDate)
-            .inModule(title)
+            .inCenteredModule(title)
     }
 }

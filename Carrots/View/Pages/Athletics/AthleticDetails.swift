@@ -6,34 +6,58 @@
 //
 
 import SwiftUI
+/**
+ Details page displaying athletic's informations.
+ */
 struct AthleticDetails: View {
     
     // MARK: - Properties
     
-    /// Viewmodel.
-    @EnvironmentObject var game: GameViewModel
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
     /// Choosen athletic.
-    let athletic: Athletic
+    private let athletic: Athletic
     /// Athletic's image.
     private var image: UIImage? {
         guard let data = athletic.image else { return nil }
         return UIImage(data: data)
     }
     
+    // MARK: - Init
+    
+    init(athletic: Athletic) {
+        self.athletic = athletic
+    }
+    
     // MARK: - Body
     
     var body: some View {
         VStack {
-            DetailsAthleticPicture(image: image)
-            DetailsDateDisplayer(title: "athletics.details.creationDate".localized, date: athletic.creationDate)
-            DetailsEvolutionGraph(title: "athletics.details.evolution".localized, datas: athletic.evolutionDatas, description: "graphic.description".localized)
-            DetailsPerformancesDisplayer(performances: athletic.performances, source: athletic)
-            
+            // module displaying the athletic's image
+            DetailsAthleticPicture(
+                image: image
+            )
+            // module displaying the athletic's creation date
+            DetailsDateDisplayer(
+                title: "athletics.details.creationDate".localized,
+                date: athletic.creationDate
+            )
+            // module displaying the athletic's evolution
+            DetailsEvolutionGraph(
+                title: "athletics.details.evolution".localized,
+                datas: athletic.evolutionDatas,
+                description: "graphic.description".localized
+            )
+            // module displaying the athletic's performances list
+            DetailsPerformancesDisplayer(
+                performances: athletic.performances,
+                source: athletic
+            )
         }
         .inDetailsPage(
-            navigationTitle: athletic.name ?? "all.noName".localized,
+            navigationTitle: athletic.description,
             specificTitle: "athletics.details.title".localized,
-            destinationToModify: AthleticSettings(athletic: athletic, name: athletic.name ?? "", image: UIImage(data: athletic.image ?? Data())),
+            destinationToModify: AthleticSettings(athletic: athletic),
             helpText: "athleticsDetails"
         )
     }

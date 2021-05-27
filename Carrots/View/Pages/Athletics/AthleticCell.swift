@@ -6,18 +6,27 @@
 //
 
 import SwiftUI
+/**
+ The cell to display in an athletics list.
+ */
 struct AthleticCell: View {
     
     // MARK: - Properties
     
-    /// Viewmodel.
-    @EnvironmentObject var game: GameViewModel
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
     /// Choosen athletic.
-    let athletic: Athletic
+    private let athletic: Athletic
     /// Choosen athletic's image.
     private var image: UIImage? {
         guard let data = athletic.image else { return nil }
         return UIImage(data: data)
+    }
+    
+    // MARK: - Init
+    
+    init(athletic: Athletic) {
+        self.athletic = athletic
     }
     
     // MARK: - Body
@@ -25,19 +34,17 @@ struct AthleticCell: View {
     var body: some View {
         ZStack(alignment: .leading) {
             HStack(alignment: .center) {
-                
+                // image
                 AthleticImage(image: image, radius: ViewCommonSettings().commonSizeBase * 2)
-                Text(athletic.name ?? "all.noName".localized)
+                // name
+                Text(athletic.description)
                     .padding()
                     .withBigSimpleFont()
             }
-            
         }
-        .frame(height: ViewCommonSettings().commonSizeBase * 4)
         .inRectangle(.leading)
         .inNavigationLink(
             AthleticDetails(athletic: athletic)
         )
-        
     }
 }

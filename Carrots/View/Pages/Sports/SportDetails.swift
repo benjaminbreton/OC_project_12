@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ Details page displaying sport's informations.
+ */
 struct SportDetails: View {
     @EnvironmentObject var game: GameViewModel
     let sport: Sport

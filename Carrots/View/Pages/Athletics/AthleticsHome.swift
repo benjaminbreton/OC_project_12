@@ -6,21 +6,29 @@
 //
 
 import SwiftUI
+/**
+ First page of athletics tab: display the athletics list.
+ */
 struct AthleticsHome: View {
     
     // MARK: - Properties
     
-    /// View model.
-    @EnvironmentObject var game: GameViewModel
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
     
     // MARK: - Body
     
     var body: some View {
-        AppList(game.athletics, placeholder: "athletics.none".localized, helpText: "athleticsList")
-            .inNavigationHome(
-                title: "athletics.title".localized,
-                buttonImage: "person.crop.circle.badge.plus",
-                buttonDestination: AthleticSettings(athletic: nil, name: "", image: nil)
-            )
+        // display the list
+        AppList(
+            game.athletics,
+            placeholder: "athletics.none".localized,
+            helpText: "athleticsList"
+        )
+        .inNavigationHome(
+            title: "athletics.title".localized,
+            buttonImage: "person.crop.circle.badge.plus",
+            buttonDestination: AthleticSettings(athletic: nil)
+        )
     }
 }

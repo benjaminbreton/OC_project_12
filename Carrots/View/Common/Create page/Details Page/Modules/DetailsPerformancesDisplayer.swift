@@ -38,7 +38,7 @@ struct DetailsPerformancesDisplayer: View {
                 Text("all.count".localized)
                 Text("\(count)")
             }
-            .inModule("performances.title.maj".localized)
+            .inCenteredModule("performances.title.maj".localized)
             // Display performances list
             if performances.count > 0 {
                 AppList(performances, placeholder: "performances.none".localized, withDivider: false, source: source)

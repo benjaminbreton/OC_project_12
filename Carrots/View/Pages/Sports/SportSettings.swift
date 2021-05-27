@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+/**
+ Settings page used to create or modify a sport.
+ */
 struct SportSettings: View {
     @EnvironmentObject var game: GameViewModel
     let sport: Sport?
