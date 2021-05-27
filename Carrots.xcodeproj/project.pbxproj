@@ -79,7 +79,6 @@
 		03DABD892652986A00746B6E /* EvolutionDatasManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DABD882652986A00746B6E /* EvolutionDatasManager.swift */; };
 		03DD81F2261EFFCE0028A0A5 /* ViewCommonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */; };
 		03DD81F7261F000B0028A0A5 /* WithBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81F6261F000B0028A0A5 /* WithBackground.swift */; };
-		03DD81FB261F00390028A0A5 /* InCellRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FA261F00390028A0A5 /* InCellRectangle.swift */; };
 		03DD81FF261F00520028A0A5 /* InRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FE261F00520028A0A5 /* InRectangle.swift */; };
 		03DD8203261F00620028A0A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8202261F00620028A0A5 /* Fonts.swift */; };
 		03DD820C261F01190028A0A5 /* InNavigationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD820B261F01190028A0A5 /* InNavigationPage.swift */; };
@@ -189,7 +188,6 @@
 		03DABD882652986A00746B6E /* EvolutionDatasManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionDatasManager.swift; sourceTree = "<group>"; };
 		03DD81F1261EFFCE0028A0A5 /* ViewCommonSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCommonSettings.swift; sourceTree = "<group>"; };
 		03DD81F6261F000B0028A0A5 /* WithBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithBackground.swift; sourceTree = "<group>"; };
-		03DD81FA261F00390028A0A5 /* InCellRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InCellRectangle.swift; sourceTree = "<group>"; };
 		03DD81FE261F00520028A0A5 /* InRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InRectangle.swift; sourceTree = "<group>"; };
 		03DD8202261F00620028A0A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		03DD820B261F01190028A0A5 /* InNavigationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InNavigationPage.swift; sourceTree = "<group>"; };
@@ -577,7 +575,6 @@
 			isa = PBXGroup;
 			children = (
 				03DD81F6261F000B0028A0A5 /* WithBackground.swift */,
-				03DD81FA261F00390028A0A5 /* InCellRectangle.swift */,
 				03DD81FE261F00520028A0A5 /* InRectangle.swift */,
 				03DD8202261F00620028A0A5 /* Fonts.swift */,
 				03DD8225261F0A540028A0A5 /* InButton.swift */,
@@ -876,7 +873,6 @@
 				03DD8226261F0A540028A0A5 /* InButton.swift in Sources */,
 				03DD8212261F013C0028A0A5 /* GeneralSettings.swift in Sources */,
 				032AFA0F261756ED00D61E28 /* PotsHome.swift in Sources */,
-				03DD81FB261F00390028A0A5 /* InCellRectangle.swift in Sources */,
 				03D3C7BA260C7B1500DDA29F /* Athletic.swift in Sources */,
 				03DE95842604C4CF00FBAA4F /* CoreDataStack.swift in Sources */,
 				03264BEF262056E4003F6429 /* SportsHome.swift in Sources */,

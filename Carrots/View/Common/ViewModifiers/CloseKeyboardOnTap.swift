@@ -9,7 +9,13 @@ import SwiftUI
 
 // MARK: - ViewModifier
 
+/**
+ Add a gesture in the content to close keyboard when content is hitten.
+ */
 fileprivate struct CloseKeyboardOnTap: ViewModifier {
+    
+    // MARK: - Body
+    
     func body(content: Content) -> some View {
         content
             .onTapGesture {
@@ -21,6 +27,10 @@ fileprivate struct CloseKeyboardOnTap: ViewModifier {
 // MARK: - View's extension
 
 extension View {
+    /**
+     Add a gesture in the content to close keyboard when content is hitten.
+     - returns: The content with the gesture.
+     */
     func closeKeyboardOnTap() -> some View {
         modifier(CloseKeyboardOnTap())
     }
