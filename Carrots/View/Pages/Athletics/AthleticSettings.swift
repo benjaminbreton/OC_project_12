@@ -32,7 +32,7 @@ struct AthleticSettings: View {
     
     // MARK: - Init
     
-    init(athletic: Athletic?) {
+    init(_ athletic: Athletic? = nil) {
         self.athletic = athletic
     }
     

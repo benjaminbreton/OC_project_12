@@ -28,7 +28,7 @@ struct AthleticsHome: View {
         .inNavigationHome(
             title: "athletics.title".localized,
             buttonImage: "person.crop.circle.badge.plus",
-            buttonDestination: AthleticSettings(athletic: nil)
+            buttonDestination: AthleticSettings()
         )
     }
 }

@@ -25,7 +25,7 @@ struct AthleticCell: View {
     
     // MARK: - Init
     
-    init(athletic: Athletic) {
+    init(_ athletic: Athletic) {
         self.athletic = athletic
     }
     

@@ -90,7 +90,6 @@ fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
     // MARK: - UIView methods
     
     func makeUIView(context: UIViewRepresentableContext<PickerView>) -> UITextView {
-        //textField.placeholder = placeholder
         return textView
     }
     
@@ -231,12 +230,6 @@ fileprivate class PickerTextView<T: CustomStringConvertible>: UITextView, UIPick
     // MARK: - UIPickerView methods
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if selectionIndex == nil {
-            selectionIndex = 0
-            if maximumSelection == 1 {
-                selectedObjects = [data[0]]
-            }
-        }
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

@@ -62,9 +62,9 @@ struct AppList<T: NSManagedObject>: View {
                 if items.count > 0 {
                     // display common pot before others in case of pots list
                     if let commonPot = commonPot {
-                        PotCell(pot: commonPot)
+                        PotCell(commonPot)
                             .inNavigationLink(
-                                PotAddings(pot: commonPot)
+                                PotAddings(commonPot)
                             )
                     }
                     // display list's title
@@ -165,7 +165,7 @@ fileprivate struct AthleticsList: View {
     var body: some View {
         VStack {
             ForEach(athletics, id: \.description) { athletic in
-                AthleticCell(athletic: athletic)
+                AthleticCell(athletic)
                     .canBeDeleted {
                         game.delete(athletic)
                     }
@@ -199,7 +199,7 @@ fileprivate struct PotsList: View {
     var body: some View {
         Group {
             ForEach(pots, id: \.description) { pot in
-                PotCell(pot: pot)
+                PotCell(pot)
             }
         }
     }
@@ -230,7 +230,7 @@ fileprivate struct SportsList: View {
     var body: some View {
         Group {
             ForEach(sports, id: \.description) { sport in
-                SportCell(sport: sport)
+                SportCell(sport)
                     .canBeDeleted {
                         game.delete(sport)
                     }

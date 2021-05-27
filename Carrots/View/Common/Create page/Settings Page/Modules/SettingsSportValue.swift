@@ -75,7 +75,7 @@ struct SettingsSportValue: View {
         }
         .frame(height: ViewCommonSettings().textLineHeight)
         .keyboardType(.numberPad)
-        .inModule(caller == .sport ? "sportValue.sportTitle".localized : "sportValue.performanceTitle".localized,
+        .inCenteredModule(caller == .sport ? "sportValue.sportTitle".localized : "sportValue.performanceTitle".localized,
                   explanations: caller == .sport ? unity?.explanations : nil)
     }
 }

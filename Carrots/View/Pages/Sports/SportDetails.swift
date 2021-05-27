@@ -10,24 +10,56 @@ import SwiftUI
  Details page displaying sport's informations.
  */
 struct SportDetails: View {
-    @EnvironmentObject var game: GameViewModel
-    let sport: Sport
+    
+    // MARK: - Properties
+    
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
+    /// The choosen sport.
+    private let sport: Sport
+    /// The choosen sport's unity type's value's localized title.
+    private var sportUnityValueTitle: String {
+        sport.unityType == .oneShot ? "sports.details.oneShot".localized : "sports.details.needs".localized
+    }
+    
+    // MARK: - Init
+    
+    init(sport: Sport) {
+        self.sport = sport
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
         VStack {
-            VerticalSpacer()
-            SportIcon(icon: sport.icon ?? "", lineCount: 5)
-            VerticalSpacer(5)
-            DetailsText(title: "sports.details.unityTitle".localized,
-                        texts: [
-                            "sports.details.unityTypeTitle".localized: (text: sport.unityInt16.sportUnityType.description, order: 1),
-                            sport.unityType == .oneShot ? "sports.details.oneShot".localized : "sports.details.needs".localized: (text: "\(sport.pointsConversionSingleString)", order: 2)
-                        ])
-            DetailsPerformancesDisplayer(performances: sport.performances, source: nil)
+            // module displaying sport's icon
+            DetailsSportIcon(
+                icon: sport.icon ?? "A"
+            )
+            // module displaying the sport unity type and its value
+            DetailsText(
+                title: "sports.details.unityTitle".localized,
+                texts: [
+                    "sports.details.unityTypeTitle".localized: (
+                        text: sport.unityInt16.sportUnityType.description,
+                        order: 1
+                    ),
+                    sportUnityValueTitle: (
+                        text: "\(sport.pointsConversionSingleString)",
+                        order: 2
+                    )
+                ]
+            )
+            // module displaying sport's performances list
+            DetailsPerformancesDisplayer(
+                performances: sport.performances,
+                source: nil
+            )
         }
         .inDetailsPage(
-            navigationTitle: sport.name ?? "all.noName".localized,
+            navigationTitle: sport.description,
             specificTitle: "sports.details.title".localized,
-            destinationToModify: SportSettings(sport: sport, name: sport.name ?? "all.noName".localized, icon: sport.icon ?? "A", unity: [sport.unityType], pointsConversion: sport.pointsConversionStringArray),
+            destinationToModify: SportSettings(sport),
             helpText: "sportsDetails"
         )
     }

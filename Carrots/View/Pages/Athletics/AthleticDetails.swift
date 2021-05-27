@@ -57,7 +57,7 @@ struct AthleticDetails: View {
         .inDetailsPage(
             navigationTitle: athletic.description,
             specificTitle: "athletics.details.title".localized,
-            destinationToModify: AthleticSettings(athletic: athletic),
+            destinationToModify: AthleticSettings(athletic),
             helpText: "athleticsDetails"
         )
     }

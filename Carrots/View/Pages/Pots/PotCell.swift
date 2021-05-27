@@ -22,7 +22,7 @@ struct PotCell: View {
     
     // MARK: - Init
     
-    init(pot: Pot?) {
+    init(_ pot: Pot?) {
         self.pot = pot
     }
     
@@ -59,7 +59,7 @@ struct PotCell: View {
         }
         .inRectangle(.leading)
         .inNavigationLink(
-            PotAddings(pot: pot)
+            PotAddings(pot)
         )
     }
 }

@@ -32,7 +32,7 @@ struct PotAddings: View {
     
     // MARK: - Init
     
-    init(pot: Pot?) {
+    init(_ pot: Pot?) {
         self.pot = pot
     }
     

@@ -10,36 +10,37 @@ import SwiftUI
  The cell to display in a sports list.
  */
 struct SportCell: View {
-    @EnvironmentObject var game: GameViewModel
-    let sport: Sport
-    let lineCount: CGFloat = 2
-    var rowHeight: CGFloat {
-        ViewCommonSettings().textLineHeight * lineCount
+    
+    
+    
+    // MARK: - Properties
+    
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
+    /// The sport.
+    private let sport: Sport
+    
+    // MARK: - Init
+    
+    init(_ sport: Sport) {
+        self.sport = sport
     }
-    var valueArray: [String] {
-        switch sport.unityInt16.sportUnityType {
-        case .time:
-            let date = DateComponents(second: Int(sport.pointsConversion))
-            guard let hours = date.hour, let minutes = date.minute, let seconds = date.second else {
-                return ["0", "0", "0"]
-            }
-            return ["\(hours)", "\(minutes)", "\(seconds)"]
-        default:
-            return ["\(Int(sport.pointsConversion))", "0", "0"]
-        }
-    }
+    
+    // MARK: - Body
+    
     var body: some View {
         HStack(alignment: .center) {
-            SportIcon(icon: sport.icon ?? "", lineCount: lineCount)
-            Spacer()
-              .frame(width: ViewCommonSettings().commonSizeBase)
+            // icon
+            SportIcon(icon: sport.icon ?? "", lineCount: 2)
+            HorizontalSpacer()
             VStack(alignment: .leading) {
-                Text(sport.name ?? "all.noName".localized)
+                // name
+                Text(sport.description)
                     .withBigSimpleFont()
+                // unity type
                 Text("\(sport.unityType.description)")
                     .withSimpleFont()
             }
-            .frame(height: rowHeight)
         }
         .inRectangle(.leading)
         .inNavigationLink(

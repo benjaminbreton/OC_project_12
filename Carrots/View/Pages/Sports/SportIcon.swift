@@ -7,12 +7,29 @@
 
 import SwiftUI
 struct SportIcon: View {
-    var icon: String
-    let lineCount: CGFloat
+    
+    // MARK: - Properties
+    
+    /// The icon.
+    private let icon: String
+    /// The line count, aka the icon's size.
+    private let lineCount: CGFloat
+    
+    // MARK: - Init
+    
+    init(icon: String, lineCount: CGFloat) {
+        self.icon = icon
+        self.lineCount = lineCount
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
         ZStack(alignment: .center) {
+            // icon background
             Circle()
                 .foregroundColor(.backCell)
+            // selected icon
             Text(icon)
                 .withSportIconFont(lineCount: lineCount)
         }
