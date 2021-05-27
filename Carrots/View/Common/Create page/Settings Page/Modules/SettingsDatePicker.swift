@@ -14,11 +14,11 @@ struct SettingsDatePicker: View {
     // MARK: - Properties
     
     /// The selected date.
-    @Binding var date: Date
+    @Binding private var date: Date
     /// The module's title.
-    let title: String
+    private let title: String
     /// The range in which the date can be choosen.
-    let range: DateRange
+    private let range: DateRange
     enum DateRange {
         case afterToday, beforeToday, any
     }

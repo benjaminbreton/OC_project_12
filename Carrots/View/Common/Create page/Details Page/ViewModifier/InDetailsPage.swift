@@ -13,8 +13,6 @@ fileprivate struct InDetailsPage<T: View>: ViewModifier {
     
     // MARK: - Properties
     
-    /// The ViewModel.
-    @EnvironmentObject private var game: GameViewModel
     /// Boolean indicating whether help's text is shown or not.
     @State private var showHelp: Bool = false
     /// The navigation's title.

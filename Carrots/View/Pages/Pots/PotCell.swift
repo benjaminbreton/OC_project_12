@@ -13,8 +13,6 @@ struct PotCell: View {
     
     // MARK: - Properties
     
-    /// The ViewModel
-    @EnvironmentObject private var game: GameViewModel
     /// The pot to display.
     private let pot: Pot?
     /// The pot's name to display.

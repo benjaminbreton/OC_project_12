@@ -17,8 +17,6 @@ struct AppList<T: NSManagedObject>: View {
     
     // MARK: - Properties
     
-    /// The ViewModel.
-    @EnvironmentObject private var game: GameViewModel
     /// Boolean indicating whether help texts are shown or not.
     @State private var showHelp: Bool = false
     /// Items to display.
@@ -88,12 +86,8 @@ struct AppList<T: NSManagedObject>: View {
  */
 fileprivate struct SimpleList<T: NSManagedObject>: View {
     
-    
-    
     // MARK: - Properties
     
-    /// The ViewModel.
-    @EnvironmentObject private var game: GameViewModel
     /// Items to display.
     private let items: [T]
     /// Text to display if items property is empty.
@@ -267,7 +261,7 @@ fileprivate struct PerformancesList<T: NSManagedObject>: View {
     var body: some View {
         Group {
             ForEach(performances, id: \.description) { performance in
-                PerformanceCell(performance: performance)
+                PerformanceCell(performance)
                     .canBeDeleted {
                         if let source = source {
                             // delete performance for the athletic

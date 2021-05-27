@@ -15,8 +15,6 @@ struct SportCell: View {
     
     // MARK: - Properties
     
-    /// The ViewModel.
-    @EnvironmentObject private var game: GameViewModel
     /// The sport.
     private let sport: Sport
     
