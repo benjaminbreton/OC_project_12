@@ -20,7 +20,7 @@ struct GeneralSettings: View {
             SettingsDatePicker(title: "settings.date.title".localized, date: $date, range: .afterToday, explanations: "settings.date.explanations".localized)
             SettingsTextfield(
                 title: "settings.conversion.title".localized,
-                placeHolder: "points.title".localized,
+                placeholder: "points.title".localized,
                 value: $moneyConversion,
                 keyboard: .numberPad,
                 explanations: "\("settings.conversion.explanations1".localized)\(moneyName)\("settings.conversion.explanations2".localized)\(moneyName).",

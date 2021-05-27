@@ -6,17 +6,31 @@
 //
 
 import SwiftUI
+/**
+ Settings module used to set a value of a sport unity type.
+ */
 struct SettingsSportValue: View {
-    let placeholder: String
-    var unity: Sport.UnityType? {
+    
+    // MARK: - Properties
+    
+    /// The choosen value.
+    @Binding private var value: [String]
+    /// The placeholder to display.
+    private let placeholder: String
+    /// The value's unity type.
+    private var unity: Sport.UnityType? {
         didSet {
             value = ["", "", ""]
         }
     }
-    @Binding var value: [String]
+    /// The possible callers.
     enum Caller: Equatable { case sport, performance }
-    let caller: Caller
-    let pointsConversion: Int64
+    /// The module's caller.
+    private let caller: Caller
+    /// The conversion from the value to points.
+    private let pointsConversion: Int64
+    
+    // MARK: - Init
     
     init(placeholder: String, unity: Sport.UnityType?, pointsConversion: Binding<[String]>, caller: Caller, existingPointsConversion: Int64? = nil) {
         self.placeholder = placeholder
@@ -26,8 +40,11 @@ struct SettingsSportValue: View {
         self.pointsConversion = existingPointsConversion ?? 0
     }
     
+    // MARK: - Body
+    
     var body: some View {
         ZStack {
+            // display value fields regarding the unity type and the caller
             if let sportUnity = unity {
                 HStack {
                     switch sportUnity {
@@ -58,7 +75,8 @@ struct SettingsSportValue: View {
         }
         .frame(height: ViewCommonSettings().textLineHeight)
         .keyboardType(.numberPad)
-        .inModule(caller == .sport ? "sportValue.sportTitle".localized : "sportValue.performanceTitle".localized, explanations: caller == .sport ? unity?.explanations : nil)
+        .inModule(caller == .sport ? "sportValue.sportTitle".localized : "sportValue.performanceTitle".localized,
+                  explanations: caller == .sport ? unity?.explanations : nil)
     }
 }
 

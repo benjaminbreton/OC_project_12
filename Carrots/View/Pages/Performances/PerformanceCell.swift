@@ -28,7 +28,6 @@ struct PerformanceCell: View {
     var body: some View {
         HStack(alignment: .center) {
             SportIcon(icon: performance.initialSportIcon ?? "", lineCount: lineCount)
-                .frame(width: rowHeight, height: rowHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             CommonWidthSpacer()
             VStack(alignment: .leading) {
                 Text(performance.formattedDate)

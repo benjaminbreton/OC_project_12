@@ -8,102 +8,169 @@
 import SwiftUI
 import UIKit
 
+// MARK: - Displayed module
+
+/**
+ Settings module used to choose an athletic's image.
+ */
 struct SettingsAthleticImagePicker: View {
-    @Binding var image: UIImage?
-    var body: some View {
-        AthleticImageWithButtons(image: _image, radius: ViewCommonSettings().commonSizeBase * 8)
-            .inCenteredModule("image.title".localized)
-    }
-}
-fileprivate struct AthleticImageWithButtons: View {
-    @Binding var image: UIImage?
-    let radius: CGFloat
+    
+    // MARK: - Properties
+    
+    /// Selected image
+    @Binding private var image: UIImage?
+    /// Boolean indicating whether the picker is shown, or not.
     @State private var isShowPicker: Bool = false
+    /// Source of the image.
     @State private var source: UIImagePickerController.SourceType? {
         didSet {
+            // when the source is selected, present the picker
             isShowPicker = true
         }
     }
+    /// Radius used to determinate image's size.
+    private let radius: CGFloat = ViewCommonSettings().commonSizeBase * 8
+    
+    // MARK: - Init
+    
+    init(image: Binding<UIImage?>) {
+        self._image = image
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
-        let sizeMultiplier: CGFloat = 0.4
-        return ZStack(alignment: .center) {
+        ZStack(alignment: .center) {
+            // selected image
             AthleticImage(image: image, radius: radius)
+            // buttons to select an image ...
             VStack(alignment: .center) {
                 Spacer()
-                    .frame(width: radius * 2, height: radius * 1.7, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 HStack {
+                    // ... in the phone's library
                     AthleticImageButton("photo") {
                         self.source = .photoLibrary
                     }
                     Spacer()
-                        .frame(width: radius * (2 - sizeMultiplier * 2), height: radius * 0.3, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    // ... with the camera
                     AthleticImageButton("camera") {
                         self.source = .camera
                     }
                 }
             }
-            .frame(width: radius * 2, height: radius * 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         }
+        // present the UIPicker regarding the source
         .sheet(isPresented: $isShowPicker, content: {
             ImagePicker(sourceType: $source, selectedImage: $image)
         })
+        .inCenteredModule("image.title".localized)
     }
 }
 
+// MARK: - Athletic Image Button
+
+/**
+ Buttons to select a picker : library or camera.
+ */
 fileprivate struct AthleticImageButton: View {
-    let name: String
-    let action: () -> Void
+    
+    // MARK: - Properties
+    
+    /// Button's picture's name.
+    private let name: String
+    /// Action to perform when button is hitten.
+    private let action: () -> Void
+    
+    // MARK: - Init
+    
     init(_ name: String, action: @escaping () -> Void) {
         self.name = name
         self.action = action
     }
+    
+    // MARK: - Body
+    
     var body: some View {
         Image(systemName: name)
-            .resizable()
-            .font(.largeTitle)
-            .foregroundColor(.link)
+            .withAthleticButtonFont()
             .inButton(action: action)
     }
 }
 
+// MARK: - UIImagePicker
+
+/**
+ View builded with an UIImagePickerController.
+ */
 fileprivate struct ImagePicker: UIViewControllerRepresentable {
     
-    @Binding var sourceType: UIImagePickerController.SourceType?
-    @Binding var selectedImage: UIImage?
+    // MARK: - Properties
+    
+    /// Used to dismiss picker.
     @Environment(\.presentationMode) private var presentationMode
- 
+    /// The selected source by the user : library or camera.
+    @Binding var sourceType: UIImagePickerController.SourceType?
+    /// The selected image.
+    @Binding var selectedImage: UIImage?
+    
+    // MARK: - Init
+    
+    init(sourceType: Binding<UIImagePickerController.SourceType?>, selectedImage: Binding<UIImage?>) {
+        self._sourceType = sourceType
+        self._selectedImage = selectedImage
+    }
+    
+    // MARK: - UIViewController
+    
+    /**
+     Create the picker with the selected source.
+     */
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
- 
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType ?? .camera
         imagePicker.delegate = context.coordinator
- 
         return imagePicker
     }
- 
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
- 
-    }
+    /**
+     Update the picker.
+     */
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) { }
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
+    // MARK: - Coordinator
     
+    /**
+     Create the coordinator.
+     */
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+    /**
+     Picker's coordinator, used to know when an image has been selected.
+     */
     final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-     
-        var parent: ImagePicker
-     
+        
+        // MARK: - Properties
+        
+        /// Coordinator's parent, aka the picker.
+        private var parent: ImagePicker
+        
+        // MARK: - Init
+        
         init(_ parent: ImagePicker) {
             self.parent = parent
         }
-     
+        
+        // MARK: - PickerController
+        
+        /**
+         Method called when an image has been selected.
+         */
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-     
+            // get the image
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                // set the selected image as the parent's selected image
                 parent.selectedImage = image
             }
-     
+            // dismiss the picker
             parent.presentationMode.wrappedValue.dismiss()
         }
     }

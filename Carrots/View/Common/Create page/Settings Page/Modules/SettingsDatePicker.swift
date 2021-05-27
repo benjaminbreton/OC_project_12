@@ -6,17 +6,24 @@
 //
 
 import SwiftUI
+/**
+ Present a date picker in a settings module.
+ */
 struct SettingsDatePicker: View {
     
     // MARK: - Properties
     
-    let title: String
+    /// The selected date.
     @Binding var date: Date
+    /// The module's title.
+    let title: String
+    /// The range in which the date can be choosen.
     let range: DateRange
-    let explanations: String?
     enum DateRange {
         case afterToday, beforeToday, any
     }
+    /// Explanations to display about the choice.
+    let explanations: String?
     
     // MARK: - Init
     
@@ -31,6 +38,7 @@ struct SettingsDatePicker: View {
     
     var body: some View {
         Group {
+            // display the date picker regarding the range
             switch range {
             case .afterToday:
                 DatePicker(selection: _date, in: Date()..., displayedComponents: .date) {

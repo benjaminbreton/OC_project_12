@@ -16,5 +16,6 @@ struct SportIcon: View {
             Text(icon)
                 .withSportIconFont(lineCount: lineCount)
         }
+        .frame(width: ViewCommonSettings().textLineHeight * lineCount, height: ViewCommonSettings().textLineHeight * lineCount)
     }
 }

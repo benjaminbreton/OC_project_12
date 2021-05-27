@@ -37,7 +37,7 @@ struct SportSettings: View {
         VStack {
             SettingsTextfield(
                 title: "all.name".localized,
-                placeHolder: "all.name".localized,
+                placeholder: "all.name".localized,
                 value: $name,
                 keyboard: .default,
                 isWrong: $isNameEmpty,
@@ -54,7 +54,7 @@ struct SportSettings: View {
                 unity: unity.count == 1 ? unity[0] : nil,
                 pointsConversion: $pointsConversion,
                 caller: .sport)
-            SettingsSportIconPicker(icon: $icon)
+            SettingsSportIconPicker($icon)
         }
         .inSettingsPage(
             name == "" ? "sports.settings.new".localized:"\(name)",

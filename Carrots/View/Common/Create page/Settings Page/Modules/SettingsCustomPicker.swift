@@ -9,29 +9,30 @@ import SwiftUI
 
 // MARK: - SettingsCustomPicker
 
-
+/**
+ UIPickerView used in a settings module.
+ */
 struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     
     // MARK: - Properties
     
-    @State var selectionIndex: Int? = nil
-    @Binding var selectedObjects: [T]
-    let titleOne: String
-    let titleMany: String
-    let data: [T]
-    let maximumSelection: Int
-    let lineCount: CGFloat
+    /// The selected element's index.
+    @State private var selectionIndex: Int? = nil
+    /// The selected objects.
+    @Binding private var selectedObjects: [T]
+    /// Element's name in singular.
+    private let titleOne: String
+    /// Element's name in plurial.
+    private let titleMany: String
+    /// All elements which could be selected.
+    private let data: [T]
+    /// Maximum number of elements which can be selected.
+    private let maximumSelection: Int
+    /// Number of lines of the textview in which selected elements will be displayed.
+    private let lineCount: CGFloat
     
     // MARK: - Init
     
-    /**
-     UITextView used to select datas from a UIPickerView.
-     - parameter selectedObjects: Binding array containing selected objects by the user.
-     - parameter title: Ocjects name.
-     - parameter data: Objects list to display in the pickeview.
-     - parameter maximumSelection: Maximum number of objects which can be selected by the user.
-     - parameter lineCount: Number of lines of the textview.
-     */
     init(titleOne: String, titleMany: String, data: [T], selectedObjects: Binding<[T]>, maximumSelection: Int, lineCount: CGFloat) {
         self.titleOne = titleOne
         self.titleMany = titleMany
@@ -56,13 +57,18 @@ fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
     
     // MARK: - Properties
     
+    /// The selected element's index.
     @Binding private var selectionIndex: Int?
+    /// The selected objects.
     @Binding private var selectedObjects: [T]
+    /// All elements which could be selected.
     private let data: [T]
+    /// UITextview in which selected elements will be displayed.
     private let textView: PickerTextView<T>
+    /// The default text in the textview.
     private let defaultText: String
+    /// Maximum number of elements which can be selected.
     private let maximumSelection: Int
-
     
     // MARK: - Init
     
@@ -80,19 +86,19 @@ fileprivate struct PickerView<T: CustomStringConvertible>: UIViewRepresentable {
         textView.text = "\("picker.chooseClick".localized)"
         textView.textAlignment = .center
     }
-
+    
     // MARK: - UIView methods
     
     func makeUIView(context: UIViewRepresentableContext<PickerView>) -> UITextView {
         //textField.placeholder = placeholder
         return textView
     }
-
+    
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PickerView>) {
         guard selectionIndex != nil else { return }
         uiView.text = selectedObjects.count == 0 ? defaultText : selectedObjects.map({ "\($0.description)" }).joined(separator: ", ")
     }
-
+    
     
 }
 
@@ -102,9 +108,13 @@ fileprivate class PickerTextView<T: CustomStringConvertible>: UITextView, UIPick
     
     // MARK: - Properties
     
+    /// The selected element's index.
     @Binding private var selectionIndex: Int?
+    /// The selected objects.
     @Binding private var selectedObjects: [T]
+    /// All elements which could be selected.
     private let data: [T]
+    /// Maximum number of elements which can be selected.
     private let maximumSelection: Int
     /// Pickerview to display when textview is selected.
     private lazy var pickerView: UIPickerView = {
@@ -159,12 +169,12 @@ fileprivate class PickerTextView<T: CustomStringConvertible>: UITextView, UIPick
         isScrollEnabled = true
         backgroundColor = .clear
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Toolbar's buttons actions
     
     /// Add the selected object  in the list.

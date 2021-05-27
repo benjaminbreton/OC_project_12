@@ -30,7 +30,7 @@ struct AthleticSettings: View {
     
     var body: some View {
         VStack {
-            SettingsTextfield(title: "all.name".localized, placeHolder: "all.name".localized, value: $name, keyboard: .default, explanations: nil, isWrong: $isNameEmpty, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "athletics.settings.nameLimit".localized, maxCount: nil))
+            SettingsTextfield(title: "all.name".localized, placeholder: "all.name".localized, value: $name, keyboard: .default, explanations: nil, isWrong: $isNameEmpty, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "athletics.settings.nameLimit".localized, maxCount: nil))
             SettingsAthleticImagePicker(image: $image)
         }
         .inSettingsPage(
