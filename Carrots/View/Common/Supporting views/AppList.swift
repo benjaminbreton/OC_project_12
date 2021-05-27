@@ -60,7 +60,9 @@ struct AppList<T: NSManagedObject>: View {
                 if items.count > 0 {
                     if let commonPot = commonPot {
                         PotCell(pot: commonPot)
-                            .withNavigationLink(destination: PotAddings(pot: commonPot))
+                            .inNavigationLink(
+                                PotAddings(pot: commonPot)
+                            )
                     }
                     if let title = title {
                         Text(title)

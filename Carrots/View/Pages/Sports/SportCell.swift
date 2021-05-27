@@ -39,8 +39,8 @@ struct SportCell: View {
             .frame(height: rowHeight)
         }
         .inRectangle(.leading)
-        .withNavigationLink(destination:
-                                SportDetails(sport: sport)
+        .inNavigationLink(
+            SportDetails(sport: sport)
         )
         
     }

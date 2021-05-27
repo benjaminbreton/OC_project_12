@@ -6,13 +6,30 @@
 //
 
 import SwiftUI
+/**
+ The button used in navigation bars.
+ */
 struct NavigationBarButton<T: View>: View {
-    let image: String
-    let destination: T
+    
+    // MARK: - Properties
+    
+    /// Button's image's system name.
+    private let image: String
+    /// The destination to reach when the button is hitten.
+    private let destination: T
+    
+    // MARK: - Init
+    
+    init(image: String, destination: T) {
+        self.image = image
+        self.destination = destination
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
         Image(systemName: image)
-            .foregroundColor(.link)
-            .font(.largeTitle)
-            .withNavigationLink(destination: destination)
+            .withNavigationButtonFont()
+            .inNavigationLink(destination)
     }
 }

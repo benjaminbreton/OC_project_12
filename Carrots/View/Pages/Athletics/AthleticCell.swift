@@ -35,8 +35,8 @@ struct AthleticCell: View {
         }
         .frame(height: ViewCommonSettings().commonSizeBase * 4)
         .inRectangle(.leading)
-        .withNavigationLink(
-            destination: AthleticDetails(athletic: athletic)
+        .inNavigationLink(
+            AthleticDetails(athletic: athletic)
         )
         
     }

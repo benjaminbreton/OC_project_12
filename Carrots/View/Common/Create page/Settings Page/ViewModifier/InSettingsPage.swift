@@ -83,7 +83,7 @@ fileprivate struct InSettingsPage: ViewModifier {
                 }
             }
         }
-        .inNavigationPageView(title: title)
+        .inNavigationPage(title)
         .closeKeyboardOnTap()
         .alert(isPresented: $showAlert) {
             // show alert

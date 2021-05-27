@@ -47,8 +47,8 @@ struct PotCell: View {
         }
         .padding()
         .inCellRectangle()
-        .withNavigationLink(
-            destination: PotAddings(pot: pot)
+        .inNavigationLink(
+            PotAddings(pot: pot)
         )
     }
 }

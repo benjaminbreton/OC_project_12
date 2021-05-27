@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - ViewModifiers
 
-fileprivate struct AthleticButtonFont: ViewModifier {
+fileprivate struct NavigationButtonFont: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(ViewCommonSettings().titleFontName, size: ViewCommonSettings().navigationTitleFontSize))
@@ -108,7 +108,7 @@ extension View {
     func withDeleteFont() -> some View {
         modifier(DeleteFont())
     }
-    func withAthleticButtonFont() -> some View {
-        modifier(AthleticButtonFont())
+    func withNavigationButtonFont() -> some View {
+        modifier(NavigationButtonFont())
     }
 }

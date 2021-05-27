@@ -82,10 +82,10 @@
 		03DD81FB261F00390028A0A5 /* InCellRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FA261F00390028A0A5 /* InCellRectangle.swift */; };
 		03DD81FF261F00520028A0A5 /* InRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD81FE261F00520028A0A5 /* InRectangle.swift */; };
 		03DD8203261F00620028A0A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8202261F00620028A0A5 /* Fonts.swift */; };
-		03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD820B261F01190028A0A5 /* NavigationPageView.swift */; };
+		03DD820C261F01190028A0A5 /* InNavigationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD820B261F01190028A0A5 /* InNavigationPage.swift */; };
 		03DD8212261F013C0028A0A5 /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8211261F013C0028A0A5 /* GeneralSettings.swift */; };
 		03DD8216261F01620028A0A5 /* PotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8215261F01620028A0A5 /* PotCell.swift */; };
-		03DD821A261F01870028A0A5 /* WithNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8219261F01870028A0A5 /* WithNavigationLink.swift */; };
+		03DD821A261F01870028A0A5 /* InNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8219261F01870028A0A5 /* InNavigationLink.swift */; };
 		03DD8222261F01D60028A0A5 /* PotAddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8221261F01D60028A0A5 /* PotAddings.swift */; };
 		03DD8226261F0A540028A0A5 /* InButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD8225261F0A540028A0A5 /* InButton.swift */; };
 		03DD822B261F23960028A0A5 /* AthleticsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD822A261F23960028A0A5 /* AthleticsHome.swift */; };
@@ -192,10 +192,10 @@
 		03DD81FA261F00390028A0A5 /* InCellRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InCellRectangle.swift; sourceTree = "<group>"; };
 		03DD81FE261F00520028A0A5 /* InRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InRectangle.swift; sourceTree = "<group>"; };
 		03DD8202261F00620028A0A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		03DD820B261F01190028A0A5 /* NavigationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPageView.swift; sourceTree = "<group>"; };
+		03DD820B261F01190028A0A5 /* InNavigationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InNavigationPage.swift; sourceTree = "<group>"; };
 		03DD8211261F013C0028A0A5 /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		03DD8215261F01620028A0A5 /* PotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotCell.swift; sourceTree = "<group>"; };
-		03DD8219261F01870028A0A5 /* WithNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithNavigationLink.swift; sourceTree = "<group>"; };
+		03DD8219261F01870028A0A5 /* InNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InNavigationLink.swift; sourceTree = "<group>"; };
 		03DD8221261F01D60028A0A5 /* PotAddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotAddings.swift; sourceTree = "<group>"; };
 		03DD8225261F0A540028A0A5 /* InButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InButton.swift; sourceTree = "<group>"; };
 		03DD822A261F23960028A0A5 /* AthleticsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticsHome.swift; sourceTree = "<group>"; };
@@ -501,8 +501,8 @@
 		034FC138262EC6B10081ADB2 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				03DD8219261F01870028A0A5 /* WithNavigationLink.swift */,
-				03DD820B261F01190028A0A5 /* NavigationPageView.swift */,
+				03DD8219261F01870028A0A5 /* InNavigationLink.swift */,
+				03DD820B261F01190028A0A5 /* InNavigationPage.swift */,
 				03648EB3263C01E8004EE0AA /* InNavigationHome.swift */,
 				034FC13B262EC71A0081ADB2 /* NavigationBarButton.swift */,
 			);
@@ -858,7 +858,7 @@
 				03264BFB26208E4C003F6429 /* SportSettings.swift in Sources */,
 				030EA01F26540AF4006CA0A0 /* HelpView.swift in Sources */,
 				03CAE4672641259400C9309D /* InModule.swift in Sources */,
-				03DD820C261F01190028A0A5 /* NavigationPageView.swift in Sources */,
+				03DD820C261F01190028A0A5 /* InNavigationPage.swift in Sources */,
 				0383212126088DEF003EE886 /* ApplicationErrors.swift in Sources */,
 				03C5649F26302FD20056756A /* AthleticDetails.swift in Sources */,
 				03264BDE26203EB5003F6429 /* AthleticSettings.swift in Sources */,
@@ -893,7 +893,7 @@
 				0335034726384CDB00E2BD99 /* DetailsPerformancesDisplayer.swift in Sources */,
 				03DD8216261F01620028A0A5 /* PotCell.swift in Sources */,
 				034FC152262F13D20081ADB2 /* DetailsEvolutionGraph.swift in Sources */,
-				03DD821A261F01870028A0A5 /* WithNavigationLink.swift in Sources */,
+				03DD821A261F01870028A0A5 /* InNavigationLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,7 +49,7 @@ fileprivate struct InDetailsPage<T: View>: ViewModifier {
                         .withBigTitleFont()
                     // edit button
                     Image(systemName: "square.and.pencil")
-                        .withNavigationLink(destination: destinationToModify)
+                        .inNavigationLink(destinationToModify)
                         .withLinkFont()
                 }
                 // help
@@ -65,7 +65,7 @@ fileprivate struct InDetailsPage<T: View>: ViewModifier {
             }
             Divider()
         }
-        .inNavigationPageView(title: navigationTitle)
+        .inNavigationPage(navigationTitle)
     }
 }
 
