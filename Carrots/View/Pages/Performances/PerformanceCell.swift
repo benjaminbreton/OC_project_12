@@ -28,14 +28,14 @@ struct PerformanceCell: View {
     var body: some View {
         HStack(alignment: .center) {
             SportIcon(icon: performance.initialSportIcon ?? "", lineCount: lineCount)
-            CommonWidthSpacer()
+            HorizontalSpacer()
             VStack(alignment: .leading) {
                 Text(performance.formattedDate)
                     .withLightSimpleFont()
-                CommonHeightSpacer(0.5)
+                VerticalSpacer(0.5)
                 Text(performance.formattedValue)
                     .withSimpleFont()
-                CommonHeightSpacer(0.5)
+                VerticalSpacer(0.5)
                 HStack(spacing: 0.7) {
                     ForEach(athleticsToShow) { athletic in
                         AthleticImage(image: UIImage(data: athletic.image ?? Data()), radius: ViewCommonSettings().textLineHeight / 3)

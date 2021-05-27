@@ -12,7 +12,7 @@ struct PotsHome: View {
         let athleticsPots = game.athletics.map({ $0.pot ?? Pot() })
         return VStack {
             AppList(athleticsPots,
-                    placeHolder: "pots.noAthletics".localized,
+                    placeholder: "pots.noAthletics".localized,
                     commonPot: game.commonPot,
                     title: "pots.athleticsPots".localized,
                     helpText: "potsList")

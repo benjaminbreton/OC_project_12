@@ -41,7 +41,7 @@ struct DetailsPerformancesDisplayer: View {
             .inModule("performances.title.maj".localized)
             // Display performances list
             if performances.count > 0 {
-                AppList(performances, placeHolder: "performances.none".localized, withDivider: false, source: source)
+                AppList(performances, placeholder: "performances.none".localized, withDivider: false, source: source)
                     .frame(height: ViewCommonSettings().textLineHeight * 4 * (CGFloat(performances.count + 1)))
 
             }

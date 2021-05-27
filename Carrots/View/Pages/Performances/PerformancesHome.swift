@@ -18,7 +18,7 @@ struct PerformancesHome: View {
         }
     }
     var body: some View {
-        AppList(game.performances, placeHolder: placeholder, helpText: "performancesList")
+        AppList(game.performances, placeholder: placeholder, helpText: "performancesList")
             .inNavigationHome(
                 title: "performances.title".localized,
                 buttonImage: "gauge.badge.plus",

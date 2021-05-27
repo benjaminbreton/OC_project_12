@@ -28,10 +28,10 @@ struct DetailsAthleticPicture: View {
     
     var body: some View {
         VStack {
-            CommonHeightSpacer()
+            VerticalSpacer()
             AthleticImage(image: image, radius: radius)
                 .inCenteredModule()
-            CommonHeightSpacer(5)
+            VerticalSpacer(5)
         }
     }
 }

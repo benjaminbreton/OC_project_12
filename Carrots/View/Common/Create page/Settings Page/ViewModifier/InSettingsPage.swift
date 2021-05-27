@@ -53,7 +53,7 @@ fileprivate struct InSettingsPage: ViewModifier {
     func body(content: Content) -> some View {
         VStack(alignment: .center) {
             Divider()
-            CommonHeightSpacer()
+            VerticalSpacer()
             // help text
             if let text = helpText {
                 HelpView(text: text, isShown: $showHelp)
@@ -154,10 +154,10 @@ fileprivate struct ConfirmButton: View {
     var body: some View {
         VStack {
             Divider()
-            CommonHeightSpacer()
+            VerticalSpacer()
             Text("confirmation.title".localized)
                 .inButton(isDisabled: isDisabled, action: action)
-            CommonHeightSpacer()
+            VerticalSpacer()
             Divider()
         }
     }

@@ -16,7 +16,7 @@ struct AthleticsHome: View {
     // MARK: - Body
     
     var body: some View {
-        AppList(game.athletics, placeHolder: "athletics.none".localized, helpText: "athleticsList")
+        AppList(game.athletics, placeholder: "athletics.none".localized, helpText: "athleticsList")
             .inNavigationHome(
                 title: "athletics.title".localized,
                 buttonImage: "person.crop.circle.badge.plus",

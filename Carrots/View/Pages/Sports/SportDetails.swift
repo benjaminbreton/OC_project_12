@@ -11,9 +11,9 @@ struct SportDetails: View {
     let sport: Sport
     var body: some View {
         VStack {
-            CommonHeightSpacer()
+            VerticalSpacer()
             SportIcon(icon: sport.icon ?? "", lineCount: 5)
-            CommonHeightSpacer(5)
+            VerticalSpacer(5)
             DetailsText(title: "sports.details.unityTitle".localized,
                         texts: [
                             "sports.details.unityTypeTitle".localized: (text: sport.unityInt16.sportUnityType.description, order: 1),
