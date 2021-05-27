@@ -60,17 +60,17 @@ struct GeneralSettings: View {
             self.moneyConversion = game.moneyConversion
             self.showHelp = game.showHelp
         }
-        .inSettingsPage("settings.title".localized,
-                        game: _game,
-                        confirmationButtonIsDisabled: confirmationButtonIsDisabled,
-                        closeAfterMessage: (
-                            title: "settings.alert.title".localized,
-                            message: "settings.alert.message".localized)
+        .inSettingsPage(
+            "settings.title".localized,
+            game: _game,
+            confirmationButtonIsDisabled: confirmationButtonIsDisabled,
+            closeAfterMessage: (
+                title: "settings.alert.title".localized,
+                message: "settings.alert.message".localized)
         ) {
             // confirmation button's action
             game.modifySettings(predictionDate: date, moneyConversion: moneyConversion, showHelp: showHelp)
         }
         .inNavigationHome(title: "settings.title".localized)
-        
     }
 }

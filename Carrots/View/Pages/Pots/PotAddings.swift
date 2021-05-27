@@ -6,30 +6,66 @@
 //
 
 import SwiftUI
+/**
+ Settings page used to add or withdraw money from a pot.
+ */
 struct PotAddings: View {
-    @EnvironmentObject var game: GameViewModel
-    let pot: Pot?
-    @State var selection: Int = 0
-    @State var amount: String = ""
-    @State var amountIsWrong: Bool = false
-    var confirmationButtonIsDisabled: Bool { amountIsWrong }
-    var placeholder: String {
-        selection == 0 ? "pots.addings.addPlaceholder".localized : "pots.addings.withdrawPlaceholder".localized
+    
+    // MARK: - Properties
+    
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
+    /// The selected operation : add or withdraw.
+    @State private var selectedOperation: Int = 0
+    /// The amount to add or withdraw.
+    @State private var amount: String = ""
+    /// Boolean indicating whether an error has been detected or not.
+    @State private var amountIsWrong: Bool = false
+    /// Pot receiving the changes.
+    private let pot: Pot?
+    /// Boolean indicating whether an error has been detected or not, so, whether the confirmation button has be disabled or not.
+    private var confirmationButtonIsDisabled: Bool { amountIsWrong }
+    /// Placeholder to display in the amount's textfield.
+    private var placeholder: String {
+        selectedOperation == 0 ? "pots.addings.addPlaceholder".localized : "pots.addings.withdrawPlaceholder".localized
     }
+    
+    // MARK: - Init
+    
+    init(pot: Pot?) {
+        self.pot = pot
+    }
+    
+    // MARK: - Body
     
     var body: some View {
         VStack {
-            SettingsSegmentedPicker($selection,
-                                    title: "pots.addings.modificationTitle".localized,
-                                    instructions: "pots.addings.modificationInstructions".localized,
-                                    possibilities: ["pots.addings.addTitle".localized, "pots.addings.withdrawTitle".localized])
-            SettingsTextfield(title: "pots.addings.amountTitle".localized, placeholder: placeholder, value: $amount, keyboard: .decimalPad, isWrong: $amountIsWrong, limits: (minCount: 1, maxCount: nil), limitsExplanations: (minCount: "pots.addings.amountLimitMin".localized, maxCount: nil))
+            // module to choose an operation
+            SettingsSegmentedPicker(
+                $selectedOperation,
+                title: "pots.addings.modificationTitle".localized,
+                instructions: "pots.addings.modificationInstructions".localized,
+                possibilities: ["pots.addings.addTitle".localized, "pots.addings.withdrawTitle".localized]
+            )
+            // module to choose an amount
+            SettingsTextfield(
+                title: "pots.addings.amountTitle".localized,
+                placeholder: placeholder,
+                value: $amount,
+                keyboard: .decimalPad,
+                isWrong: $amountIsWrong,
+                limits: (minCount: 1, maxCount: nil),
+                limitsExplanations: (minCount: "pots.addings.amountLimitMin".localized, maxCount: nil)
+            )
         }
-        .inSettingsPage("\(pot?.description ?? "all.noName".localized)",
-                        game: _game,
-                        confirmationButtonIsDisabled: confirmationButtonIsDisabled,
-                        helpText: "potsAddings") {
-            game.changeMoney(for: pot?.owner, amount: amount, operation: selection)
+        .inSettingsPage(
+            "\(pot?.description ?? "all.noName".localized)",
+            game: _game,
+            confirmationButtonIsDisabled: confirmationButtonIsDisabled,
+            helpText: "potsAddings"
+        ) {
+            // confirmation button's action
+            game.changeMoney(for: pot?.owner, amount: amount, operation: selectedOperation)
         }
     }
 }

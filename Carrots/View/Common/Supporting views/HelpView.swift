@@ -35,35 +35,32 @@ struct HelpView: View {
     // MARK: - Body
     
     var body: some View {
-        // use a group to display a view since help can be disabled
-        Group {
-            // add something in the group if help is enabled
-            if hasToBeShown {
-                Button(action: {
-                    // when help's frame is hitten, toggle the text visibility
-                    isShown.toggle()
-                }, label: {
-                    // help's frame
-                    VStack {
-                        // title
-                        HStack {
-                            Image(systemName: "questionmark.diamond.fill")
-                            Text("\(isShown ? "help.title".localized : "help.proposal".localized)")
-                        }
-                        // text if it has to be shown
-                        if isShown {
-                            VerticalSpacer()
-                            Text(completeText)
-                                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                            VerticalSpacer()
-                            Text("help.end".localized)
-                        }
+        // add something in the group if help is enabled
+        if hasToBeShown {
+            Button(action: {
+                // when help's frame is hitten, toggle the text visibility
+                isShown.toggle()
+            }, label: {
+                // help's frame
+                VStack {
+                    // title
+                    HStack {
+                        Image(systemName: "questionmark.diamond.fill")
+                        Text("\(isShown ? "help.title".localized : "help.proposal".localized)")
                     }
-                    .inRectangle(.leading)
-                    .withLightSimpleFont()
-                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                })
-            }
+                    // text if it has to be shown
+                    if isShown {
+                        VerticalSpacer()
+                        Text(completeText)
+                            .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        VerticalSpacer()
+                        Text("help.end".localized)
+                    }
+                }
+                .inRectangle(.leading)
+                .withLightSimpleFont()
+                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            })
         }
     }
 }

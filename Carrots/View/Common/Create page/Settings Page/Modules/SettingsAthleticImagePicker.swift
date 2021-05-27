@@ -92,7 +92,7 @@ fileprivate struct AthleticImageButton: View {
     
     var body: some View {
         Image(systemName: name)
-            .withNavigationButtonFont()
+            .withAthleticImageButtonFont()
             .inButton(action: action)
     }
 }

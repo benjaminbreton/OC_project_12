@@ -6,16 +6,32 @@
 //
 
 import SwiftUI
+/**
+ The view displaying all pots.
+ */
 struct PotsHome: View {
-    @EnvironmentObject var game: GameViewModel
+    
+    // MARK: - Property
+    
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
+    
+    // MARK: - Body
+    
     var body: some View {
+        // get all athletics pots
         let athleticsPots = game.athletics.map({ $0.pot ?? Pot() })
+        // return the list
         return VStack {
-            AppList(athleticsPots,
-                    placeholder: "pots.noAthletics".localized,
-                    commonPot: game.commonPot,
-                    title: "pots.athleticsPots".localized,
-                    helpText: "potsList")
+            // the list
+            AppList(
+                athleticsPots,
+                placeholder: "pots.noAthletics".localized,
+                commonPot: game.commonPot,
+                title: "pots.athleticsPots".localized,
+                helpText: "potsList"
+            )
+            // the pots amount warning
             PotsWarning()
         }
         .inNavigationHome(title: "pots.title".localized)

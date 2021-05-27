@@ -12,6 +12,13 @@ import SwiftUI
 fileprivate struct NavigationButtonFont: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .font(.custom(ViewCommonSettings().titleFontName, size: ViewCommonSettings().bigTitleFontSize))
+            .foregroundColor(.link)
+    }
+}
+fileprivate struct AthleticImageButtonFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
             .font(.custom(ViewCommonSettings().titleFontName, size: ViewCommonSettings().navigationTitleFontSize))
             .foregroundColor(.link)
     }
@@ -110,5 +117,8 @@ extension View {
     }
     func withNavigationButtonFont() -> some View {
         modifier(NavigationButtonFont())
+    }
+    func withAthleticImageButtonFont() -> some View {
+        modifier(AthleticImageButtonFont())
     }
 }
