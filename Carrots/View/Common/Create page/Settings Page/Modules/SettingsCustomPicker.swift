@@ -45,9 +45,25 @@ struct SettingsCustomPicker<T: CustomStringConvertible>: View {
     // MARK: - View
     
     var body: some View {
-        PickerView(titleOne: titleOne, titleMany: titleMany, data: data, selectionIndex: $selectionIndex, selectedObjects: _selectedObjects, maximumSelection: maximumSelection)
-            .frame(height: ViewCommonSettings().textLineHeight * lineCount)
-            .inModule(titleMany)
+        PickerView(
+            titleOne: titleOne,
+            titleMany: titleMany,
+            data: data,
+            selectionIndex: $selectionIndex,
+            selectedObjects: _selectedObjects,
+            maximumSelection: maximumSelection
+        )
+        .onAppear {
+            if selectedObjects.count == 1 {
+                for index in data.indices {
+                    if data[index].description == selectedObjects[0].description {
+                        selectionIndex = index
+                    }
+                }
+            }
+        }
+        .frame(height: ViewCommonSettings().textLineHeight * lineCount)
+        .inModule(titleMany)
     }
 }
 
@@ -230,6 +246,12 @@ fileprivate class PickerTextView<T: CustomStringConvertible>: UITextView, UIPick
     // MARK: - UIPickerView methods
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if selectionIndex == nil {
+            selectionIndex = 0
+            if maximumSelection == 1 {
+                selectedObjects = [data[0]]
+            }
+        }
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
