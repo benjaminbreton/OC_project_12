@@ -35,10 +35,12 @@ fileprivate struct InSettingsPage: ViewModifier {
     private var closeAfter: Bool
     /// Message to display if the page does not have to be dismissed when confirmation button has been hitten.
     private var closeAfterMessage: (title: String, message: String)?
+    /// Boolean indicating whether the settings page is the first tab's page or not.
+    private var isHomePage: Bool
     
     // MARK: - Init
     
-    init(title: String, game: EnvironmentObject<GameViewModel>, confirmationIsDisabled: Bool?, helpText: String?, closeAfterMessage: (title: String, message: String)?, confirmAction: @escaping () -> Void) {
+    init(title: String, game: EnvironmentObject<GameViewModel>, confirmationIsDisabled: Bool?, helpText: String?, closeAfterMessage: (title: String, message: String)?, isHomePage: Bool, confirmAction: @escaping () -> Void) {
         self.title = title
         self.confirmAction = confirmAction
         self.confirmationIsDisabled = confirmationIsDisabled
@@ -46,6 +48,7 @@ fileprivate struct InSettingsPage: ViewModifier {
         self.helpText = helpText
         self.closeAfter = closeAfterMessage == nil
         self.closeAfterMessage = closeAfterMessage
+        self.isHomePage = isHomePage
     }
     
     // MARK: - Body
@@ -83,7 +86,7 @@ fileprivate struct InSettingsPage: ViewModifier {
                 }
             }
         }
-        .inNavigationPage(title)
+        .inSettingsNavigationHandler(title, isHomePage: isHomePage)
         .closeKeyboardOnTap()
         .alert(isPresented: $showAlert) {
             // show alert
@@ -110,6 +113,41 @@ fileprivate struct InSettingsPage: ViewModifier {
     }
 }
 
+// MARK: - Navigation handler
+
+/**
+ Check if the settings page is the first page in the tab and place it in a navigationPage or a navigationHome.
+ */
+fileprivate struct InSettingsNavigationHandler: ViewModifier {
+    
+    // MARK: - Properties
+    
+    /// Boolean indicating whether the settings page is the first tab's page or not.
+    private let isHomePage: Bool
+    /// Title to display in the navigation bar.
+    private let title: String
+    
+    // MARK: - Init
+    
+    init(isHomePage: Bool, title: String) {
+        self.isHomePage = isHomePage
+        self.title = title
+    }
+    
+    // MARK: - Body
+    
+    func body(content: Content) -> some View {
+        Group {
+            switch isHomePage {
+            case true:
+                content.inNavigationHome(title: title)
+            case false:
+                content.inNavigationPage(title)
+            }
+        }
+    }
+}
+
 // MARK: - View's extension
 
 extension View {
@@ -120,11 +158,20 @@ extension View {
      - parameter confirmationButtonIsDisabled: Boolean indicating whether the confirmation button is disabled or not.
      - parameter helpText: The text to display if user asked for help.
      - parameter closeAfterMessage: Tuple containing the *title* and the *message* to display if the page does not have to be dismissed when confirmation button has been hitten.
+     - parameter isHomePage: Boolean indicating whether the settings page is the first tab's page or not.
      - parameter confirmAction: Action to perform if the confirmation button is hitten.
      - returns: The created settings page.
      */
-    func inSettingsPage(_ title: String, game: EnvironmentObject<GameViewModel>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, closeAfterMessage: (title: String, message: String)? = nil, confirmAction: @escaping () -> Void) -> some View {
-        modifier(InSettingsPage(title: title, game: game, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, closeAfterMessage: closeAfterMessage, confirmAction: confirmAction))
+    func inSettingsPage(_ title: String, game: EnvironmentObject<GameViewModel>, confirmationButtonIsDisabled: Bool? = nil, helpText: String? = nil, closeAfterMessage: (title: String, message: String)? = nil, isHomePage: Bool = false, confirmAction: @escaping () -> Void) -> some View {
+        modifier(InSettingsPage(title: title, game: game, confirmationIsDisabled: confirmationButtonIsDisabled, helpText: helpText, closeAfterMessage: closeAfterMessage, isHomePage: isHomePage, confirmAction: confirmAction))
+    }
+    /**
+     Check if the settings page is the first page in the tab and place it in a navigationPage or a navigationHome.
+     - parameter title: The navigation bar's title.
+     - parameter isHomePage: Boolean indicating whether the settings page is the first tab's page or not.
+     */
+    fileprivate func inSettingsNavigationHandler(_ title: String, isHomePage: Bool) -> some View {
+        modifier(InSettingsNavigationHandler(isHomePage: isHomePage, title: title))
     }
 }
 
@@ -156,7 +203,10 @@ fileprivate struct ConfirmButton: View {
             Divider()
             VerticalSpacer()
             Text("confirmation.title".localized)
-                .inButton(isDisabled: isDisabled, action: action)
+                .inButton(isDisabled: isDisabled) {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    action()
+                }
             VerticalSpacer()
             Divider()
         }

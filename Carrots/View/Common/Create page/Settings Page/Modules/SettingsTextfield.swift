@@ -74,7 +74,7 @@ class TextFieldValue: ObservableObject {
     // MARK: - Limits typealias
     
     /// Characters count limits for the setted value.
-    typealias Limits = (minCount: Int?, maxCount:Int?)?
+    typealias Limits = (minCount: Int?, maxCount: Int?)?
     /// Explanations to display if limits have been surpassed.
     typealias LimitsExplanations = (minCount: String?, maxCount: String?)?
     

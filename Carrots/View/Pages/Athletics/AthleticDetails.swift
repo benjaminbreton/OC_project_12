@@ -13,6 +13,8 @@ struct AthleticDetails: View {
     
     // MARK: - Properties
     
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
     /// Choosen athletic.
     private let athletic: Athletic
     /// Athletic's image.

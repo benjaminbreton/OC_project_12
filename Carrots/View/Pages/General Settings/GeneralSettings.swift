@@ -66,11 +66,11 @@ struct GeneralSettings: View {
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
             closeAfterMessage: (
                 title: "settings.alert.title".localized,
-                message: "settings.alert.message".localized)
+                message: "settings.alert.message".localized),
+            isHomePage: true
         ) {
             // confirmation button's action
             game.modifySettings(predictionDate: date, moneyConversion: moneyConversion, showHelp: showHelp)
         }
-        .inNavigationHome(title: "settings.title".localized)
     }
 }

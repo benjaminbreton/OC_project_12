@@ -44,14 +44,17 @@ struct SettingsDatePicker: View {
                 DatePicker(selection: _date, in: Date()..., displayedComponents: .date) {
                     Text("date.ask".localized)
                 }
+                .fixedSize(horizontal: false, vertical: true)
             case .beforeToday:
                 DatePicker(selection: _date, in: ...Date(), displayedComponents: .date) {
                     Text("date.ask".localized)
                 }
+                .fixedSize(horizontal: false, vertical: true)
             case .any:
                 DatePicker(selection: _date, displayedComponents: .date) {
                     Text("date.ask".localized)
                 }
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .inModule(title, explanations: explanations)

@@ -13,6 +13,8 @@ struct PerformanceCell: View {
     
     // MARK: - Properties
     
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
     /// The performance to display.
     private let performance: Performance
     /// Boolean indicating whether the maximum number of athletics to display in a cell has been reached or not.

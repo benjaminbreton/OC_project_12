@@ -13,6 +13,8 @@ struct SportDetails: View {
     
     // MARK: - Properties
     
+    /// The ViewModel.
+    @EnvironmentObject private var game: GameViewModel
     /// The choosen sport.
     private let sport: Sport
     /// The choosen sport's unity type's value's localized title.
