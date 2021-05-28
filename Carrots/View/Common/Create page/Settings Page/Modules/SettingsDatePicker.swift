@@ -41,12 +41,12 @@ struct SettingsDatePicker: View {
             // display the date picker regarding the range
             switch range {
             case .afterToday:
-                DatePicker(selection: _date, in: Date()..., displayedComponents: .date) {
+                DatePicker(selection: _date, in: Date().tomorrow..., displayedComponents: .date) {
                     Text("date.ask".localized)
                 }
                 .fixedSize(horizontal: false, vertical: true)
             case .beforeToday:
-                DatePicker(selection: _date, in: ...Date(), displayedComponents: .date) {
+                DatePicker(selection: _date, in: ...Date().yesterday, displayedComponents: .date) {
                     Text("date.ask".localized)
                 }
                 .fixedSize(horizontal: false, vertical: true)

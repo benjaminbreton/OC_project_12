@@ -26,4 +26,6 @@ extension Date {
     }
     var today: Date { Calendar.current.startOfDay(for: now) }
     var now: Date { self - dayToAdd * 24 * 3600 }
+    var tomorrow: Date { Calendar.current.startOfDay(for: now + 24 * 3600) }
+    var yesterday: Date { Calendar.current.startOfDay(for: now - 24 * 3600) }
 }
