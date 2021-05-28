@@ -58,6 +58,20 @@ fileprivate struct LightSimpleFont: ViewModifier {
             .foregroundColor(.textLight)
     }
 }
+fileprivate struct AlertBlockTextFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().regularFontSize))
+            .foregroundColor(.alertBlockText)
+    }
+}
+fileprivate struct AlertBlockImageFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom(ViewCommonSettings().regularFontName, size: ViewCommonSettings().bigTitleFontSize))
+            .foregroundColor(.alertBlockImage)
+    }
+}
 fileprivate struct DeleteFont: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -120,5 +134,11 @@ extension View {
     }
     func withAthleticImageButtonFont() -> some View {
         modifier(AthleticImageButtonFont())
+    }
+    func withAlertBlockTextFont() -> some View {
+        modifier(AlertBlockTextFont())
+    }
+    func withAlertBlockImageFont() -> some View {
+        modifier(AlertBlockImageFont())
     }
 }

@@ -64,9 +64,7 @@ struct GeneralSettings: View {
             "settings.title".localized,
             game: _game,
             confirmationButtonIsDisabled: confirmationButtonIsDisabled,
-            closeAfterMessage: (
-                title: "settings.alert.title".localized,
-                message: "settings.alert.message".localized),
+            closeAfterMessage: "settings.alert.message".localized,
             isHomePage: true
         ) {
             // confirmation button's action
