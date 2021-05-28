@@ -69,6 +69,7 @@ fileprivate struct InSettingsPage: ViewModifier {
             // content containing settings modules
             ScrollView(.vertical) {
                 content
+                    .frame(width: UIScreen.main.bounds.width)
             }
             // confirmation button
             ConfirmButton(isDisabled: confirmationIsDisabled) {

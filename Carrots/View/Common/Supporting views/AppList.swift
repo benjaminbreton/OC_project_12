@@ -308,8 +308,6 @@ fileprivate struct CanBeDeleted: ViewModifier {
             }
             // the cell's opacity depending on animation
             .opacity(opacity)
-            // animation's type
-            .animation(.easeIn)
             // transition's type
             .transition(.opacity)
             // wait for the opacity's animation to be completed before performing the action

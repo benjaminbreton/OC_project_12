@@ -60,6 +60,7 @@ fileprivate struct InDetailsPage<T: View>: ViewModifier {
             ScrollView(.vertical) {
                 // content = modules list
                 content
+                    .frame(width: UIScreen.main.bounds.width)
             }
             Divider()
         }
