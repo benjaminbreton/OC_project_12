@@ -41,9 +41,13 @@ struct DetailsPerformancesDisplayer: View {
             .inCenteredModule("performances.title.maj".localized)
             // Display performances list
             if performances.count > 0 {
-                AppList(performances, placeholder: "performances.none".localized, withDivider: false, source: source)
-                    .frame(height: ViewCommonSettings().textLineHeight * 4 * (CGFloat(performances.count + 1)))
-
+                VStack {
+                    Text("all.list".localized)
+                        .withTitleFont()
+                    AppList(performances, placeholder: "performances.none".localized, source: source)
+                }
+                .frame(height: ViewCommonSettings().commonSizeBase * 25)
+                .inCenteredModule()
             }
         }
     }
