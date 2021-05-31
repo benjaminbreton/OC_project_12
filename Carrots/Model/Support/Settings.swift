@@ -23,9 +23,9 @@ struct Settings {
     @UserDefault(key: "didValidateWarning", defaultValue: false)
     var didValidateWarning: Bool
     
-    init() {
-        if predictionDate < Date().today {
-            predictionDate = Date().today + 30 * 24 * 3600
+    init(_ today: Date) {
+        if predictionDate < today {
+            predictionDate = today + 30 * 24 * 3600
         }
     }
 }

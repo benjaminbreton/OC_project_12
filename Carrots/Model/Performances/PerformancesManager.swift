@@ -14,9 +14,12 @@ class PerformancesManager {
     
     /// Coredatastack used to save and load datas from CoreData.
     let coreDataStack: CoreDataStack
+    /// The setted date for today.
+    private let today: Date
     
-    init(_ coreDataStack: CoreDataStack) {
+    init(_ coreDataStack: CoreDataStack, today: Date) {
         self.coreDataStack = coreDataStack
+        self.today = today
     }
 }
 

@@ -15,12 +15,15 @@ class PotsManager {
     let coreDataStack: CoreDataStack
     /// Used to create and delete evolution datas.
     let evolutionDatasManager: EvolutionDatasManager
+    /// The setted date for today.
+    private let today: Date
     
     // MARK: - Init
     
-    init(_ coreDataStack: CoreDataStack) {
+    init(_ coreDataStack: CoreDataStack, today: Date) {
         self.coreDataStack = coreDataStack
-        self.evolutionDatasManager = EvolutionDatasManager(coreDataStack)
+        self.evolutionDatasManager = EvolutionDatasManager(coreDataStack, today: today)
+        self.today = today
     }
 
     // MARK: - Creation
@@ -30,19 +33,19 @@ class PotsManager {
      - parameter date: The pot's creation date.
      - returns: The new pot.
      */
-    func create(for date: Date = Date().today) -> Pot {
+    func create(for date: Date) -> Pot {
         let pot = Pot(context: coreDataStack.viewContext)
         pot.amount = 0
         pot.creationDate = date
         pot.points = 0
-        evolutionDatasManager.create(for: pot, value: 0, date: Date().today)
+        evolutionDatasManager.create(for: pot, value: 0, date: date)
         return pot
     }
     /**
      Create the common pot.
      */
     func createCommonPot() {
-        let pot = create()
+        let pot = create(for: today)
         let commonPot = CommonPot(context: coreDataStack.viewContext)
         commonPot.pot = pot
     }
@@ -102,10 +105,7 @@ class PotsManager {
      */
     func refresh(with moneyConversion: Int, for predictionDate: Date) {
         for pot in coreDataStack.entities.allPots {
-            if let value = pot.getEvolution(for: Date().today) {
-                evolutionDatasManager.create(for: pot, value: value, date: Date().today)
-                evolutionDatasManager.delete(pot.evolutionDatasToClean(for: Date().today))
-            }
+            evolutionDatasManager.handleEvolutions(of: pot, until: today)
             pot.computeAmount(with: moneyConversion, for: predictionDate)
         }
     }

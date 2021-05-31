@@ -33,26 +33,27 @@ struct Game {
     private let performancesManager: PerformancesManager
     /// Class managing pots creation, modification and deletion
     private let potsManager: PotsManager
+    /// The setted date for today.
+    private let today: Date
 }
 
 // MARK: - Init
 
 extension Game {
-    /// Create game with the entered Coredatastack.
-    /// - parameter coreDataStack: Coredatastack used to save and load datas from CoreData.
-    init(coreDataStack: CoreDataStack) {
+    init(coreDataStack: CoreDataStack, today: Date) {
         // load settings
-        self.settings = Settings()
+        self.settings = Settings(today)
         // get CoreDataStack
         self.coreDataStack = coreDataStack
         // set default properties
+        self.today = today
         athletics = []
         sports = []
         performances = []
-        athleticsManager = AthleticsManager(coreDataStack)
-        sportsManager = SportsManager(coreDataStack)
-        performancesManager = PerformancesManager(coreDataStack)
-        potsManager = PotsManager(coreDataStack)
+        athleticsManager = AthleticsManager(coreDataStack, today: today)
+        sportsManager = SportsManager(coreDataStack, today: today)
+        performancesManager = PerformancesManager(coreDataStack, today: today)
+        potsManager = PotsManager(coreDataStack, today: today)
         if !settings.gameAlreadyExists {
             potsManager.createCommonPot()
         }
@@ -93,7 +94,6 @@ extension Game {
      */
     mutating func addAthletic(name: String?, image: Data?) {
         guard let name = name else { return }
-        let today = Date().now
         let pot = potsManager.create(for: today)
         error = athleticsManager.add(name: name, image: image, pot: pot, creationDate: today)
         refresh()
@@ -200,10 +200,10 @@ extension Game {
      - parameter athletics: Athletics who did the performance.
      - parameter value: The performance's value.
      - parameter addToCommonPot: A boolean which indicates whether the points have to be added to the common pot, or the athletics pots.
-     - parameter moneyConversion: Necessary number of points to get one money's unity.
+     - parameter date: The performance's date
      */
-    mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
-        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, moneyConversion: settings.moneyConversion, date: Date().now, predictionDate: settings.predictionDate)
+    mutating func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, date: Date) {
+        error = performancesManager.add(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, moneyConversion: settings.moneyConversion, date: date, predictionDate: settings.predictionDate)
         refresh()
     }
     /**

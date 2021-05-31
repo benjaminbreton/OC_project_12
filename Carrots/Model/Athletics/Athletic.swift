@@ -10,7 +10,8 @@ import CoreData
 
 // MARK: - Properties
 
-public class Athletic: NSManagedObject {
+public class Athletic: NSManagedObject, EvolutionDatasContainer {
+    
     
     /// All points earned by the Athletic.
     var allPoints: Double {
@@ -61,55 +62,6 @@ extension Athletic {
     func update(name: String?, image: Data?) {
         self.name = name
         self.image = image
-    }
-}
-
-// MARK: - Evolution datas
-
-extension Athletic {
-    
-    /**
-     Check if an evolution has already been created for the current day, and eventually returns the evolution to add.
-     - parameter date: Date of the evolution to get.
-     - returns: The number of points per hour, or *nil* if an evolution has already been created for the date entered in parameter.
-     */
-    func getEvolution(for date: Date) -> Double? {
-        let calendar = Calendar.current
-        if evolutionDatas.count > 0 {
-            guard let creationDate = creationDate, let lastEvolution = evolutionDatas.last, let lastEvolutionDate = lastEvolution.date, lastEvolutionDate < date else { return nil }
-            return getEvolutionValue(from: creationDate, to: date)
-        } else if let creationDate = creationDate, calendar.startOfDay(for: creationDate) < date {
-            return getEvolutionValue(from: creationDate, to: date)
-        } else {
-            return nil
-        }
-    }
-    /**
-     Returns the number of points earned per hour.
-     - parameter start: Date of the pot's creation.
-     - parameter end: Date of the evolution to get.
-     - returns: The number of points per hour.
-     */
-    private func getEvolutionValue(from start: Date, to end: Date) -> Double {
-        let interval = DateInterval(start: start, end: end)
-        return allPoints / interval.duration * 3600
-    }
-    /**
-     Keep datas for the last 30 days, plus one.
-     - returns: The datas to keep.
-     */
-    func evolutionDatasToClean(for date: Date) -> [EvolutionData] {
-        let date = date - 30 * 24 * 3600
-        var evolutionDatas: [EvolutionData] = []
-        for evolutionData in self.evolutionDatas {
-            guard let evolutionDate = evolutionData.date else { return [] }
-            if evolutionDate <= date {
-                evolutionDatas.append(evolutionData)
-            }
-        }
-        guard evolutionDatas.count > 0 else { return evolutionDatas }
-        evolutionDatas.remove(at: evolutionDatas.count - 1)
-        return evolutionDatas
     }
 }
 

@@ -40,8 +40,8 @@ class GameViewModel: ObservableObject {
 
 // MARK: - Init
 
-    init(_ coreDataStack: CoreDataStack) {
-        game = Game(coreDataStack: coreDataStack)
+    init(_ coreDataStack: CoreDataStack, today: Date = Date().today) {
+        game = Game(coreDataStack: coreDataStack, today: today)
     }
 }
 
@@ -119,9 +119,10 @@ extension GameViewModel {
      - parameter athletics: Athletics who did the performance.
      - parameter value: The performance's value.
      - parameter addToCommonPot: A boolean which indicates whether the points have to be added to the common pot, or the athletics pots.
+     - parameter date: The performance date.
      */
-    func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool) {
-        game.addPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot)
+    func addPerformance(sport: Sport, athletics: [Athletic], value: [String?], addToCommonPot: Bool, date: Date = Date().now) {
+        game.addPerformance(sport: sport, athletics: athletics, value: value, addToCommonPot: addToCommonPot, date: date)
     }
     /**
      Delete a performance.

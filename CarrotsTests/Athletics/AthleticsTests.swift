@@ -67,5 +67,38 @@ class AthleticsTests: XCTestCase {
         XCTAssertNil(game.error)
         XCTAssert(game.athletics.count == 0)
     }
+    
+    // MARK: - Evolution
+    
+    func testGivenAGameHasBeenCreated45daysAgoWhenAddingPerformancesThenEvolutionsAreOk() throws {
+        let coreDataStack = FakeCoreDataStack()
+        // day - 45 : create athletic and sport
+        self.game = GameViewModel(coreDataStack, today: Date().today - 45 * 24 * 3600)
+        let athletic = try XCTUnwrap(support.addAthletic())
+        XCTAssertNil(game?.error)
+        let sport = try XCTUnwrap(support.addSport())
+        XCTAssertNil(game?.error)
+        // reload game on day - 45 to test the evolutiondatas count
+        self.game = GameViewModel(coreDataStack, today: Date().today - 45 * 24 * 3600)
+        XCTAssert(game?.athletics[0].evolutionDatas.count == 1)
+        // day - 31 : add performance
+        self.game = GameViewModel(coreDataStack, today: Date().today - 31 * 24 * 3600)
+        game?.addPerformance(sport: sport, athletics: [athletic], value: ["5000", "", ""], addToCommonPot: false, date: Date().now - 31 * 24 * 3600)
+        XCTAssertNil(game?.error)
+        // day - 29 : add performance
+        self.game = GameViewModel(coreDataStack, today: Date().today - 29 * 24 * 3600)
+        game?.addPerformance(sport: sport, athletics: [athletic], value: ["5000", "", ""], addToCommonPot: false, date: Date().now - 29 * 24 * 3600)
+        XCTAssertNil(game?.error)
+        // day D : check conditions of success
+        self.game = GameViewModel(coreDataStack)
+        XCTAssert(game?.athletics.count == 1)
+        XCTAssert(game?.performances.count == 2)
+        XCTAssert(game?.athletics[0].pot?.points == 100)
+        // There are 3 evolutiondatas : today, today-29, and today-31 to have an evolution on 30 days. Today-31 is essential because there's no evolution for today-30. Today-45 has to be deleted.
+        XCTAssert(game?.athletics[0].evolutionDatas.count == 3)
+        XCTAssert(game?.commonPot?.evolutionDatas.count == 3)
+        // The first evolution has to be Today-31.
+        XCTAssert(game?.athletics[0].evolutionDatas[0].date == Date().today - 31 * 24 * 3600)
+    }
 
 }

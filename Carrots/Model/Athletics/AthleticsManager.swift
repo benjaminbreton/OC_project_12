@@ -16,12 +16,15 @@ class AthleticsManager {
     let coreDataStack: CoreDataStack
     /// Used to create and delete evolution datas.
     let evolutionDatasManager: EvolutionDatasManager
+    /// The setted date for today.
+    private let today: Date
     
     // MARK: - Init
     
-    init(_ coreDataStack: CoreDataStack) {
+    init(_ coreDataStack: CoreDataStack, today: Date) {
         self.coreDataStack = coreDataStack
-        self.evolutionDatasManager = EvolutionDatasManager(coreDataStack)
+        self.evolutionDatasManager = EvolutionDatasManager(coreDataStack, today: today)
+        self.today = today
     }
 
     // MARK: - Add
@@ -104,10 +107,7 @@ class AthleticsManager {
      */
     func refresh() {
         for athletic in coreDataStack.entities.allAthletics {
-            if let value = athletic.getEvolution(for: Date().today) {
-                evolutionDatasManager.create(for: athletic, value: value, date: Date().today)
-                evolutionDatasManager.delete(athletic.evolutionDatasToClean(for: Date().today))
-            }
+            evolutionDatasManager.handleEvolutions(of: athletic, until: today)
         }
     }
 }
