@@ -10,7 +10,7 @@ import CoreData
 
 // MARK: - Properties
 
-public class Athletic: NSManagedObject, EvolutionDatasContainer {
+final public class Athletic: NSManagedObject, EvolutionDatasContainer {
     
     
     /// All points earned by the Athletic.

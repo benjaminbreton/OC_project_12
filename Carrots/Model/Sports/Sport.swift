@@ -10,7 +10,7 @@ import CoreData
 
 // MARK: - Properties
 
-public class Sport: NSManagedObject {
+final public class Sport: NSManagedObject {
     
     /// Sport's unity type.
     var unityType: UnityType { unityInt16.sportUnityType }

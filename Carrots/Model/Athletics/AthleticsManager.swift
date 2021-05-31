@@ -8,14 +8,14 @@
 import Foundation
 import CoreData
 
-class AthleticsManager {
+final class AthleticsManager {
     
     // MARK: - Properties
     
     /// Coredatastack used to save and load datas from CoreData.
-    let coreDataStack: CoreDataStack
+    private let coreDataStack: CoreDataStack
     /// Used to create and delete evolution datas.
-    let evolutionDatasManager: EvolutionDatasManager
+    private let evolutionDatasManager: EvolutionDatasManager
     /// The setted date for today.
     private let today: Date
     

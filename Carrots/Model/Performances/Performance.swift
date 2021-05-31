@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-public class Performance: NSManagedObject {
+final public class Performance: NSManagedObject {
     
     // MARK: - Properties
     

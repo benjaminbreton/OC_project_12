@@ -10,16 +10,13 @@ import CoreData
 
 // MARK: - Property and init
 
-class PerformancesManager {
+final class PerformancesManager {
     
     /// Coredatastack used to save and load datas from CoreData.
-    let coreDataStack: CoreDataStack
-    /// The setted date for today.
-    private let today: Date
+    private let coreDataStack: CoreDataStack
     
-    init(_ coreDataStack: CoreDataStack, today: Date) {
+    init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
-        self.today = today
     }
 }
 

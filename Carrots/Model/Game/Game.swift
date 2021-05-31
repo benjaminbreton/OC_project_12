@@ -51,8 +51,8 @@ extension Game {
         sports = []
         performances = []
         athleticsManager = AthleticsManager(coreDataStack, today: today)
-        sportsManager = SportsManager(coreDataStack, today: today)
-        performancesManager = PerformancesManager(coreDataStack, today: today)
+        sportsManager = SportsManager(coreDataStack)
+        performancesManager = PerformancesManager(coreDataStack)
         potsManager = PotsManager(coreDataStack, today: today)
         if !settings.gameAlreadyExists {
             potsManager.createCommonPot()

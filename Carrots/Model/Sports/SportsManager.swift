@@ -8,20 +8,17 @@
 import Foundation
 import CoreData
 
-class SportsManager {
+final class SportsManager {
     
     // MARK: - Properties
     
     /// Coredatastack used to save and load datas from CoreData.
-    let coreDataStack: CoreDataStack
-    /// The setted date for today.
-    private let today: Date
+    private let coreDataStack: CoreDataStack
     
     // MARK: - Init
     
-    init(_ coreDataStack: CoreDataStack, today: Date) {
+    init(_ coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
-        self.today = today
     }
     
     // MARK: - Add

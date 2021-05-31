@@ -10,7 +10,7 @@ import CoreData
 
 // MARK: - Properties
 
-public class Pot: NSManagedObject, EvolutionDatasContainer {
+final public class Pot: NSManagedObject, EvolutionDatasContainer {
     
     /// Pot's description, aka its owner's name.
     public override var description: String {

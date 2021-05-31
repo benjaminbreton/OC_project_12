@@ -8,12 +8,12 @@
 import Foundation
 import CoreData
 
-class EvolutionDatasManager {
+final class EvolutionDatasManager {
     
     // MARK: - Property
     
     /// Coredatastack used to save and load datas from CoreData.
-    let coreDataStack: CoreDataStack
+    private let coreDataStack: CoreDataStack
     /// The setted date for today.
     private let today: Date
     
@@ -24,7 +24,7 @@ class EvolutionDatasManager {
         self.today = today
     }
     
-    // MARK: - Methods
+    // MARK: - Creation
     
     /**
      Create an evolution data.
@@ -40,6 +40,8 @@ class EvolutionDatasManager {
         evolutionData.value = value
     }
     
+    // MARK: - Deletion
+    
     /**
      Delete evolution datas.
      - parameter evolutionDatas: Evolution datas to delete.
@@ -52,7 +54,7 @@ class EvolutionDatasManager {
         }
     }
     
-    // MARK: - Get methods
+    // MARK: - Update
     
     /**
      Method called to create evolution datas of an entity.
@@ -92,7 +94,7 @@ class EvolutionDatasManager {
      - parameter entity: The entity for which evolution datas have to be deleted.
      - returns: The datas to keep.
      */
-    func evolutionDatasToClean(for entity: EvolutionDatasContainer, until date: Date) -> [EvolutionData] {
+    private func evolutionDatasToClean(for entity: EvolutionDatasContainer, until date: Date) -> [EvolutionData] {
         let date = date - 30 * 24 * 3600
         var evolutionDatas: [EvolutionData] = []
         for evolutionData in entity.evolutionDatas {
@@ -105,11 +107,6 @@ class EvolutionDatasManager {
         evolutionDatas.remove(at: evolutionDatas.count - 1)
         return evolutionDatas
     }
-    
-    
-    
-    
-    
 }
 
 
