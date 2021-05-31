@@ -88,13 +88,11 @@ final class PotsManager {
      - returns: The pot.
      */
     private func getPot(of athletic: Athletic?) -> Pot? {
-        if let athletic = athletic {
-            guard let pot = athletic.pot else { return nil }
-            return pot
-        } else {
+        guard let pot = athletic?.pot else {
             guard let pot = coreDataStack.entities.commonPot else { return nil }
             return pot
         }
+        return pot
     }
     
     // MARK: - Refresh pots

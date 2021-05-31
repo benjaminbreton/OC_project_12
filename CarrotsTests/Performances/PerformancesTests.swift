@@ -95,6 +95,10 @@ class PerformancesTests: XCTestCase {
         XCTAssert(game.performances[0].athletics.count == 1)
         XCTAssert(game.performances[0].athletics[0] == athletic2)
         XCTAssert(game.commonPot?.points == 100)
+        game.delete(game.performances[0], of: athletic2)
+        XCTAssertNil(game.error)
+        XCTAssert(game.performances.count == 0)
+        XCTAssert(game.commonPot?.points == 0)
     }
     
     // MARK: - Several tests
