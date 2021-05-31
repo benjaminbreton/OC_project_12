@@ -36,7 +36,8 @@ struct UserDefault<Value> {
     let defaultValue: Value
     var wrappedValue: Value {
         get {
-            UserDefaults.standard.object(forKey: key) as? Value ?? defaultValue
+            guard let result = UserDefaults.standard.object(forKey: key) as? Value else { return defaultValue }
+            return result
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: key)

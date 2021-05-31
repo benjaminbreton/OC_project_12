@@ -31,6 +31,7 @@ class SettingsTests: XCTestCase {
         let date = Date() + 60 * 24 * 3600
         game.modifySettings(predictionDate: date, moneyConversion: "500", showHelp: false)
         XCTAssertNil(game.error)
+        print(game.predictionDate)
         XCTAssert(game.predictionDate == date)
         XCTAssert(game.moneyConversion == "500")
         XCTAssert(!game.showHelp)
@@ -41,6 +42,17 @@ class SettingsTests: XCTestCase {
         game.validateWarning()
         XCTAssertNil(game.error)
         XCTAssert(game.didValidateWarning)
+    }
+    
+    func testGivenPredictionDateIsOlderThanTodayWhenGameIsCreatedThenDateIsChanged() throws {
+        let game = try XCTUnwrap(self.game)
+        game.modifySettings(predictionDate: Date().yesterday, moneyConversion: game.moneyConversion, showHelp: game.showHelp)
+        XCTAssertNil(game.error)
+        self.game = nil
+        let coreDataStack = FakeCoreDataStack()
+        self.game = GameViewModel(coreDataStack)
+        let game2 = try XCTUnwrap(self.game)
+        XCTAssert(game2.predictionDate == Date().today + 30 * 24 * 3600)
     }
 
 }
