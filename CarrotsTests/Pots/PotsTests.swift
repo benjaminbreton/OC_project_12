@@ -24,7 +24,14 @@ class PotsTests: XCTestCase {
         game = nil
     }
     
-    // MARK: - Pot tests
+    // MARK: - Common pot
+    
+    func testGivenGameHasBeenCreatedWhenAskingCommonPotNameThenTheLocalizedNameIsGetted() throws {
+        let game = try XCTUnwrap(self.game)
+        XCTAssert(game.commonPot?.description == "pots.commonPot".localized)
+    }
+    
+    // MARK: - Change amounts
     
     func testGivenPotContainsNothingWhenAskToAddMoneyThenMoneyHasBeenAdded() throws {
         let game = try XCTUnwrap(self.game)

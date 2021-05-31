@@ -58,11 +58,8 @@ final public class Pot: NSManagedObject, EvolutionDatasContainer {
     }
     /// Pot's evolution datas.
     var evolutionDatas: [EvolutionData] {
-        guard let evolutionSet = evolutionDatasSet, let evolutions = evolutionSet.allObjects as? [EvolutionData] else {
-            return []
-        }
-        return evolutions.sorted {
-            $0.date ?? Date() < $1.date ?? Date()
+        evolutionDatasSet.getArray().sorted {
+            $0.date.unwrapped < $1.date.unwrapped
         }
     }
     var isFirstDay: Bool {
@@ -84,17 +81,6 @@ extension Pot {
         points += Double(count)
         computeAmount(with: moneyConversion, for: predictionDate)
     }
-    /**
-     Method to call to block points changings.
-     - parameter moneyConversion: Necessary number of points to get one money's unity.
-     - parameter predictionDate: Setted date to predict a pot's amount.
-     */
-    func fixPoints(with moneyConversion: Int, for predictionDate: Date) {
-        computeAmount(with: moneyConversion, for: predictionDate)
-        self.amount = computedAmount
-        points = 0
-    }
-
 }
 
 // MARK: - Amount
