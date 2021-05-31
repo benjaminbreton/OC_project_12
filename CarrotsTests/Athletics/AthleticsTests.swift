@@ -32,6 +32,14 @@ class AthleticsTests: XCTestCase {
         XCTAssertNil(game.error)
         XCTAssert(game.athletics.count == 1)
         XCTAssert(game.athletics[0].name == "Ben")
+        XCTAssert(game.athletics[0].description == "Ben")
+        XCTAssert(game.athletics[0].allPoints == 0)
+        XCTAssert(game.athletics[0].allPotPoints == 0)
+    }
+    func testGivenAthleticHasNoNameWhenAskHisNameThenNoNameIsGetted() throws {
+        let athletic = support.addAthletic("Ben")
+        athletic?.name = nil
+        XCTAssert(athletic?.description == "all.noName".localized)
     }
     func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() throws {
         let game = try XCTUnwrap(self.game)
@@ -88,15 +96,17 @@ class AthleticsTests: XCTestCase {
         // day - 29 : add performance
         self.game = GameViewModel(coreDataStack, today: Date().today - 29 * 24 * 3600)
         game?.addPerformance(sport: sport, athletics: [athletic], value: ["5000", "", ""], addToCommonPot: false, date: Date().now - 29 * 24 * 3600)
+        game?.addPerformance(sport: sport, athletics: [athletic], value: ["5000", "", ""], addToCommonPot: true, date: Date().now - 29 * 24 * 3600)
         XCTAssertNil(game?.error)
         // day D : check conditions of success
         self.game = GameViewModel(coreDataStack)
         XCTAssert(game?.athletics.count == 1)
-        XCTAssert(game?.performances.count == 2)
+        XCTAssert(game?.performances.count == 3)
         XCTAssert(game?.athletics[0].pot?.points == 100)
         // There are 3 evolutiondatas : today, today-29, and today-31 to have an evolution on 30 days. Today-31 is essential because there's no evolution for today-30. Today-45 has to be deleted.
         XCTAssert(game?.athletics[0].evolutionDatas.count == 3)
         XCTAssert(game?.commonPot?.evolutionDatas.count == 3)
+        XCTAssert(game?.athletics[0].pot?.evolutionDatas.count == 3)
         // The first evolution has to be Today-31.
         XCTAssert(game?.athletics[0].evolutionDatas[0].date == Date().today - 31 * 24 * 3600)
     }

@@ -32,6 +32,7 @@ class PerformancesTests: XCTestCase {
         game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
         XCTAssertNil(game.error)
         XCTAssert(game.performances.count == 1)
+        XCTAssert(athletic.performances.count == 1)
         XCTAssert(game.commonPot?.points == 1)
     }
     

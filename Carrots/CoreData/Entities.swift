@@ -21,8 +21,6 @@ class Entities {
         guard result.count == 1, let pot = result[0].pot else {
             if result.count == 0 {
                 ApplicationErrors.log(.noCommonPot)
-            } else if result.count == 1, result[0].pot == nil {
-                ApplicationErrors.log(.noPotInCommonPot)
             } else {
                 ApplicationErrors.log(.severalCommonPots(result.count))
                 for commonPot in result {
