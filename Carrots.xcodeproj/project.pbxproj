@@ -379,6 +379,7 @@
 		032915C0265E5BCD0076729F /* Tests supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */,
 				032915C1265E5BEA0076729F /* CommonTestsSupport.swift */,
 				03EA46DC26667635006DCF15 /* GameTestsHandler.swift */,
 			);
@@ -451,7 +452,6 @@
 				03EA46D926665806006DCF15 /* Tests */,
 				032915C0265E5BCD0076729F /* Tests supporting files */,
 				034AB64026010E600034C1E2 /* Info.plist */,
-				03DE95902604E3B400FBAA4F /* FakeCoreDataStack.swift */,
 			);
 			path = CarrotsTests;
 			sourceTree = "<group>";
