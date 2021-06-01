@@ -34,6 +34,8 @@ class PerformancesTests: XCTestCase {
         XCTAssert(game.performances.count == 1)
         XCTAssert(athletic.performances.count == 1)
         XCTAssert(game.commonPot?.points == 1)
+        XCTAssert(game.performances[0].description == "\(game.performances[0].formattedDate) performance")
+        XCTAssert(game.performances[0].formattedValue == "100")
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() throws {

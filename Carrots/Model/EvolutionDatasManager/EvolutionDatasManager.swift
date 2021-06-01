@@ -132,9 +132,3 @@ final class EvolutionDatasManager {
         return evolutionDatas
     }
 }
-
-protocol PerformancesContainer {
-    var performances: [Performance] { get }
-}
-
-

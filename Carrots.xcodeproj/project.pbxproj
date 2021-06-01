@@ -100,6 +100,7 @@
 		03E6DBA326651C6200B92E30 /* OptionalSet+getArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6DBA226651C6200B92E30 /* OptionalSet+getArray.swift */; };
 		03E6DBA726651CE200B92E30 /* OptionalDate+Unwrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6DBA626651CE200B92E30 /* OptionalDate+Unwrapped.swift */; };
 		03EA46CB26661861006DCF15 /* OptionalString+int64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EA46CA26661861006DCF15 /* OptionalString+int64.swift */; };
+		03EA46CF26663313006DCF15 /* PerformancesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EA46CE26663313006DCF15 /* PerformancesContainer.swift */; };
 		03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F472092615FB8A002CE23D /* HomeView.swift */; };
 		03F787232631B8DC00735510 /* SportDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F787222631B8DC00735510 /* SportDetails.swift */; };
 /* End PBXBuildFile section */
@@ -214,6 +215,7 @@
 		03E6DBA226651C6200B92E30 /* OptionalSet+getArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalSet+getArray.swift"; sourceTree = "<group>"; };
 		03E6DBA626651CE200B92E30 /* OptionalDate+Unwrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalDate+Unwrapped.swift"; sourceTree = "<group>"; };
 		03EA46CA26661861006DCF15 /* OptionalString+int64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalString+int64.swift"; sourceTree = "<group>"; };
+		03EA46CE26663313006DCF15 /* PerformancesContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesContainer.swift; sourceTree = "<group>"; };
 		03F472092615FB8A002CE23D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03F787222631B8DC00735510 /* SportDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -659,6 +661,7 @@
 			children = (
 				033503372638227600E2BD99 /* Performance.swift */,
 				03E1F9DA2645851100DA870F /* PerformancesManager.swift */,
+				03EA46CE26663313006DCF15 /* PerformancesContainer.swift */,
 			);
 			path = Performances;
 			sourceTree = "<group>";
@@ -837,6 +840,7 @@
 				03D3C7BE260C7B2B00DDA29F /* Int16+enumConversion.swift in Sources */,
 				03CE0749262D75260054BDC0 /* SettingsCustomToggle.swift in Sources */,
 				030DB54C261352320054D140 /* Settings.swift in Sources */,
+				03EA46CF26663313006DCF15 /* PerformancesContainer.swift in Sources */,
 				03B1DF9C262C8D5D00B590AC /* InSettingsPage.swift in Sources */,
 				03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */,
 				030EA01B26539D52006CA0A0 /* Date+SchemeDates.swift in Sources */,

@@ -82,7 +82,6 @@
 "performances.none.noAthletics" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif :\n- aller dans la page sportifs ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sportif et confirmer.";
 "performances.none.noSports" = "Aucun sport n'a été ajouté.\n\nPour ajouter un sport :\n- aller dans la page sports ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sport et confirmer.";
 "performances.none.noPerformances" = "Aucune performance n'a été ajoutée.\n\nPour ajouter une performance :\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations de la nouvelle performance et confirmer.";
-"performances.oneShot" = "*en une fois*";
 "performances.settings.sportsInstructions" = "Choisissez un sport";
 "performances.settings.addPotQuestion" = "Ajouter les points à la cagnotte commune ?";
 "performances.settings.addExplanationsOn" = "Les points seront ajoutés à la cagnotte commune.";

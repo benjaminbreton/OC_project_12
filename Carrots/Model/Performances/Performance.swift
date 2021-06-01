@@ -15,16 +15,12 @@ final public class Performance: NSManagedObject {
     public override var description: String { "\(formattedDate) performance" }
     /// Formatted value of the performance.
     var formattedValue: String {
-        let unity = initialUnity.sportUnityType
-        return unity != .oneShot ? "\(unity.singleString(for: value))" : "performances.oneShot".localized
+        "\(initialUnity.sportUnityType.singleString(for: value))"
     }
     /// Athletics who did participate to the performance.
     var athletics: [Athletic] {
-        guard let athleticsSet = athleticsSet, let athletics = athleticsSet.allObjects as? [Athletic] else {
-            return []
-        }
-        return athletics.sorted {
-            $0.name ?? "all.noName".localized < $1.name ?? "all.noName".localized
+        return athleticsSet.getArray().sorted {
+            $0.description < $1.description
         }
     }
     /// Formatted performance's date.

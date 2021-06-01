@@ -57,3 +57,16 @@ class PotsTests: XCTestCase {
     }
 
 }
+
+/*
+ func testGivenACommonPotExistsWhenAddAnOtherCommonPotAndReloadGameThenTheSecondCommonPotIsDeleted() throws {
+     
+     let game = try XCTUnwrap(self.game)
+     guard let athletic = support.addAthletic(), let sport = support.addSport() else {
+         XCTFail()
+         return
+     }
+     game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
+     
+ }
+ */

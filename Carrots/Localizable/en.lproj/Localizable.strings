@@ -82,7 +82,6 @@
 "performances.none.noAthletics" = "No athletics have been added.\n\nTo add an athletic:\n- go on athletics page below;\n- select the + button on the top of the screen;\n- add new athletic's informations and confirm.";
 "performances.none.noSports" = "No sports have been added.\n\nTo add a sport:\n- go on sports page below;\n- select the + button on the top of the screen;\n- add new sport's informations and confirm.";
 "performances.none.noPerformances" = "No performances have been added.\n\nTo add a performance:\n- select the + button on the top of the screen;\n- add new performance's informations and confirm.";
-"performances.oneShot" = "*one shot*";
 "performances.settings.sportsInstructions" = "Choose a sport";
 "performances.settings.addPotQuestion" = "Add points to common pot ?";
 "performances.settings.addExplanationsOn" = "Points will be added to the common pot.";

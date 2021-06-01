@@ -63,37 +63,4 @@ class Entities {
         guard let result = try? context.fetch(request) else { return [] }
         return result
     }
-    
-    func getPerformances<Entity: NSManagedObject>(of item: Entity) -> [Performance] {
-        if let athletic = item as? Athletic {
-            return getAthleticPerformances(of: athletic)
-        }
-        if let sport = item as? Sport {
-            return getSportPerformances(of: sport)
-        }
-        return []
-    }
-    private func getAthleticPerformances(of athletic: Athletic) -> [Performance] {
-        let all = allPerformances
-        var performances: [Performance] = []
-        for performance in all {
-            for performanceAthletic in performance.athletics {
-                if athletic == performanceAthletic {
-                    performances.append(performance)
-                    break
-                }
-            }
-        }
-        return performances
-    }
-    private func getSportPerformances(of sport: Sport) -> [Performance] {
-        let all = allPerformances
-        var performances: [Performance] = []
-        for performance in all {
-            if let performanceSport = performance.sport, performanceSport == sport {
-                performances.append(performance)
-            }
-        }
-        return performances
-    }
 }
