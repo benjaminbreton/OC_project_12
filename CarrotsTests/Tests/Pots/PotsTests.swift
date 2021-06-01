@@ -11,22 +11,20 @@ import CoreData
 
 class PotsTests: XCTestCase {
     
-    var game: GameViewModel?
-    
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+    var support: CommonTestsSupport { gameHandler!.support }
     
     override func setUp() {
-        let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
+        self.gameHandler = GameHandler()
     }
     override func tearDown() {
-        game = nil
+        gameHandler = nil
     }
     
     // MARK: - Common pot
     
     func testGivenGameHasBeenCreatedWhenAskingCommonPotNameThenTheLocalizedNameIsGetted() throws {
-        let game = try XCTUnwrap(self.game)
         XCTAssert(game.commonPot?.description == "pots.commonPot".localized)
         XCTAssert(game.commonPot?.isFirstDay == true)
     }
@@ -34,7 +32,6 @@ class PotsTests: XCTestCase {
     // MARK: - Change amounts
     
     func testGivenPotContainsNothingWhenAskToAddMoneyThenMoneyHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         let athletic = support.addAthletic()
         game.changeMoney(amount: "10", operation: 0)
         game.changeMoney(for: athletic, amount: "50", operation: 0)
@@ -44,7 +41,6 @@ class PotsTests: XCTestCase {
     }
     
     func testGivenPotContainsSomeMoneyWhenAskToWithdrawSomeOfItThenMoneyHasBeenWithdrawn() throws {
-        let game = try XCTUnwrap(self.game)
         let athletic = support.addAthletic()
         game.changeMoney(amount: "100", operation: 0)
         game.changeMoney(for: athletic, amount: "50", operation: 0)

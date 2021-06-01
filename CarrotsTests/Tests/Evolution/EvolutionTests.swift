@@ -11,22 +11,20 @@ import CoreData
 
 class EvolutionTests: XCTestCase {
     
-    var coreDataStack: FakeCoreDataStack?
-    
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+    var support: CommonTestsSupport { gameHandler!.support }
+
     override func setUp() {
-        self.coreDataStack = FakeCoreDataStack()
+        self.gameHandler = GameHandler(Date().today - 45 * 24 * 3600)
     }
     override func tearDown() {
-        coreDataStack = nil
+        gameHandler = nil
     }
     
     func testGivenAGameHasBeenCreated45daysAgoWhenAddingPerformancesThenEvolutionsAreOk() throws {
-        let coreDataStack = try XCTUnwrap(self.coreDataStack)
-        
         // day - 45 : create athletic and sport
         
-        var game = GameViewModel(coreDataStack, today: Date().today - 45 * 24 * 3600, setFactorySettingsBack: true)
-        var support: CommonTestsSupport { CommonTestsSupport(game) }
         let athletic = try XCTUnwrap(support.addAthletic())
         XCTAssertNil(game.error)
         let sport = try XCTUnwrap(support.addSport())
@@ -35,12 +33,12 @@ class EvolutionTests: XCTestCase {
         XCTAssert(athletic.pot?.evolution.image.name == "arrow.right.square")
         XCTAssert(athletic.pot?.evolution.image.color == "yellow")
         // reload game on day - 45 to test the evolutiondatas count
-        game = GameViewModel(coreDataStack, today: Date().today - 45 * 24 * 3600)
+        gameHandler?.reloadGame(for: Date().today - 45 * 24 * 3600)
         XCTAssert(game.athletics[0].evolutionDatas.count == 1)
         
         // day - 31 : add performance
         
-        game = GameViewModel(coreDataStack, today: Date().today - 31 * 24 * 3600)
+        gameHandler?.reloadGame(for: Date().today - 31 * 24 * 3600)
         // no performance has been made on day - 45, so the evolution is same
         XCTAssert(athletic.pot?.evolution.image.name == "arrow.right.square")
         XCTAssert(athletic.pot?.evolution.image.color == "yellow")
@@ -50,7 +48,7 @@ class EvolutionTests: XCTestCase {
         
         // day - 29 : add performance
         
-        game = GameViewModel(coreDataStack, today: Date().today - 29 * 24 * 3600)
+        gameHandler?.reloadGame(for: Date().today - 29 * 24 * 3600)
         // a performance has been made on day - 31, so the evolution is up
         XCTAssert(athletic.pot?.evolution.image.name == "arrow.up.right.square")
         XCTAssert(athletic.pot?.evolution.image.color == "lightGreen")
@@ -60,7 +58,7 @@ class EvolutionTests: XCTestCase {
         
         // day D : check conditions of success
         
-        game = GameViewModel(coreDataStack)
+        gameHandler?.reloadGame()
         XCTAssert(game.athletics.count == 1)
         XCTAssert(game.performances.count == 2)
         // points = 10000 / 100 = 100

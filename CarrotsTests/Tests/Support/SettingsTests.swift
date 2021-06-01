@@ -11,22 +11,20 @@ import CoreData
 
 class SettingsTests: XCTestCase {
     
-    var game: GameViewModel?
-    
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+    var support: CommonTestsSupport { gameHandler!.support }
     
     override func setUp() {
-        let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
+        self.gameHandler = GameHandler()
     }
     override func tearDown() {
-        game = nil
+        gameHandler = nil
     }
     
     // MARK: - Modify
     
     func testGivenGameExistsWhenAskingToModifySettingsThenSettingsAreModified() throws {
-        let game = try XCTUnwrap(self.game)
         let date = Date() + 60 * 24 * 3600
         game.modifySettings(predictionDate: date, moneyConversion: "500", showHelp: false)
         XCTAssertNil(game.error)
@@ -36,7 +34,6 @@ class SettingsTests: XCTestCase {
         XCTAssert(!game.showHelp)
     }
     func testGivenWarningHasntBeenAcceptedWhenDidAcceptItThenItsAccepted() throws {
-        let game = try XCTUnwrap(self.game)
         XCTAssert(!game.didValidateWarning)
         game.validateWarning()
         XCTAssertNil(game.error)
@@ -44,14 +41,10 @@ class SettingsTests: XCTestCase {
     }
     
     func testGivenPredictionDateIsOlderThanTodayWhenGameIsCreatedThenDateIsChanged() throws {
-        let game = try XCTUnwrap(self.game)
         game.modifySettings(predictionDate: Date().yesterday, moneyConversion: game.moneyConversion, showHelp: game.showHelp)
         XCTAssertNil(game.error)
-        self.game = nil
-        let coreDataStack = FakeCoreDataStack()
-        self.game = GameViewModel(coreDataStack)
-        let game2 = try XCTUnwrap(self.game)
-        XCTAssert(game2.predictionDate == Date().today + 30 * 24 * 3600)
+        gameHandler?.reloadGame()
+        XCTAssert(game.predictionDate == Date().today + 30 * 24 * 3600)
     }
 
 }

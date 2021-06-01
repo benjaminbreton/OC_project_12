@@ -9,13 +9,15 @@ import Foundation
 import Carrots
 import CoreData
 class FakeCoreDataStack: CoreDataStack {
+    static let model: NSManagedObjectModel = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Carrots", withExtension: "momd")!)!
+    
     override init() {
         super.init()
         // create new description with an InMemoryStoreType
         let persistentStoreDescription = NSPersistentStoreDescription()
         persistentStoreDescription.type = NSInMemoryStoreType
         // create new container
-        let container = NSPersistentContainer(name: "Carrots")
+        let container = NSPersistentContainer(name: "Carrots", managedObjectModel: FakeCoreDataStack.model)
         // set new description to new container's persistentStoreDescriptions
         container.persistentStoreDescriptions = [persistentStoreDescription]
         // load persistent stores

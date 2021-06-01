@@ -11,22 +11,19 @@ import CoreData
 
 class GameTests: XCTestCase {
     
-    var game: GameViewModel?
-    
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
-    
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+
     override func setUp() {
-        let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
+        self.gameHandler = GameHandler()
     }
     override func tearDown() {
-        game = nil
+        gameHandler = nil
     }
     
     // MARK: - Game Tests
     
     func testGivenNoGameHasBeenInitializedWhenCreateOneThenGameHasBeenSaved() throws {
-        let game = try XCTUnwrap(self.game)
         XCTAssertNotNil(game.commonPot)
         XCTAssert(game.moneyConversion == "100")
     }

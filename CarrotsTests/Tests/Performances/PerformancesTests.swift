@@ -11,22 +11,20 @@ import CoreData
 
 class PerformancesTests: XCTestCase {
     
-    var game: GameViewModel?
-    
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
-    
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+    var support: CommonTestsSupport { gameHandler!.support }
+
     override func setUp() {
-        let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
+        self.gameHandler = GameHandler()
     }
     override func tearDown() {
-        game = nil
+        gameHandler = nil
     }
     
     // MARK: - Add
     
     func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic = support.addAthletic(), let sport = support.addSport(), game.error == nil else { return }
         game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
         XCTAssertNil(game.error)
@@ -38,7 +36,6 @@ class PerformancesTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
@@ -56,7 +53,6 @@ class PerformancesTests: XCTestCase {
     // MARK: - Delete
     
     func testGivenPerformancesExistWhenAskToDeleteOneOfThemThenPerformanceIsDeleted() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
@@ -69,7 +65,6 @@ class PerformancesTests: XCTestCase {
     }
     
     func testGivenPerformancesExistWhenAskToDeleteAllOfThemThenPerformancesAreDeleted() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
@@ -83,7 +78,6 @@ class PerformancesTests: XCTestCase {
         XCTAssert(game.performances.count == 0)
     }
     func testGivenAPerformanceHasBeenAddedWhenAskingToDeleteItForOneAthleticThenItsDeletedForThisAthletic() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
             XCTFail()
             return
@@ -106,7 +100,6 @@ class PerformancesTests: XCTestCase {
     // MARK: - Several tests
     
     func testGivenPerformancesExistWhenAthleticSportAndPerformancesHasBeenDeletedThenTheyAreSuccessfullyDeletedAndPointsTotalIsCorrect() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic1 = support.addAthletic(), let athletic2 = support.addAthletic(), let sport = support.addSport(unityType: .count, pointsConversion: ["1", "0", "0"]), game.error == nil else {
             XCTFail()
             return

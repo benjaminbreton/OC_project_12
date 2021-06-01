@@ -11,22 +11,20 @@ import CoreData
 
 class SportsTests: XCTestCase {
     
-    var game: GameViewModel?
-    
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
-    
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+    var support: CommonTestsSupport { gameHandler!.support }
+
     override func setUp() {
-        let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
+        self.gameHandler = GameHandler()
     }
     override func tearDown() {
-        game = nil
+        gameHandler = nil
     }
     
     // MARK: - Add
     
     func testGivenAGameExistsWhenAskToAddSportThenSportHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport("Walk")
         XCTAssertNil(game.error)
         XCTAssert(game.sports.count == 1)
@@ -35,7 +33,6 @@ class SportsTests: XCTestCase {
         XCTAssert(game.sports[0].name == game.sports[0].description)
     }
     func testGivenASportExistsWhenAskToAddASportWithTheSameNameThenErrorOccures() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport("Walk")
         XCTAssertNil(game.error)
         support.addSport("Walk")
@@ -50,7 +47,6 @@ class SportsTests: XCTestCase {
     // MARK: - Unity types
     
     func testGivenAGameExistsWhenAskToAddCountSportThenSportHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport("Walk")
         XCTAssertNil(game.error)
         XCTAssert(game.sports[0].unityType == .count)
@@ -64,7 +60,6 @@ class SportsTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddTimeSportThenSportHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport("Walk", icon: "A", unityType: .time, pointsConversion: ["1", "5", "0"])
         XCTAssertNil(game.error)
         XCTAssert(game.sports[0].unityType == .time)
@@ -78,7 +73,6 @@ class SportsTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddDistanceSportThenSportHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport("Walk", icon: "A", unityType: .distance, pointsConversion: ["1000", "", ""])
         XCTAssertNil(game.error)
         XCTAssert(game.sports[0].unityType == .distance)
@@ -92,7 +86,6 @@ class SportsTests: XCTestCase {
     }
     
     func testGivenAGameExistsWhenAskToAddoneShotSportThenSportHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport("Walk", icon: "A", unityType: .oneShot, pointsConversion: ["100", "", ""])
         XCTAssertNil(game.error)
         XCTAssert(game.sports[0].unityType == .oneShot)
@@ -108,7 +101,6 @@ class SportsTests: XCTestCase {
     // MARK: - Modify
     
     func testGivenSportExistsWhenAskingToModifyItsNameAndTypeAndIconAndConversionThenItsModified() throws {
-        let game = try XCTUnwrap(self.game)
         guard let sport = support.addSport(), game.error == nil else {
             XCTFail()
             return
@@ -125,7 +117,6 @@ class SportsTests: XCTestCase {
     // MARK: - Delete
     
     func testGivenSportsExistWhenAskToDeleteOneOfThemThenSportIsDeleted() throws {
-        let game = try XCTUnwrap(self.game)
         support.addSport()
         guard let sport = support.addSport(), game.error == nil else {
             XCTFail()

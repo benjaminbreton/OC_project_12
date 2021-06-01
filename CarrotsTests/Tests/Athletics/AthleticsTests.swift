@@ -11,22 +11,20 @@ import CoreData
 
 class AthleticsTests: XCTestCase {
     
-    var game: GameViewModel?
-    
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
-    
+    var gameHandler: GameHandler?
+    var game: GameViewModel { gameHandler!.game }
+    var support: CommonTestsSupport { gameHandler!.support }
+
     override func setUp() {
-        let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
+        self.gameHandler = GameHandler()
     }
     override func tearDown() {
-        game = nil
+        gameHandler = nil
     }
     
     // MARK: - Add
     
     func testGivenAGameExistsWhenAskToAddAthleticThenAthleticHasBeenAdded() throws {
-        let game = try XCTUnwrap(self.game)
         support.addAthletic("Ben")
         XCTAssertNil(game.error)
         XCTAssert(game.athletics.count == 1)
@@ -39,7 +37,6 @@ class AthleticsTests: XCTestCase {
         XCTAssert(athletic?.description == "all.noName".localized)
     }
     func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() throws {
-        let game = try XCTUnwrap(self.game)
         support.addAthletic("Ben")
         XCTAssertNil(game.error)
         support.addAthletic("Ben")
@@ -49,7 +46,6 @@ class AthleticsTests: XCTestCase {
     // MARK: - Modify
     
     func testGivenAthleticExistsWhenAskingToModifyHisNameThenHisNameIsModified() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic = support.addAthletic(), game.error == nil else {
             XCTFail()
             return
@@ -63,7 +59,6 @@ class AthleticsTests: XCTestCase {
     // MARK: - Delete
     
     func testGivenAGameWithAthleticsExistsWhenAskToDeleteOneOfThemThenAthleticIsDeleted() throws {
-        let game = try XCTUnwrap(self.game)
         guard let athletic = support.addAthletic(), game.error == nil, game.athletics.count == 1 else {
             XCTFail()
             return
