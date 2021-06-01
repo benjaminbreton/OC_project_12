@@ -16,10 +16,9 @@ final public class Sport: NSManagedObject {
     var unityType: UnityType { unityInt16.sportUnityType }
     /// Sport's performances.
     var performances: [Performance] {
-        guard let performancesSet = performancesSet, let performances = performancesSet.allObjects as? [Performance] else {
-            return []
+        performancesSet.getArray().sorted() {
+            $0.date.unwrapped > $1.date.unwrapped
         }
-        return performances
     }
     /// Sport's description, aka its name.
     override public var description: String { name ?? "all.noName".localized }
@@ -45,8 +44,7 @@ extension Sport {
         case .oneShot:
             return pointsConversion
         default:
-            let points = value / pointsConversion
-            return points * pointsConversion > value ? points - 1 : points
+            return value / pointsConversion
         }
     }
 }
@@ -144,13 +142,12 @@ extension Sport {
          - returns: The Int64.
          */
         func value(for inputs: [String?]) -> Int64 {
-            guard inputs.count == 3 else { return 0 }
-            let values: [Int] = inputs.map({ Int($0 ?? "0") ?? 0 })
+            let values: [Int64] = inputs.map({ $0.int64 })
             switch self {
             case .time:
-                return Int64(values[0] * 3600 + values[1] * 60 + values[2])
+                return values[0] * 3600 + values[1] * 60 + values[2]
             default:
-                return Int64(values[0])
+                return values[0]
             }
         }
         /**
@@ -161,14 +158,10 @@ extension Sport {
         func stringArray(for value: Int64) -> [String] {
             switch self {
             case .time:
-                let interval = TimeInterval(value)
-                let components = DateComponents(calendar: Calendar.current, year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0)
-                guard let firstDate = components.date else { return ["0", "0", "0"]}
-                let date = Date(timeInterval: interval, since: firstDate)
-                let neededComponents: Set<Calendar.Component> = [.hour, .minute, .second]
-                
-                let resultComponents = Calendar.current.dateComponents(neededComponents, from: date)
-                guard let hours = resultComponents.hour, let minutes = resultComponents.minute, let seconds = resultComponents.second else { return ["0", "0", "0"]}
+                let hours = value / 3600
+                let valueRemaining = value % 3600
+                let minutes = valueRemaining / 60
+                let seconds = valueRemaining % 60
                 return ["\(hours)", "\(minutes)", "\(seconds)"]
             default:
                 return ["\(Int(value))", "0", "0"]
@@ -222,13 +215,15 @@ extension Sport {
          - returns: The element's string.
          */
         private func getTimeElement(of strings: [String], at index: Int, isFirstElement: Bool) -> String {
-            if strings[index] == "0" {
-                return ""
-            } else {
-                return strings[index].count == 1 && !isFirstElement ? "0\(strings[index])\(symbols[index])" : "\(strings[index])\(symbols[index])"
-            }
+            return strings[index] == "0" ?
+                ""
+                :
+                strings[index].count == 1 && !isFirstElement ?
+                "0\(strings[index])\(symbols[index])"
+                :
+                "\(strings[index])\(symbols[index])"
         }
     }
-    
-    
 }
+
+

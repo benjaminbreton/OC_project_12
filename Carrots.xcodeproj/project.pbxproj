@@ -99,6 +99,7 @@
 		03E6DB9F26650C8A00B92E30 /* EvolutionDatasContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6DB9E26650C8A00B92E30 /* EvolutionDatasContainer.swift */; };
 		03E6DBA326651C6200B92E30 /* OptionalSet+getArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6DBA226651C6200B92E30 /* OptionalSet+getArray.swift */; };
 		03E6DBA726651CE200B92E30 /* OptionalDate+Unwrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6DBA626651CE200B92E30 /* OptionalDate+Unwrapped.swift */; };
+		03EA46CB26661861006DCF15 /* OptionalString+int64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EA46CA26661861006DCF15 /* OptionalString+int64.swift */; };
 		03F4720A2615FB8A002CE23D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F472092615FB8A002CE23D /* HomeView.swift */; };
 		03F787232631B8DC00735510 /* SportDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F787222631B8DC00735510 /* SportDetails.swift */; };
 /* End PBXBuildFile section */
@@ -212,6 +213,7 @@
 		03E6DB9E26650C8A00B92E30 /* EvolutionDatasContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionDatasContainer.swift; sourceTree = "<group>"; };
 		03E6DBA226651C6200B92E30 /* OptionalSet+getArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalSet+getArray.swift"; sourceTree = "<group>"; };
 		03E6DBA626651CE200B92E30 /* OptionalDate+Unwrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalDate+Unwrapped.swift"; sourceTree = "<group>"; };
+		03EA46CA26661861006DCF15 /* OptionalString+int64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalString+int64.swift"; sourceTree = "<group>"; };
 		03F472092615FB8A002CE23D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03F787222631B8DC00735510 /* SportDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -545,6 +547,7 @@
 				0366F881265667900070D4A0 /* String+Localizable.swift */,
 				03E6DBA226651C6200B92E30 /* OptionalSet+getArray.swift */,
 				03E6DBA626651CE200B92E30 /* OptionalDate+Unwrapped.swift */,
+				03EA46CA26661861006DCF15 /* OptionalString+int64.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				03B1DFB0262C8EE500B590AC /* CloseKeyboardOnTap.swift in Sources */,
 				03DD81FF261F00520028A0A5 /* InRectangle.swift in Sources */,
 				0383212A260899F3003EE886 /* Sport.swift in Sources */,
+				03EA46CB26661861006DCF15 /* OptionalString+int64.swift in Sources */,
 				03DE95882604C51800FBAA4F /* Game.swift in Sources */,
 				034C01CB262DBD93000663AA /* SettingsSportIconPicker.swift in Sources */,
 				0327CDEB2657A74C0053B259 /* PotsWarning.swift in Sources */,
