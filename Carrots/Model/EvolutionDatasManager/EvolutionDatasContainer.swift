@@ -12,5 +12,4 @@ import Foundation
 protocol EvolutionDatasContainer {
     var creationDate: Date? { get set }
     var evolutionDatas: [EvolutionData] { get }
-    var allPoints: Double { get }
 }

@@ -14,21 +14,7 @@ final public class Pot: NSManagedObject, EvolutionDatasContainer {
     
     /// Pot's description, aka its owner's name.
     public override var description: String {
-        guard let name = owner?.name else { return "pots.commonPot".localized }
-        return "\(name)"
-    }
-    /// All points added to the pot.
-    var allPoints: Double {
-        if let owner = owner {
-            return owner.allPotPoints
-        } else {
-            let request: NSFetchRequest<Performance> = Performance.fetchRequest()
-            let predicate = NSPredicate(format: "addedToCommonPot == YES")
-            request.predicate = predicate
-            guard let performances = try? managedObjectContext?.fetch(request) else { return 0 }
-            let points = performances.map({ Double($0.potAddings) * Double($0.initialAthleticsCount) }).reduce(0, +)
-            return points
-        }
+        owner?.name ?? "pots.commonPot".localized
     }
     /// Amount to display.
     var formattedAmount: String {
@@ -62,6 +48,7 @@ final public class Pot: NSManagedObject, EvolutionDatasContainer {
             $0.date.unwrapped < $1.date.unwrapped
         }
     }
+    /// Boolean indicating whether this pot has just been created or not.
     var isFirstDay: Bool {
         guard let date = creationDate else { return false }
         return Calendar.current.startOfDay(for: date) == Date().today
@@ -180,9 +167,8 @@ extension Pot {
                 return .up
             } else if newEvolution < lastEvolution {
                 return .down
-            } else {
-                return .same
             }
+            return .same
         }
     }
 }

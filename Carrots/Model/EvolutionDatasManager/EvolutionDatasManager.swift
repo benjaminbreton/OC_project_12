@@ -87,7 +87,31 @@ final class EvolutionDatasManager {
      */
     private func getEvolutionValue(for entity: EvolutionDatasContainer, from start: Date, to end: Date) -> Double {
         let interval = DateInterval(start: start, end: end)
-        return entity.allPoints / interval.duration * 3600
+        return allPoints(of: entity) / interval.duration * 3600
+    }
+    /**
+     Returns all earned points of an EvolutionDatasContainer.
+     - parameter entity: The EvolutionDatasContainer.
+     - returns: All earned points.
+     */
+    private func allPoints(of entity: EvolutionDatasContainer) -> Double {
+        allPerformances(of: entity).map({ Double($0.potAddings )}).reduce(0, +)
+    }
+    /**
+     Returns all performances of an EvolutionDatasContainer.
+     - parameter entity: The EvolutionDatasContainer.
+     - returns: All performances.
+     */
+    private func allPerformances(of entity: EvolutionDatasContainer) -> [Performance] {
+        if let entity = entity as? PerformancesContainer {
+            // return all performances of the container
+            return entity.performances
+        } else if let pot = entity as? Pot, let owner = pot.owner {
+            // return all performances of the owner where the points have been added to this pot
+            return owner.performances.map({ $0.addedToCommonPot ? nil : $0 }).compactMap({ $0 })
+        }
+        // case of common pot : return all performances added to the common pot
+        return coreDataStack.entities.allPerformances.map({ $0.addedToCommonPot ? $0 : nil }).compactMap({ $0 })
     }
     /**
      Keep datas for the last 30 days, plus one.
@@ -107,6 +131,10 @@ final class EvolutionDatasManager {
         evolutionDatas.remove(at: evolutionDatas.count - 1)
         return evolutionDatas
     }
+}
+
+protocol PerformancesContainer {
+    var performances: [Performance] { get }
 }
 
 

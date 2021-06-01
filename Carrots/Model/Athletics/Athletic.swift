@@ -10,15 +10,7 @@ import CoreData
 
 // MARK: - Properties
 
-final public class Athletic: NSManagedObject, EvolutionDatasContainer {
-    /// All points earned by the Athletic.
-    var allPoints: Double {
-        performances.count > 0 ? Double(performances.map({ $0.potAddings }).reduce(0, +)) : 0
-    }
-    /// All points earned by the Athletic AND added to his own pot.
-    var allPotPoints: Double {
-        performances.count > 0 ? Double(performances.map({ $0.addedToCommonPot ? 0 : $0.potAddings }).reduce(0, +)) : 0
-    }
+final public class Athletic: NSManagedObject, EvolutionDatasContainer, PerformancesContainer {
     /// The athletic's description, aka his name.
     public override var description: String { name ?? "all.noName".localized }
     /// The athletic's performances, sorted by date.

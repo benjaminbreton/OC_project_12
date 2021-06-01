@@ -29,6 +29,7 @@ class PotsTests: XCTestCase {
     func testGivenGameHasBeenCreatedWhenAskingCommonPotNameThenTheLocalizedNameIsGetted() throws {
         let game = try XCTUnwrap(self.game)
         XCTAssert(game.commonPot?.description == "pots.commonPot".localized)
+        XCTAssert(game.commonPot?.isFirstDay == true)
     }
     
     // MARK: - Change amounts

@@ -33,8 +33,6 @@ class AthleticsTests: XCTestCase {
         XCTAssert(game.athletics.count == 1)
         XCTAssert(game.athletics[0].name == "Ben")
         XCTAssert(game.athletics[0].description == "Ben")
-        XCTAssert(game.athletics[0].allPoints == 0)
-        XCTAssert(game.athletics[0].allPotPoints == 0)
     }
     func testGivenAthleticHasNoNameWhenAskHisNameThenNoNameIsGetted() throws {
         let athletic = support.addAthletic("Ben")
