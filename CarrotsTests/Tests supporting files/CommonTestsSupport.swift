@@ -44,19 +44,3 @@ class CommonTestsSupport {
         return nil
     }
 }
-
-class GameHandler {
-    
-    var coreDataStack: FakeCoreDataStack
-    var game: GameViewModel
-    var support: CommonTestsSupport { CommonTestsSupport(game) }
-    
-    init(_ today: Date = Date().today) {
-        coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack, today: today, setFactorySettingsBack: true)
-    }
-    
-    func reloadGame(for today: Date = Date().today) {
-        game = GameViewModel(coreDataStack, today: today, setFactorySettingsBack: false)
-    }
-}

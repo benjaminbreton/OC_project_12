@@ -42,8 +42,8 @@
             filePath = "CarrotsTests/Tests/Pots/PotsTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "PotsTests"
             landmarkType = "3">
          </BreakpointContent>

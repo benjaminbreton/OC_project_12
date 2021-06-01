@@ -11,11 +11,11 @@ import CoreData
 
 class GameTests: XCTestCase {
     
-    var gameHandler: GameHandler?
+    var gameHandler: GameTestsHandler?
     var game: GameViewModel { gameHandler!.game }
 
     override func setUp() {
-        self.gameHandler = GameHandler()
+        self.gameHandler = GameTestsHandler()
     }
     override func tearDown() {
         gameHandler = nil

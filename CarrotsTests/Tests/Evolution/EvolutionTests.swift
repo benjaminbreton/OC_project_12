@@ -11,12 +11,12 @@ import CoreData
 
 class EvolutionTests: XCTestCase {
     
-    var gameHandler: GameHandler?
+    var gameHandler: GameTestsHandler?
     var game: GameViewModel { gameHandler!.game }
     var support: CommonTestsSupport { gameHandler!.support }
 
     override func setUp() {
-        self.gameHandler = GameHandler(Date().today - 45 * 24 * 3600)
+        self.gameHandler = GameTestsHandler(Date().today - 45 * 24 * 3600)
     }
     override func tearDown() {
         gameHandler = nil

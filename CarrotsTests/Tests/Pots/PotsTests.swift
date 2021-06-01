@@ -11,12 +11,13 @@ import CoreData
 
 class PotsTests: XCTestCase {
     
-    var gameHandler: GameHandler?
+    var gameHandler: GameTestsHandler?
     var game: GameViewModel { gameHandler!.game }
     var support: CommonTestsSupport { gameHandler!.support }
+    var coreDataStack: FakeCoreDataStack { gameHandler!.coreDataStack }
     
     override func setUp() {
-        self.gameHandler = GameHandler()
+        self.gameHandler = GameTestsHandler()
     }
     override func tearDown() {
         gameHandler = nil
@@ -27,6 +28,54 @@ class PotsTests: XCTestCase {
     func testGivenGameHasBeenCreatedWhenAskingCommonPotNameThenTheLocalizedNameIsGetted() throws {
         XCTAssert(game.commonPot?.description == "pots.commonPot".localized)
         XCTAssert(game.commonPot?.isFirstDay == true)
+    }
+    func testGivenACommonPotExistsWhenAddAnOtherCommonPotAndReloadGameThenTheSecondCommonPotIsDeleted() throws {
+        // check common pot
+        XCTAssert(game.commonPot?.points == 0)
+        XCTAssert(coreDataStack.entities.allPots.map({ $0.owner == nil ? 1 : 0 }).reduce(0, +) == 1)
+        // add common pot
+        addCommonPot()
+        // check common pots
+        XCTAssert(coreDataStack.entities.allPots.map({ $0.owner == nil ? 1 : 0 }).reduce(0, +) == 2)
+        // reload
+        gameHandler?.reloadGame()
+        // check common pot
+        XCTAssert(game.commonPot?.points == 0)
+        XCTAssert(coreDataStack.entities.allPots.map({ $0.owner == nil ? 1 : 0 }).reduce(0, +) == 1)
+        // add performance
+        guard let athletic = support.addAthletic(), let sport = support.addSport() else {
+            XCTFail()
+            return
+        }
+        game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
+        // check common pot
+        XCTAssert(game.commonPot?.points == 1)
+        XCTAssert(coreDataStack.entities.allPots.map({ $0.owner == nil ? 1 : 0 }).reduce(0, +) == 1)
+        // add common pot
+        addCommonPot()
+        // check common pots
+        XCTAssert(coreDataStack.entities.allPots.map({ $0.owner == nil ? 1 : 0 }).reduce(0, +) == 2)
+        // reload
+        gameHandler?.reloadGame()
+        // check common pot
+        XCTAssert(game.commonPot?.points == 1)
+        XCTAssert(coreDataStack.entities.allPots.map({ $0.owner == nil ? 1 : 0 }).reduce(0, +) == 1)
+    }
+    
+    private func addCommonPot() {
+        let pot = Pot(context: coreDataStack.viewContext)
+        pot.points = 0
+        let commonPot = CommonPot(context: coreDataStack.viewContext)
+        commonPot.pot = pot
+        coreDataStack.saveContext()
+    }
+    
+    func testGivenCommonPotHasBeenDeletedWhenReloadGameThenErrorIsDisplayedOnTheConsoleAndCommonPotReturnsNil() throws {
+        let commonPot = try XCTUnwrap(game.commonPot?.commonPotParent)
+        coreDataStack.viewContext.delete(commonPot)
+        coreDataStack.saveContext()
+        gameHandler?.reloadGame()
+        XCTAssertNil(game.commonPot)
     }
     
     // MARK: - Change amounts
@@ -54,14 +103,5 @@ class PotsTests: XCTestCase {
 }
 
 /*
- func testGivenACommonPotExistsWhenAddAnOtherCommonPotAndReloadGameThenTheSecondCommonPotIsDeleted() throws {
-     
-     let game = try XCTUnwrap(self.game)
-     guard let athletic = support.addAthletic(), let sport = support.addSport() else {
-         XCTFail()
-         return
-     }
-     game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
-     
- }
+ 
  */

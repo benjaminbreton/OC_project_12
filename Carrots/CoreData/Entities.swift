@@ -17,7 +17,7 @@ class Entities {
     // MARK: - Entities properties
     
     var commonPot: Pot? {
-        let result: [CommonPot] = getEntities()
+        let result: [CommonPot] = getEntities(by: "pot.creationDate", ascending: true)
         guard result.count == 1, let pot = result[0].pot else {
             if result.count == 0 {
                 ApplicationErrors.log(.noCommonPot)
@@ -33,10 +33,11 @@ class Entities {
                         return pot
                     }
                 }
-                for potToDelete in result {
-                    context.delete(potToDelete)
+                for index in 1...result.count - 1 {
+                    context.delete(result[index])
                 }
                 try? context.save()
+                return result[0].pot
             }
             return nil
         }
