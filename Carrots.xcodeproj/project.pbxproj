@@ -24,7 +24,6 @@
 		03264BD626203E3D003F6429 /* AthleticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD526203E3D003F6429 /* AthleticCell.swift */; };
 		03264BDA26203E78003F6429 /* AthleticImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BD926203E78003F6429 /* AthleticImage.swift */; };
 		03264BDE26203EB5003F6429 /* AthleticSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BDD26203EB5003F6429 /* AthleticSettings.swift */; };
-		03264BE926205638003F6429 /* sportstfb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03264BE826205638003F6429 /* sportstfb.ttf */; };
 		03264BEF262056E4003F6429 /* SportsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BEE262056E4003F6429 /* SportsHome.swift */; };
 		03264BF326208E23003F6429 /* SportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BF226208E22003F6429 /* SportCell.swift */; };
 		03264BF726208E36003F6429 /* SportIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03264BF626208E36003F6429 /* SportIcon.swift */; };
@@ -135,7 +134,6 @@
 		03264BD526203E3D003F6429 /* AthleticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticCell.swift; sourceTree = "<group>"; };
 		03264BD926203E78003F6429 /* AthleticImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticImage.swift; sourceTree = "<group>"; };
 		03264BDD26203EB5003F6429 /* AthleticSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleticSettings.swift; sourceTree = "<group>"; };
-		03264BE826205638003F6429 /* sportstfb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sportstfb.ttf; sourceTree = "<group>"; };
 		03264BEE262056E4003F6429 /* SportsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsHome.swift; sourceTree = "<group>"; };
 		03264BF226208E22003F6429 /* SportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportCell.swift; sourceTree = "<group>"; };
 		03264BF626208E36003F6429 /* SportIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportIcon.swift; sourceTree = "<group>"; };
@@ -373,7 +371,6 @@
 			children = (
 				032AFA2D26175DA900D61E28 /* kirsty.otf */,
 				032AFA2326175D0600D61E28 /* akaPosse.ttf */,
-				03264BE826205638003F6429 /* sportstfb.ttf */,
 				03324010264A68E000DA4E3A /* sportive.ttf */,
 			);
 			path = Fonts;
@@ -830,7 +827,6 @@
 				034AB62E26010E5F0034C1E2 /* Assets.xcassets in Resources */,
 				0366F87B265667070070D4A0 /* Localizable.strings in Resources */,
 				03324011264A68E000DA4E3A /* sportive.ttf in Resources */,
-				03264BE926205638003F6429 /* sportstfb.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
