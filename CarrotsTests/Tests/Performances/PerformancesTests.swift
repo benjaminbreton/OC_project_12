@@ -17,8 +17,7 @@ class PerformancesTests: XCTestCase {
     
     override func setUp() {
         let coreDataStack = FakeCoreDataStack()
-        game = GameViewModel(coreDataStack)
-        game?.setFactorySettingsBack()
+        game = GameViewModel(coreDataStack, setFactorySettingsBack: true)
     }
     override func tearDown() {
         game = nil

@@ -40,9 +40,16 @@ struct Game {
 // MARK: - Init
 
 extension Game {
-    init(coreDataStack: CoreDataStack, today: Date) {
+    init(coreDataStack: CoreDataStack, today: Date, setFactorySettingsBack: Bool) {
         // load settings
         self.settings = Settings(today)
+        if setFactorySettingsBack {
+            settings.moneyConversion = 100
+            settings.gameAlreadyExists = false
+            settings.predictionDate = today + 30 * 24 * 3600
+            settings.showHelp = true
+            settings.didValidateWarning = false
+        }
         // get CoreDataStack
         self.coreDataStack = coreDataStack
         // set default properties
@@ -140,15 +147,6 @@ extension Game {
      */
     mutating func validateWarning() {
         settings.didValidateWarning = true
-    }
-    
-    mutating func setFactorySettingsBack() {
-        settings.moneyConversion = 100
-        settings.gameAlreadyExists = false
-        settings.predictionDate = Date() - 24 * 3600
-        settings.showHelp = true
-        settings.didValidateWarning = false
-        refresh()
     }
 }
 

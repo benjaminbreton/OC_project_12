@@ -40,8 +40,8 @@ class GameViewModel: ObservableObject {
 
 // MARK: - Init
 
-    init(_ coreDataStack: CoreDataStack, today: Date = Date().today) {
-        game = Game(coreDataStack: coreDataStack, today: today)
+    init(_ coreDataStack: CoreDataStack, today: Date = Date().today, setFactorySettingsBack: Bool = false) {
+        game = Game(coreDataStack: coreDataStack, today: today, setFactorySettingsBack: setFactorySettingsBack)
     }
 }
 
@@ -152,11 +152,6 @@ extension GameViewModel {
      */
     func validateWarning() {
         game.validateWarning()
-    }
-    
-    
-    func setFactorySettingsBack() {
-        game.setFactorySettingsBack()
     }
 }
 
