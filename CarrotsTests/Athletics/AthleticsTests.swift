@@ -120,10 +120,14 @@ class AthleticsTests: XCTestCase {
         XCTAssert(game?.performances.count == 2)
         // points = 10000 / 100 = 100
         XCTAssert(athletic.pot?.points == 100)
-        // 100 points = 1 $
-        XCTAssert(athletic.pot?.formattedAmount == "$US 1.00")
-        // 100 points for 1080h = 0,09pts/h approx. Prediction for 30 days = amount (1$) + 0,09 * 30 * 24 = 1.67 approx.
-        XCTAssert(athletic.pot?.formattedPredictionAmount == "$US 1.67")
+        // amount = 100 points = 1 $
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        XCTAssert(athletic.pot?.formattedAmount == formatter.string(from: 1))
+        // prediction = amount (1) + prediction : points per hour (100 / 1080) x number of hours (30 * 24) / points for one $ (100)
+        let prediction: Double = 100 / 1080 * 30 * 24 / 100
+        XCTAssert(athletic.pot?.formattedPredictionAmount == formatter.string(from: NSNumber(value: 1 + prediction)))
         // a performance has been made on day - 29, but only for the common pot. The athletic's pot's evolution is down, the common pot's is up.
         XCTAssert(athletic.pot?.evolution.image.name == "arrow.down.right.square")
         XCTAssert(athletic.pot?.evolution.image.color == "red")
