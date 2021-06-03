@@ -49,11 +49,17 @@ fileprivate struct InTabItem: ViewModifier {
     /// The ViewModel
     @EnvironmentObject var game: GameViewModel
     /// Tab's index.
-    let index: Int
+    private let index: Int
     /// Image to display.
     private var image: String { index.tabItemImage }
     /// Text to display.
     private var text: String { index.tabItemText }
+    
+    // MARK: - Init
+    
+    init(_ index: Int) {
+        self.index = index
+    }
     
     // MARK: - Body
     
@@ -72,7 +78,7 @@ fileprivate struct InTabItem: ViewModifier {
 
 fileprivate extension View {
     func inTabItem(_ index: Int) -> some View {
-        modifier(InTabItem(index: index))
+        modifier(InTabItem(index))
     }
 }
 
