@@ -87,6 +87,8 @@
 "performances.settings.addExplanationsOn" = "Points will be added to the common pot.";
 "performances.settings.addExplanationsOff" = "Points will be added to each athletics pot.";
 "performances.new" = "new performance";
+"performances.hide" = "Hide older performances";
+"performances.todaysNone" = "No performances today.";
 
 // MARK: - Picker
 

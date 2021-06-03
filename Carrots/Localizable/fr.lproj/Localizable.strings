@@ -87,6 +87,8 @@
 "performances.settings.addExplanationsOn" = "Les points seront ajoutés à la cagnotte commune.";
 "performances.settings.addExplanationsOff" = "Les points seront ajoutés aux cagnottes de chacun des sportifs.";
 "performances.new" = "nouvelle perf.";
+"performances.hide" = "Cacher les performances anciennes";
+"performances.todaysNone" = "Aucune performance aujourd'hui.";
 
 // MARK: - Picker
 
@@ -142,25 +144,26 @@
 "sports.noSports" = "Aucun sport n'a été ajouté.\nPour ajouter un sport, appuyer sur le bouton + en haut de l'écran, et renseigner ses informations.";
 "sports.details.unityTitle" = "Unité de mesure";
 "sports.details.unityTypeTitle" = "Type:";
+
 "sports.unityType.distance.description" = "distance";
-"sports.unityType.time.description" = "temps";
-"sports.unityType.oneShot.description" = "en une fois";
-"sports.unityType.count.description" = "compte";
 "sports.unityType.distance.symbols1" = " m";
+"sports.unityType.distance.placeholder1" = "distance";
+"sports.unityType.distance.explanations" = "Vous devez indiquer la distance nécessaire pour gagner un point.";
+"sports.unityType.time.description" = "temps";
 "sports.unityType.time.symbols1" = " h ";
 "sports.unityType.time.symbols2" = " m ";
 "sports.unityType.time.symbols3" = " s";
-"sports.unityType.oneShot.symbols1" = " pts";
-"sports.unityType.count.symbols1" = "";
-"sports.unityType.distance.placeholder1" = "distance";
 "sports.unityType.time.placeholder1" = "heures";
 "sports.unityType.time.placeholder2" = "min.";
 "sports.unityType.time.placeholder3" = "sec.";
-"sports.unityType.oneShot.placeholder1" = "points gagnés";
-"sports.unityType.count.placeholder1" = "compte";
-"sports.unityType.distance.explanations" = "Vous devez indiquer la distance nécessaire pour gagner un point.";
 "sports.unityType.time.explanations" = "Vous devez indiquer la durée nécessaire de l'exercice pour gagner un point.";
+"sports.unityType.oneShot.description" = "en une fois";
+"sports.unityType.oneShot.symbols1" = " pts";
+"sports.unityType.oneShot.placeholder1" = "points gagnés";
 "sports.unityType.oneShot.explanations" = "Vous devez indiquer le nombre de points gagnés à chaque fois que ce sport sera effectué.";
+"sports.unityType.count.description" = "compte";
+"sports.unityType.count.symbols1" = "";
+"sports.unityType.count.placeholder1" = "compte";
 "sports.unityType.count.explanations" = "Vous devez indiquer le compte nécessaire pour gagner un point.";
 "sports.details.oneShot" = "En une fois :";
 "sports.details.needs" = "Pour 1 point :";

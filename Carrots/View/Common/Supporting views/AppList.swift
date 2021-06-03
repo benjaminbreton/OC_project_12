@@ -127,7 +127,6 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
                 Text(placeholder)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
-                    .animation(.easeIn)
                     .transition(.opacity)
             }
         }
@@ -244,10 +243,20 @@ fileprivate struct PerformancesList<T: NSManagedObject>: View {
     
     /// The ViewModel.
     @EnvironmentObject private var game: GameViewModel
+    /// Boolean indicating whether older performances than today can be displayed or not.
+    @State var areOlderPerformancesHidden: Bool = true
     /// Items to display.
     private let performances: [Performance]
     /// If this list is an athletic's performances list, the source is the athletic.
     private let source: Athletic?
+    /// Performances of performances property recorded today.
+    private var todaysPerformances: [Performance] {
+        performances.map({ $0.date.unwrapped >= Date().today ? $0 : nil }).compactMap({ $0 })
+    }
+    /// Performances of performances property recorded before today.
+    private var olderPerformances: [Performance] {
+        performances.map({ $0.date.unwrapped >= Date().today ? nil : $0 }).compactMap({ $0 })
+    }
     
     // MARK: - Init
     
@@ -259,18 +268,46 @@ fileprivate struct PerformancesList<T: NSManagedObject>: View {
     // MARK: - Body
     
     var body: some View {
-        Group {
-            ForEach(performances, id: \.description) { performance in
-                PerformanceCell(performance)
-                    .canBeDeleted {
-                        if let source = source {
-                            // delete performance for the athletic
-                            game.delete(performance, of: source)
-                        } else {
-                            // delete performance
-                            game.delete(performance)
+        VStack {
+            // toggle to choose between display older performances or not
+            Toggle("performances.hide".localized, isOn: $areOlderPerformancesHidden)
+                .withLightSimpleFont()
+                .inRectangle(.leading)
+                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            // today's performances list
+            if todaysPerformances.count > 0 {
+                ForEach(todaysPerformances, id: \.description) { performance in
+                    PerformanceCell(performance)
+                        .canBeDeleted {
+                            if let source = source {
+                                // delete performance for the athletic
+                                game.delete(performance, of: source)
+                            } else {
+                                // delete performance
+                                game.delete(performance)
+                            }
                         }
-                    }
+                }
+            } else {
+                Text("performances.todaysNone".localized)
+                    .withLightSimpleFont()
+                    .inRectangle(.leading)
+                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            }
+            // older performances list
+            if !areOlderPerformancesHidden {
+                ForEach(olderPerformances, id: \.description) { performance in
+                    PerformanceCell(performance)
+                        .canBeDeleted {
+                            if let source = source {
+                                // delete performance for the athletic
+                                game.delete(performance, of: source)
+                            } else {
+                                // delete performance
+                                game.delete(performance)
+                            }
+                        }
+                }
             }
         }
     }
