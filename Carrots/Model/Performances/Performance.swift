@@ -15,7 +15,8 @@ final public class Performance: NSManagedObject {
     public override var description: String { "\(formattedDate) performance" }
     /// Formatted value of the performance.
     var formattedValue: String {
-        "\(initialUnity.sportUnityType.singleString(for: value))"
+        guard let sport = sport else { return "" }
+        return "\(initialUnity.sportUnityType.singleString(for: initialUnity.sportUnityType == Sport.UnityType.oneShot ? sport.pointsConversion : value))"
     }
     /// Athletics who did participate to the performance.
     var athletics: [Athletic] {

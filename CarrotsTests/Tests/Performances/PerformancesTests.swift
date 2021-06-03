@@ -24,8 +24,8 @@ class PerformancesTests: XCTestCase {
     
     // MARK: - Add
     
-    func testGivenAGameExistsWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
-        guard let athletic = support.addAthletic(), let sport = support.addSport(), game.error == nil else { return }
+    func testGivenAGameExistsWithACountSportWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
+        guard let athletic = support.addAthletic(), let sport = support.addSport("Walk", icon: "A", unityType: .count, pointsConversion: ["100", "0", "0"]), game.error == nil else { return }
         game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
         XCTAssertNil(game.error)
         XCTAssert(game.performances.count == 1)
@@ -33,6 +33,40 @@ class PerformancesTests: XCTestCase {
         XCTAssert(game.commonPot?.points == 1)
         XCTAssert(game.performances[0].description == "\(game.performances[0].formattedDate) performance")
         XCTAssert(game.performances[0].formattedValue == "100")
+    }
+    
+    func testGivenAGameExistsWithADistanceSportWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
+        guard let athletic = support.addAthletic(), let sport = support.addSport("Walk", icon: "A", unityType: .distance, pointsConversion: ["100", "0", "0"]), game.error == nil else { return }
+        game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
+        XCTAssertNil(game.error)
+        XCTAssert(game.performances.count == 1)
+        XCTAssert(athletic.performances.count == 1)
+        XCTAssert(game.commonPot?.points == 1)
+        XCTAssert(game.performances[0].description == "\(game.performances[0].formattedDate) performance")
+        XCTAssert(game.performances[0].formattedValue == "100 m")
+    }
+    
+    func testGivenAGameExistsWithTimeSportWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
+        guard let athletic = support.addAthletic(), let sport = support.addSport("Walk", icon: "A", unityType: .time, pointsConversion: ["1", "10", "20"]), game.error == nil else { return }
+        game.addPerformance(sport: sport, athletics: [athletic], value: ["1", "10", "20"], addToCommonPot: true)
+        XCTAssertNil(game.error)
+        XCTAssert(game.performances.count == 1)
+        XCTAssert(athletic.performances.count == 1)
+        XCTAssert(game.commonPot?.points == 1)
+        XCTAssert(game.performances[0].description == "\(game.performances[0].formattedDate) performance")
+        XCTAssert(game.performances[0].formattedValue == "1 h 10 m 20 s")
+    }
+    
+    func testGivenAGameExistsWithAOneShotSportWhenAskToAddPerformanceThenPerformanceHasBeenAdded() throws {
+        guard let athletic = support.addAthletic(), let sport = support.addSport("Walk", icon: "A", unityType: .oneShot, pointsConversion: ["1", "0", "0"]), game.error == nil else { return }
+        game.addPerformance(sport: sport, athletics: [athletic], value: ["100", "0", "0"], addToCommonPot: true)
+        XCTAssertNil(game.error)
+        XCTAssert(game.performances.count == 1)
+        XCTAssert(athletic.performances.count == 1)
+        XCTAssert(game.commonPot?.points == 1)
+        XCTAssert(game.performances[0].description == "\(game.performances[0].formattedDate) performance")
+        print(game.performances[0].formattedValue)
+        XCTAssert(game.performances[0].formattedValue == "1 pts")
     }
     
     func testGivenAGameExistsWhenAskToAddPerformanceWithPointsInTheCommonAndIndividualPotsThenPerformanceHasBeenAdded() throws {
