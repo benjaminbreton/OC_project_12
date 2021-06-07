@@ -129,7 +129,7 @@
 "settings.date.explanations" = "The application provides, for each pot, an expected amount on a certain date if athletics keep adding performances on the same rythm.\nYou can set this date here.";
 "settings.conversion.title" = "Money conversion";
 "settings.conversion.explanations1" = "In this application, athletics can earn points by doing some sports performances.\nPoints can be converted in ";
-"settings.conversion.explanations2" = " you can spend from your own money for each pot.\n Set this number correctly according to your means so that the application offers you amounts in line with your budget.\nSet here the necessary number of points to earn 1 ";
+"settings.conversion.explanations2" = " you can spend from your own money for each pot.\nSet this number correctly according to your means so that the application offers you amounts in line with your budget.\nSet here the necessary number of points to earn 1 ";
 "settings.conversion.limitExplanationsMin" = "Enter a number.";
 "settings.conversion.limitExplanationsMax" = "The number has to be inferior than 1,000.";
 "settings.help.title" = "Help";
@@ -141,7 +141,7 @@
 
 "sports.title" = "sports";
 "sports.title.sing.maj" = "Sport";
-"sports.noSports" = "No sports have been added.\nTo add a sport, press the + button on the top of the screen, and set sport's informations.";
+"sports.noSports" = "No sports have been added.\n\nTo add a sport, press the + button on the top of the screen, and set sport's informations.";
 "sports.details.unityTitle" = "Measurement unity";
 "sports.details.unityTypeTitle" = "Type:";
 "sports.unityType.distance.description" = "distance";

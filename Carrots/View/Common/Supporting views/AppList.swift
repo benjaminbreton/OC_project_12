@@ -109,25 +109,26 @@ fileprivate struct SimpleList<T: NSManagedObject>: View {
     
     var body: some View {
         Group {
-            // look for the list type ...
-            if let athletics = items as? [Athletic] {
-                AthleticsList(athletics: athletics)
-            }
-            if let pots = items as? [Pot] {
-                PotsList(pots: pots)
-            }
-            if let sports = items as? [Sport] {
-                SportsList(sports: sports)
-            }
-            if let performances = items as? [Performance] {
-                PerformancesList(performances: performances, source: source)
-            }
             // if no elements in the list, display placeholder
             if isPlaceholderVisible {
                 Text(placeholder)
                     .withSimpleFont()
                     .inRectangle(.topLeading)
                     .transition(.opacity)
+            } else {
+                // look for the list type ...
+                if let athletics = items as? [Athletic] {
+                    AthleticsList(athletics: athletics)
+                }
+                if let pots = items as? [Pot] {
+                    PotsList(pots: pots)
+                }
+                if let sports = items as? [Sport] {
+                    SportsList(sports: sports)
+                }
+                if let performances = items as? [Performance] {
+                    PerformancesList(performances: performances, source: source)
+                }
             }
         }
     }

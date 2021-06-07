@@ -141,10 +141,9 @@
 
 "sports.title" = "sports";
 "sports.title.sing.maj" = "Sport";
-"sports.noSports" = "Aucun sport n'a été ajouté.\nPour ajouter un sport, appuyer sur le bouton + en haut de l'écran, et renseigner ses informations.";
+"sports.noSports" = "Aucun sport n'a été ajouté.\n\nPour ajouter un sport, appuyer sur le bouton + en haut de l'écran, et renseigner ses informations.";
 "sports.details.unityTitle" = "Unité de mesure";
 "sports.details.unityTypeTitle" = "Type:";
-
 "sports.unityType.distance.description" = "distance";
 "sports.unityType.distance.symbols1" = " m";
 "sports.unityType.distance.placeholder1" = "distance";
