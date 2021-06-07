@@ -43,6 +43,8 @@
 "error.default.message" = "An error occurred.";
 "error.existingAthletic.title" = "Unavailable name";
 "error.existingAthletic.message" = "An athletic already exists with this name. Please choose another.";
+"error.existingSport.title" = "Unavailable name";
+"error.existingSport.message" = "A sport already exists with this name. Please choose another.";
 
 // MARK: - Graphic
 
@@ -106,7 +108,7 @@
 "pots.title.maj" = "Pots";
 "pots.noAthletics" = "No athletics have been added.\n\nTo add an athletic:\n- go on athletics page below;\n- select the + button on the top of the screen;\n- add new athletic's informations and confirm.";
 "pots.athleticsPots" = "Athletics pots";
-"pots.warning" = "Remember that the amounts displayed here are NOT money offered by the app and its owners; but amounts that the app offers you to set aside, from YOUR OWN MONEY, due to your efforts. It is therefore necessary to correctly set up the conversion of points into money in the settings page in line with your budget.";
+"pots.warning" = "Remember that the amounts displayed here are NOT money offered by the app; but amounts that the app offers you to set aside, from YOUR OWN MONEY, due to your efforts. It is therefore necessary to correctly set up the conversion of points into money in the settings page in line with your budget.";
 "pots.addings.addPlaceholder" = "Amount to add";
 "pots.addings.addTitle" = "+ add money";
 "pots.addings.withdrawTitle" = "- withdraw money";

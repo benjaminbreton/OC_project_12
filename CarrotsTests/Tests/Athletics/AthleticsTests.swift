@@ -40,7 +40,10 @@ class AthleticsTests: XCTestCase {
         support.addAthletic("Ben")
         XCTAssertNil(game.error)
         support.addAthletic("Ben")
-        XCTAssert(game.error?.description == ApplicationErrors.existingAthletic.description)
+        let error = game.error
+        XCTAssert(error?.description == ApplicationErrors.existingAthletic.description)
+        XCTAssert(error?.userTitle == "error.existingAthletic.title".localized)
+        XCTAssert(error?.userMessage == "error.existingAthletic.message".localized)
     }
     
     // MARK: - Modify

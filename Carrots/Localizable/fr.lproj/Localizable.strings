@@ -43,6 +43,8 @@
 "error.default.message" = "Une erreur est survenue.";
 "error.existingAthletic.title" = "Nom indisponible";
 "error.existingAthletic.message" = "Un sportif existe déjà avec ce nom. Merci d'en choisir un autre.";
+"error.existingSport.title" = "Nom indisponible";
+"error.existingSport.message" = "Un sport existe déjà avec ce nom. Merci d'en choisir un autre.";
 
 // MARK: - Graphic
 
@@ -106,7 +108,7 @@
 "pots.title.maj" = "Cagnottes";
 "pots.noAthletics" = "Aucun sportif n'a été ajouté.\n\nPour ajouter un sportif :\n- aller dans la page sportifs ci-dessous ;\n- sélectionner le bouton + en haut de l'écran ;\n- ajouter les informations du nouveau sportif et confirmer.";
 "pots.athleticsPots" = "Cagnottes des sportifs";
-"pots.warning" = "Rappelez-vous que les sommes affichées ici ne correspondent PAS à de l'argent offert par l'application et ses propriétaires, mais des montants que l'application vous propose de mettre de côté, à partir de VOTRE PROPRE ARGENT, vu vos efforts. Il convient donc de paramétrer correctement, dans la page paramètres, la conversion des points en argent en accord avec votre budget.";
+"pots.warning" = "Rappelez-vous que les sommes affichées ici ne correspondent PAS à de l'argent offert par l'application, mais des montants que l'application vous propose de mettre de côté, à partir de VOTRE PROPRE ARGENT, vu vos efforts. Il convient donc de paramétrer correctement, dans la page paramètres, la conversion des points en argent en accord avec votre budget.";
 "pots.addings.addPlaceholder" = "Montant à ajouter";
 "pots.addings.addTitle" = "+ ajouter de l'argent";
 "pots.addings.withdrawTitle" = "- retirer de l'argent";

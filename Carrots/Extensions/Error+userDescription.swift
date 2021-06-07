@@ -14,6 +14,8 @@ extension Error {
             switch error {
             case .existingAthletic:
                 return "error.existingAthletic.title".localized
+            case .existingSport:
+                return "error.existingSport.title".localized
             default:
                 return defaultUserTitle
             }
@@ -26,6 +28,8 @@ extension Error {
             switch error {
             case .existingAthletic:
                 return "error.existingAthletic.message".localized
+            case .existingSport:
+                return "error.existingSport.message".localized
             default:
                 return defaultUserMessage
             }

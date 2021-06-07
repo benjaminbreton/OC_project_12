@@ -36,7 +36,10 @@ class SportsTests: XCTestCase {
         support.addSport("Walk")
         XCTAssertNil(game.error)
         support.addSport("Walk")
-        XCTAssert(game.error?.description == ApplicationErrors.existingSport.description)
+        let error = game.error
+        XCTAssert(error?.description == ApplicationErrors.existingSport.description)
+        XCTAssert(error?.userTitle == "error.existingSport.title".localized)
+        XCTAssert(error?.userMessage == "error.existingSport.message".localized)
     }
     func testGivenSportHasNoNameWhenAskItsNameThenNoNameIsGetted() throws {
         let sport = support.addSport()
