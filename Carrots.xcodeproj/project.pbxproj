@@ -288,16 +288,6 @@
 			path = Performances;
 			sourceTree = "<group>";
 		};
-		030585F026395C28002015A7 /* Create page */ = {
-			isa = PBXGroup;
-			children = (
-				03CAE46A2641291000C9309D /* Common */,
-				034FC147262ECD6B0081ADB2 /* Details Page */,
-				03B1DF97262C8D2800B590AC /* Settings Page */,
-			);
-			path = "Create page";
-			sourceTree = "<group>";
-		};
 		030585F226395CA6002015A7 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +374,44 @@
 				03EA46DC26667635006DCF15 /* GameTestsHandler.swift */,
 			);
 			path = "Tests supporting files";
+			sourceTree = "<group>";
+		};
+		032DD32A266E5FF600BE3E7F /* Modular pages */ = {
+			isa = PBXGroup;
+			children = (
+				03CAE46A2641291000C9309D /* Common */,
+				034FC147262ECD6B0081ADB2 /* Details Page */,
+				03B1DF97262C8D2800B590AC /* Settings Page */,
+			);
+			path = "Modular pages";
+			sourceTree = "<group>";
+		};
+		032DD32C266E601900BE3E7F /* AppList */ = {
+			isa = PBXGroup;
+			children = (
+				032AFA332617648800D61E28 /* AppList.swift */,
+			);
+			path = AppList;
+			sourceTree = "<group>";
+		};
+		032DD32F266E609A00BE3E7F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				032DD332266E60C300BE3E7F /* Supporting views */,
+				03DD81F5261EFFF70028A0A5 /* ViewModifiers */,
+				034FC138262EC6B10081ADB2 /* Navigation */,
+				03DD820A261F00E10028A0A5 /* Settings */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		032DD332266E60C300BE3E7F /* Supporting views */ = {
+			isa = PBXGroup;
+			children = (
+				030EA01E26540AF3006CA0A0 /* HelpView.swift */,
+				03B1DFA9262C8DF700B590AC /* CommonSpacers.swift */,
+			);
+			path = "Supporting views";
 			sourceTree = "<group>";
 		};
 		0335033B2638461000E2BD99 /* ViewModel */ = {
@@ -486,16 +514,14 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		034FC12F262EC62A0081ADB2 /* Common */ = {
+		034FC12F262EC62A0081ADB2 /* Common pages tools */ = {
 			isa = PBXGroup;
 			children = (
-				03DD820A261F00E10028A0A5 /* Settings */,
-				030585F026395C28002015A7 /* Create page */,
-				034FC138262EC6B10081ADB2 /* Navigation */,
-				03DD81F5261EFFF70028A0A5 /* ViewModifiers */,
-				03DD8209261F00C60028A0A5 /* Supporting views */,
+				032DD32F266E609A00BE3E7F /* Common */,
+				032DD32A266E5FF600BE3E7F /* Modular pages */,
+				032DD32C266E601900BE3E7F /* AppList */,
 			);
-			path = Common;
+			path = "Common pages tools";
 			sourceTree = "<group>";
 		};
 		034FC138262EC6B10081ADB2 /* Navigation */ = {
@@ -607,16 +633,6 @@
 				03DD8215261F01620028A0A5 /* PotCell.swift */,
 			);
 			path = Pots;
-			sourceTree = "<group>";
-		};
-		03DD8209261F00C60028A0A5 /* Supporting views */ = {
-			isa = PBXGroup;
-			children = (
-				032AFA332617648800D61E28 /* AppList.swift */,
-				030EA01E26540AF3006CA0A0 /* HelpView.swift */,
-				03B1DFA9262C8DF700B590AC /* CommonSpacers.swift */,
-			);
-			path = "Supporting views";
 			sourceTree = "<group>";
 		};
 		03DD820A261F00E10028A0A5 /* Settings */ = {
@@ -733,7 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				03DD8206261F00AB0028A0A5 /* Home */,
-				034FC12F262EC62A0081ADB2 /* Common */,
+				034FC12F262EC62A0081ADB2 /* Common pages tools */,
 				030585FA263960E7002015A7 /* Pages */,
 			);
 			path = View;
