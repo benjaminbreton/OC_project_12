@@ -93,9 +93,6 @@ final class AthleticsManager {
      - returns: If an error occurred, the error's type is returned.
      */
     func delete(_ athletic: Athletic) -> ApplicationErrors? {
-        //deletePerformances(athletic)
-        
-        //deleteEvolutionDatas(athletic.evolutionDatas)
         coreDataStack.viewContext.delete(athletic)
         return nil
     }
