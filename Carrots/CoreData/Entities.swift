@@ -47,6 +47,7 @@ class Entities {
     var allSports: [Sport] { getEntities(by: "name", ascending: true) }
     var allPerformances: [Performance] { getEntities(by: "date", ascending: false) }
     var allPots: [Pot] { getEntities(by: "creationDate", ascending: true) }
+    var insertedObjects: [NSManagedObject] { Array(context.insertedObjects) }
     
     // MARK: - Init
     

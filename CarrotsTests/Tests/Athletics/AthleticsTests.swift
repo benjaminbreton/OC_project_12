@@ -37,13 +37,18 @@ class AthleticsTests: XCTestCase {
         XCTAssert(athletic?.description == "all.noName".localized)
     }
     func testGivenAGameWithAthleticExistsWhenAskToAddAthleticWithTheSameNameThenErrorOccurres() throws {
+        XCTAssert(gameHandler?.coreDataStack.entities.allPots.count == 1)
         support.addAthletic("Ben")
         XCTAssertNil(game.error)
+        XCTAssert(gameHandler?.coreDataStack.entities.allPots.count == 2)
         support.addAthletic("Ben")
+        XCTAssert(gameHandler?.coreDataStack.entities.allPots.count == 2)
         let error = game.error
         XCTAssert(error?.description == ApplicationErrors.existingAthletic.description)
         XCTAssert(error?.userTitle == "error.existingAthletic.title".localized)
         XCTAssert(error?.userMessage == "error.existingAthletic.message".localized)
+        support.addAthletic("Ben2")
+        XCTAssert(gameHandler?.coreDataStack.entities.allPots.count == 3)
     }
     
     // MARK: - Modify

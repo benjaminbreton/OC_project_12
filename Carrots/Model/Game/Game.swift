@@ -79,7 +79,13 @@ extension Game {
      Refresh all properties.
      */
     mutating func refresh() {
-        guard error == nil else { return }
+        guard error == nil else {
+            for object in coreDataStack.entities.insertedObjects {
+                coreDataStack.viewContext.delete(object)
+            }
+            coreDataStack.saveContext()
+            return
+        }
         commonPot = coreDataStack.entities.commonPot
         athletics = coreDataStack.entities.allAthletics
         performances = coreDataStack.entities.allPerformances
