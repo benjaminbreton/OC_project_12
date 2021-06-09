@@ -339,7 +339,7 @@ fileprivate struct CanBeDeleted: ViewModifier {
                     Image(systemName: "trash")
                 }
                 .inButton {
-                    withAnimation(.easeIn(duration: 0.5)) {
+                    withAnimation(.easeIn(duration: 1)) {
                         opacity = 0
                     }
                 }
